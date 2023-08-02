@@ -1,0 +1,16 @@
+server.port: 9090
+
+spring:
+  security:
+    user:
+      name: user
+      password: 1234
+
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+  devtools:
+    livereload:
+      enabled: true
