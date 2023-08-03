@@ -9,16 +9,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class Review extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-
-    private Long UId;
-
-    private Long VId;
 
     private String VTitle;
 
@@ -27,4 +23,12 @@ public class Review {
     private String content;
 
     private char status;
+
+    @ManyToOne
+    @JoinColumn(name = "uId")
+    private Users users;
+
+    @ManyToOne
+    @JoinColumn(name = "vId")
+    private Volunteer volunteer;
 }

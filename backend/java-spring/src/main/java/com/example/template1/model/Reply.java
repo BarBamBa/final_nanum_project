@@ -9,16 +9,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reply {
+public class Reply extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
-    private Long UId;
+    @ManyToOne
+    @JoinColumn(name = "uId")
+    private Users users;
 
-    private Long BId;
+    @ManyToOne
+    @JoinColumn(name = "bId")
+    private Board board;
 
     private String content;
 

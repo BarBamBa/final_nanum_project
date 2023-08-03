@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -48,4 +50,10 @@ public class Volunteer {
     private LocalDateTime rEndDate;
 
     private int rCapacity;
+
+    @OneToMany(mappedBy = "volunteer")
+    List<Applicants> applicants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "volunteer")
+    List<Review> reviews = new ArrayList<>();
 }
