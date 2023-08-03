@@ -6,10 +6,33 @@ spring:
       name: user
       password: 1234
 
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true  # sql문 pretty하게 보여줌
+        use_sql_comments: true
+    generate-ddl: true   # true, false
+    hibernate:
+      ddl-auto: create    # create, create-drop, update, validate, none
+
+  sql:
+    init:
+      mode: always # never, always
+      # always: embeded db가 아닌 외부 db 사용 시 spring boot를 실행할때 마다 data.sql schema.sql import.sql을 항상 실행
+      # never: data.sql schema.sql import.sql을 실행하지 않음
+      encoding: utf-8
+
   h2:
     console:
       path: /h2-console
       enabled: true
+
+  datasource:
+    driver-class-name: org.h2.Driver  # Database를 H2로 사용하겠다.
+    url: jdbc:h2:~/test  # H2 접속 정보
+    username: sa  # H2 접속 시 입력할 username 정보 (원하는 것으로 입력)
+    password:  # H2 접속 시 입력할 password 정보 (원하는 것으로 입력)
 
   devtools:
     livereload:
