@@ -16,8 +16,10 @@ import java.util.List;
 public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "VOLUNTEER_ID")
     private Long id;
+
+    private int number;
 
     private String title;
 
@@ -50,10 +52,4 @@ public class Volunteer {
     private LocalDateTime rEndDate;
 
     private int rCapacity;
-
-    @OneToMany(mappedBy = "volunteer")
-    List<Applicants> applicants = new ArrayList<>();
-
-    @OneToMany(mappedBy = "volunteer")
-    List<Review> reviews = new ArrayList<>();
 }

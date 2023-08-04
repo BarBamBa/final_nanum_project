@@ -19,7 +19,8 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
-                .requestMatchers(toH2Console());
+            .requestMatchers(toH2Console())
+            ;
     }
 
     @Bean

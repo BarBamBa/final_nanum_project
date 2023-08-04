@@ -1,15 +1,14 @@
 package com.example.template1.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@RequestMapping("/final")
 public class MainController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
-        return "MainPage";
+        return "Test";
     }
 
 }

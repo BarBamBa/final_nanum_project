@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+</head>
+<body>
+    <h1>내부 API 테스트</h1>
+    <button id="btn1">카테고리검색</button>
+    <textarea id="data1" disabled></textarea>
+    <input id="param" type="text">
+    <button id="btn2">번호세부사항검색</button>
+</body>
+<script>
+    const btn1 = document.getElementById("btn1");
+    const data1 = document.getElementById("data1");
+    btn1.addEventListener('click', event => {
+        fetch('/api/test1', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(data => data.json())
+            .then(data => {
+                console.log(data);
+                data1.innerText = JSON.stringify(data);
+            })
+    });
+
+
+</script>
+</html>

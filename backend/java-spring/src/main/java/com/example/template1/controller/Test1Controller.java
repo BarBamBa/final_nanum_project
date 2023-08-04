@@ -16,4 +16,7 @@ public class Test1Controller {
     public String gettest1() {
         return "get테스트1";
     }
+
+    @GetMapping("/usertest1")
+    public String usertest1() { return test1Service.addUser().toString(); }
 }
