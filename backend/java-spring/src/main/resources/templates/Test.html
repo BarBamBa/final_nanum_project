@@ -6,28 +6,47 @@
 </head>
 <body>
     <h1>내부 API 테스트</h1>
+    <textarea id="data1" style="width: 200px; height: 300px;"  disabled></textarea>
     <button id="btn1">카테고리검색</button>
-    <textarea id="data1" disabled></textarea>
+    <br>
     <input id="param" type="text">
     <button id="btn2">번호세부사항검색</button>
+    <textarea id="data2" style="width: 200px; height: 300px;"  disabled></textarea>
 </body>
 <script>
     const btn1 = document.getElementById("btn1");
     const data1 = document.getElementById("data1");
     btn1.addEventListener('click', event => {
         fetch('/api/test1', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
         })
-            .then(data => data.json())
+            .then(data => data.json())  // string 문자열을 json 객체로 변환
             .then(data => {
-                console.log(data);
-                data1.innerText = JSON.stringify(data);
+                console.log(data);  // console로 json 객체 출력
+                data1.innerText = JSON.stringify(data); // html 요소의 innerText로 출력하기 위해 string 문자열로 변환
             })
     });
-
-
+    const btn2 = document.getElementById("btn2");
+    const param = document.getElementById("param");
+    const data2 = document.getElementById("data2");
+    btn2.addEventListener('click', event => {
+        fetch('/api/test2', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: {
+                "progrmRegistNo": param.innerHTML,
+            }
+        })
+            .then(data => data.json())  // string 문자열을 json 객체로 변환
+            .then(data => {
+                console.log(data);  // console로 json 객체 출력
+                data2.innerText = JSON.stringify(data); // html 요소의 innerText로 출력하기 위해 string 문자열로 변환
+            })
+    });
 </script>
 </html>

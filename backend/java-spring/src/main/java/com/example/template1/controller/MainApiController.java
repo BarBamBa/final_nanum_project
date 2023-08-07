@@ -1,23 +1,16 @@
 package com.example.template1.controller;
 
-import com.example.template1.model.dto.VolunteerResponseDto;
+import com.example.template1.model.dto.RestJsonRequestDto;
+import com.example.template1.model.dto.RestJsonResponseDto;
 import com.example.template1.service.Test1Service;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.parser.ParseException;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.XML;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 @RestController
@@ -39,15 +32,15 @@ public class MainApiController {
             "getVltrPartcptnItem"       // 봉사참여정보상세조회
     };
 
-    @GetMapping("/test1")
+    @PostMapping("/test1")
     public String apiTest1() throws IOException {
-        return test1Service.getApiBody(defUrl + funcUrl[3]);
+        return test1Service.getListInfo(defUrl + funcUrl[3]);
     }
 
-    @GetMapping("/test2")
-    public String apiTest2() throws IOException {
-        String params = "3013236";
-        return test1Service.getApiBodyToString(defUrl + funcUrl[4], params);
+    @PostMapping("/test2")
+    public String apiTest2(@RequestParam String progrmRegistNo) throws IOException {
+        return test1Service.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
     }
+
 }
 

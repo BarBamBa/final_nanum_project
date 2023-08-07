@@ -26,6 +26,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {
+        http
+            .csrf().disable();
         return http.build();
     }
 
