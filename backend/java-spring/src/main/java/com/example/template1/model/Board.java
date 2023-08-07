@@ -25,7 +25,6 @@ public class Board extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "uId")
-    @JsonIgnore
     private Users users;
 
     @OneToMany(mappedBy = "board")
@@ -37,6 +36,6 @@ public class Board extends BaseEntity {
 
     private char status;
 
-    private char boardFlg;
+    private char boardFlg; // 1=공지사항 2=소식공유 3=자유게시판 4=봉사후기
 
 }

@@ -1,35 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Pagination from "react-js-pagination";
+import {
+  AiOutlineLeft,
+  AiOutlineDoubleLeft,
+  AiOutlineRight,
+  AiOutlineDoubleRight,
+} from "react-icons/ai";
 
-function News() {
+
+
+function News(props) {
+  const boardData = props.boardData;
+  console.log(props);
+  
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setPage(page);  };
+
+
+
+  const startIndex = (page - 1) * 10;
+  const endIndex = startIndex + 10;
+
+  const paginatedBoardData = boardData.slice(startIndex, endIndex);
   return (
     <div>
-      <input />
+      <div className="search-box">
+        <input placeholder="검색어를 입력해주세요"></input>
+      </div>
       <table>
         <thead>
           <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>등록일</th>
+            <th className="table-head">번호</th>
+            <th className="table-head">제목</th>
+            <th className="table-head">등록일</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>소식</td>
-            <td>금천구립 시흥 도서관 자원봉사</td>
-            <td>2023. 05. 23</td>
-          </tr>
-          <tr>
-            <td>소식</td>
-            <td>금천구립 시흥 도서관 자원봉사</td>
-            <td>2023. 05. 23</td>
-          </tr>
-          <tr>
-            <td>소식</td>
-            <td>금천구립 시흥 도서관 자원봉사</td>
-            <td>2023. 05. 23</td>
-          </tr>
+          {paginatedBoardData.map((board, i) => {
+            return (
+              <tr key={board.id}>
+                <td className="table-no">{board.id}</td>
+                <td className="table-title">{board.title}</td>
+                <td className="table-date">{board.createAt2}</td>
+              </tr>
+            );
+          })}
+
         </tbody>
       </table>
+      <Pagination
+        activePage={page} // 현재 페이지
+        itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
+        totalItemsCount={boardData.length} // 총 아이템 갯수
+        pageRangeDisplayed={5} // paginator의 페이지 범위
+        firstPageText={<AiOutlineDoubleLeft />} // "처음"을 나타낼 텍스트
+        prevPageText={<AiOutlineLeft />} // "이전"을 나타낼 텍스트
+        lastPageText={<AiOutlineDoubleRight />} // "마지막"을 나타낼 텍스트
+        nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
+        onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+      />
+      <button>글쓰기</button>
     </div>
   );
 }

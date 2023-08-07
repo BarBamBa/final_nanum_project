@@ -3,14 +3,33 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   border-top: 1px solid #ccc;
-  padding: 8px;
+  padding: 16px;
   text-align: left;
+}
+.table-head {
+  text-align: center;
+}
+.table-no, .table-date {
+  text-align: center;
 }
 
 th {
-  border-top: 2px  solid #546D01;
-  border-bottom: 2px solid #546D01;
+  border-top: 2px solid #546d01;
+  border-bottom: 2px solid #546d01;
 }
-
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+.search-box input {
+  font-size: 20px;
+  padding: 0px 10px;
+  width: 460px;
+  height: 60px;
+  border-radius: 15px;
+  border: 2px solid #546D01;
+}

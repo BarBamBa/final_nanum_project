@@ -15,12 +15,12 @@ spring:
     generate-ddl: true   # true, false
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create    # create, create-drop, update, validate, none
+      ddl-auto: none    # create, create-drop, update, validate, none
 
 
   sql:
     init:
-      mode: always # never, always
+      mode: never # never, always
       # always: embeded db가 아닌 외부 db 사용 시 spring boot를 실행할때 마다 data.sql schema.sql import.sql을 항상 실행
       # never: data.sql schema.sql import.sql을 실행하지 않음
       encoding: utf-8
