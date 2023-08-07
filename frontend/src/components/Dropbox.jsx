@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, Router, Routes } from 'react-router-dom';
+import About from '../pages/about/About'
 import '../scss/Header.scss'
 
 function Dropbox() {

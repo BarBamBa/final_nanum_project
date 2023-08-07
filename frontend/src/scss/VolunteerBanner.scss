@@ -43,18 +43,33 @@ div {
     margin-right: 10px;
     width: 100%;
   }
+
+  .vArrowBack, .vArrowForward {
+    position: relative;
+    z-index: 99;
+    width: 35px;
+    height: 35px;
+    color: #546D01;
+  }
+
   .vBannerListBox {
-    display: grid;
+    display: flex;
     background-color: white;
     justify-content: space-between;
-    grid-template-columns: repeat(4, 280px);
     width: 1200px;
     height: 300px;
     padding: 20px 30px;
     overflow: hidden;
 
+    p {
+      display: flex;
+      align-items: center;
+      height: 280px;
+      margin: 0;
+    }
+
     .vBannerList {
-      width: auto;
+      width: 280px;
       height: 250px;
       z-index: 99;
       border: 1px solid #546D01;
@@ -124,6 +139,7 @@ div {
         justify-content: flex-end;
         padding: 5px 5px;
         display: flex;
+        color: #A4CC22;
         .arrowFoward {
           width: 18px;
           height: 18px;
