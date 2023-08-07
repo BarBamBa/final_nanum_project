@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import {
   AiOutlineLeft,
@@ -13,6 +14,7 @@ function News(props) {
   const boardData = props.boardData;
   console.log(props);
   
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
   const handlePageChange = (page) => {
@@ -42,7 +44,7 @@ function News(props) {
             return (
               <tr key={board.id}>
                 <td className="table-no">{board.id}</td>
-                <td className="table-title">{board.title}</td>
+                <td className="table-title" onClick={()=>{navigate(`/board/detail/${board.id}`)}}>{board.title}</td>
                 <td className="table-date">{board.createAt2}</td>
               </tr>
             );
@@ -61,7 +63,7 @@ function News(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      <button>글쓰기</button>
+      <button onClick={()=>{navigate('/board/input')}}>글쓰기</button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import {
   AiOutlineLeft,
@@ -6,6 +7,7 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import BoardDetail from "./BoardDetail";
 
 
 
@@ -13,6 +15,7 @@ function Notice(props) {
   const boardData = props.boardData;
   console.log(props);
   
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
   const handlePageChange = (page) => {
@@ -42,7 +45,7 @@ function Notice(props) {
             return (
               <tr key={board.id}>
                 <td className="table-no">{board.id}</td>
-                <td className="table-title">{board.title}</td>
+                <td className="table-title" onClick={()=>{navigate(`/board/detail/${board.id}`)}}>{board.title}</td>
                 <td className="table-date">{board.createAt2}</td>
               </tr>
             );

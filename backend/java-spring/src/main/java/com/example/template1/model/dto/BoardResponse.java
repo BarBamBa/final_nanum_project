@@ -27,6 +27,8 @@ public class BoardResponse {
 
     private final Long uId;
 
+    private final String name;
+
 
 
     public BoardResponse(Board board) {
@@ -39,5 +41,6 @@ public class BoardResponse {
         this.createAt2 = LocalDate.from(board.getCreateAt());
         this.updateAt = board.getUpdateAt();
         this.uId = board.getUsers().getId();
+        this.name = board.getUsers().getName();
     }
 }

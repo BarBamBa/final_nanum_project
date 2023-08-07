@@ -3,17 +3,17 @@ import Notice from "./Notice";
 import FreeBoard from "./FreeBoard";
 import News from "./News";
 import Review from "./Review";
+import BoardInputForm from "../../components/BoardInputForm";
+import BoardDetail from "./BoardDetail";
 import '../../scss/board/Board.css'
 import '../../scss/board/Notice.css'
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "../../scss/Paging.css";
-import Pagination from "react-js-pagination";
 
 
 
 function Board() {
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
   const [boardName, setBoardName] = useState("공지사항");
   const [boardKind, setBoardKind] = useState("1");
   const [boardData, setBoardData] = useState([]);
@@ -41,13 +41,6 @@ function Board() {
   }, [boardKind]);
 
 
-
-
-
-
-
-
-
   return (
     <div>
       <div className="boardContainer">
@@ -68,8 +61,9 @@ function Board() {
         <Routes>
           <Route path="notice" element={<Notice boardData={boardData} />} />
           <Route path="news" element={<News boardData={boardData}/>} />
-          <Route path="freeboard" element={<FreeBoard boardData={boardData}/>} />          
+          <Route path="freeboard" element={<FreeBoard boardData={boardData}/>} />             
           <Route path="review" element={<Review boardData={boardData}/>} />
+          
         </Routes>
       </div>
 

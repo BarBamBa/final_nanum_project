@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,14 @@ public class BoardController {
 
         return ResponseEntity.ok()
                 .body(boards);
+    }
+
+    @GetMapping("/boards/{id}")
+    public ResponseEntity<BoardResponse> findArticle(@PathVariable long id){
+        Board board = boardService.getBoardDetail(id);
+
+        return ResponseEntity.ok()
+                .body(new BoardResponse(board));
     }
 
 

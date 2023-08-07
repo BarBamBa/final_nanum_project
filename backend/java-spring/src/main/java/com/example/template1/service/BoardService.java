@@ -19,5 +19,9 @@ public class BoardService {
         return boardList;
     }
 
+    public Board getBoardDetail(long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+        return board;
+    }
 
 }

@@ -7,6 +7,7 @@ import MyPage from './pages/myPage/MyPage';
 import Qna from './pages/qna/Qna';
 import SignUp from './pages/signUp/SignUp';
 import Volunteer from './pages/volunteer/Volunteer';
+import BoardDetail from './pages/board/BoardDetail';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/qna/*" element={<Qna/>} />
         <Route path="/login/*" element={<Login/>} />
         <Route path="/signup/*" element={<SignUp/>} />
-        <Route path="/manager/*" element={<Manager/>} />
+        <Route path="/manager/*" element={<Manager/>} /> 
+        <Route path='/board/detail/:id' element={<BoardDetail />} />
       </Routes>
     </div>
   );

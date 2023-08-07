@@ -1,0 +1,6 @@
+.inputContainer {
+  width: 1440px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
