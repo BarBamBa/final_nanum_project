@@ -8,7 +8,7 @@ import org.json.JSONObject;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RestJsonResponseDto {
-    private int progRegistNo;
+    private int progrmRegistNo;
 
     private String progrmSj;
 
@@ -28,7 +28,7 @@ public class RestJsonResponseDto {
 
     private int rcritNmpr;
 
-    private int actWkdy;
+    private String actWkdy;
 
     private String srvcClCode;
 

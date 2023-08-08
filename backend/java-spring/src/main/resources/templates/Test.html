@@ -6,22 +6,44 @@
 </head>
 <body>
     <h1>내부 API 테스트</h1>
-    <textarea id="data1" style="width: 200px; height: 300px;"  disabled></textarea>
-    <button id="btn1">카테고리검색</button>
+    <label for="data1">리스트</label>
     <br>
-    <input id="param" type="text">
-    <button id="btn2">번호세부사항검색</button>
-    <textarea id="data2" style="width: 200px; height: 300px;"  disabled></textarea>
+    <textarea id="data1" style="width: 200px; height: 300px;" disabled></textarea>
+    <br>
+    <form>
+        <label for="param1">검색어</label>
+        <input id="param1" type="text" placeholder="검색어 입력">
+    </form>
+    <br>
+    <button id="btn1">리스트 검색</button>
+    <br>
+    <label for="data2">프로그램 상세</label>
+    <br>
+    <textarea id="data2" style="width: 200px; height: 300px;" disabled></textarea>
+    <br>
+    <form>
+        <label for="param2">프로그램 번호</label>
+        <input id="param2" type="text" placeholder="번호 입력">
+    </form>
+    <br>
+    <button id="btn2" type="submit">상세번호검색</button>
 </body>
 <script>
     const btn1 = document.getElementById("btn1");
+    const param1 = document.getElementById("param1");
     const data1 = document.getElementById("data1");
-    btn1.addEventListener('click', event => {
-        fetch('/api/test1', {
+
+    btn1.addEventListener('click', async event => {
+        event.preventDefault();
+        let keyword = param1.value;
+        fetch('/api/list', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                keyword,
+            })
         })
             .then(data => data.json())  // string 문자열을 json 객체로 변환
             .then(data => {
@@ -29,18 +51,22 @@
                 data1.innerText = JSON.stringify(data); // html 요소의 innerText로 출력하기 위해 string 문자열로 변환
             })
     });
+
     const btn2 = document.getElementById("btn2");
-    const param = document.getElementById("param");
+    const param2 = document.getElementById("param2");
     const data2 = document.getElementById("data2");
-    btn2.addEventListener('click', event => {
-        fetch('/api/test2', {
+
+    btn2.addEventListener('click', async event => {
+        event.preventDefault();
+        let progrmRegistNo = param2.value;
+        await fetch('/api/detail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
-                "progrmRegistNo": param.innerHTML,
-            }
+            body: JSON.stringify({
+                progrmRegistNo,
+            })
         })
             .then(data => data.json())  // string 문자열을 json 객체로 변환
             .then(data => {
@@ -48,5 +74,6 @@
                 data2.innerText = JSON.stringify(data); // html 요소의 innerText로 출력하기 위해 string 문자열로 변환
             })
     });
+
 </script>
 </html>

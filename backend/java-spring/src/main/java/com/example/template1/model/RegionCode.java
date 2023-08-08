@@ -1,9 +1,6 @@
 package com.example.template1.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +21,9 @@ public class RegionCode {
 
     private String city;
 
+    @Column(nullable = true)
     private int districtCode;
 
+    @Column(nullable = true)
     private String district;
 }

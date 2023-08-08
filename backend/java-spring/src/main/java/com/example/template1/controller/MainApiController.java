@@ -1,28 +1,23 @@
 package com.example.template1.controller;
 
-import com.example.template1.model.dto.RestJsonRequestDto;
-import com.example.template1.model.dto.RestJsonResponseDto;
-import com.example.template1.service.Test1Service;
+import com.example.template1.service.RemoteApiService;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.parser.ParseException;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class MainApiController {
 
-    private final Test1Service test1Service;
+    private final RemoteApiService remoteApiService;
 
-    // 메인 페이지 호출되면 웹에서 비동기로 내부 api 호출
-    // 분야별봉사참여정보목록조회(getVltrCategoryList) api 호출
-    // xml 데이터를 json으로 변환 후 웹으로 반환
+    // 프론트에서 파라미터와 함께 백 api 호출
+    // 백에서는 넘겨받은 파라미터로 외부 api url 구성하여 호출
+    // 외부 api 호출하여 반환받은 xml 데이터를 json으로 변환하여 프론트에 맞게 다듬고 프론트로 반환
     String defUrl = "http://openapi.1365.go.kr/openapi/service/rest/VolunteerPartcptnService/";
     String[] funcUrl = {
             "getVltrSearchWordList",    // 검색어봉사참여정보목록조회
@@ -32,14 +27,19 @@ public class MainApiController {
             "getVltrPartcptnItem"       // 봉사참여정보상세조회
     };
 
-    @PostMapping("/test1")
-    public String apiTest1() throws IOException {
-        return test1Service.getListInfo(defUrl + funcUrl[3]);
+    @PostMapping("/list")
+    public String SearchListByKeyword(@RequestBody(required = false) String data) throws IOException {
+        if(data != null) {
+            String keyword = new JSONObject(data).getString("keyword");
+            return remoteApiService.getListInfo(defUrl + funcUrl[0], keyword);
+        }
+        return remoteApiService.getListInfo(defUrl + funcUrl[0]);
     }
 
-    @PostMapping("/test2")
-    public String apiTest2(@RequestParam String progrmRegistNo) throws IOException {
-        return test1Service.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
+    @PostMapping("/detail")
+    public String SearchDetailByNumber(@RequestBody String data) throws IOException {
+        String progrmRegistNo = new JSONObject(data).getString("progrmRegistNo");
+        return remoteApiService.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
     }
 
 }

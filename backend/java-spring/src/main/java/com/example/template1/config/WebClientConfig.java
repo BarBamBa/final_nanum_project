@@ -14,6 +14,8 @@ import java.time.Duration;
 @Configuration
 public class WebClientConfig {
 
+    // WebClient를 자동으로 생성하여 Bean처럼 호출할 수 있게 해주는 클래스
+
     DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory();
 
     HttpClient httpClient = HttpClient.create()
