@@ -1,8 +1,15 @@
 import React from 'react'
+import SearchBar from '../../components/SearchBar'
+import '/src/scss/Volunteer.scss'
 
 function Volunteer() {
   return (
-    <div>Volunteer</div>
+    <main>
+      <div className='pageTitle'>
+        봉사활동찾기
+      </div>     
+      <SearchBar />
+    </main>
   )
 }
 

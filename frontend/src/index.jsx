@@ -8,6 +8,7 @@ import Header from './components/layouts/Header.jsx'
 import Footer from './components/layouts/Footer.jsx'
 import About from './pages/about/About.jsx'
 import Main from './pages/Main.jsx'
+import Volunteer from './pages/volunteer/Volunteer.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,8 +17,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/template1-project" element={<Main />} />
         <Route path="/about" element={<About />} />
-        {/* <Route path="/volunteer" component={Volunteer} />
-        <Route path="/notice" component={NoticeBoard} />
+        <Route path="/volunteer" element={<Volunteer />} />
+        {/* <Route path="/notice" component={NoticeBoard} />
         <Route path="/news" component={NewsBoard} />
         <Route path="/board" component={FreeBoard} />
         <Route path="/review" component={ReviewBoard} />

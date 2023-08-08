@@ -1,0 +1,158 @@
+.checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #D6D6D6;
+    border: 1px solid #D6D6D6;
+    border-radius: 3px;
+  }
+  
+  .checkbox input:checked ~ .checkmark {
+    background-color: #546D01;
+    border: 1px solid #546D01;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .checkbox .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+// 봉사활동검색 메인페이지
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1440px;
+  height: 100vh;
+
+  .pageTitle {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 40px;
+    border-bottom: 3px solid #D6D6D6;
+    padding: 15px 0px;
+    margin-left: 20px;
+  }
+}
+
+// 봉사활동 검색 카테고리 컴포넌트
+
+.searchBar {
+  width: 1000px;
+  height: auto;
+  margin: 30px 0px;
+
+  .searchHeader {
+    width: 100%;
+    background-color: #546D01;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 0px;
+
+    .searchArrow {
+      width: 20px;
+      height: 20px;
+    }
+
+    .down {
+        transform: rotate(180deg);
+    }
+  }
+
+  .searchContents {
+    border: 1px solid #546D01;
+    margin-top: 0;
+    display: block; /* 기본적으로 표시되도록 설정 */
+    height: 500px;
+    opacity: 1; /* 기본적으로 불투명도 1로 설정 */
+    transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    &.closed {
+      height: 0; /* 닫혔을 때 최대 높이를 0으로 설정하여 숨김 */
+      opacity: 0; /* 닫혔을 때 불투명도를 0으로 설정하여 페이드아웃 */
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+
+      tbody{
+        
+
+        tr {
+          border-bottom: 1px dashed #D6D6D6;
+  
+          th {
+            width: 100px;
+            height: 50px;
+            min-height: 50px;
+            max-height: 100px;
+          }
+  
+          td {
+  
+            /* 체크박스 스타일 변경 */
+            input[type="checkbox"] {
+              /* 기본 체크박스를 숨기기 */
+              display: none;
+            }
+            
+            label.labelContainer {
+              width: 120px;
+              height: 25px;
+              background-color: white;
+              border: 1px solid #546D01;
+              border-radius: 5px;
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 10px;
+              padding: 5px 0;
+              &.checked {
+                // background-color: #A4CC22;
+                background-color: #546D01;
+                color: white;
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

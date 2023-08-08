@@ -25,7 +25,7 @@ function About() {
 
     useEffect(() => {
       const elementToAnimate = document.querySelector('#aboutText');
-      elementToAnimate.classList.add('animation-class');
+      elementToAnimate.classList.add('animationClass');
     }, []);
 
   return (
@@ -34,7 +34,7 @@ function About() {
         <div>늘 마음뿐이던 자원봉사</div>
         <div>이젠 "나눔"과 함께하세요</div>
       </div>
-      <div className={`iconBox scroll-animate ${visible ? 'visible' : ''}`} id='targetElement'>
+      <div className={`iconBox scrollAnimate ${visible ? 'visible' : ''}`} id='targetElement'>
         <div className='iconList1'>
           <IoIosSearch />
           <p>내게 맞는 자원봉사 활동을</p> 
@@ -51,7 +51,7 @@ function About() {
           <p>소통할 수 있습니다</p>
         </div>
       </div>
-      <div className={`imgBox scroll-animate ${visible ? 'visible' : ''}`} id='targetElement'>
+      <div className={`imgBox scrollAnimate ${visible ? 'visible' : ''}`} id='targetElement'>
         <img src='/images/circle.png' />
       </div>
     </>
