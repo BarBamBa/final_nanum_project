@@ -63,7 +63,7 @@ function Review(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      <button>글쓰기</button>
+      <button onClick={()=>{navigate('/board/input', {state:{boardName:"봉사후기",boardKind:"4"}})}}>글쓰기</button>
     </div>
   );
 }

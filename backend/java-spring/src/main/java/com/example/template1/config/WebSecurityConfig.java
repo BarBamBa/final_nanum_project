@@ -26,7 +26,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {
         http
+                .httpBasic().disable()
+                .csrf().disable()
                 .authorizeHttpRequests((auth) -> auth
+
                         .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated()
                 );

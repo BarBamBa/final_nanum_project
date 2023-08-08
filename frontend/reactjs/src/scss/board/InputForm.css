@@ -4,3 +4,10 @@
   display: flex;
   flex-direction: column;
 }
+.board-input-nav {
+  border-bottom: 4px solid #546d01;
+  position: relative;
+}
+.board-input {
+  margin : 16px;
+}

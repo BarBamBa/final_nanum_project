@@ -1,6 +1,7 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
+import com.example.template1.model.BoardImg;
 import com.example.template1.model.Users;
 import lombok.Getter;
 
@@ -17,7 +18,7 @@ public class BoardResponse {
 
     private final char status;
 
-    private final char boardFlg;
+    private final char flg;
 
     private final LocalDateTime createAt;
 
@@ -25,7 +26,7 @@ public class BoardResponse {
 
     private final LocalDateTime updateAt;
 
-    private final Long uId;
+    private final Long userId;
 
     private final String name;
 
@@ -36,11 +37,11 @@ public class BoardResponse {
         this.title = board.getTitle();
         this.content = board.getContent();
         this.status = board.getStatus();
-        this.boardFlg = board.getBoardFlg();
+        this.flg = board.getFlg();
         this.createAt = board.getCreateAt();
         this.createAt2 = LocalDate.from(board.getCreateAt());
         this.updateAt = board.getUpdateAt();
-        this.uId = board.getUsers().getId();
+        this.userId = board.getUsers().getId();
         this.name = board.getUsers().getName();
     }
 }

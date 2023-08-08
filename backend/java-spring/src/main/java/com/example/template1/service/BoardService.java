@@ -1,6 +1,7 @@
 package com.example.template1.service;
 
 import com.example.template1.model.Board;
+import com.example.template1.model.dto.AddBoardRequest;
 import com.example.template1.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class BoardService {
     public Board getBoardDetail(long id) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
         return board;
+    }
+
+    public Board save(AddBoardRequest request) {
+        return boardRepository.save(request.toBoardEntity());
     }
 
 }
