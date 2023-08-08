@@ -27,4 +27,6 @@ public class BoardImg {
 
     private String path;
 
+    private String name;
+
 }

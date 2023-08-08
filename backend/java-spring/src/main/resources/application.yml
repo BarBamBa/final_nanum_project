@@ -1,6 +1,10 @@
 server.port: 9090
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
   security:
     user:
       name: user
@@ -41,3 +45,6 @@ spring:
   devtools:
     livereload:
       enabled: true
+
+app:
+  file-upload-path: /images
