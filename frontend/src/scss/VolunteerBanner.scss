@@ -45,11 +45,12 @@ div {
   }
 
   .vArrowBack, .vArrowForward {
-    position: relative;
+    position: absolute;
     z-index: 99;
     width: 35px;
     height: 35px;
     color: #546D01;
+    cursor: pointer;
   }
 
   .vBannerListBox {
@@ -60,6 +61,7 @@ div {
     height: 300px;
     padding: 20px 30px;
     overflow: hidden;
+    position: relative;
 
     p {
       display: flex;

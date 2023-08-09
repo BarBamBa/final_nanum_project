@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchBar from '../../components/SearchBar'
 import '/src/scss/Volunteer.scss'
+import Vdetail from './Vdetail'
 
 function Volunteer() {
   return (

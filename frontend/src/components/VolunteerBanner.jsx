@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Link } from 'react-router-dom';
 import '../scss/VolunteerBanner.scss'
 import { BsPlusLg } from 'react-icons/bs';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import VBannerList from './VBannerList';
+
 function VolunteerBanner() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+		const fetchData = async() => {
+          const res = await fetch('/api/list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+          });
+          const result = res.json();
+          return result;
+        }	
+        
+        fetchData().then(res => {
+          setData(res);
+        });
+    }, []);
+
   return (
     <>
       <div className='vBannerBackground'>
@@ -12,38 +34,9 @@ function VolunteerBanner() {
         <div className='vBannerListBox'>
           {/* 온클릭 넣을거 */}
           <p><IoIosArrowBack className='vArrowBack' /></p>
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
+            {data.map((item, idx) => 
+            <VBannerList data={item} num={idx} key={idx} />
+          )}   
           <p><IoIosArrowForward className='vArrowForward' /></p>
         </div>
         
