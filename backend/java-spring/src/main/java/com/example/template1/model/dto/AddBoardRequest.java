@@ -20,13 +20,17 @@ public class AddBoardRequest {
     private final char flg;
 
     public Board toBoardEntity() {
+        Users users = new Users();
+        users.setId(1L);
 
         return Board.builder()
                 .title(title)
                 .content(content)
                 .flg(flg)
                 .status('Y')
+                .users(users)
                 .build();
+
     }
 
 }

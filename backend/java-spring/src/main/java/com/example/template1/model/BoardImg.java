@@ -2,6 +2,7 @@ package com.example.template1.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardImg {
+@Builder
+public class BoardImg extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +30,13 @@ public class BoardImg {
     private String path;
 
     private String name;
+
+    public BoardImg( Long id, String path, String name, Board board, Users users) {
+        this.id = id;
+        this.path = path;
+        this.name = name;
+        this.board = board;
+        this.users = users;
+    }
 
 }

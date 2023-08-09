@@ -29,8 +29,7 @@ function App() {
         <Route path="/qna/*" element={<Qna/>} />
         <Route path="/login/*" element={<Login/>} />
         <Route path="/signup/*" element={<SignUp/>} />
-        <Route path="/manager/*" element={<Manager/>} /> 
-        
+        <Route path="/manager/*" element={<Manager/>} />         
       </Routes>
       <Footer />
     </div>
