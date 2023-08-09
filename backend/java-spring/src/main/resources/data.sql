@@ -229,9 +229,3 @@ select now();
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6480000, "경상남도", 5670000, "창원시");
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6500000, "제주특별자치도", 6510000, "제주시");
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6500000, "제주특별자치도", 6520000, "서귀포시");
-
-
-
-
-
-

@@ -1,0 +1,103 @@
+//Header grid
+header{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #546D01;
+  width: 100%;
+  
+  .logoWrap{
+    #logoImg{
+      width: 8rem;
+      height: 6rem;
+    }
+  }
+}
+
+nav{
+  margin: 0;
+  padding: 0;
+  transition: 1s ease-in-out;
+  background-color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+    ul{
+      width: 150px;
+      margin: auto;
+      padding-top: 20px;
+      list-style: none;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:hover{
+        color: #A4CC22;
+        cursor: pointer;
+      }
+    }
+}
+
+
+
+
+//dropBox
+.dropBox {
+  position: relative;
+  z-index: 99;
+  width: 150px;
+  height: auto;
+  // border: 1px solid #546D01;
+  background-color: #A4CC22;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 0px;
+  margin-top: 20px;
+  a {
+    color: white;
+  }
+  .dropItem {
+    height: 25px;
+    text-align: center;
+    list-style-type: none;
+    margin: 10px 0px;
+    font-weight: 400;
+    color: white;
+
+    &:hover {
+      height: 25px;
+      text-align: center;
+      list-style-type: none;
+      margin: 10px 0px;
+      font-size: 17px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: font-size 0.3s ease;
+      
+    }
+  }
+  
+}
+//UtilWrap
+.utilWrap {
+  display: flex;
+  list-style: none;
+  align-items: center;
+
+  li {
+    width: 80px;
+    height: 50px;
+    padding-top: 20px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  a:hover {
+    color: #A4CC22;
+    cursor: pointer;
+  }
+}

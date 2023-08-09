@@ -1,0 +1,82 @@
+#aboutText {
+  width: 100%;
+  height: 1000px;
+  font-size: 40px;
+  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  div {
+    margin-bottom: 20px;
+  }
+}
+/* ScrollAnimation.css */
+.scrollAnimate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 2s ease, transform 2s ease;
+}
+
+.scrollAnimate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+//FadeIn
+.animationClass {
+  animation: fadeInUp 2s ease;
+  /* 기타 애니메이션 속성들 */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.iconBox {
+  border-top: 3px solid #546D01;
+  border-bottom: 3px solid #546D01;
+  width: 100%;
+  height: 500px;
+  margin: 100px 0px;
+  display: flex;
+  justify-content: space-between;
+
+  svg {
+    color: #A4CC22;
+    width: 150px;
+    height: 150px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+  }
+
+  div {
+    width: 470px;
+    height: 100%;
+    text-align: center;
+
+    p {
+      color: #546D01;
+      font-size: 30px;
+    }
+  }
+  
+  .iconList2 {
+    border-left: 1px dashed #D6D6D6;
+    border-right: 1px dashed #D6D6D6;
+  }
+}
+.imgBox {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 200px 0px;
+}

@@ -21,11 +21,10 @@ import java.net.URLEncoder;
 @RequiredArgsConstructor
 public class RemoteApiService {
 
-    private final UsersRepository usersRepository;
     private final RegionCodeRepository regionCodeRepository;
     private final WebClientUtil webClient;
 
-    public String getListInfo(String url) throws IOException {
+    public String getListInfo(String url) {
         JSONObject jsonObject = fetchJson(url);
 
         return getString(jsonObject);
@@ -53,7 +52,7 @@ public class RemoteApiService {
         return newJsonArray.toString();
     }
 
-    public String getDetailInfo(String url, String params) throws IOException {
+    public String getDetailInfo(String url, String params) {
         JSONObject jsonObject = fetchJson(url + "?progrmRegistNo=" + params);
         JSONObject object = jsonObject.getJSONObject("response")
                 .getJSONObject("body")
@@ -66,7 +65,7 @@ public class RemoteApiService {
         return object.toString();
     }
 
-    private JSONObject fetchJson(String uri) throws IOException {
+    private JSONObject fetchJson(String uri) {
         String response = webClient.get(uri, String.class);
 
         return XML.toJSONObject(response);
@@ -100,15 +99,17 @@ public class RemoteApiService {
         String change = jsonObject.toString();
         String actWkdy = "" +jsonObject.get("actWkdy");
 
-        StringBuilder replace = new StringBuilder();
+        StringBuilder replaceBuilder = new StringBuilder();
 
         String[] strArr = actWkdy.split("");
         String[] wkdy = "월화수목금토일".split("");
         for(int i=0; i<strArr.length; i++) {
             if(strArr[i].equals("1")) {
-                replace.append(wkdy[i]);
+                replaceBuilder.append(wkdy[i]).append(" ");
             }
         }
+        String replace = replaceBuilder.substring(0, replaceBuilder.length()-1);
+        System.out.println(replace);
         if(!replace.isEmpty()) {
             change = change.replace(actWkdy, replace);
         } else {

@@ -37,7 +37,7 @@ public class MainApiController {
     }
 
     @PostMapping("/detail")
-    public String SearchDetailByNumber(@RequestBody String data) throws IOException {
+    public String SearchDetailByNumber(@RequestBody String data) {
         String progrmRegistNo = new JSONObject(data).getString("progrmRegistNo");
         return remoteApiService.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
     }
