@@ -2,16 +2,19 @@ package com.example.template1.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "users")
 public class Board extends BaseEntity{
 
     @Id
@@ -37,5 +40,9 @@ public class Board extends BaseEntity{
     private char flg;
 
     private char status;
+
+    public void delete(char status) {
+        this.status = status;
+    }
 
 }

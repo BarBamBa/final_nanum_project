@@ -3,19 +3,18 @@ package com.example.template1.model.dto;
 import com.example.template1.model.Board;
 import com.example.template1.model.BoardImg;
 import com.example.template1.model.Users;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 public class AddBoardImgRequest {
 
-    private final String path;
-    private final String name;
-    private final Users userId;
-    private final Board boardId;
+    private  String path;
+    private  String name;
+    private  Users userId;
+    private  Board boardId;
 
     public BoardImg uploadImgEntity() {
         Users users = new Users();

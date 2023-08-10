@@ -50,7 +50,7 @@ public class BoardImgController {
 
             Board board2 = new Board();
 
-            board2.setId((long) id); // 임시로 board_id 1로 지정
+            board2.setId((long) id);
 
             Users users2 = new Users();
             users2.setId(1L); // 임시로 user_id 1로 지정

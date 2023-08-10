@@ -20,7 +20,7 @@ function BoardInputForm() {
     };
 
     try {
-      const response = await fetch("/api/boards/put", {
+      await fetch("/api/boards/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

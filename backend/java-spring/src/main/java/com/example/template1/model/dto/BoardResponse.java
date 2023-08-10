@@ -1,8 +1,7 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
-import com.example.template1.model.BoardImg;
-import com.example.template1.model.Users;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -31,7 +30,6 @@ public class BoardResponse {
     private final String name;
 
 
-
     public BoardResponse(Board board) {
         this.id = board.getId();
         this.title = board.getTitle();
@@ -44,4 +42,5 @@ public class BoardResponse {
         this.userId = board.getUsers().getId();
         this.name = board.getUsers().getName();
     }
+
 }
