@@ -1,10 +1,17 @@
-//Header grid
+//Header
 header{
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #546D01;
   width: 100%;
-  
+  .navBar {
+    width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .logoWrap{
     #logoImg{
       width: 8rem;

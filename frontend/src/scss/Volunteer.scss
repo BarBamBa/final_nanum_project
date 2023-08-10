@@ -51,11 +51,7 @@
 // 봉사활동검색 메인페이지
 
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 1440px;
-  height: 100vh;
 
   .pageTitle {
     display: flex;

@@ -7,11 +7,13 @@ import '/src/scss/Header.scss';
 function Header() {
   return (
       <header>
-        <div className='logoWrap'>
-          <Link to='/'><img id='logoImg' src="/images/logo.png" alt="로고이미지" /></Link>
+        <div className='navBar'>
+          <div className='logoWrap'>
+            <Link to='/'><img id='logoImg' src="/images/logo.png" alt="로고이미지" /></Link>
+          </div>
+          <Dropbox />
+          <UtilWrap />
         </div>
-        <Dropbox />
-        <UtilWrap />
       </header>
   )
 }

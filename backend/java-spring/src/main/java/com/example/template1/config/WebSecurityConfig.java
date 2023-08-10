@@ -19,12 +19,15 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
-                .requestMatchers(toH2Console());
+            .requestMatchers(toH2Console())
+            ;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {
+        http
+            .csrf().disable();
         return http.build();
     }
 

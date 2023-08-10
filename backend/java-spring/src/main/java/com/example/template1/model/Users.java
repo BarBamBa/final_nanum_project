@@ -1,24 +1,26 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.pl.REGON;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users extends BaseEntity{
+@EntityListeners(value = AuditingEntityListener.class)
+public class Users extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "USER_ID")
     private Long id;
 
     @OneToMany(mappedBy = "users")
@@ -26,12 +28,6 @@ public class Users extends BaseEntity{
 
     @OneToMany(mappedBy = "users")
     List<Review> reviews = new ArrayList<>();
-
-    @OneToMany(mappedBy = "users")
-    List<Board> boards = new ArrayList<>();
-
-    @OneToMany(mappedBy = "users")
-    List<Reply> replies = new ArrayList<>();
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -48,4 +44,8 @@ public class Users extends BaseEntity{
     private int age;
 
     private String phone;
+
+    @Column(nullable = true)
+    private char status;
+
 }
