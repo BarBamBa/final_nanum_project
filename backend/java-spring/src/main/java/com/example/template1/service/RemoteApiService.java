@@ -3,7 +3,6 @@ package com.example.template1.service;
 import com.example.template1.model.RegionCode;
 
 import com.example.template1.repository.RegionCodeRepository;
-import com.example.template1.repository.UsersRepository;
 
 import com.example.template1.util.WebClientUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Iterator;
 
 
 @Service
@@ -30,10 +30,42 @@ public class RemoteApiService {
         return getString(jsonObject);
     }
 
-    public String getListInfo(String url, String keyword) throws IOException {
-        JSONObject jsonObject = fetchJson(url
-                + "?schCateGu=all&keyword=" + URLEncoder.encode(keyword, "UTF-8"));
+    public String getListInfo(String url, JSONObject data) throws IOException {
+        Iterator<String> iter = data.keys();
+        System.out.println("================================");
 
+        StringBuilder sb = new StringBuilder();
+        boolean flg = true;
+
+        while (iter.hasNext()) {
+            String key = iter.next();
+            System.out.print(key + " : ");
+            if(data.get(key) instanceof JSONObject)
+            {
+                if(flg) {
+                    String value = (String) data.get(key);
+                    System.out.print(value);
+                    sb.append(url)
+                        .append("?")
+                        .append(key)
+                        .append("=")
+                        .append(URLEncoder.encode(value, "UTF-8"));
+                    flg = !flg;
+                } else {
+                    String value = (String) data.get(key);
+                    System.out.print(value);
+                    sb.append("&")
+                        .append(key)
+                        .append("=")
+                        .append(URLEncoder.encode(value, "UTF-8"));
+                }
+            }
+        }
+        System.out.println();
+        System.out.println("================================");
+        System.out.println(sb);
+        System.out.println("================================");
+        JSONObject jsonObject = fetchJson(sb.toString());
         return getString(jsonObject);
     }
 
