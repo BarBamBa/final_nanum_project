@@ -41,19 +41,18 @@ function Volunteer() {
           setData(res);
         });
     }, []);
-
+    console.log(data);
   return (
     <main>
       <div className='pageTitle'>
         봉사활동찾기
       </div>
-        { data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
-          <SearchBar data={Item} num={idx} key={idx} />
-        )}     
+          <SearchBar data={data} />
       <div>
-        { data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
+        { data ? data.map((Item, idx) => 
           <VolunteerList data={Item} num={idx} key={idx} />
-        )}
+        ) : "검색 결과가 없습니다." 
+        }
       </div>
     </main>
   )

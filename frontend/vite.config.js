@@ -24,4 +24,12 @@ export default defineConfig({
     setupFiles: "@testing-library/jest-dom",
     mockReset: true,
   },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: '@import "./src/scss/_variables";', 
+  //       additionalData: '@import "./src/scss/_mixins";'
+  //     }
+  //   }
+  // }
 })

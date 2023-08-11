@@ -28,15 +28,15 @@ function RcodeSelect() {
 
   useEffect(() => {
 		const fetchRegion = async() => {
-          const res = await fetch('/api/region', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-          });
-          const result = res.json();
-          return result;
+      const res = await fetch('/api/region', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
         }
+      });
+      const result = res.json();
+      return result;
+    }
         
         fetchRegion().then(res => {
           const cityMap = new Map();

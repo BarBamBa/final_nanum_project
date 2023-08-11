@@ -10,7 +10,4 @@ public interface RegionCodeRepository extends JpaRepository<RegionCode, Integer>
 
     RegionCode findByCityCodeAndDistrictCode(int cityCode, int districtCode);
 
-//    List<RegionCode> findDistinctByCity(String city);
-
-//    List<RegionCode> findDistinctBy();
 }

@@ -6,7 +6,6 @@ import com.example.template1.repository.RegionCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +14,7 @@ public class RegionCodeService {
 
     private final RegionCodeRepository regionCodeRepository;
 
-    public RegionCode getCityList () {
-        return regionCodeRepository.findByCityCodeAndDistrictCode();
+    public List<RegionCode> getCityList () {
+        return regionCodeRepository.findAll();
     };
 }

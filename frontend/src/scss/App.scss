@@ -9,6 +9,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+//캘린더
+:global {
+  @import "datepicker.scss";
+}
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -198,6 +203,8 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  padding: 5px 10px;
+  margin: 0 10px;
 }
 
 /**
