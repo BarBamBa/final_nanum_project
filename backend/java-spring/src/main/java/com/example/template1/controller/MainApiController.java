@@ -1,11 +1,17 @@
 package com.example.template1.controller;
 
+import com.example.template1.model.RegionCode;
+import com.example.template1.model.VolunteerCode;
+import com.example.template1.repository.RegionCodeRepository;
+import com.example.template1.service.RegionCodeService;
 import com.example.template1.service.RemoteApiService;
+import com.example.template1.service.VolunteerCodeService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -14,6 +20,8 @@ import java.io.IOException;
 public class MainApiController {
 
     private final RemoteApiService remoteApiService;
+    private final RegionCodeService regionCodeService;
+    private final VolunteerCodeService volunteerCodeService;
 
     // 프론트에서 파라미터와 함께 백 api 호출
     // 백에서는 넘겨받은 파라미터로 외부 api url 구성하여 호출
@@ -28,7 +36,7 @@ public class MainApiController {
     };
 
     @PostMapping("/list")
-    public String SearchListByKeyword(@RequestBody(required = false) String data) throws IOException {
+    public String searchListByKeyword(@RequestBody(required = false) String data) throws IOException {
         if(data != null) {
             String keyword = new JSONObject(data).getString("keyword");
             return remoteApiService.getListInfo(defUrl + funcUrl[0], keyword);
@@ -37,9 +45,19 @@ public class MainApiController {
     }
 
     @PostMapping("/detail")
-    public String SearchDetailByNumber(@RequestBody String data) {
+    public String searchDetailByNumber(@RequestBody String data) {
         String progrmRegistNo = new JSONObject(data).getString("progrmRegistNo");
         return remoteApiService.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
+    }
+
+    @GetMapping("/region")
+    public List<RegionCode> searchAllRegionCode() {
+        return regionCodeService.getRegionList();
+    }
+
+    @GetMapping("/volunteer")
+    public List<VolunteerCode> searchAllVolunteerCode() {
+        return volunteerCodeService.getVolunteerCode();
     }
 
 }

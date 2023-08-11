@@ -109,7 +109,6 @@ public class RemoteApiService {
             }
         }
         String replace = replaceBuilder.substring(0, replaceBuilder.length()-1);
-        System.out.println(replace);
         if(!replace.isEmpty()) {
             change = change.replace(actWkdy, replace);
         } else {

@@ -44,12 +44,17 @@ function VDetailCategory() {
         <div className='categoryItem'>신청인원: {data.appTotal} 명</div>
         <div className='categoryItem'>봉사장소: {data.actPlace}</div>
         <div className='categoryItem'>봉사기관:  {data.mnnstNm}</div>
-        <div className='categoryItem'>봉사참여유형: {data.adultPosblAt === 'Y' ? '성인 ' : ''}{data.yngbgsPosblAt === 'Y' ? '청소년 ' : ''}{data.grpPosblAt === 'Y' ? '기업·단체' : ''}</div>
+        <div className='categoryItem'>봉사참여유형: {data.adultPosblAt === 'Y' ? '성인 ' : ''}
+                                                   {data.yngbgsPosblAt === 'Y' ? '청소년 ' : ''}
+                                                   {data.grpPosblAt === 'Y' ? '기업·단체' : ''}
+        </div>
         <div className='categoryItem'>활동요일: {data.actWkdy}</div>
         <div className='categoryItem'>봉사분야: {data.srvcClCode}</div>
         <div className='categoryItem'>봉사시간: {data.actBeginTm}시 ~ {data.actEndTm}시 </div>
         <div className='categoryItem'>첨부파일: {data.actPlace}</div>
-        <div className='categoryItem'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기' : data.progrmSttusSe === 2 ? '모집중' : '모집완료'}</div>
+        <div className='categoryItem'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기'
+                                               : data.progrmSttusSe === 2 ? '모집중' : '모집완료'}
+        </div>
       </div>
       <div className='vDetailContents'>
         내용 : 

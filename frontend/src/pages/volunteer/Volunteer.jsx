@@ -6,18 +6,18 @@ import VolunteerList from '../../components/VolunteerList'
 function Volunteer() {
 
   const [params, setParams] = useState({
-    numOfRows: 30,
-    pageNo: 5,
-    keyword: null,
-    schCateGu: 'all',
-    schSido: null,
-    schSign1: null,
-    upperClCode: null,
-    nanmClCode: null,
-    progrmBgnde: null,
-    progrmEndde: null,
-    adultPosblAt: null,
-    yngbgsPosblAt: null,
+    // numOfRows: 30,
+    // pageNo: 5,
+    // keyword: null,
+    // schCateGu: 'all',
+    // schSido: null,
+    // schSign1: null,
+    // upperClCode: null,
+    // nanmClCode: null,
+    // progrmBgnde: null,
+    // progrmEndde: null,
+    // adultPosblAt: null,
+    // yngbgsPosblAt: null,
   });
   const [data, setData] = useState([]);
 
@@ -28,9 +28,9 @@ function Volunteer() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                params
-            })
+            // body: JSON.stringify({
+            //     params,
+            // })
           });
           const result = res.json();
           return result;
@@ -49,7 +49,7 @@ function Volunteer() {
       <SearchBar />
       <div>
         { data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
-          <VolunteerList data={item} num={idx} key={idx} />
+          <VolunteerList data={Item} num={idx} key={idx} />
         )}
       </div>
     </main>

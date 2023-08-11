@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class RegionCode {
 
     @Id
@@ -21,9 +19,7 @@ public class RegionCode {
 
     private String city;
 
-    @Column(nullable = true)
-    private int districtCode;
+    private Integer districtCode;
 
-    @Column(nullable = true)
     private String district;
 }

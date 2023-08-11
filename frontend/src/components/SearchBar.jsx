@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import '/src/scss/Volunteer.scss'
 import { IoIosArrowUp } from 'react-icons/io';
 import { AiOutlineCheck } from 'react-icons/ai'
-import CustomSelect from './SelectBar';
+import VCodeSelect from './VCodeSelect';
+import RcodeSelect from './RcodeSelect';
 
 function SearchBar() {
 
@@ -20,11 +21,11 @@ function SearchBar() {
   
   return (
     <div className='searchBar'>
-      <div className='searchHeader'>
+      <div className='searchHeader' onClick={handleSearchHeader}>
         {onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
         <IoIosArrowUp 
           className= {`searchArrow ${onSearchHeader ? '' : 'down'}`}
-          onClick={handleSearchHeader}
+          
         />
       </div>
       <div className={`searchContents ${onSearchHeader ? '' : 'closed'}`}>
@@ -33,16 +34,13 @@ function SearchBar() {
             <tr>
               <th>봉사분야</th>
               <td>
-                <input type='checkbox' className='inputContainer' id='life' checked={onCheck}/>
-                <label className={`labelContainer ${onCheck ? 'checked' : ''}`} onClick={handleCheck} htmlFor='life'>
-                  생활편의지원
-                </label>   
+                  <VCodeSelect />   
               </td>
             </tr>
             <tr>
               <th>지역</th>
                 <td>
-                  <CustomSelect />
+                  <RcodeSelect />
                 </td>
               <th>봉사자유형</th>
                 <td></td>
