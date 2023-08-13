@@ -32,7 +32,7 @@ public class RemoteApiService {
 
     public String getListInfo(String url, JSONObject data) throws IOException {
         Iterator<String> iter = data.keys();
-        System.out.println("================================");
+        System.out.println("=======================================================================================");
 
         StringBuilder sb = new StringBuilder();
         boolean flg = true;
@@ -40,11 +40,9 @@ public class RemoteApiService {
         while (iter.hasNext()) {
             String key = iter.next();
             System.out.print(key + " : ");
-            if(data.get(key) instanceof JSONObject)
-            {
                 if(flg) {
-                    String value = (String) data.get(key);
-                    System.out.print(value);
+                    String value = data.getString(key);
+                    System.out.print(value + ", ");
                     sb.append(url)
                         .append("?")
                         .append(key)
@@ -52,19 +50,18 @@ public class RemoteApiService {
                         .append(URLEncoder.encode(value, "UTF-8"));
                     flg = !flg;
                 } else {
-                    String value = (String) data.get(key);
-                    System.out.print(value);
+                    String value = data.getString(key);
+                    System.out.print(value + ", ");
                     sb.append("&")
                         .append(key)
                         .append("=")
                         .append(URLEncoder.encode(value, "UTF-8"));
                 }
-            }
         }
         System.out.println();
-        System.out.println("================================");
+        System.out.println("=======================================================================================");
         System.out.println(sb);
-        System.out.println("================================");
+        System.out.println("=======================================================================================");
         JSONObject jsonObject = fetchJson(sb.toString());
         return getString(jsonObject);
     }

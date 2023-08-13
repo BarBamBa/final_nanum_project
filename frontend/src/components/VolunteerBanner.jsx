@@ -21,6 +21,9 @@ function VolunteerBanner() {
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+              keyword: '',
+            })
           });
           const result = await res.json();
           return result;
