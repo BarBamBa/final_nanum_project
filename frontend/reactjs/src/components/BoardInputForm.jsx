@@ -5,19 +5,39 @@ import axios from "axios";
 
 function BoardInputForm() {
   const location = useLocation();
-  const [boardName] = useState(location.state.boardName);
   const [boardId, setBoardId] = useState("");
+  const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
+  const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
+  console.log(location.state);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // 게시판 글 정보 저장 시작
-    const formData = new FormData(e.target);
-    const data = {
-      title: formData.get("title"),
-      content: formData.get("content"),
-      flg: location.state.boardKind,
-    };
+    // const formData = new FormData(e.target);
+    // 글쓰기번튼누르면 userid를 전송
+    let data ;
+    if (location.state.formKind === "write") {
+      data = {
+        title: titleValue,
+        content: contentValue,
+        flg: location.state.boardKind,
+        users: {
+          id: 1 //로그인 기능 구현시 수정 할 예정
+        },
+      };
+    } 
+
+    // 수정버튼누르면 boardid를 전송
+    if (location.state.formKind === "modify"){
+      data = {
+        title: titleValue,
+        content: contentValue,
+        id: location.state.boardData.id
+      };
+    }
+    console.log(data);
 
     try {
       await fetch("/api/boards/post", {
@@ -27,24 +47,11 @@ function BoardInputForm() {
         },
         body: JSON.stringify(data),
       })
-      .then(res => res.json())
-      .then(res => {
-        setBoardId(res.id);
-      });
-      
-      // if (response.ok) {
-      //   const res = response.json();
+        .then(res => res.json())
+        .then(res => {
+          setBoardId(res.id);
+        });
 
-      //   // const resData = await response.json();
-      //   // console.log(resData);
-        
-      //   console.log("res", res.body.id);
-      //   // setBoardId(res.id); // BoardImg 테이블에 넣을 Board_Id 뽑아내기
-
-      //   alert("게시글 등록 완료");
-      // } else {
-      //   console.error("등록 실패:");
-      // }
     } catch (error) {
       console.error("등록 실패 에러", error);
     }
@@ -89,7 +96,7 @@ function BoardInputForm() {
   return (
     <div className="inputContainer">
       <div className="board-input-nav">
-        <h1>{boardName} 글쓰기</h1>
+        <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
       </div>
 
       <div className="board-input-form">
@@ -99,7 +106,13 @@ function BoardInputForm() {
               <td>제목</td>
               <td>
                 <div className="board-input titleBox">
-                  <input type="text" className="form-control" name="title" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="title"
+                    value={titleValue}
+                    onChange={(e) => setTitleValue(e.target.value)}
+                  />
                 </div>
               </td>
             </tr>
@@ -107,7 +120,12 @@ function BoardInputForm() {
               <td>내용</td>
               <td>
                 <div className="board-input ContentBox">
-                  <textarea className="form-control" name="content" />
+                  <textarea
+                    className="form-control"
+                    name="content"
+                    value={contentValue}
+                    onChange={(e) => setContentValue(e.target.value)}
+                  />
                 </div>
               </td>
             </tr>
@@ -127,7 +145,7 @@ function BoardInputForm() {
           </table>
 
           <button type="submit" className="board-input submitBox">
-            Submit
+            {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
           </button>
         </form>
       </div>

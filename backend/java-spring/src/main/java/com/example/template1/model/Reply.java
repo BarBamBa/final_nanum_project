@@ -1,7 +1,11 @@
 package com.example.template1.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.ibatis.annotations.Many;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -9,7 +13,8 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "board")
+@Builder
+@ToString(exclude = {"board","childReply"})
 public class Reply extends BaseEntity{
 
     @Id
@@ -28,7 +33,9 @@ public class Reply extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private Long reply;
+    @ManyToOne
+    @JoinColumn(name = "Parents_No")
+    private Reply parentsNo;
 
     private char status;
 

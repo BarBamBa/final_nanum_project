@@ -18,7 +18,6 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
-    private final ReplyRepository replyRepository;
 
     public List<Board> getAllBoard() {
         List<Board> boardList = boardRepository.findAll();
@@ -32,7 +31,7 @@ public class BoardService {
 
     public Board saveBoard(BoardRequest request) {
         Users users = new Users();
-        users.setId(1L);
+        users.setId(request.getUsers().getId());
 
         Board board =  Board.builder()
                 .title(request.getTitle())
@@ -44,6 +43,17 @@ public class BoardService {
 
         return boardRepository.save(board);
     }
+
+    @Transactional
+    public Board updateBoard(BoardRequest request) {
+        Board board = boardRepository.findById(request.getId())
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + request.getId()));
+
+        board.setTitle(request.getTitle());
+        board.setContent(request.getContent());
+
+        return board;
+    }
     @Transactional
     public Board deleteBoard(long id, BoardRequest request) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
@@ -51,9 +61,6 @@ public class BoardService {
         return board;
     }
 
-    public List<Reply> getAllReply(long id) {
-        List<Reply> replyList = replyRepository.findAll();
-        return replyList;
-    }
+
 
 }

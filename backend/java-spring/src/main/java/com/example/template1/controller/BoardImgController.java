@@ -4,7 +4,6 @@ package com.example.template1.controller;
 import com.example.template1.model.Board;
 import com.example.template1.model.BoardImg;
 import com.example.template1.model.Users;
-import com.example.template1.model.dto.AddBoardImgRequest;
 import com.example.template1.service.BoardImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;

@@ -64,7 +64,7 @@ function Notice(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      <button onClick={()=>{navigate('/board/input', {state:{boardName:"공지사항",boardKind:"1"}})}}>글쓰기</button>
+      <button onClick={()=>{navigate('/board/input', {state:{boardName:"공지사항",boardKind:"1",formKind:"write"}})}}>글쓰기</button>
     </div>
   );
 }

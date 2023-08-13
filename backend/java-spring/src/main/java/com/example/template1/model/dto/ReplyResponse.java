@@ -3,6 +3,9 @@ package com.example.template1.model.dto;
 import com.example.template1.model.Reply;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 public class ReplyResponse {
     private final Long id;
@@ -15,9 +18,13 @@ public class ReplyResponse {
 
     private final String content;
 
-    private final Long reply;
-
     private final char status;
+
+    private final Long parentsNo;
+
+    private final LocalDateTime createAt;
+
+    private final LocalDateTime updateAt;
 
     public ReplyResponse(Reply reply) {
         this.id = reply.getId();
@@ -25,8 +32,15 @@ public class ReplyResponse {
         this.name = reply.getUsers().getName();
         this.boardId = reply.getBoard().getId();
         this.content = reply.getContent();
-        this.reply = reply.getReply();
         this.status = reply.getStatus();
+        this.createAt = reply.getCreateAt();
+        this.updateAt = reply.getUpdateAt();
+        if (reply.getParentsNo() == null) {
+            this.parentsNo = null;
+
+        } else {
+            this.parentsNo = reply.getParentsNo().getId();
+        }
 
     }
 
