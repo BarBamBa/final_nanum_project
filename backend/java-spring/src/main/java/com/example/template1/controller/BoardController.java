@@ -27,7 +27,6 @@ public class BoardController {
         List<BoardResponse> boards = boardService.getAllBoard()
                 .stream()
                 .filter(board -> board.getStatus() == 'Y') //게시글 상태 N은 삭제상태로 설정
-                //board.getStatus().equals("Y") 는 문자열 비교라 char인 status컬럼은 equals 사용 불가
                 .map(BoardResponse::new)
                 .toList();
 
@@ -43,28 +42,22 @@ public class BoardController {
                 .body(new BoardResponse(board));
     }
 
-//    @PostMapping("/boards/post") //게시판 글쓰기
-//    public ResponseEntity<Board> addBoard(@RequestBody BoardRequest request) {
-//        Board savedBoard = boardService.saveBoard(request);
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body(savedBoard);
-//    }
-    @PostMapping("/boards/post")
+    @PostMapping("/boards/post") //게시판 글쓰기
     public ResponseEntity<Board> addOrUpdateBoard(@RequestBody BoardRequest request) {
         if (request.getId() == null) {
-            // id가 null인 경우 글 등록
+            // id(board)가 null인 경우 글 등록
             Board savedBoard = boardService.saveBoard(request);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(savedBoard);
         } else {
-            // id가 있는 경우 글 수정
+            // id(board)가 있는 경우 글 수정
             Board updatedBoard = boardService.updateBoard(request);
             return ResponseEntity.ok()
                     .body(updatedBoard);
         }
     }
 
-    @PutMapping("/boards/delete/{id}") // 댓글삭제
+    @PutMapping("/boards/delete/{id}") // 게시판 삭제
     public ResponseEntity<Board> removeBoard(@PathVariable Long id, @RequestBody BoardRequest request) {
 
         Board deleteBoard = boardService.deleteBoard(id, request);
@@ -96,7 +89,7 @@ public class BoardController {
         return ResponseEntity.ok()
                 .body(replies);
     }
-    @PostMapping("/replies/post/{id}") //댓글입력
+    @PostMapping("/replies/post/{id}") //댓글 입력
     public ResponseEntity<Reply> addReply(@PathVariable Long id, @RequestBody ReplyRequest request) {
         Reply savedReply = replyService.saveReply(id, request);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -104,7 +97,7 @@ public class BoardController {
 
     }
 
-    @PutMapping("/replies/update/{id}")
+    @PutMapping("/replies/update/{id}") //댓글 수정
     public ResponseEntity<Reply> removeReply(@PathVariable Long id, @RequestBody ReplyRequest request) {
 
         Reply deleteReply = replyService.deleteOrEditReply(id, request);

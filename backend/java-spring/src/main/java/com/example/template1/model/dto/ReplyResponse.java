@@ -20,7 +20,7 @@ public class ReplyResponse {
 
     private final char status;
 
-    private final Long parentsNo;
+    private final Long reply;
 
     private final LocalDateTime createAt;
 
@@ -35,11 +35,11 @@ public class ReplyResponse {
         this.status = reply.getStatus();
         this.createAt = reply.getCreateAt();
         this.updateAt = reply.getUpdateAt();
-        if (reply.getParentsNo() == null) {
-            this.parentsNo = null;
+        if (reply.getReply() == null) {
+            this.reply = null;
 
         } else {
-            this.parentsNo = reply.getParentsNo().getId();
+            this.reply = reply.getReply().getId();
         }
 
     }

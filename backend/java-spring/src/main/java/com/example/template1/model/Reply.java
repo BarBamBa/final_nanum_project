@@ -1,11 +1,7 @@
 package com.example.template1.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.ibatis.annotations.Many;
-
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -35,7 +31,7 @@ public class Reply extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "Parents_No")
-    private Reply parentsNo;
+    private Reply reply;
 
     private char status;
 

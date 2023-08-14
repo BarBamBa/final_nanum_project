@@ -1,5 +1,6 @@
 package com.example.template1.model.dto;
 
+import com.example.template1.model.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,11 +13,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ReplyRequest {
 
+    private Long id;
+
     private String content;
 
-    private Long reply;
-
     private char status;
+
+    private Long reply;
 
     private LocalDateTime createAt;
 

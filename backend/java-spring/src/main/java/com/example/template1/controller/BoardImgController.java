@@ -61,8 +61,6 @@ public class BoardImgController {
                     .users(users2)
                     .build();
 
-            // 필요한 경우 다른 속성도 설정
-
             // 이미지 정보를 DB에 저장하는 dao 실행
             boardImgService.saveBoardImage(boardImg);
 

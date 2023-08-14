@@ -16,12 +16,12 @@ import java.util.List;
 public class ReplyService {
     private final ReplyRepository replyRepository;
     public List<Reply> getAllReply(long id) {
-        List<Reply> replyList = replyRepository.findAllByBoardIdAndParentsNoIsNull(id);
+        List<Reply> replyList = replyRepository.findAllByBoardIdAndReplyIsNull(id);
         return replyList;
     }
 
     public List<Reply> getAllChildReply(Reply id) {
-        List<Reply> replyList = replyRepository.findAllByParentsNo(id);
+        List<Reply> replyList = replyRepository.findAllByReply(id);
         return replyList;
     }
 
@@ -32,12 +32,27 @@ public class ReplyService {
         Board board = new Board();
         board.setId(id);
 
-        Reply reply =  Reply.builder()
-                .content(request.getContent())
-                .status('Y')
-                .users(users)
-                .board(board)
-                .build();
+        Reply reply = null;
+        if (request.getReply() == null) {
+            reply = Reply.builder()
+                    .content(request.getContent())
+                    .status('Y')
+                    .users(users)
+                    .board(board)
+                    .build();
+        }
+        if (request.getReply() != null) {
+            Reply reply2 = new Reply();
+            reply2.setId(request.getReply());
+            reply = Reply.builder()
+                    .content(request.getContent())
+                    .reply(reply2)
+                    .status('Y')
+                    .users(users)
+                    .board(board)
+                    .build();
+        }
+
 
         return replyRepository.save(reply);
     }
