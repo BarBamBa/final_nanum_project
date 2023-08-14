@@ -67,7 +67,7 @@ function BoardDetail() {
 
   // 대댓글 조회
   const fetchChildReplies = async (parentId) => {
-    setViewChildReplyFlg(!viewChildReplyFlg);
+    
     fetch("/api/child-replies/" + parentId)
       .then((res) => res.json())
       .then((data) => {
@@ -100,7 +100,7 @@ function BoardDetail() {
   };
 
 
-  // 댓글 입력
+  // 댓글 / 대댓글입력
   const newReplyHandle = async () => {
     let data;
     if (postReplyFlg) {
@@ -220,7 +220,7 @@ function BoardDetail() {
                 <div>{data.content}</div>
 
                 {/* 대댓글보기버튼 */}
-                <button onClick={() => { fetchChildReplies(data.id), setEditedReplyIndex(i); }}>대댓글보기</button>
+                <button onClick={() => {setViewChildReplyFlg(!viewChildReplyFlg) ,fetchChildReplies(data.id), setEditedReplyIndex(i); }}>대댓글보기</button>
 
                 {/* 수정버튼 */}
                 <button
