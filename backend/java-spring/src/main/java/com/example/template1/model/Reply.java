@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString(exclude = {"board","childReply"})
 public class Reply extends BaseEntity{
 
