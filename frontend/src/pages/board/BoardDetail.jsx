@@ -15,7 +15,7 @@ function BoardDetail() {
   const [postReplyFlg, setPostReplyFlg] = useState(false); //댓글입력창 flg
   const [editReplyFlg, setEditReplyFlg] = useState(false); //댓글수정창 flg
   const [viewChildReplyFlg, setViewChildReplyFlg] = useState(false); //대댓글보기 flg
-  const [reReplyFlg, setReReplyFlg] = useState(false); //대댓글입력창 flg
+  const [childReplyFlg, setChildReplyFlg] = useState(false); //대댓글입력창 flg
   const [editDeleteFlg, setEditDeleteFlg] = useState("delete");
 
   const [editedReplyIndex, setEditedReplyIndex] = useState(0); //댓글번호
@@ -67,7 +67,7 @@ function BoardDetail() {
 
   // 대댓글 조회
   const fetchChildReplies = async (parentId) => {
-    
+
     fetch("/api/child-replies/" + parentId)
       .then((res) => res.json())
       .then((data) => {
@@ -109,9 +109,9 @@ function BoardDetail() {
       }
     } else {
       data = {
-        content : newChildReplyData.content,
-        reply : newChildReplyData.reply
-      };      
+        content: newChildReplyData.content,
+        reply: newChildReplyData.reply
+      };
     }
     console.log(data);
     fetch(`/api/replies/post/${id}`, {
@@ -125,7 +125,7 @@ function BoardDetail() {
       .then((res) => {
         console.log(res);
         setPostReplyFlg(false);
-        setReReplyFlg(false);
+        setChildReplyFlg(false);
       })
       .catch((error) => {
         console.error(error);
@@ -168,24 +168,47 @@ function BoardDetail() {
       })
   }
 
-
   return (
-    <>
+    <div className="board-detail-container">
       {/* 게시글 영역 */}
-      <h1>게시판 : {BoardFlg(boardData.flg)}</h1>
-      <h1>글쓴이 : {boardData.name}</h1>
-      <h1>글제목 : {boardData.title}</h1>
-      <h1>글내용 : {boardData.content}</h1>
-      <h1>작성일 : {boardData.createAt2}</h1>
-      <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
-      <button onClick={removeBoard}>삭제</button>
+      <div className="board-detail-kind">
+        <h2>{BoardFlg(boardData.flg)}</h2>
+      </div>
+
+      <div className="board-detail-box">
+        <div className="board-detail-header">
+          <div className="board-title">
+            <h3>글제목 : {boardData.title}</h3>
+          </div>
+          <div className="board-writter-info">
+            <p>글쓴이 : {boardData.name}</p>
+            <p>등록일 : {boardData.createAt2}</p>
+          </div>
+
+        </div>
+
+        <div className="board-detail-content">
+          <div>이미지영역</div>
+          <p>글내용 : {boardData.content}</p>
+        </div>
+
+
+
+        <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
+        <button onClick={removeBoard}>삭제</button>
+      </div>
+
 
       {/* 댓글영역 */}
-      <div className="reply-container">
-        <h3>댓글영역</h3>
-        <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
+      <div className="board-reply-container">
+        <div className="board-reply-header">
+          <p>댓글({replyData.length})</p>
+          <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
+        </div>
+
+
         {postReplyFlg ?
-          <>
+          <div className="board-reply-input">
             <input
               type="text"
               onChange={(e) => {
@@ -193,17 +216,19 @@ function BoardDetail() {
                 setNewReplyData(e.target.value);
               }} />
             <button onClick={newReplyHandle} >입력</button>
-          </> : null}
+          </div> : null}
 
         {replyData.map((data, i) => (
 
-          <div key={i} style={{marginTop:"20px"}}>
+          <div key={i} className="board-reply-content">
             {/* 댓글작성자 */}
-            <div> 글쓴이 : {data.name}</div>
+            <div className="reply-writter">
+              <p>글쓴이 : {data.name}</p>
+            </div>
 
             {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
             {editReplyFlg && editedReplyIndex === i ? (
-              <>
+              <div>
                 <input
                   type="text"
                   value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
@@ -213,15 +238,27 @@ function BoardDetail() {
                   }}
                 />
                 <button onClick={() => { modifyReplyHandle(i) }}>저장</button>
-              </>
+                <button onClick={() => { setEditReplyFlg(!editReplyFlg) }}>취소</button>
+              </div>
             ) : (
               <>
                 {/* 댓글내용 */}
-                <div>{data.content}</div>
+                <div className="reply-content">{data.content}</div>
+              </>
+            )}
+            <div className="reply-date">{data.createAt2}</div>
 
+            <div className="reply-button-area">
+
+              <div className="reply-childBtn-area">
                 {/* 대댓글보기버튼 */}
-                <button onClick={() => {setViewChildReplyFlg(!viewChildReplyFlg) ,fetchChildReplies(data.id), setEditedReplyIndex(i); }}>대댓글보기</button>
+                <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setEditedReplyIndex(i); }}>대댓글보기</p>
 
+                {/* 대댓글달기 */}
+                <p onClick={() => { setChildReplyFlg(true); setEditedReplyIndex(i); }}>댓글달기</p>
+              </div>
+
+              <div className="reply-modifyBtn-area">
                 {/* 수정버튼 */}
                 <button
                   onClick={() => {
@@ -235,48 +272,51 @@ function BoardDetail() {
 
                 {/* 댓글삭제 */}
                 <button onClick={() => { modifyReplyHandle(i) }}>삭제</button>
+              </div>
 
-                {/* 대댓글달기 */}
-                <button onClick={() => { setReReplyFlg(true);setEditedReplyIndex(i); }}>답글</button>
-                {reReplyFlg && editedReplyIndex === i ? (
-                  <>
-                    <input
-                      type="text"
-                      name={data.id}
-                      onChange={(e) => {
-                        console.log(e.target.name);
-                        // console.log(e.target.value);
-                        setNewChildReplyData({content : e.target.value, reply : e.target.name});
-                      }} />
-                    <button onClick={newReplyHandle}>작성</button>
-                    <button onClick={() => { setReReplyFlg(false) }}> 취소 </button>
-                  </>
-                ) : null}
-                {/* 대댓글달기 end */}
+            </div>
 
-                {viewChildReplyFlg && editedReplyIndex === i ? (
-                  <div>
-                    <h3>대댓글영역</h3>
-                    {childReplyData.map((childData, i) => (
-                      <div key={i}>
-                        <div>대댓글작성자 : {childData.name}   대댓글내용 : {childData.content}</div>
-                        
-                      </div>
-                    ))}
+            {childReplyFlg && editedReplyIndex === i ? (
+              <div className="child-reply-input">
+                <input
+                  type="text"
+                  name={data.id}
+                  onChange={(e) => {
+                    console.log(e.target.name);
+                    // console.log(e.target.value);
+                    setNewChildReplyData({ content: e.target.value, reply: e.target.name });
+                  }} />
+                <button onClick={newReplyHandle}>작성</button>
+                <button onClick={() => { setChildReplyFlg(false) }}> 취소 </button>
+              </div>
+            ) : null}
+            {/* 대댓글달기 end */}
 
+
+            {viewChildReplyFlg && editedReplyIndex === i ? (
+              <div className="board-child-reply-container">
+                {childReplyData.map((childData, i) => (
+                  <div key={i} className="board-child-reply-content">
+                    <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
+                    <div className="child-reply-content">{childData.content}</div>
+                    <button>수정</button>
+                    <button>삭제</button>
                   </div>
+                ))}
 
-                ) : null}
+              </div>
 
-              </>
-            )}
+            ) : null}
+
+
+
 
           </div>
 
 
         ))}
       </div>
-    </>
+    </div >
   );
 }
 

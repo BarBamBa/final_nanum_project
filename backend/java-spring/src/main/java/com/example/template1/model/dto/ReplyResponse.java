@@ -3,6 +3,7 @@ package com.example.template1.model.dto;
 import com.example.template1.model.Reply;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class ReplyResponse {
 
     private final LocalDateTime createAt;
 
+    private final LocalDate createAt2;
+
     private final LocalDateTime updateAt;
 
     public ReplyResponse(Reply reply) {
@@ -34,6 +37,7 @@ public class ReplyResponse {
         this.content = reply.getContent();
         this.status = reply.getStatus();
         this.createAt = reply.getCreateAt();
+        this.createAt2 = LocalDate.from(reply.getCreateAt());
         this.updateAt = reply.getUpdateAt();
         if (reply.getReply() == null) {
             this.reply = null;

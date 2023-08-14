@@ -25,3 +25,71 @@
   line-height: normal;
   cursor: pointer;
 }
+.board-detail-container h2 {
+  padding:14px;
+}
+.board-detail-kind {
+  border-bottom:3px solid #546d01;
+}
+.board-detail-box {
+  padding:30px;
+}
+.board-detail-header {
+}
+.board-writter-info {
+  display: flex;
+  justify-content: flex-end;
+}
+.board-detail-content {
+  min-height: 800px;
+  border: 1px solid #ccc;
+}
+.board-reply-container {
+  padding:30px;
+}
+.board-reply-header {
+  padding:10px;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+.board-reply-header button {
+  margin: 16px;
+}
+.board-reply-input {
+  margin:10px;
+}
+.board-reply-content {
+  margin-top:10px;
+  padding:10px;
+  background-color:#F9F9F9;
+}
+.reply-button-area {
+  display: flex;
+  justify-content: space-between;
+}
+.reply-childBtn-area {
+  display: flex;
+}
+.reply-childBtn-area p {
+  margin-right:16px;
+}
+.reply-writter,
+.reply-content,
+.reply-date,
+.reply-button-area {
+  margin-bottom: 10px;
+}
+.reply-writter p {
+  font-weight: 700;
+}
+.board-child-reply-container {
+  border-top:1px solid #546d01;
+  padding:16px;
+}
+.board-child-reply-content {
+  margin-bottom: 10px;
+}
+.child-reply-writter {
+  font-weight: 700;
+}
