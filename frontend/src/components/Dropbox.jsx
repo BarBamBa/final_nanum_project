@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import { Link, Route, Router, Routes } from 'react-router-dom';
 import About from '../pages/about/About'
+
 import '../scss/Header.scss'
 
 function Dropbox() {
@@ -61,10 +63,12 @@ function Dropbox() {
         게시판
         {menuState.navItem3 && (
           <ul className='dropBox'>
+
             <li className='dropItem'><Link to={'/board/notice'} state={{boardKind:"1", boardName:"공지사항"}}>공지사항</Link></li>
             <li className='dropItem'><Link to={'board/news'} state={{boardKind:"2", boardName:"소식공유"}}>소식공유</Link></li>
             <li className='dropItem'><Link to={'board/freeboard'} state={{boardKind:"3", boardName:"자유게시판"}}>자유게시판</Link></li>
             <li className='dropItem'><Link to={'board/review'} state={{boardKind:"4", boardName:"봉사후기"}}>봉사후기</Link></li>
+
           </ul>
         )}
       </ul>
@@ -77,8 +81,10 @@ function Dropbox() {
         {menuState.navItem4 && (
           <ul className='dropBox'>
             <li className='dropItem'><Link to='/mypage'>회원정보</Link></li>
-            <li className='dropItem'><Link to='/mypage/volunteerList'>나의자원봉사</Link></li>
-            <li className='dropItem'><Link to='/mypage/wishList'>관심목록</Link></li>
+
+            <li className='dropItem'><Link to='/MyVolunteer'>나의자원봉사</Link></li>
+            <li className='dropItem'><Link to='/wishList'>관심목록</Link></li>
+
           </ul>
         )}
       </ul>
@@ -95,6 +101,7 @@ function Dropbox() {
         )}
       </ul>
     </nav>
+
   );
 }
 

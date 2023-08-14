@@ -45,11 +45,14 @@ public class Users extends BaseEntity {
 
     private String name;
 
+    @Column(unique = true)
     private String nickname;
 
     private String address;
 
     private int age;
+
+    private char gender;
 
     private String phone;
 
