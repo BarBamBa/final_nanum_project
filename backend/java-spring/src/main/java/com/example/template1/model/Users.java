@@ -23,12 +23,6 @@ public class Users extends BaseEntity {
     @Column(name = "USER_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "users")
-    List<Applicants> applicants = new ArrayList<>();
-
-    @OneToMany(mappedBy = "users")
-    List<Review> reviews = new ArrayList<>();
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

@@ -1,16 +1,14 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"board","childReply"})
 public class Reply extends BaseEntity{
 
     @Id
@@ -29,7 +27,9 @@ public class Reply extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private Long reply;
+    @ManyToOne
+    @JoinColumn(name = "Parents_No")
+    private Reply reply;
 
     private char status;
 
