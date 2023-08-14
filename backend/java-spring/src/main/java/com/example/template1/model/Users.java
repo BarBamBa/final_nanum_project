@@ -1,37 +1,41 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.pl.REGON;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users extends BaseEntity{
+@EntityListeners(value = AuditingEntityListener.class)
+//@ToString(exclude = "boards")
+public class Users extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "USER_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "users")
-    List<Applicants> applicants = new ArrayList<>();
+//    @OneToMany(mappedBy = "users")
+//    List<Board> boards = new ArrayList<>();
 
-    @OneToMany(mappedBy = "users")
-    List<Review> reviews = new ArrayList<>();
-
-    @OneToMany(mappedBy = "users")
-    List<Board> boards = new ArrayList<>();
-
-    @OneToMany(mappedBy = "users")
-    List<Reply> replies = new ArrayList<>();
+//    @OneToMany(mappedBy = "users")
+//    List<Applicants> applicants = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "users")
+//    List<Review> reviews = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "users")
+//    List<BoardImg> boardImgs = new ArrayList<>();
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -41,11 +45,17 @@ public class Users extends BaseEntity{
 
     private String name;
 
+    @Column(unique = true)
     private String nickname;
 
     private String address;
 
     private int age;
 
+    private char gender;
+
     private String phone;
+
+    @Column(nullable = true)
+    private char status;
 }
