@@ -43,6 +43,7 @@ public class RemoteApiService {
                 if(flg) {
                     String value = data.getString(key);
                     System.out.print(value + ", ");
+                    if (value.isEmpty()) continue;
                     sb.append(url)
                         .append("?")
                         .append(key)
@@ -52,6 +53,7 @@ public class RemoteApiService {
                 } else {
                     String value = data.getString(key);
                     System.out.print(value + ", ");
+                    if (value.isEmpty()) continue;
                     sb.append("&")
                         .append(key)
                         .append("=")
@@ -106,7 +108,6 @@ public class RemoteApiService {
         if (jsonObject.getInt("sidoCd") == 5690000) {
             String sido = jsonObject.get("sidoCd").toString();
             change = change.replace(sido, "세종특별자치시");
-
         } else {
             RegionCode regionCode = regionCodeRepository
                     .findByCityCodeAndDistrictCode(
@@ -115,10 +116,8 @@ public class RemoteApiService {
                     );
             String sido = jsonObject.get("sidoCd").toString();
             String gugun = jsonObject.get("gugunCd").toString();
-
             change = change.replace(sido, regionCode.getCity());
             change = change.replace(gugun, regionCode.getDistrict());
-
         }
 
         return new JSONObject(change);
