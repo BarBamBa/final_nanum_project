@@ -22,7 +22,7 @@ public class RegionCode {
 
     private String city;
 
-    private int districtCode;
+    private Integer districtCode;
 
     private String district;
 }
