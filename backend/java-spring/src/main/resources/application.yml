@@ -1,6 +1,10 @@
 server.port: 9090
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
   security:
     user:
       name: user
@@ -13,12 +17,13 @@ spring:
         format_sql: true  # sql문 pretty하게 보여줌
         use_sql_comments: true
     generate-ddl: true   # true, false
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create    # create, create-drop, update, validate, none
+      ddl-auto: update   # create, create-drop, update, validate, none
 
   sql:
     init:
-      mode: always # never, always
+      mode: never # never, always
       # always: embeded db가 아닌 외부 db 사용 시 spring boot를 실행할때 마다 data.sql schema.sql import.sql을 항상 실행
       # never: data.sql schema.sql import.sql을 실행하지 않음
       encoding: utf-8
@@ -29,11 +34,17 @@ spring:
       enabled: true
 
   datasource:
-    driver-class-name: org.h2.Driver  # Database를 H2로 사용하겠다.
-    url: jdbc:h2:~/test  # H2 접속 정보
-    username: sa  # H2 접속 시 입력할 username 정보 (원하는 것으로 입력)
-    password:  # H2 접속 시 입력할 password 정보 (원하는 것으로 입력)
+    #    url: jdbc:mariadb://ec2-3-34-177-39.ap-northeast-2.compute.amazonaws.com/mydb         # mariadb
+    url: jdbc:mariadb://localhost:3306/mydb         # mariadb
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: 1234
+
 
   devtools:
     livereload:
       enabled: true
+
+
+file:
+  dir: /images

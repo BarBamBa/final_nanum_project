@@ -1,23 +1,24 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "VOLUNTEER_ID")
     private Long id;
+
+    private int number;
 
     private String title;
 
@@ -50,10 +51,4 @@ public class Volunteer {
     private LocalDateTime rEndDate;
 
     private int rCapacity;
-
-    @OneToMany(mappedBy = "volunteer")
-    List<Applicants> applicants = new ArrayList<>();
-
-    @OneToMany(mappedBy = "volunteer")
-    List<Review> reviews = new ArrayList<>();
 }

@@ -58,4 +58,5 @@ public class Users extends BaseEntity {
 
     @Column(nullable = true)
     private char status;
+
 }

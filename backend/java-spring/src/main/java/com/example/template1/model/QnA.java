@@ -1,11 +1,10 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,18 +12,23 @@ public class QnA extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    private Long UId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private Users users;
+
+    @ManyToOne
+    @JoinColumn(name = "MANAGER_ID")
+    private Manager manager;
 
     private String UTitle;
 
+    @Column(columnDefinition = "TEXT")
     private String UContent;
 
-    private Long SId;
+    private String MTitle;
 
-    private String STitle;
-
-    private String SContent;
+    @Column(columnDefinition = "TEXT")
+    private String MContent;
 }

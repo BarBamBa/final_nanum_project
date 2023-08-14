@@ -1,11 +1,11 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,13 +13,15 @@ public class Notice extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    private Long SId;
+    @ManyToOne
+    @JoinColumn(name = "MANAGER_ID")
+    private Manager manager;
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private char status;

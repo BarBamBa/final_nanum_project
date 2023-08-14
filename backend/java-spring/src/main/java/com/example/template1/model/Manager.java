@@ -1,11 +1,13 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +15,7 @@ public class Manager {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "MANAGER_ID")
     private Long id;
 
     private String password;

@@ -1,31 +1,38 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString(exclude = {"board","childReply"})
 public class Reply extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "REPLY_ID")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "uId")
+    @JoinColumn(name = "USER_ID")
     private Users users;
 
     @ManyToOne
-    @JoinColumn(name = "bId")
+    @JoinColumn(name = "BOARD_ID")
     private Board board;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    private Long reply;
+    @ManyToOne
+    @JoinColumn(name = "Parents_No")
+    private Reply reply;
+
+    private char status;
 
 }

@@ -24,6 +24,7 @@ function Footer() {
         <li className='footerMenuList'><Link to='/mypage'>회원정보</Link></li>
         <li className='footerMenuList'><Link to='/MyVolunteer'>나의자원봉사</Link></li>
         <li className='footerMenuList'><Link to='/wishList'>관심목록</Link></li>
+
       </ul>
       <ul className='footerMenu'>
         <li className='footerMenuName'>고객센터</li>

@@ -1,6 +1,8 @@
+
 div {
   position: relative;
 }
+
 .vBannerBackground {
   width: 100%;
   height: 500px;
@@ -8,6 +10,8 @@ div {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+  z-index: 100;
   &::before {
     content: '';
     position: absolute;
@@ -34,101 +38,158 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 101;
   }
   
   .toVolunteerPage {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-right: 120px;
     width: 100%;
-  }
-  .vBannerListBox {
-    display: grid;
-    background-color: white;
-    justify-content: space-between;
-    grid-template-columns: repeat(4, 280px);
-    width: 1200px;
-    height: 300px;
-    padding: 20px 30px;
-    overflow: hidden;
-
-    .vBannerList {
-      width: auto;
-      height: 250px;
-      z-index: 99;
-      border: 1px solid #546D01;
-      border-radius: 10px;
-      margin: 10px;
-      padding: 10px 0px;
-
-      div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: auto;
-      }
-      .region {
-        width: 50%;
-        height: 40px;
-        border-bottom: 6px solid #546D01;
-        color: #546D01;
-        font-size: 24px;
-        position: relative;
-
-      }
-      .region::before {
-        content: "";
-        position: absolute;
-        bottom: -3px; /* border-bottom의 굵기와 동일한 크기로 설정합니다. */
-        right: -3px;
-        width: 50%;
-        height: 0;
-        border-left: 3px solid transparent; /* 선의 굵기와 같은 값으로 설정합니다. */
-        border-top: 3px solid #546D01; /* 선의 굵기와 같은 값으로 설정합니다. */
-        border-top-right-radius: 3px; /* 원하는 둥근 정도로 설정합니다. */
-      }
-      .region::after {
-        content: "";
-        position: absolute;
-        bottom: -6px; /* border-bottom의 굵기와 동일한 크기로 설정합니다. */
-        right: -3px;
-        width: 50%;
-        height: 0;
-        border-left: 3px solid transparent; /* 선의 굵기와 같은 값으로 설정합니다. */
-        border-bottom: 3px solid #546D01; /* 선의 굵기와 같은 값으로 설정합니다. */
-        border-bottom-right-radius: 3px; /* 원하는 둥근 정도로 설정합니다. */
-      }
-
-      .title {
-        height: 80px;
-        padding: 0px 10px;
-        font-size: 20px;
-      }
-
-      .recruitmentPeriod {
-        justify-content: flex-start;
-        padding: 5px 10px;
-      }
-
-      .recruitmentNumber {
-        justify-content: flex-start;
-        padding: 5px 10px;
-      }
-
-      .volunteerPeriod {
-        justify-content: flex-start;
-        padding: 5px 10px;
-      }
-      .goToVolunteer {
-        justify-content: flex-end;
-        padding: 5px 5px;
-        display: flex;
-        .arrowFoward {
-          width: 18px;
-          height: 18px;
-        }
-      }
+    z-index: 101;
+    
+    a {
+      width: 70px;
+      padding: 10px;
     }
   }
+
+  .vArrowBack, .vArrowForward {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    color: #546D01;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  .slick-slider {
+    display: flex;
+    background-color: white;
+    width: 1300px;
+    height: 350px;
+    padding: 20px 30px;
+    z-index: 100;
+    align-items: center;
+
+    p {
+      display: flex;
+      align-items: center;
+      height: 280px;
+      margin: 0;
+    }
+  }
+  .slick-list {
+    position: relative;
+    display: list-item;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-prev-arrow {
+    display: block;
+    position: relative;
+    right: 25px;
+  }
+// 배너 리스트 scss
+.vBannerList {
+  width: 280px;
+  height: 250px;
+  border: 1px solid #546D01;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px 0px;
+  
+
+  .region {
+    width: 55%;
+    height: 40px;
+    border-bottom: 6px solid #546D01;
+    color: #546D01;
+    font-size: 22px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      width: 50%;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-top: 3px solid #546D01;
+      border-top-right-radius: 3px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      right: -3px;
+      width: 50%;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-bottom: 3px solid #546D01;
+      border-bottom-right-radius: 3px;
+    }
+  }
+  .titleBox {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      padding: 0px 10px;
+      margin: 10px 0;
+      font-size: 20px;
+      width: auto;
+      display: -webkit-inline-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      line-height: 1.2;
+    }
+  }
+  .detailBox{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+    text-align: left;
+
+    .recruitmentPeriod,
+    .recruitmentKind,
+    .volunteerPeriod {
+
+      font-size: 13px;
+      display: -webkit-inline-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      line-height: 1.5;
+      text-indent: 0;
+    }
+  }
+  
+
+  .goToVolunteer {
+    justify-content: flex-end;
+    padding: 5px 5px;
+    display: flex;
+    color: #A4CC22;
+
+    .arrowFoward {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
 }
