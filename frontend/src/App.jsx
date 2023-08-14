@@ -11,6 +11,8 @@ import Qna from './pages/qna/Qna';
 import SignUp from './pages/signUp/SignUp';
 import Volunteer from './pages/volunteer/Volunteer';
 import Vdetail from './pages/volunteer/Vdetail';
+import BoardDetail from './pages/board/BoardDetail';
+import BoardInputForm from './components/BoardInputForm'
 import './scss/App.scss'
 import {Route, Routes} from 'react-router-dom';
 
@@ -25,8 +27,8 @@ function App() {
         <Route path="/volunteer/*" element={<Volunteer/>} />
         <Route path="/vdetail/*" element={<Vdetail/>} />
         <Route path="/board/*" element={<Board/>} />
-        {/* <Route path='/board/detail/:id' element={<BoardDetail/>} />
-        <Route path='/board/input' element={<BoardInputForm/>} /> */}
+        <Route path='/board/detail/:id' element={<BoardDetail/>} />
+        <Route path='/board/input' element={<BoardInputForm/>} />
         <Route path="/mypage/*" element={<MyPage/>} />
         <Route path="/qna/*" element={<Qna/>} />
         <Route path="/login/*" element={<Login/>} />
