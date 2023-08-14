@@ -51,11 +51,11 @@ function SearchBar(props) {
   return (
     <div className='searchBar'>
       <div className='searchHeader'>
-        {onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
+        <span onClick={handleSearchHeader}>{onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
         <IoIosArrowUp 
           className= {`searchArrow ${onSearchHeader ? '' : 'down'}`}
-          onClick={handleSearchHeader}
         />
+        </span>
       </div>
       <div className={`searchContents ${onSearchHeader ? '' : 'closed'}`}>
           <div className='table'>
@@ -103,9 +103,11 @@ function SearchBar(props) {
               </div>
             </div>
           </div>
+          <div className='btnBox'>
+            <button onClick={handleSearch} id='btnSearch'>찾기</button>
+            <button onClick={''} id='btnReset'>초기화</button>
+          </div>
       </div>
-      {/* <button onClick={none}>찾기</button>
-      <button onClick={none}>초기화</button> */}
     </div>
   )
 }
