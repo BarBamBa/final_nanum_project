@@ -5,8 +5,8 @@ import { useLocation } from 'react-router-dom';
 
 function VDetailCategory() {
 
-  const location = useLocation();
-  const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
+  // const location = useLocation();
+  // const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -31,13 +31,13 @@ function VDetailCategory() {
     }, []);
 
   return (
-    <div className='VDetailCategory'>
+    <div className='vDetail'>
       <div className='buttonLine'>
-        <button>목록으로</button>
-        <button>신청하기</button>
+        <button Link to='/volunteer' id='btnToList'>목록으로</button>
+        <button id='btnSubmit'>신청하기</button>
       </div>
       <div className='vDetailCategory'>
-        <div className='categoryItem'>제목 : {data.progrmSj}</div>
+        <div className='categoryTitle'>제목 : {data.progrmSj}</div>
         <div className='categoryItem'>모집기간: {data.noticeBgnde} ~ {data.noticeEndde}</div>
         <div className='categoryItem'>봉사기간: {data.progrmBgnde} ~ {data.progrmEndde}</div>
         <div className='categoryItem'>모집인원: {data.rcritNmpr} 명 / 일</div>
@@ -51,14 +51,13 @@ function VDetailCategory() {
         <div className='categoryItem'>활동요일: {data.actWkdy}</div>
         <div className='categoryItem'>봉사분야: {data.srvcClCode}</div>
         <div className='categoryItem'>봉사시간: {data.actBeginTm}시 ~ {data.actEndTm}시 </div>
-        <div className='categoryItem'>첨부파일: {data.actPlace}</div>
-        <div className='categoryItem'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기'
+        <div className='categoryState'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기'
                                                : data.progrmSttusSe === 2 ? '모집중' : '모집완료'}
         </div>
+        <div className='categoryFile'>첨부파일: {data.actPlace}</div>
       </div>
       <div className='vDetailContents'>
-        내용 : 
-        <p>{data.progrmCn}</p>
+        <p>{data.progrmCn} 내용냉용내용내용</p>
       </div>
       <div className='contactList'>
         <div className='contactItem'>담당자명: {data.nanmmbyNmAdmn}</div>

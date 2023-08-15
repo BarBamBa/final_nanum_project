@@ -6,11 +6,15 @@ main {
   .pageTitle {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
+    height: 80px;
     font-size: 40px;
     border-bottom: 3px solid #D6D6D6;
     padding: 15px 0px;
-    margin-left: 20px;
+    span {
+      padding-left: 20px;
+    }
   }
 }
 
@@ -163,7 +167,7 @@ main {
         
         }  
     }
-
+    //카테고리 검색창 버튼 디자인 변경
     .btnBox {
       width: 100%;
       display: flex;
@@ -177,7 +181,7 @@ main {
         border: none;
         margin: 10px;
         border-radius: 5px;
-                
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);           
       }
 
       #btnSearch {

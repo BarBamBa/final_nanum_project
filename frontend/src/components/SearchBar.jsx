@@ -27,14 +27,6 @@ function SearchBar(props) {
     }
   }
 
-  const handleOptionChange = (event) => {
-    const { name, value } = event.target;
-    setSearchOptions((prevOptions) => ({
-      ...prevOptions,
-      [name]: value,
-    }));
-  };
-
   const handleSearch = () => {
     const filteredData = data.filter((item) => {
       for (const option in searchOptions) {
@@ -105,7 +97,7 @@ function SearchBar(props) {
           </div>
           <div className='btnBox'>
             <button onClick={handleSearch} id='btnSearch'>찾기</button>
-            <button onClick={''} id='btnReset'>초기화</button>
+            <button onClick={handleReset} id='btnReset'>초기화</button>
           </div>
       </div>
     </div>

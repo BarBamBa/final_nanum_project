@@ -6,18 +6,18 @@ import '/src/scss/Volunteer.scss'
 function Volunteer() {
 
   const [params, setParams] = useState({
-    numOfRows: 30,
-    pageNo: 5,
-    keyword: null,
-    schCateGu: 'all',
-    schSido: null,
-    schSign1: null,
-    upperClCode: null,
-    nanmClCode: null,
-    progrmBgnde: null,
-    progrmEndde: null,
-    adultPosblAt: null,
-    yngbgsPosblAt: null,
+    // numOfRows: 30,
+    // pageNo: 5,
+    // keyword: null,
+    // schCateGu: 'all',
+    // schSido: null,
+    // schSign1: null,
+    // upperClCode: null,
+    // nanmClCode: null,
+    // progrmBgnde: null,
+    // progrmEndde: null,
+    // adultPosblAt: null,
+    // yngbgsPosblAt: null,
   });
 
   const [data, setData] = useState([]);
@@ -29,9 +29,9 @@ function Volunteer() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                params,
-            })
+          //   body: JSON.stringify({
+          //       params,
+          //   })
           });
           const result = res.json();
           return result;
@@ -41,18 +41,17 @@ function Volunteer() {
           setData(res);
         });
     }, []);
-    console.log(data);
+
   return (
     <main>
       <div className='pageTitle'>
         봉사활동찾기
       </div>
-          <SearchBar data={data} />
+      <SearchBar data={data} />
       <div>
-        { data ? data.map((Item, idx) => 
+        { data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
           <VolunteerList data={Item} num={idx} key={idx} />
-        ) : "검색 결과가 없습니다." 
-        }
+        )}
       </div>
     </main>
   )
