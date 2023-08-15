@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c747663-51db-453c-83f5-f4c5957853d6" name="Changes" comment="zz">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3c747663-51db-453c-83f5-f4c5957853d6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/java-spring/src/main/java/com/example/template1/model/dto/ReplyResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/java-spring/src/main/java/com/example/template1/model/dto/ReplyResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/java-spring/src/main/java/com/example/template1/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/java-spring/src/main/java/com/example/template1/model/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/board/BoardDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/board/BoardDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/scss/board/Board.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/scss/board/Board.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +40,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -75,7 +78,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15429688",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -112,6 +115,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="zz" />
-    <option name="LAST_COMMIT_MESSAGE" value="zz" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
