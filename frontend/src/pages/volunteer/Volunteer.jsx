@@ -53,10 +53,10 @@ function Volunteer() {
   return (
     <main>
       <div className='pageTitle'>
-        봉사활동찾기
+        <span>봉사활동찾기</span>
       </div>     
       <SearchBar params={params} setParams={setParams} setData={setData}/>
-      <div className='tab'>
+      <div className='volunteerTab'>
         <div className={`tabOption ${tab ? 'selected' : ''}`} onClick={() => setTab(true)}>목록보기</div>
         <div className={`tabOption ${tab ? '' : 'selected'}`} onClick={() => setTab(false)}>지도보기</div>
       </div>

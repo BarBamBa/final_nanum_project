@@ -1,5 +1,5 @@
 .vDetail {
-  width: 1000px;
+  width: 1200px;
   height: auto;
   margin: 0 auto;
   padding-bottom: 100px;
@@ -21,6 +21,11 @@
       text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);        
     }
 
+    a {
+      color: white;
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);   
+    }
+
     #btnSubmit {
       background-color: #A4CC22;
 
@@ -40,7 +45,7 @@
   }
 //봉사활동 세부사항
   .vDetailCategory{
-    width: 1000px;
+    width: 1200px;
     border-top: 3px solid #546D01;
     border-bottom: 3px solid #546D01;
     border-left: 1px solid #546D01;
@@ -51,36 +56,50 @@
     
     margin: 0 auto;
     
-    div {
+    .categoryItem {
+      display: grid;
+      grid-template-areas: 
+      "category content"
+      ;
+      grid-template-columns: 20% 80%;
       border-bottom: 1px dashed #D6D6D6;
       padding: 10px 10px;
       height: 30px;
       line-height: 30px;
+
+      .itemName {
+        grid-area: category;
+        width: 80px;
+        margin: 0;
+      }
+
+      &.title {
+        display: block;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border-bottom: 1px solid #546D01;
+        background-color: #546D01;
+        color: white;
+        font-size: 24px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      }
+      &.state {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+  
+      &.file {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border: none;
+      }
     }
 
-    .categoryTitle {
-      grid-column-start: 1;
-      grid-column-end: 3;
-      border-bottom: 3px solid #546D01;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .categoryState {
-      grid-column-start: 1;
-      grid-column-end: 3;
-    }
-
-    .categoryFile {
-      grid-column-start: 1;
-      grid-column-end: 3;
-      border: none;
-    }
   
   }
 //내용 부분
   .vDetailContents {
-    width: 1000px;
+    width: 1200px;
     min-height: 300px;
     height: auto;
     border-left: 1px solid #546D01;
@@ -88,15 +107,16 @@
     margin: 0 auto;
 
     p {
-      padding: 10px;
+      padding: 30px;
       margin: 0;
       white-space: pre-wrap;
+      line-height: 2;
     }
   }
 // 담당자 연락처 부분
   .contactList {
-    width: 1000px;
-    min-height: 200px;
+    width: 1200px;
+    min-height: 250px;
     border-top: 3px solid #546D01;
     border-bottom: 3px solid #546D01;
     border-left: 1px solid #546D01;
@@ -106,8 +126,25 @@
     justify-content: space-between;
     margin: 0 auto;
 
-    .contactItem {
+    .contactTitle {
+      height: 30px;
+      font-size: 20px;
+      background-color: #546D01;
+      color: white;
       padding: 10px;
+      line-height: 30px;
+    }
+
+    .contactItem {
+      height: 30px;
+      line-height: 25px;
+      padding: 0 20px;
+      margin: 0;
+      border-bottom: 1px dashed #D6D6D6;
+
+      &.addr {
+        border: none;
+      }
     }
   }
 }

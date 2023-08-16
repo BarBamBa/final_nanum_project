@@ -22,7 +22,7 @@ main {
 
 .searchBar {
   width: 1000px;
-  height: 100vh;
+  height: auto;
   margin: 30px auto;
 
   .searchHeader {
@@ -56,14 +56,38 @@ main {
     border: 1px solid #546D01;
     margin-top: 0;
     display: block; /* 기본적으로 표시되도록 설정 */
-    height: 300px;
+    height: auto;
     opacity: 1; /* 기본적으로 불투명도 1로 설정 */
     // 열고 닫을 때 애니메이션 
     // transition: max-height 0.5s ease-in-out, opacity 0.1s ease-in-out;
-
+    
     &.closed {
       height: 0; /* 닫혔을 때 최대 높이를 0으로 설정하여 숨김 */
       opacity: 0; /* 닫혔을 때 불투명도를 0으로 설정하여 페이드아웃 */
+    }
+
+    input[type="text"]{
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      color: #343434;
+
+      &:focus {
+        border-color: #A4CC22;
+        outline: none;
+        box-shadow: 0 0 2px rgba(#A4CC22, 1);
+      }
+    }
+
+    select {
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      color: #343434;
+
+      &:focus {
+        border-color: #A4CC22;
+        outline: none;
+        box-shadow: 0 0 2px rgba(#A4CC22, 1);
+      }
     }
     .table {
       width: 1000px;
@@ -172,7 +196,7 @@ main {
 
 // 목록, 지도 탭
 
-.tab {
+.volunteerTab {
   width: 1000px;
   margin: auto;
   display: flex;
@@ -207,15 +231,81 @@ main {
 
   .volunteerList {
     margin: 20px 0;
-    border-bottom: 1px solid #546D01;
 
     .page {
       margin: 15px 0;
     }
+    .volunteerListBox {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      grid-template-areas: 
+      "state title date"
+      "state detail1 date"
+      "state detail2 date"
+      ;
+      grid-template-columns: 10% 80% 10%;
+      grid-template-rows: 40% 30% 30%;
+      padding: 10px;
+      border-top: 1px dashed #D6D6D6;
+      height: 100px;
 
-    .volunteerBox {
-      padding: 10px 0;
-      border-top: 1px dotted #000;
+      .listState {
+        grid-area: state;
+        background-color: #A4CC22;
+        border: 1px solid #A4CC22;
+        border-radius: 5px;
+        color: white;
+        width: 80px;
+        height: 30px;
+        text-align: center;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        line-height: 30px;
+      }
+
+      .listTitle {
+        grid-area: title;
+        font-size: 20px;
+        font-weight: bolder;
+        //한 줄 넘어갈 시 생략
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+
+      .listDetail1 {
+        grid-area: detail1;
+        font-size: 14px;
+
+        span {
+          margin: 0 20px;
+        }
+      }
+
+      .listDetail2 {
+        grid-area: detail2;
+        font-size: 14px;
+        
+        span {
+          margin: 0 20px;
+        }
+      }
+
+      .listDate {
+        grid-area: date;
+        color: #546D01;
+
+        .listDateNum {
+          font-size: 19px;
+          // color: #A4CC22;
+          text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+
+          &.end {
+            color: darken(red, 10%);
+          }
+        }
+      }
     }
   }
 
