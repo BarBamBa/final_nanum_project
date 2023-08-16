@@ -17,7 +17,6 @@ spring:
         format_sql: true  # sql문 pretty하게 보여줌
         use_sql_comments: true
     generate-ddl: true   # true, false
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update   # create, create-drop, update, validate, none
 
@@ -44,7 +43,3 @@ spring:
   devtools:
     livereload:
       enabled: true
-
-
-file:
-  dir: /images

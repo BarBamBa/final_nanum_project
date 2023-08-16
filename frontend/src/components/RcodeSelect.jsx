@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
-function RcodeSelect() {
+function RcodeSelect({ params, setParams }) {
 
   const [city, setCity] = useState([]);
   const [district, setDistrict] = useState([]);
-  const [selected, setSelected] = useState(
-    {
-      city: '',
-      district: '',
-    }
-  );
+
+  // 시/군 선택 이벤트
   const handleCitySelectChange = (event) => {
-    setSelected({
-      ...selected,
-      city: event.target.value
+    setParams({
+      ...params,
+      schSido: event.target.value,
     });
-    console.log(selected);
   };
 
+  // 시/군/구 선택 이벤트
   const handleDistrictSelectChange = (event) => {
-    setSelected({
-      ...selected,
-      district: event.target.value
+    setParams({
+      ...params,
+      schSign1: event.target.value,
     });
-    console.log(selected);
   };
 
   useEffect(() => {
@@ -52,7 +47,7 @@ function RcodeSelect() {
 
   return (
     <>
-      <select value={selected.city} onChange={handleCitySelectChange}>
+      <select value={params.schSido} onChange={handleCitySelectChange}>
         <option value="" disabled>
           시/도
         </option>
@@ -62,12 +57,12 @@ function RcodeSelect() {
           </option>
         ))}
       </select>
-      <select value={selected.district} onChange={handleDistrictSelectChange}>
+      <select value={params.schSign1} onChange={handleDistrictSelectChange}>
         <option value="" disabled>
           시/군/구
         </option>
         {district.map((option) => (
-          option[0] == selected.city && 
+          option[0] == params.schSido && 
           <option key={option[1]} value={option[2]}>
             {option[1]} 
           </option>

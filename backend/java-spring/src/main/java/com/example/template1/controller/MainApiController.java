@@ -37,10 +37,7 @@ public class MainApiController {
 
     @PostMapping("/list")
     public String searchListByKeyword(@RequestBody(required = false) String data) throws IOException {
-        if(!new JSONObject(data).getString("keyword").isEmpty()) {
-            return remoteApiService.getListInfo(defUrl + funcUrl[0], new JSONObject(data));
-        }
-        return remoteApiService.getListInfo(defUrl + funcUrl[0]);
+        return remoteApiService.getListInfo(defUrl + funcUrl[0], new JSONObject(data));
     }
 
     @PostMapping("/detail")
