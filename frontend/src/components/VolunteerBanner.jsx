@@ -22,7 +22,8 @@ function VolunteerBanner() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              keyword: '',
+              schCateGu: 'all',
+              keyword: '교류',
             })
           });
           const result = await res.json();
