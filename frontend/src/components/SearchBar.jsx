@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '/src/scss/Volunteer.scss'
 import { IoIosArrowUp } from 'react-icons/io';
 import { AiOutlineCheck } from 'react-icons/ai'
@@ -7,18 +7,18 @@ import VCodeSelect from './VCodeSelect';
 import Calendar from './Calendar';
 
 
-function SearchBar(props) {
+function SearchBar({ params, setParams, setData }) {
 
-  const {data} = props;
+  // const {data} = props;
   const [ onSearchHeader, setOnSearchHeader ] = useState(true);
   const [ onCheck, setOnCheck ] = useState("");
 
 
-  //카테고리 헤더 열기닫기 기능
+  // 카테고리 헤더 열기닫기 기능
   function handleSearchHeader() {
     setOnSearchHeader(!onSearchHeader);
   }
-  //봉사분야 체크박스 선택시 true/false
+  // 모집상태 체크박스 선택시 true/false
   function handleCheck(newOnCheck) {
     if(newOnCheck === onCheck) {
       setOnCheck("");
@@ -27,44 +27,64 @@ function SearchBar(props) {
     }
   }
 
-  function handleReset() {
-    return;
+  // 검색 버튼 클릭 이벤트
+  const handleSearch = async() => {
+    await fetch('/api/list', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...params
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      setData(res);
+      console.log(params);
+      console.log(res);
+    });
   }
 
-  const handleSearch = () => {
-    const filteredData = data.filter((item) => {
-      for (const option in searchOptions) {
-        if (searchOptions[option] && !item[option].includes(searchOptions[option])) {
-          return false;
-        }
-      }
-      return true;
+  // 초기화 버튼 클릭 이벤트
+  const handleSearchInit = () => {
+    setParams({
+        // numOfRows: 30,
+      // pageNo: 5,
+      schCateGu: 'all',
+      keyword: '',
+      schSido: '',
+      schSign1: '',
+      schupperClCode: '',
+      schnanmClCode: '',
+      schprogrmBgnde: '',
+      progrmEndde: '',
+      adultPosblAt: '',
+      yngbgsPosblAt: '',
     });
-
-    onSearch(filteredData);
-  };
+  } 
 
   return (
     <div className='searchBar'>
       <div className='searchHeader'>
-        <span onClick={handleSearchHeader}>{onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
+        {onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
         <IoIosArrowUp 
           className= {`searchArrow ${onSearchHeader ? '' : 'down'}`}
+          onClick={handleSearchHeader}
         />
-        </span>
       </div>
       <div className={`searchContents ${onSearchHeader ? '' : 'closed'}`}>
           <div className='table'>
             <div className='tableTr'>
               <div className='trTitle'>봉사분야</div>
               <div className='tableTdField'>
-                  <VCodeSelect />
+                  <VCodeSelect params={params} setParams={setParams} />
               </div>
             </div>
             <div className='tableTr'>
               <div className='trTitle'>지역</div>
                 <div className='tableTd'>
-                  <RcodeSelect />
+                  <RcodeSelect params={params} setParams={setParams} />
                 </div>
               <div className='trTitle'>봉사자유형</div>
               <div className='tableTd'>
@@ -82,7 +102,7 @@ function SearchBar(props) {
             </div>
             <div className='tableTr'>
               <div className='trTitle'>봉사기간</div>
-              <div className='tableTd'><Calendar/></div>
+              <div className='tableTd'><Calendar params={params} setParams={setParams} /></div>
             </div>
             <div className='tableTr'>
               <div className='trTitle'>모집상태</div>
@@ -98,12 +118,22 @@ function SearchBar(props) {
                 <label htmlFor='statusDone' onClick={() => handleCheck('done')}>모집완료</label>
               </div>
             </div>
-          </div>
-          <div className='btnBox'>
-            <button onClick={handleSearch} id='btnSearch'>찾기</button>
-            <button onClick={handleReset} id='btnReset'>초기화</button>
+            <div className='tableTr'>
+              <div className='trTitle'>검색어</div>
+              <div className='keyword'>
+                {/* 검색어 */}
+                <input type='text' id='keyword' placeholder='봉사' value={params.keyword} onChange={(e) => {
+                  setParams({
+                    ...params,
+                    keyword: e.target.value,
+                  })
+                }}/>
+              </div>
+            </div>
           </div>
       </div>
+      <button onClick={handleSearch}>검색</button>
+      <button onClick={handleSearchInit}>초기화</button>
     </div>
   )
 }

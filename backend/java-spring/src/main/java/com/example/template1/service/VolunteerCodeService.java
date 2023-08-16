@@ -10,10 +10,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VolunteerCodeService {
-
     private final VolunteerCodeRepository volunteerCodeRepository;
 
-    public List<VolunteerCode> getVolunteerCode () {
-      return volunteerCodeRepository.findAll();
-    };
+    public List<VolunteerCode> getVolunteerCode() {
+        return volunteerCodeRepository.findAll();
+    }
 }

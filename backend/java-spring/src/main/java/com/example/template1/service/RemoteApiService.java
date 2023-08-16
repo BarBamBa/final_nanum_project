@@ -24,12 +24,13 @@ public class RemoteApiService {
     private final RegionCodeRepository regionCodeRepository;
     private final WebClientUtil webClient;
 
-    public String getListInfo(String url) {
-        JSONObject jsonObject = fetchJson(url);
+//    public String getListInfo(String url) {
+//        JSONObject jsonObject = fetchJson(url);
+//
+//        return getListString(jsonObject);
+//    }
 
-        return getString(jsonObject);
-    }
-
+    // key, value 값을 순회하며 url을 완성하여 fetchJson의 webclient url로 보낸다.
     public String getListInfo(String url, JSONObject data) throws IOException {
         Iterator<String> iter = data.keys();
         System.out.println("=======================================================================================");
@@ -40,34 +41,37 @@ public class RemoteApiService {
         while (iter.hasNext()) {
             String key = iter.next();
             System.out.print(key + " : ");
-            if(flg) {
-                String value = data.getString(key);
-                System.out.print(value + ", ");
-                sb.append(url)
+                if(flg) {
+                    String value = data.getString(key);
+                    System.out.print(value + ", ");
+                    if (value.isEmpty()) continue;
+                    sb.append(url)
                         .append("?")
                         .append(key)
                         .append("=")
                         .append(URLEncoder.encode(value, "UTF-8"));
-                flg = !flg;
-            } else {
-                String value = data.getString(key);
-                System.out.print(value + ", ");
-                if (value.isEmpty()) continue;
-                sb.append("&")
+                    flg = false;
+                } else {
+                    String value = data.getString(key);
+                    System.out.print(value + ", ");
+                    if (value.isEmpty()) continue;
+                    sb.append("&")
                         .append(key)
                         .append("=")
                         .append(URLEncoder.encode(value, "UTF-8"));
-            }
+                }
         }
         System.out.println();
         System.out.println("=======================================================================================");
         System.out.println(sb);
         System.out.println("=======================================================================================");
+
         JSONObject jsonObject = fetchJson(sb.toString());
-        return getString(jsonObject);
+
+        return getListString(jsonObject);
     }
 
-    private String getString(JSONObject jsonObject) {
+    private String getListString(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONObject("response")
                 .getJSONObject("body")
                 .getJSONObject("items")

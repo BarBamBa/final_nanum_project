@@ -36,6 +36,7 @@
     btn1.addEventListener('click', async event => {
         event.preventDefault();
         let keyword = param1.value;
+        let schCateGu = "all";
         fetch('/api/list', {
             method: 'POST',
             headers: {
@@ -43,6 +44,7 @@
             },
             body: JSON.stringify({
                 keyword,
+                schCateGu,
             })
         })
             .then(data => data.json())  // string 문자열을 json 객체로 변환

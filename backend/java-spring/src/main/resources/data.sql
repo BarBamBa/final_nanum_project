@@ -79,8 +79,7 @@ select now();
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(1900, "온라인자원봉사", 1904, "캠페인 및 홍보");
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(1900, "온라인자원봉사", 1905, "전문기술제공");
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(1900, "온라인자원봉사", 1906, "노력활동");
-
-
+--
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6110000, "서울특별시", 3000000, "종로구");
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6110000, "서울특별시", 3010000, "중구");
 -- insert into region_code(`city_code`, `city`, `district_code`, `district`) values(6110000, "서울특별시", 3020000, "용산구");

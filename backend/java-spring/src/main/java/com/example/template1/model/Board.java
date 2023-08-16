@@ -1,19 +1,20 @@
 package com.example.template1.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString(exclude = "users")
 public class Board extends BaseEntity{
 
     @Id
@@ -25,8 +26,11 @@ public class Board extends BaseEntity{
     @JoinColumn(name = "USER_ID")
     private Users users;
 
-    @OneToMany(mappedBy = "board")
-    List<Reply> replies = new ArrayList<>();
+//    @OneToMany(mappedBy = "board")
+//    List<Reply> replies = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "board")
+//    List<BoardImg> boardImg = new ArrayList<>();
 
     private String title;
 
@@ -36,5 +40,9 @@ public class Board extends BaseEntity{
     private char flg;
 
     private char status;
+
+    public void delete(char status) {
+        this.status = status;
+    }
 
 }

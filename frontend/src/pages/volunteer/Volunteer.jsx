@@ -12,14 +12,13 @@ function Volunteer() {
     keyword: '',
     schSido: '',
     schSign1: '',
-    upperClCode: '',
-    nanmClCode: '',
-    progrmBgnde: '',
+    schupperClCode: '',
+    schnanmClCode: '',
+    schprogrmBgnde: '',
     progrmEndde: '',
     adultPosblAt: '',
     yngbgsPosblAt: '',
   });
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,8 +29,8 @@ function Volunteer() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                schCateGu: 'all',
-                keyword: '',
+              schCateGu: 'all',
+              keyword: '구로구',
             })
           });
           const result = res.json();
@@ -40,23 +39,41 @@ function Volunteer() {
         
         fetchData().then(res => {
           setData(res);
+          console.log(res);
         });
+
     }, []);
+
+    useEffect(()=> {
+      console.log(params);
+    }, [params])
 
   return (
     <main>
       <div className='pageTitle'>
         봉사활동찾기
+      </div>     
+      <SearchBar params={params} setParams={setParams} setData={setData}/>
+      <div className='tab'>
+        <div className={`tabOption ${tab ? 'selected' : ''}`} onClick={() => setTab(true)}>목록보기</div>
+        <div className={`tabOption ${tab ? '' : 'selected'}`} onClick={() => setTab(false)}>지도보기</div>
       </div>
-      <SearchBar data={data} />
-      <div>
-        { data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
-          <VolunteerList data={Item} num={idx} key={idx} />
-        )}
+      <div className='result'>
+        { tab ? 
+          <div className='volunteerList'>
+            <div className='page'>[전체 {data.length}건, 현재페이지 {1}/{1}]</div>
+            { !data ? "검색 결과가 없습니다." : data.map((Item, idx) => 
+              <VolunteerList data={Item} num={idx} key={idx} />
+            )}
+          </div> 
+          : 
+          <div>
+            <Map />
+          </div> 
+        }
       </div>
     </main>
   )
 }
-
 
 export default Volunteer

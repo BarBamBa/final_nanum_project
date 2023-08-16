@@ -52,7 +52,8 @@ function VCodeSelect() {
 
   return (
     <>
-      <select value={selected.large} onChange={handleLargeSelectChange}>
+      {/* 상위분야코드 셀렉트 박스 */}
+      <select value={params.schupperClCode} onChange={handleLargeSelectChange}>
         <option value="" disabled>
           상위분야코드
         </option>
@@ -62,12 +63,13 @@ function VCodeSelect() {
           </option>
         ))}
       </select>
-      <select value={selected.small} onChange={handleSmallSelectChange}>
+      {/* 하위분야코드 셀렉트 박스 */}
+      <select value={params.schnanmClCode} onChange={handleSmallSelectChange}>HY
         <option value="" disabled>
           분야코드
         </option>
         {small.map((option) => (
-          option[0] == selected.large && 
+          option[0] == params.schupperClCode && 
           <option key={option[1]} value={option[2]}>
             {option[1]} 
           </option>

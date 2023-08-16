@@ -167,38 +167,92 @@ main {
         
         }  
     }
-    //카테고리 검색창 버튼 디자인 변경
-    .btnBox {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  }
+}
 
-      button {
-        width: 100px;
-        height: 40px;  
-        color: white;
-        border: none;
-        margin: 10px;
-        border-radius: 5px;
-        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);           
-      }
+// 목록, 지도 탭
 
-      #btnSearch {
-        background-color: #A4CC22;
+.tab {
+  width: 1000px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid #546D01;
+  border-top: 1px solid #546D01;
 
-        &:active {
-          background-color: darken(#A4CC22, 10%);
-        }
-      }
+  .tabOption {
+    box-sizing: border-box;
+    width: 50%;
+    height: 50px;
+    margin: auto 0;
+    border-right: 1px solid #546D01;
+    border-bottom: 1px solid #546D01;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 50px;
 
-      #btnReset {
-        background-color: #546D01;
+    &.selected {
+      border-top: 8px solid #546D01;
+      border-bottom: 8px solid #fff;
+    }
+  }
+}
 
-        &:active {
-          background-color: darken(#546D01, 10%);
-        }
-      }
+// 목록, 지도 컨텐츠
+
+.result {
+  width: 1000px;
+  margin: 0 auto;
+
+  .volunteerList {
+    margin: 20px 0;
+    border-bottom: 1px solid #546D01;
+
+    .page {
+      margin: 15px 0;
+    }
+
+    .volunteerBox {
+      padding: 10px 0;
+      border-top: 1px dotted #000;
+    }
+  }
+
+  .mapBox {
+    border: 1px solid #546D01;
+  }
+}
+//카테고리 검색창 버튼 디자인 변경
+.btnBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 100px;
+    height: 40px;  
+    color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);           
+  }
+
+  #btnSearch {
+    background-color: #A4CC22;
+
+    &:active {
+      background-color: darken(#A4CC22, 10%);
+    }
+  }
+
+  #btnReset {
+    background-color: #546D01;
+
+    &:active {
+      background-color: darken(#546D01, 10%);
     }
   }
 }
