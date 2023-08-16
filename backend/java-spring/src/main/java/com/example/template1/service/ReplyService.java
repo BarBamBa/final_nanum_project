@@ -34,6 +34,7 @@ public class ReplyService {
         board.setId(id);
 
         Reply reply = null;
+        // 부모댓글 id가 없이 넘어오면 댓글입력
         if (request.getReply() == null) {
             reply = Reply.builder()
                     .content(request.getContent())
@@ -42,6 +43,7 @@ public class ReplyService {
                     .board(board)
                     .build();
         }
+        // 부모댓글 id가 넘어오면 대댓글 입력
         if (request.getReply() != null) {
             Reply reply2 = new Reply();
             reply2.setId(request.getReply());

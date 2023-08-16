@@ -3,6 +3,7 @@ package com.example.template1.model;
 import jakarta.persistence.*;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,10 @@ public class Board extends BaseEntity{
 
     private char flg;
 
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
+
+    private Integer likeCount;
 
     public void delete(char status) {
         this.status = status;
