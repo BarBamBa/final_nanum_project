@@ -18,9 +18,11 @@ public class Applicants extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID")
     private Users users;
 
     @ManyToOne
+    @JoinColumn(name = "VOLUNTEER_ID")
     @JoinColumn(name = "VOLUNTEER_ID")
     private Volunteer volunteer;
 

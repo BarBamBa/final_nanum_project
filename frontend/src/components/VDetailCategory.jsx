@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '/src/scss/VDetailCategory.scss'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 function VDetailCategory() {
@@ -59,13 +59,12 @@ function VDetailCategory() {
         <div className='categoryItem'>활동요일: {data.actWkdy}</div>
         <div className='categoryItem'>봉사분야: {data.srvcClCode}</div>
         <div className='categoryItem'>봉사시간: {data.actBeginTm}시 ~ {data.actEndTm}시 </div>
-        <div className='categoryItem'>첨부파일: {data.actPlace}</div>
-        <div className='categoryItem'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기'
+        <div className='categoryState'>모집상태:  {data.progrmSttusSe === 1 ? '모집대기'
                                                : data.progrmSttusSe === 2 ? '모집중' : '모집완료'}
         </div>
+        <div className='categoryFile'>첨부파일: {data.actPlace}</div>
       </div>
       <div className='vDetailContents'>
-        내용 : 
         <p>{data.progrmCn}</p>
       </div>
       <div className='contactList'>

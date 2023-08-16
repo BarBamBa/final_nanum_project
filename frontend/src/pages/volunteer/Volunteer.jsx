@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBar from '../../components/SearchBar'
+import VolunteerList from '../../components/VolunteerList';
 import '/src/scss/Volunteer.scss'
-import VolunteerList from '../../components/VolunteerList'
-import Map from '../../components/Map';
 
 function Volunteer() {
 
-  const [tab, setTab] = useState(true);
   const [params, setParams] = useState({
     // numOfRows: 30,
     // pageNo: 5,

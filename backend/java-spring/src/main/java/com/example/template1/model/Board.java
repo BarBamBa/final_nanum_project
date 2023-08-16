@@ -20,9 +20,11 @@ public class Board extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BOARD_ID")
+    @Column(name = "BOARD_ID")
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "USER_ID")
     @JoinColumn(name = "USER_ID")
     private Users users;
 
@@ -35,7 +37,10 @@ public class Board extends BaseEntity{
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String content;
+
+    private char flg;
 
     private char flg;
 

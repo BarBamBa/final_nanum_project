@@ -6,11 +6,15 @@ main {
   .pageTitle {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
+    height: 80px;
     font-size: 40px;
     border-bottom: 3px solid #D6D6D6;
     padding: 15px 0px;
-    margin-left: 20px;
+    span {
+      padding-left: 20px;
+    }
   }
 }
 
@@ -18,7 +22,7 @@ main {
 
 .searchBar {
   width: 1000px;
-  height: auto;
+  height: 100vh;
   margin: 30px auto;
 
   .searchHeader {
@@ -29,10 +33,18 @@ main {
     align-items: center;
     justify-content: flex-end;
     padding: 10px 0px;
+    
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 25px;
+      cursor: pointer;
+    }
 
     .searchArrow {
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
     }
 
     .down {
@@ -44,9 +56,10 @@ main {
     border: 1px solid #546D01;
     margin-top: 0;
     display: block; /* 기본적으로 표시되도록 설정 */
-    height: 500px;
+    height: 300px;
     opacity: 1; /* 기본적으로 불투명도 1로 설정 */
-    transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    // 열고 닫을 때 애니메이션 
+    // transition: max-height 0.5s ease-in-out, opacity 0.1s ease-in-out;
 
     &.closed {
       height: 0; /* 닫혔을 때 최대 높이를 0으로 설정하여 숨김 */
@@ -58,7 +71,7 @@ main {
 
       .tableTr {
         width: 100%;
-        height: 50px;
+        height: 58px;
         display: flex;
         align-items: center;
         border-bottom: 1px dashed #D6D6D6;
@@ -208,5 +221,38 @@ main {
 
   .mapBox {
     border: 1px solid #546D01;
+  }
+}
+//카테고리 검색창 버튼 디자인 변경
+.btnBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 100px;
+    height: 40px;  
+    color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);           
+  }
+
+  #btnSearch {
+    background-color: #A4CC22;
+
+    &:active {
+      background-color: darken(#A4CC22, 10%);
+    }
+  }
+
+  #btnReset {
+    background-color: #546D01;
+
+    &:active {
+      background-color: darken(#546D01, 10%);
+    }
   }
 }

@@ -494,7 +494,9 @@
   position: relative;
   display: inline-block;
   width: auto;
-
+  input {
+    width: 240px;
+  }
   .react-datepicker__calendar-icon {
     position: absolute;
     padding: 0.5rem;

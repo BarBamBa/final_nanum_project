@@ -1,24 +1,29 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function VCodeSelect({ params, setParams }) {
+function VCodeSelect() {
 
   const [large, setLarge] = useState([]);
   const [small, setSmall] = useState([]);
-
-  // 상위분야코드 선택 이벤트
+  const [selected, setSelected] = useState(
+    {
+      large: '',
+      small: '',
+    }
+  );
   const handleLargeSelectChange = (event) => {
-    setParams({
-      ...params,
-      schupperClCode: event.target.value,
+    setSelected({
+      ...selected,
+      large: event.target.value
     });
+    console.log(selected);
   };
 
-  // 하위분야코드 선택 이벤트
   const handleSmallSelectChange = (event) => {
-    setParams({
-      ...params,
-      schnanmClCode: event.target.value,
+    setSelected({
+      ...selected,
+      small: event.target.value
     });
+    console.log(selected);
   };
 
   useEffect(() => {
@@ -59,7 +64,7 @@ function VCodeSelect({ params, setParams }) {
         ))}
       </select>
       {/* 하위분야코드 셀렉트 박스 */}
-      <select value={params.schnanmClCode} onChange={handleSmallSelectChange}>
+      <select value={params.schnanmClCode} onChange={handleSmallSelectChange}>HY
         <option value="" disabled>
           분야코드
         </option>

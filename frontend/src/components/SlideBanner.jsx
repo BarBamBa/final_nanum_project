@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { BiArrowToRight } from 'react-icons/bi';
-import '../scss/SlideBanner.scss'
+import '/src/scss/SlideBanner.scss'
 
 function SlideBanner() {
   const slides = [

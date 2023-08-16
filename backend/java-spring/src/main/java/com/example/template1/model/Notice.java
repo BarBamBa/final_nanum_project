@@ -18,9 +18,13 @@ public class Notice extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "MANAGER_ID")
     private Manager manager;
+    @ManyToOne
+    @JoinColumn(name = "MANAGER_ID")
+    private Manager manager;
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     @Column(columnDefinition = "TEXT")
     private String content;
 

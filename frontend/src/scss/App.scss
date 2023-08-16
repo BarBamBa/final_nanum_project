@@ -9,6 +9,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+//캘린더
+:global {
+  @import "datepicker.scss";
+}
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -32,13 +37,11 @@ body {
   font-family: 'NanumSquareNeo-Variable';
   color: #343434;
   font-size: 16px;
-  display: flex;
-  justify-content: center;
+  line-height: 1;
 }
 // root
-#root {
-  width: 1440px;
-  height: 100vh;
+:root {
+  margin: 0 auto;
 }
 
 /**
@@ -46,7 +49,9 @@ body {
  */
 
 main {
-  display: block;
+  width: 1440px;
+  margin: 0 auto;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 /**
@@ -92,6 +97,21 @@ pre {
 
 a {
   background-color: transparent;
+  color: #343434;
+  text-decoration: none;
+}
+// 리스트 스타일
+
+ol,
+ul,
+li {
+  list-style: none;
+}
+//테이블 스타일
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /**
@@ -175,9 +195,7 @@ img {
  */
 
 button,
-
-input:not(.category-box, .age-box, .category-address, .category-address2, .email-box, .number-input),
-
+input,
 optgroup,
 select,
 textarea {
@@ -185,6 +203,8 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  padding: 5px 10px;
+  margin: 0 10px;
 }
 
 /**
@@ -365,9 +385,4 @@ template {
 
 [hidden] {
   display: none;
-}
-
-a {
-  text-decoration: none;
-  color: #343434;
 }

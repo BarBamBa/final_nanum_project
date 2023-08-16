@@ -4,10 +4,10 @@ import VDetailCategory from '../../components/VDetailCategory'
 
 function Vdetail() {
   return (
-    <div>
-      <div className='pageTitle'>봉사활동찾기</div>
+    <main>
+      <div className='pageTitle'><span>봉사활동찾기</span></div>
       <VDetailCategory />
-    </div>
+    </main>
   )
 }
 
