@@ -24,12 +24,13 @@ public class RemoteApiService {
     private final RegionCodeRepository regionCodeRepository;
     private final WebClientUtil webClient;
 
-    public String getListInfo(String url) {
-        JSONObject jsonObject = fetchJson(url);
+//    public String getListInfo(String url) {
+//        JSONObject jsonObject = fetchJson(url);
+//
+//        return getListString(jsonObject);
+//    }
 
-        return getString(jsonObject);
-    }
-
+    // key, value 값을 순회하며 url을 완성하여 fetchJson의 webclient url로 보낸다.
     public String getListInfo(String url, JSONObject data) throws IOException {
         Iterator<String> iter = data.keys();
         System.out.println("=======================================================================================");
@@ -49,7 +50,7 @@ public class RemoteApiService {
                         .append(key)
                         .append("=")
                         .append(URLEncoder.encode(value, "UTF-8"));
-                    flg = !flg;
+                    flg = false;
                 } else {
                     String value = data.getString(key);
                     System.out.print(value + ", ");
@@ -64,11 +65,13 @@ public class RemoteApiService {
         System.out.println("=======================================================================================");
         System.out.println(sb);
         System.out.println("=======================================================================================");
+
         JSONObject jsonObject = fetchJson(sb.toString());
-        return getString(jsonObject);
+
+        return getListString(jsonObject);
     }
 
-    private String getString(JSONObject jsonObject) {
+    private String getListString(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONObject("response")
                 .getJSONObject("body")
                 .getJSONObject("items")
