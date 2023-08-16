@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
-function VCodeSelect() {
+function VCodeSelect({ params, setParams }) {
 
   const [large, setLarge] = useState([]);
   const [small, setSmall] = useState([]);
-  const [selected, setSelected] = useState(
-    {
-      large: '',
-      small: '',
-    }
-  );
+
+  // 상위분야코드 선택 이벤트
   const handleLargeSelectChange = (event) => {
-    setSelected({
-      ...selected,
-      large: event.target.value
+    setParams({
+      ...params,
+      schupperClCode: event.target.value,
     });
-    console.log(selected);
   };
 
+  // 하위분야코드 선택 이벤트
   const handleSmallSelectChange = (event) => {
-    setSelected({
-      ...selected,
-      small: event.target.value
+    setParams({
+      ...params,
+      schnanmClCode: event.target.value,
     });
-    console.log(selected);
   };
 
   useEffect(() => {

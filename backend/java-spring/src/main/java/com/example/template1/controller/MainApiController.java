@@ -1,17 +1,27 @@
 package com.example.template1.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.template1.model.RegionCode;
+import com.example.template1.model.VolunteerCode;
+import com.example.template1.repository.RegionCodeRepository;
+import com.example.template1.service.RegionCodeService;
+import com.example.template1.service.RemoteApiService;
+import com.example.template1.service.VolunteerCodeService;
+import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class MainApiController {
 
-    // 메인 페이지 호출되면 웹에서 비동기로 내부 api 호출
-    // 분야별봉사참여정보목록조회(getVltrCategoryList) api 호출
-    // xml 데이터를 json으로 변환 후 웹으로 반환
+    private final RemoteApiService remoteApiService;
+    private final RegionCodeService regionCodeService;
+    private final VolunteerCodeService volunteerCodeService;
 
     // 프론트에서 파라미터와 함께 백 api 호출
     // 백에서는 넘겨받은 파라미터로 외부 api url 구성하여 호출
@@ -24,5 +34,26 @@ public class MainApiController {
             "getVltrCategoryList",      // 분야별봉사참여정보목록조회
             "getVltrPartcptnItem"       // 봉사참여정보상세조회
     };
+
+    @PostMapping("/list")
+    public String searchListByKeyword(@RequestBody(required = false) String data) throws IOException {
+        return remoteApiService.getListInfo(defUrl + funcUrl[0], new JSONObject(data));
+    }
+
+    @PostMapping("/detail")
+    public String searchDetailByNumber(@RequestBody String data) {
+        String progrmRegistNo = new JSONObject(data).getString("progrmRegistNo");
+        return remoteApiService.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
+    }
+
+    @GetMapping("/region")
+    public List<RegionCode> searchAllRegionCode() {
+        return regionCodeService.getRegionList();
+    }
+
+    @GetMapping("/volunteer")
+    public List<VolunteerCode> searchAllVolunteerCode() {
+        return volunteerCodeService.getVolunteerCode();
+    }
 
 }

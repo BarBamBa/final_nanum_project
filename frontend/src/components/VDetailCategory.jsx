@@ -6,16 +6,16 @@ import { Link, useLocation } from 'react-router-dom';
 function VDetailCategory() {
 
   function stringFormat(str) {
-      const string = str + "";
-      const year = string.substring(0, 4);
-      const month = string.substring(4, 6);
-      const date = string.substring(6, string.length);
-      return year + "-" + month + "-" + date;
-  }
+    const string = str + "";
+    const year = string.substring(0, 4);
+    const month = string.substring(4, 6);
+    const date = string.substring(6, string.length);
+    return year + "-" + month + "-" + date;
+}
 
-  const location = useLocation();
-  const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
-  const [data, setData] = useState({});
+const location = useLocation();
+const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
+const [data, setData] = useState({});
 
   useEffect(() => {
 		const fetchData = async() => {
@@ -39,13 +39,13 @@ function VDetailCategory() {
     }, []);
 
   return (
-    <div className='VDetailCategory'>
+    <div className='vDetail'>
       <div className='buttonLine'>
-        <button>목록으로</button>
-        <button>신청하기</button>
+        <button id='btnToList'><Link to='/volunteer'>목록으로</Link></button>
+        <button id='btnSubmit'>신청하기</button>
       </div>
       <div className='vDetailCategory'>
-        <div className='categoryItem'>제목 : {data.progrmSj}</div>
+        <div className='categoryTitle'>제목 : {data.progrmSj}</div>
         <div className='categoryItem'>모집기간: {stringFormat(data.noticeBgnde)} ~ {stringFormat(data.noticeEndde)}</div>
         <div className='categoryItem'>봉사기간: {stringFormat(data.progrmBgnde)} ~ {stringFormat(data.progrmEndde)}</div>
         <div className='categoryItem'>모집인원: {data.rcritNmpr} 명 / 일</div>
