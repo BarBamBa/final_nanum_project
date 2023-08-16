@@ -16,7 +16,6 @@ public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MANAGER_ID")
-    @Column(name = "MANAGER_ID")
     private Long id;
 
     private String password;
