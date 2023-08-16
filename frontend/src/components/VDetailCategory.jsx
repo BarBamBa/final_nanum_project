@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '/src/scss/VDetailCategory.scss'
 import { useLocation } from 'react-router-dom';
 
 
 function VDetailCategory() {
+
+  function stringFormat(str) {
+      const string = str + "";
+      const year = string.substring(0, 4);
+      const month = string.substring(4, 6);
+      const date = string.substring(6, string.length);
+      return year + "-" + month + "-" + date;
+  }
 
   const location = useLocation();
   const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
@@ -38,8 +46,8 @@ function VDetailCategory() {
       </div>
       <div className='vDetailCategory'>
         <div className='categoryItem'>제목 : {data.progrmSj}</div>
-        <div className='categoryItem'>모집기간: {data.noticeBgnde} ~ {data.noticeEndde}</div>
-        <div className='categoryItem'>봉사기간: {data.progrmBgnde} ~ {data.progrmEndde}</div>
+        <div className='categoryItem'>모집기간: {stringFormat(data.noticeBgnde)} ~ {stringFormat(data.noticeEndde)}</div>
+        <div className='categoryItem'>봉사기간: {stringFormat(data.progrmBgnde)} ~ {stringFormat(data.progrmEndde)}</div>
         <div className='categoryItem'>모집인원: {data.rcritNmpr} 명 / 일</div>
         <div className='categoryItem'>신청인원: {data.appTotal} 명</div>
         <div className='categoryItem'>봉사장소: {data.actPlace}</div>

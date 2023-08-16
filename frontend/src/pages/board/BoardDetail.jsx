@@ -14,9 +14,11 @@ function BoardDetail() {
 
   const [postReplyFlg, setPostReplyFlg] = useState(false); //댓글입력창 flg
   const [editReplyFlg, setEditReplyFlg] = useState(false); //댓글수정창 flg
+
   const [viewChildReplyFlg, setViewChildReplyFlg] = useState(false); //대댓글보기 flg
   const [childReplyFlg, setChildReplyFlg] = useState(false); //대댓글입력창 flg
-  const [editDeleteFlg, setEditDeleteFlg] = useState("delete");
+  const [editChildReplyFlg, setEditChildReplyFlg] = useState(false); //대댓글수정창flg
+  const [editDeleteFlg, setEditDeleteFlg] = useState("delete"); //댓글 수정 / 입력 flg
 
   const [editedReplyIndex, setEditedReplyIndex] = useState(0); //댓글번호
 
@@ -34,33 +36,32 @@ function BoardDetail() {
         return "알 수 없음";
     }
   };
+  // 게시글 조회
+  async function fetchBoards() {
+    fetch("/api/boards/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        setBoardData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  // 댓글 조회
+  async function fetchReplies() {
+    fetch("/api/replies/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        setReplyData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   useEffect(() => {
-    // 게시글 조회
-    async function fetchBoards() {
-      fetch("/api/boards/" + id)
-        .then((response) => response.json())
-        .then((data) => {
-          setBoardData(data);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-    // 댓글 조회
-    async function fetchReplies() {
-      fetch("/api/replies/" + id)
-        .then((response) => response.json())
-        .then((data) => {
-          setReplyData(data);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-
     fetchBoards();
     fetchReplies();
   }, []);
@@ -104,10 +105,18 @@ function BoardDetail() {
   const newReplyHandle = async () => {
     let data;
     if (postReplyFlg) {
+      if (newReplyData == null) {
+        alert("댓글을 입력해주세요");
+        return;
+      }
       data = {
         content: newReplyData
       }
     } else {
+      if (newChildReplyData == null) {
+        alert("댓글을 입력해주세요");
+        return;
+      }
       data = {
         content: newChildReplyData.content,
         reply: newChildReplyData.reply
@@ -123,32 +132,63 @@ function BoardDetail() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setPostReplyFlg(false);
-        setChildReplyFlg(false);
+        console.log("댓글입력완료", res);
+        setNewReplyData(); // 새 댓글데이터 초기화
+        setNewChildReplyData(); // 새 대댓글데이터 초기화
+        setPostReplyFlg(false); // 댓글 입력창 닫기
+        setChildReplyFlg(false); // 대댓글 입력창 닫기
+        fetchReplies();
+        if (viewChildReplyFlg) {
+          fetchChildReplies(newChildReplyData.reply);
+          // 대댓글 창이 열려있으면 새 대댓글의 parentID로 대댓글 목록 갱신
+        }
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  // 댓글 수정 삭제
+  // 댓글 수정/삭제
   const modifyReplyHandle = async (i) => {
+    console.log(editReplyFlg);
+    console.log(editedReplyIndex);
+    console.log(editDeleteFlg);
     let data;
     if (editDeleteFlg === "edit") {
+      if (editReplyContent == "") {
+        setEditReplyFlg(false);
+        setEditChildReplyFlg(false);
+        setEditedReplyIndex(0);
+        setEditDeleteFlg("delete");
+        alert("수정완료");
+        return;
+      }
       data = {
         content: editReplyContent,
         status: "Y"
       }
+      // if (editReplyContent == null) {
+
+      //   alert("댓글을입력해주세요");
+      //   return;
+      // }
+
+      if (!confirm("수정하시겠습니까?")) {
+        return;
+      }
     }
+
     if (editDeleteFlg === "delete") {
       data = {
         status: "N"
       }
+      if (!confirm("삭제하시겠습니까?")) {
+        return;
+      }
     }
 
-    console.log(replyData[i].id);
-    fetch(`/api/replies/update/${replyData[i].id}`, {
+    console.log(i);
+    fetch(`/api/replies/update/${i}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -159,9 +199,13 @@ function BoardDetail() {
       .then((res) => {
         console.log(res);
         setEditReplyFlg(false);
+        setEditChildReplyFlg(false);
         setEditedReplyIndex(0);
         setEditReplyContent("");
-        setEditDeleteFlg("delete")
+        setEditDeleteFlg("delete");
+        fetchReplies();
+        fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
+        alert("수정완료");
       })
       .catch((error) => {
         console.error(error);
@@ -191,8 +235,6 @@ function BoardDetail() {
           <div>이미지영역</div>
           <p>글내용 : {boardData.content}</p>
         </div>
-
-
 
         <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
         <button onClick={removeBoard}>삭제</button>
@@ -233,12 +275,12 @@ function BoardDetail() {
                   type="text"
                   value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
                   onChange={(e) => {
-                    e.preventDefault;
+                    // e.preventDefault;
                     setEditReplyContent(e.target.value);
                   }}
                 />
-                <button onClick={() => { modifyReplyHandle(i) }}>저장</button>
-                <button onClick={() => { setEditReplyFlg(!editReplyFlg) }}>취소</button>
+                <button onClick={() => { modifyReplyHandle(data.id) }}>저장</button>
+                <button onClick={() => { setEditReplyFlg(!editReplyFlg); setEditDeleteFlg("delete"); }}>취소</button>
               </div>
             ) : (
               <>
@@ -255,23 +297,22 @@ function BoardDetail() {
                 <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setEditedReplyIndex(i); }}>대댓글보기</p>
 
                 {/* 대댓글달기 */}
-                <p onClick={() => { setChildReplyFlg(true); setEditedReplyIndex(i); }}>댓글달기</p>
+                <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setEditedReplyIndex(i); }}>댓글달기</p>
               </div>
 
               <div className="reply-modifyBtn-area">
-                {/* 수정버튼 */}
+
+                {/* 댓글수정버튼 */}
                 <button
                   onClick={() => {
                     setEditReplyFlg(true);
                     setEditedReplyIndex(i);
                     setEditDeleteFlg("edit");
-                  }}>
-                  수정
-                </button>
+                  }}>수정</button>
                 {/* 수정버튼 end */}
 
                 {/* 댓글삭제 */}
-                <button onClick={() => { modifyReplyHandle(i) }}>삭제</button>
+                <button onClick={() => { modifyReplyHandle(data.id) }}>삭제</button>
               </div>
 
             </div>
@@ -287,20 +328,47 @@ function BoardDetail() {
                     setNewChildReplyData({ content: e.target.value, reply: e.target.name });
                   }} />
                 <button onClick={newReplyHandle}>작성</button>
-                <button onClick={() => { setChildReplyFlg(false) }}> 취소 </button>
+                <button onClick={() => { setChildReplyFlg(false); }}> 취소 </button>
               </div>
             ) : null}
             {/* 대댓글달기 end */}
 
 
-            {viewChildReplyFlg && editedReplyIndex === i ? (
+            {viewChildReplyFlg && editedReplyIndex === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
               <div className="board-child-reply-container">
                 {childReplyData.map((childData, i) => (
                   <div key={i} className="board-child-reply-content">
                     <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
-                    <div className="child-reply-content">{childData.content}</div>
-                    <button>수정</button>
-                    <button>삭제</button>
+
+                    {/* 대댓글 내용 / 수정창 전환영역 */}
+                    {editChildReplyFlg && editedReplyIndex === i ? (
+                      <div>
+                        <input
+                          type="text"
+                          value={editReplyContent || childData.content}
+                          onChange={(e) => {
+                            setEditReplyContent(e.target.value);
+                          }}
+                        />
+                        <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
+                        <button onClick={() => { setEditChildReplyFlg(false); setEditDeleteFlg("delete"); }}>취소</button>
+                      </div>
+                    ) : (
+                      <div className="child-reply-content">{childData.content}</div>
+                    )}
+                    {/* 대댓글 내용 수정창 전환영역 end*/}
+
+                    {/*  대댓글 수정버튼 */}
+                    <button
+                      onClick={() => {
+                        setEditChildReplyFlg(true)
+                        setEditedReplyIndex(i)
+                        setEditDeleteFlg("edit")
+                      }}>수정</button>
+
+                    {/* 대댓글 삭제버튼 */}
+                    <button onClick={() => { modifyReplyHandle(childData.id) }}>삭제</button>
+
                   </div>
                 ))}
 

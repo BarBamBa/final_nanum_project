@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "/src/scss/board/InputForm.scss";
 import axios from "axios";
 
 function BoardInputForm() {
   const location = useLocation();
-  const [boardId, setBoardId] = useState("");
+  const navigate = useNavigate();
+  // const [boardId, setBoardId] = useState("");
   const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
   const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
   console.log(location.state);
@@ -13,11 +14,10 @@ function BoardInputForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // 게시판 글 정보 저장 시작
-    // const formData = new FormData(e.target);
-    // 글쓰기번튼누르면 userid를 전송
+    let boardId;
+    // 게시판 글 정보 저장 시작    
     let data ;
+    // 글쓰기번튼누르면 userid를 전송
     if (location.state.formKind === "write") {
       data = {
         title: titleValue,
@@ -49,7 +49,11 @@ function BoardInputForm() {
       })
         .then(res => res.json())
         .then(res => {
-          setBoardId(res.id);
+          boardId = res.id;
+          // navigate("/board/news");
+          console.log("boardId",boardId);
+          // handleFileUpload(e);
+          // alert("게시글 등록성공");
         });
 
     } catch (error) {
@@ -59,6 +63,11 @@ function BoardInputForm() {
     // 첨부파일 업로드 시작
     const fileInput = e.target.querySelector('input[name="upload"]');
     console.log(fileInput.files);
+
+    if ( fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
+      alert("등록완료");
+      navigate("/board/news");
+    }
 
     if (fileInput) {
 
@@ -80,10 +89,10 @@ function BoardInputForm() {
 
           if (uploadResponse.status === 200) {
             console.log("파일 업로드 성공:", uploadResponse);
-            // 파일 업로드 성공 시 처리
+            alert("등록완료");
+            navigate("/board/news");
           } else {
             console.error("파일 업로드 에러:", uploadResponse.statusText);
-            // 파일 업로드 실패 시 처리
           }
         } catch (uploadError) {
           console.error("파일 업로드 에러:", uploadError);
