@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = "users")
+//@ToString(exclude = "users")
 public class Board extends BaseEntity{
 
     @Id
@@ -43,10 +43,8 @@ public class Board extends BaseEntity{
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 
+    @Column(columnDefinition = "INTEGER default 0")
     private Integer likeCount;
 
-    public void delete(char status) {
-        this.status = status;
-    }
 
 }

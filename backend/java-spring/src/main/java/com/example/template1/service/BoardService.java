@@ -1,12 +1,9 @@
 package com.example.template1.service;
 
 import com.example.template1.model.Board;
-import com.example.template1.model.Reply;
 import com.example.template1.model.Users;
-import com.example.template1.model.dto.BoardDeleteRequest;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.repository.BoardRepository;
-import com.example.template1.repository.ReplyRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,7 +34,8 @@ public class BoardService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .flg(request.getFlg())
-                .status('Y')
+                .status(request.getStatus())
+                .likeCount(request.getLikeCount())
                 .users(users)
                 .build();
 
@@ -57,7 +55,7 @@ public class BoardService {
     @Transactional
     public Board deleteBoard(long id, BoardRequest request) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
-        board.delete(request.getStatus());
+        board.setStatus(request.getStatus());
         return board;
     }
 

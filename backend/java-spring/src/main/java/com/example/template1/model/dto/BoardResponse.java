@@ -29,6 +29,8 @@ public class BoardResponse {
 
     private final String name;
 
+    private final Integer likeCount;
+
 
     public BoardResponse(Board board) {
         this.id = board.getId();
@@ -41,6 +43,7 @@ public class BoardResponse {
         this.updateAt = board.getUpdateAt();
         this.userId = board.getUsers().getId();
         this.name = board.getUsers().getName();
+        this.likeCount = board.getLikeCount();
     }
 
 }

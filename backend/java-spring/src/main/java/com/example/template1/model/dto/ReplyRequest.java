@@ -17,7 +17,7 @@ public class ReplyRequest {
 
     private String content;
 
-    private char status;
+    private char status = 'Y';
 
     private Long reply;
 

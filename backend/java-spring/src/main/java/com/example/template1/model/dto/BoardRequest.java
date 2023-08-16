@@ -3,6 +3,7 @@ package com.example.template1.model.dto;
 import com.example.template1.model.Board;
 import com.example.template1.model.Users;
 import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +26,9 @@ public class BoardRequest {
 
     private char flg;
 
-    private char status;
+    private char status = 'Y';
+
+    private Integer likeCount = 0;
 
     private LocalDateTime createAt;
 

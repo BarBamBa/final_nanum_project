@@ -6,7 +6,7 @@ function BoardDetail() {
   let { id } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [reportReason, setReportReason] = useState();
+  const [reportReason, setReportReason] = useState(1);
 
   const [boardData, setBoardData] = useState({}); //게시글 정보
   const [replyData, setReplyData] = useState([]); //댓글 리스트
@@ -247,24 +247,28 @@ function BoardDetail() {
 
   // 게시글 신고
   const reportBoard = async () => {
-    fetch(`/api/boards/delete/${id}`, {
-      method: "PUT",
+    let data = {
+      reporter: 2,
+      users: 1,
+      reason: reportReason
+    }
+    fetch(`/api/report/${id}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ status: "R" }),
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
       })
       .catch((error) => {
+        console.log(error.message);
         console.error(error);
       });
   }
-  const eee = (target) => {
-    console.log(target);
-  }
+
 
   return (
     <div className="board-detail-container">
@@ -279,7 +283,7 @@ function BoardDetail() {
             <h3>글제목 : {boardData.title}</h3>
             <button
               className="board-reportBtn"
-              onClick={()=>{reportBoard; setIsOpen(true)}}>신고</button>
+              onClick={()=>{setIsOpen(true)}}>신고</button>
           </div>
           <div className="board-writter-info">
             <p>글쓴이 : {boardData.name}</p>
@@ -457,13 +461,13 @@ function BoardDetail() {
       >        
         <div>
           <label htmlFor="selectbar">신고사유</label>
-          <select id="selectbar" onChange={eee(this)}>
+          <select id="selectbar" onChange={(e)=>{setReportReason(e.target.value)}} value={reportReason}>
             <option value={1}>폭력/욕설</option>
             <option value={2}>광고물</option>
             <option value={3}>선정적인 게시물</option>
             <option value={4}>게시판 성격과 무관한 게시물</option>
           </select>
-          <button onClick={eee}>신고</button>
+          <button onClick={reportBoard}>신고</button>
         </div>
       </Modal>
     </div >

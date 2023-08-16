@@ -2,7 +2,6 @@ package com.example.template1.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.ibatis.annotations.Many;
 
 @Getter
 @Setter
@@ -10,25 +9,25 @@ import org.apache.ibatis.annotations.Many;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BoardReport {
+public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "B_REPORT_ID")
+    @Column(name = "REPORT_ID")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="USER_ID") //신고 할 사람
     private Users users;
 
     @ManyToOne
-    @JoinColumn(name="REPORTER_ID")
+    @JoinColumn(name="REPORTER_ID") //신고자
     private Users reporter;
 
     @ManyToOne
-    @JoinColumn(name="BOARD_ID")
+    @JoinColumn(name="BOARD_ID") //신고 할 게시판
     private Board board;
 
-    private String reason;
+    private String reason; //사유
 
 }
