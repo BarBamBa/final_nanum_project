@@ -12,7 +12,6 @@ spring:
 
   jpa:
     show-sql: true
-    defer-datasource-initialization: true # data.sql 사용을 위해서 필수적으로 등록
     properties:
       hibernate:
         format_sql: true  # sql문 pretty하게 보여줌

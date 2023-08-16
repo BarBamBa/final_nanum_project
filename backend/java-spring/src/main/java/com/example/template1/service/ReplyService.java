@@ -23,6 +23,7 @@ public class ReplyService {
     public List<Reply> getAllChildReply(Reply id) {
         List<Reply> replyList = replyRepository.findAllByReply(id);
         return replyList;
+
     }
 
     public Reply saveReply(long id, ReplyRequest request) {

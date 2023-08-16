@@ -1,3 +1,8 @@
+
+div {
+  position: relative;
+}
+
 .vBannerBackground {
   width: 100%;
   height: 500px;
@@ -7,7 +12,6 @@
   text-align: center;
   position: relative;
   z-index: 100;
-
   &::before {
     content: '';
     position: absolute;
