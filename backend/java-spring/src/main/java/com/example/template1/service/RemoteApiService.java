@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 
 @Service
@@ -84,6 +87,32 @@ public class RemoteApiService {
         }
 
         return newJsonArray.toString();
+    }
+
+    public String getMarkerList(String url, JSONArray param) {
+        JSONArray markerArray = new JSONArray();
+
+        for(int i = 0; i < param.length()-1; i++) {
+            String registNo = "" + param.getJSONObject(i).getInt("progrmRegistNo");
+            JSONObject object = new JSONObject(getDetailInfo(url, registNo));
+
+            JSONObject marker = new JSONObject();
+
+            marker.put("title", object.get("progrmSj"));
+
+            if(object.getString("areaLalo1").equals(",")) { continue; }
+            String[] arealalo = object.getString("areaLalo1").split(",");
+
+            JSONObject latlng = new JSONObject();
+            latlng.put("lat", Float.parseFloat(arealalo[0]));
+            latlng.put("lng", Float.parseFloat(arealalo[1]));
+
+            marker.put("latlng", latlng);
+
+            markerArray.put(marker);
+        }
+
+        return markerArray.toString();
     }
 
     public String getDetailInfo(String url, String params) {

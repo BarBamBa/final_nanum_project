@@ -61,40 +61,6 @@ function VolunteerBanner() {
       <div className='vBannerBackground'>
         <div className='vBannerTitle'>모집중인 자원봉사</div>
         <div className='toVolunteerPage'><Link to='/volunteer' className='toVolunteerPage'><BsPlusLg />더보기</Link></div>
-        <div className='vBannerListBox'>
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-            <div className='vBannerList'>
-              <div className='region'>봉사지역</div>
-              <div className='title'>봉사제목</div>
-              <div className='recruitmentPeriod'>모집기간</div>
-              <div className='recruitmentNumber'>모집인원</div>
-              <div className='volunteerPeriod'>봉사기간</div>
-              <div className='goToVolunteer'><Link to='/volunteer/vol=num' className='goToVolunteer'>상세보기<IoIosArrowForward className='arrowFoward'/></Link></div>
-            </div>  
-        </div>
         <div className='toVolunteerPage'>
           <Link to='/volunteer' className='toVolunteerPage'>
             <BsPlusLg />더보기

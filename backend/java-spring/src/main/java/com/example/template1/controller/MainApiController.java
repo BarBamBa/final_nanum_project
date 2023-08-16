@@ -7,6 +7,7 @@ import com.example.template1.service.RegionCodeService;
 import com.example.template1.service.RemoteApiService;
 import com.example.template1.service.VolunteerCodeService;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,12 @@ public class MainApiController {
     public String searchDetailByNumber(@RequestBody String data) {
         String progrmRegistNo = new JSONObject(data).getString("progrmRegistNo");
         return remoteApiService.getDetailInfo(defUrl + funcUrl[4], progrmRegistNo);
+    }
+
+    @PostMapping("/marker")
+    public String searchLatlngAndTitleByProgrmRegistNo(@RequestBody String data) {
+        JSONArray jsonArray = new JSONArray(new JSONObject(data).getJSONArray("data"));
+        return remoteApiService.getMarkerList(defUrl + funcUrl[4], jsonArray);
     }
 
     @GetMapping("/region")
