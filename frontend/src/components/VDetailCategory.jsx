@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import '/src/scss/VDetailCategory.scss'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 function VDetailCategory() {
 
-  // const location = useLocation();
-  // const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
+  const location = useLocation();
+  const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function VDetailCategory() {
   return (
     <div className='vDetail'>
       <div className='buttonLine'>
-        <button Link to='/volunteer' id='btnToList'>목록으로</button>
+        <button id='btnToList'><Link to='/volunteer'>목록으로</Link></button>
         <button id='btnSubmit'>신청하기</button>
       </div>
       <div className='vDetailCategory'>
@@ -57,7 +57,7 @@ function VDetailCategory() {
         <div className='categoryFile'>첨부파일: {data.actPlace}</div>
       </div>
       <div className='vDetailContents'>
-        <p>{data.progrmCn} 내용냉용내용내용</p>
+        <p>{data.progrmCn}</p>
       </div>
       <div className='contactList'>
         <div className='contactItem'>담당자명: {data.nanmmbyNmAdmn}</div>

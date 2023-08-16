@@ -3,7 +3,6 @@ package com.example.template1.service;
 import com.example.template1.model.RegionCode;
 
 import com.example.template1.repository.RegionCodeRepository;
-import com.example.template1.repository.UsersRepository;
 
 import com.example.template1.util.WebClientUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Iterator;
 
 
 @Service
@@ -30,10 +30,40 @@ public class RemoteApiService {
         return getString(jsonObject);
     }
 
-    public String getListInfo(String url, String keyword) throws IOException {
-        JSONObject jsonObject = fetchJson(url
-                + "?schCateGu=all&keyword=" + URLEncoder.encode(keyword, "UTF-8"));
+    public String getListInfo(String url, JSONObject data) throws IOException {
+        Iterator<String> iter = data.keys();
+        System.out.println("=======================================================================================");
 
+        StringBuilder sb = new StringBuilder();
+        boolean flg = true;
+
+        while (iter.hasNext()) {
+            String key = iter.next();
+            System.out.print(key + " : ");
+            if(flg) {
+                String value = data.getString(key);
+                System.out.print(value + ", ");
+                sb.append(url)
+                        .append("?")
+                        .append(key)
+                        .append("=")
+                        .append(URLEncoder.encode(value, "UTF-8"));
+                flg = !flg;
+            } else {
+                String value = data.getString(key);
+                System.out.print(value + ", ");
+                if (value.isEmpty()) continue;
+                sb.append("&")
+                        .append(key)
+                        .append("=")
+                        .append(URLEncoder.encode(value, "UTF-8"));
+            }
+        }
+        System.out.println();
+        System.out.println("=======================================================================================");
+        System.out.println(sb);
+        System.out.println("=======================================================================================");
+        JSONObject jsonObject = fetchJson(sb.toString());
         return getString(jsonObject);
     }
 
@@ -77,7 +107,6 @@ public class RemoteApiService {
         if (jsonObject.getInt("sidoCd") == 5690000) {
             String sido = jsonObject.get("sidoCd").toString();
             change = change.replace(sido, "세종특별자치시");
-
         } else {
             RegionCode regionCode = regionCodeRepository
                     .findByCityCodeAndDistrictCode(
@@ -86,10 +115,8 @@ public class RemoteApiService {
                     );
             String sido = jsonObject.get("sidoCd").toString();
             String gugun = jsonObject.get("gugunCd").toString();
-
             change = change.replace(sido, regionCode.getCity());
             change = change.replace(gugun, regionCode.getDistrict());
-
         }
 
         return new JSONObject(change);
@@ -109,7 +136,6 @@ public class RemoteApiService {
             }
         }
         String replace = replaceBuilder.substring(0, replaceBuilder.length()-1);
-        System.out.println(replace);
         if(!replace.isEmpty()) {
             change = change.replace(actWkdy, replace);
         } else {

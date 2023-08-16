@@ -14,7 +14,7 @@ public class RegionCodeService {
 
     private final RegionCodeRepository regionCodeRepository;
 
-    public List<RegionCode> getCityList () {
+    public List<RegionCode> getRegionList () {
         return regionCodeRepository.findAll();
     };
 }

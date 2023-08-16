@@ -27,6 +27,10 @@ function SearchBar(props) {
     }
   }
 
+  function handleReset() {
+    return;
+  }
+
   const handleSearch = () => {
     const filteredData = data.filter((item) => {
       for (const option in searchOptions) {
@@ -67,11 +71,11 @@ function SearchBar(props) {
                 <div className='checkboxCustom'>
                   {/* 성인체크박스 */}
                   <input type='checkbox' id='adult' />
-                  <label for="adult"></label>
+                  <label htmlFor="adult"></label>
                   <span>성인</span>
                   {/* 청소년체크박스 */}
                   <input type='checkbox' id='student' />
-                  <label for="student"></label>
+                  <label htmlFor="student"></label>
                   <span>청소년</span>
                 </div>
               </div>  

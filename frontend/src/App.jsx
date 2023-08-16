@@ -26,7 +26,7 @@ function App() {
         <Route path='/' element={<Main />}></Route>
         <Route path="/about" element={<About/>} /> 
         <Route path="/volunteer" element={<Volunteer/>} />
-        <Route path="/vdetail" element={<Vdetail/>} />
+        <Route path="/vdetail/*" element={<Vdetail/>} />
         <Route path="/board/*" element={<Board/>} />
         {/* <Route path='/board/detail/:id' element={<BoardDetail/>} />
         <Route path='/board/input' element={<BoardInputForm/>} /> */}

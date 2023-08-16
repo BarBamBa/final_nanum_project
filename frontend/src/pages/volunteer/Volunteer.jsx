@@ -8,16 +8,16 @@ function Volunteer() {
   const [params, setParams] = useState({
     // numOfRows: 30,
     // pageNo: 5,
-    // keyword: null,
-    // schCateGu: 'all',
-    // schSido: null,
-    // schSign1: null,
-    // upperClCode: null,
-    // nanmClCode: null,
-    // progrmBgnde: null,
-    // progrmEndde: null,
-    // adultPosblAt: null,
-    // yngbgsPosblAt: null,
+    schCateGu: 'all',
+    keyword: '',
+    schSido: '',
+    schSign1: '',
+    upperClCode: '',
+    nanmClCode: '',
+    progrmBgnde: '',
+    progrmEndde: '',
+    adultPosblAt: '',
+    yngbgsPosblAt: '',
   });
 
   const [data, setData] = useState([]);
@@ -29,9 +29,10 @@ function Volunteer() {
             headers: {
                 'Content-Type': 'application/json'
             },
-          //   body: JSON.stringify({
-          //       params,
-          //   })
+            body: JSON.stringify({
+                schCateGu: 'all',
+                keyword: '',
+            })
           });
           const result = res.json();
           return result;

@@ -13,7 +13,7 @@ public class VolunteerCodeService {
 
     private final VolunteerCodeRepository volunteerCodeRepository;
 
-    public List<VolunteerCode> getVcodeList () {
+    public List<VolunteerCode> getVolunteerCode () {
       return volunteerCodeRepository.findAll();
     };
 }
