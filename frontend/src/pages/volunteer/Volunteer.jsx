@@ -32,7 +32,7 @@ function Volunteer() {
             },
             body: JSON.stringify({
               schCateGu: 'all',
-              keyword: '구로구',
+              keyword: '',
             })
           });
           const result = res.json();
@@ -53,7 +53,7 @@ function Volunteer() {
   return (
     <main>
       <div className='pageTitle'>
-        봉사활동찾기
+        <span>봉사활동찾기</span>
       </div>     
       <SearchBar params={params} setParams={setParams} setData={setData}/>
       <div className='volunteerTab'>

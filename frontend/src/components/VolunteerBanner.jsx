@@ -55,12 +55,10 @@ function VolunteerBanner() {
     nextArrow: <CustomNextArrow />, // 다음 화살표 컴포넌트
   };
 
-
   return (
     <>
       <div className='vBannerBackground'>
         <div className='vBannerTitle'>모집중인 자원봉사</div>
-        <div className='toVolunteerPage'><Link to='/volunteer' className='toVolunteerPage'><BsPlusLg />더보기</Link></div>
         <div className='toVolunteerPage'>
           <Link to='/volunteer' className='toVolunteerPage'>
             <BsPlusLg />더보기

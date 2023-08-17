@@ -67,11 +67,11 @@ function SearchBar({ params, setParams, setData }) {
   return (
     <div className='searchBar'>
       <div className='searchHeader'>
-        {onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
+        <span onClick={handleSearchHeader}>{onSearchHeader ? "검색목록 닫기" : "검색목록 열기"}
         <IoIosArrowUp 
           className= {`searchArrow ${onSearchHeader ? '' : 'down'}`}
-          onClick={handleSearchHeader}
         />
+        </span>
       </div>
       <div className={`searchContents ${onSearchHeader ? '' : 'closed'}`}>
           <div className='table'>
@@ -122,7 +122,7 @@ function SearchBar({ params, setParams, setData }) {
               <div className='trTitle'>검색어</div>
               <div className='keyword'>
                 {/* 검색어 */}
-                <input type='text' id='keyword' placeholder='봉사' value={params.keyword} onChange={(e) => {
+                <input type='text' id='keyword' placeholder='검색어를 입력해주세요' value={params.keyword} onChange={(e) => {
                   setParams({
                     ...params,
                     keyword: e.target.value,
@@ -130,10 +130,12 @@ function SearchBar({ params, setParams, setData }) {
                 }}/>
               </div>
             </div>
+            <div className='btnBox'>
+              <button onClick={handleSearch} id='btnSearch'>찾기</button>
+              <button onClick={handleSearchInit} id='btnReset'>초기화</button>
+            </div>
           </div>
       </div>
-      <button onClick={handleSearch}>검색</button>
-      <button onClick={handleSearchInit}>초기화</button>
     </div>
   )
 }
