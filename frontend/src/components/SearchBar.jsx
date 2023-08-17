@@ -7,23 +7,42 @@ import VCodeSelect from './VCodeSelect';
 import Calendar from './Calendar';
 
 
-function SearchBar({ params, setParams, setData }) {
+function SearchBar({ params, setParams, setData, onCheck, handleCheck }) {
 
   // const {data} = props;
   const [ onSearchHeader, setOnSearchHeader ] = useState(true);
-  const [ onCheck, setOnCheck ] = useState("");
 
 
   // 카테고리 헤더 열기닫기 기능
   function handleSearchHeader() {
     setOnSearchHeader(!onSearchHeader);
   }
-  // 모집상태 체크박스 선택시 true/false
-  function handleCheck(newOnCheck) {
-    if(newOnCheck === onCheck) {
-      setOnCheck("");
+
+  function handleAdultCheck() {
+    if(params.adultPosblAt === 'Y') {
+      setParams({
+        ...params,
+        adultPosblAt: '',
+      });
     } else {
-      setOnCheck(newOnCheck);
+      setParams({
+        ...params,
+        adultPosblAt: 'Y',
+      });
+    }
+  }
+
+  function handleYoungCheck() {
+    if(params.yngbgsPosblAt === 'Y') {
+      setParams({
+        ...params,
+        yngbgsPosblAt: '',
+      });
+    } else {
+      setParams({
+        ...params,
+        yngbgsPosblAt: 'Y',
+      });
     }
   }
 
@@ -41,8 +60,6 @@ function SearchBar({ params, setParams, setData }) {
     .then(res => res.json())
     .then(res => {
       setData(res);
-      console.log(params);
-      console.log(res);
     });
   }
 
@@ -86,16 +103,16 @@ function SearchBar({ params, setParams, setData }) {
                 <div className='tableTd'>
                   <RcodeSelect params={params} setParams={setParams} />
                 </div>
-              <div className='trTitle'>봉사자유형</div>
+              <div className='trTitle'>연령제한</div>
               <div className='tableTd'>
                 <div className='checkboxCustom'>
                   {/* 성인체크박스 */}
                   <input type='checkbox' id='adult' />
-                  <label htmlFor="adult"></label>
+                  <label htmlFor="adult" onClick={handleAdultCheck}></label>
                   <span>성인</span>
                   {/* 청소년체크박스 */}
                   <input type='checkbox' id='student' />
-                  <label htmlFor="student"></label>
+                  <label htmlFor="student" onClick={handleYoungCheck}></label>
                   <span>청소년</span>
                 </div>
               </div>  
@@ -108,14 +125,14 @@ function SearchBar({ params, setParams, setData }) {
               <div className='trTitle'>모집상태</div>
               <div className='status' colSpan='3'>
                 {/* 모집대기버튼 */}
-                <input type='checkbox' id='statusWait' checked={onCheck  === 'wait'} readOnly/>
-                <label htmlFor='statusWait' onClick={() => handleCheck('wait')}>모집대기</label>
+                <input type='checkbox' id='statusWait' checked={onCheck === 1} readOnly/>
+                <label htmlFor='statusWait' onClick={() => handleCheck(1)}>모집대기</label>
                 {/* 모집중버튼 */}
-                <input type='checkbox' id='statusIng' checked={onCheck  === 'ing'} readOnly/>
-                <label htmlFor='statusIng' onClick={() => handleCheck('ing')}>모집중</label>
+                <input type='checkbox' id='statusIng' checked={onCheck === 2} readOnly/>
+                <label htmlFor='statusIng' onClick={() => handleCheck(2)}>모집중</label>
                 {/* 모집완료버튼 */}
-                <input type='checkbox' id='statusDone' checked={onCheck  === 'done'} readOnly/>
-                <label htmlFor='statusDone' onClick={() => handleCheck('done')}>모집완료</label>
+                <input type='checkbox' id='statusDone' checked={onCheck === 3} readOnly/>
+                <label htmlFor='statusDone' onClick={() => handleCheck(3)}>모집완료</label>
               </div>
             </div>
             <div className='tableTr'>
