@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import SearchBar from '../../components/SearchBar'
 import '/src/scss/Volunteer.scss'
 import VolunteerList from '../../components/VolunteerList'
-import Map from '../../components/Map';
+import MapBox from '../../components/MapBox';
 
 function Volunteer() {
 
@@ -41,13 +41,13 @@ function Volunteer() {
         
         fetchData().then(res => {
           setData(res);
-          console.log(res);
+          console.log('volunteerList:', res);
         });
 
     }, []);
 
     useEffect(()=> {
-      console.log(params);
+      // console.log('volunteer useEffect:', params);
     }, [params])
 
   return (
@@ -70,7 +70,7 @@ function Volunteer() {
           </div> 
           : 
           <div>
-            <Map />
+            <MapBox data={data} />
           </div> 
         }
       </div>
