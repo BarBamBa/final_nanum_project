@@ -5,12 +5,8 @@ import com.example.template1.model.Report;
 import com.example.template1.model.Users;
 import com.example.template1.model.dto.ReportRequest;
 import com.example.template1.repository.ReportRepository;
-import com.nimbusds.jose.shaded.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 
@@ -19,14 +15,7 @@ import java.util.HashMap;
 public class ReportService {
 
     private final ReportRepository reportRepository;
-
     public Report saveReport(ReportRequest request, long id) throws Exception {
-        // 중복 신고 방지 유효성검사
-        boolean DuplicateTest =reportRepository.existsByReporterIdAndBoardId(request.getReporter(), id);
-
-        if (DuplicateTest) {
-            throw new Exception("이미 신고한 게시물입니다.");
-        }
 
         Users users = new Users();
         users.setId(request.getUsers());
@@ -46,4 +35,11 @@ public class ReportService {
                 .build();
         return reportRepository.save(report);
     }
+
+
+    public boolean DuplicateTest(ReportRequest request, long id) { //중복신고 검사
+
+        return reportRepository.existsByReporterIdAndBoardId(request.getReporter(), id);
+    }
+
 }

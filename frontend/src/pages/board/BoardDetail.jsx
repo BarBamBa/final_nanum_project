@@ -22,7 +22,6 @@ function BoardDetail() {
   const [viewChildReplyFlg, setViewChildReplyFlg] = useState(false); //대댓글보기 flg
   const [postChildReplyFlg, setChildReplyFlg] = useState(false); //대댓글입력창 flg
   const [editChildReplyFlg, setEditChildReplyFlg] = useState(false); //대댓글수정창flg
-  const [editDeleteFlg, setEditDeleteFlg] = useState("delete"); //댓글 수정 / 입력 flg
 
   const [replyIdx, setReplyIdx] = useState(0); //댓글 번호
   const [childReplyIdx, setChildReplyIdx] = useState(0); //대댓글 번호
@@ -89,6 +88,9 @@ function BoardDetail() {
 
   // 게시글 삭제
   const removeBoard = async () => {
+    if (!confirm("삭제하시겠습니까?")) {
+      return;
+    }
     fetch(`/api/boards/delete/${id}`, {
       method: "PUT",
       headers: {
@@ -262,6 +264,13 @@ function BoardDetail() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if( data == true) {
+          alert ("이미 신고한 게시글 입니다.");
+          setIsOpen(false);
+          return;
+        }
+        alert ("신고되었습니다.");
+        setIsOpen(false);
       })
       .catch((error) => {
         console.log(error.message);

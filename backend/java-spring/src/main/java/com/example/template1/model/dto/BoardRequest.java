@@ -34,4 +34,6 @@ public class BoardRequest {
 
     private LocalDateTime updateAt;
 
+
+
 }

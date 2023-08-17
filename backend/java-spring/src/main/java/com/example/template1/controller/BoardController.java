@@ -20,7 +20,6 @@ import java.util.Objects;
 public class BoardController {
     private final BoardService boardService;
     private final ReplyService replyService;
-    private final BoardImgService boardImgService;
 
     @GetMapping("/boards") //게시판 리스트 조회
     public ResponseEntity<List<BoardResponse>> getAllBoards() {
@@ -40,6 +39,18 @@ public class BoardController {
 
         return ResponseEntity.ok()
                 .body(new BoardResponse(board));
+    }
+
+    @PostMapping("/boards/search") //게시판 검색
+    public ResponseEntity<List<BoardResponse>> searchingBoard(@RequestBody BoardRequest request) {
+        List<BoardResponse> boards = boardService.searchBoard(request.getTitle(), request.getFlg())
+                .stream()
+                .filter(board -> board.getStatus() == 'Y')
+                .map(BoardResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(boards);
     }
 
     @PostMapping("/boards/post") //게시판 글쓰기
@@ -78,7 +89,7 @@ public class BoardController {
                 .body(replies);
     }
 
-    @GetMapping("/child-replies/{id}") // 댓글 리스트 조회
+    @GetMapping("/child-replies/{id}") // 대댓글 리스트 조회
     public ResponseEntity<List<ReplyResponse>> getAllChildReplies(@PathVariable Reply id) {
         List<ReplyResponse> replies = replyService.getAllChildReply(id)
                 .stream()

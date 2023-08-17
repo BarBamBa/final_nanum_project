@@ -66,7 +66,7 @@ function BoardInputForm() {
 
     if ( fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
       alert("등록완료");
-      navigate("/board/news");
+      navigate("/board/notice");
     }
 
     if (fileInput) {
@@ -90,7 +90,7 @@ function BoardInputForm() {
           if (uploadResponse.status === 200) {
             console.log("파일 업로드 성공:", uploadResponse);
             alert("등록완료");
-            navigate("/board/news");
+            navigate("/board/notice");
           } else {
             console.error("파일 업로드 에러:", uploadResponse.statusText);
           }

@@ -16,17 +16,22 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public List<Board> getAllBoard() {
+    public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAll();
         return boardList;
     }
 
-    public Board getBoardDetail(long id) {
+    public Board getBoardDetail(long id) { //게시글 조회
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
         return board;
     }
 
-    public Board saveBoard(BoardRequest request) {
+    public List<Board> searchBoard(String title, char flg) { //게시판 검색
+        List<Board> boardList = boardRepository.findByTitleContainingAndFlg(title, flg);
+        return boardList;
+    }
+
+    public Board saveBoard(BoardRequest request) { //게시판 글쓰기
         Users users = new Users();
         users.setId(request.getUsers().getId());
 
@@ -43,7 +48,7 @@ public class BoardService {
     }
 
     @Transactional
-    public Board updateBoard(BoardRequest request) {
+    public Board updateBoard(BoardRequest request) { //게시글 수정
         Board board = boardRepository.findById(request.getId())
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + request.getId()));
 
@@ -53,7 +58,7 @@ public class BoardService {
         return board;
     }
     @Transactional
-    public Board deleteBoard(long id, BoardRequest request) {
+    public Board deleteBoard(long id, BoardRequest request) { //게시글 삭제
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
         board.setStatus(request.getStatus());
         return board;

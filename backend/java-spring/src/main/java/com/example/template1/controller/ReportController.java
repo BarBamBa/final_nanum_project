@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -18,7 +20,12 @@ public class ReportController {
 
 
     @PostMapping("/report/{id}")
-    public ResponseEntity<Report> addReport(@PathVariable long id, @RequestBody ReportRequest request) throws Exception {
+    public ResponseEntity<Object> addReport(@PathVariable long id, @RequestBody ReportRequest request) throws Exception {
+        if (reportService.DuplicateTest(request, id)) {
+            Boolean duplicate = reportService.DuplicateTest(request, id);
+            return ResponseEntity.ok(duplicate);
+        }
+
         Report saveReport = reportService.saveReport(request, id);
 
         return ResponseEntity.status(HttpStatus.CREATED)

@@ -33,7 +33,6 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .csrf().disable()
             .authorizeHttpRequests((auth) -> auth
-
                     .requestMatchers("/api/**").permitAll()
                     .anyRequest().authenticated()
             );

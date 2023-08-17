@@ -19,6 +19,7 @@ function Board() {
   const [boardData, setBoardData] = useState([]);
 
   useEffect(() => {
+    //게시판 조회
     async function fetchBoards() {
       try {
         const response = await fetch("/api/boards");
@@ -39,6 +40,31 @@ function Board() {
     fetchBoards();
   }, [boardKind]);
 
+  //게시판 검색 조회
+  const searchBoards = async (keyword) => {
+    console.log("keyword",keyword);
+
+    fetch("/api/boards/search", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: keyword,
+        flg: boardKind
+      }),
+
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      setBoardData(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   useEffect(() => {
     // 페이지 로딩 시 URL 매개변수에서 데이터를 가져와서 boardData를 업데이트
     if (location.state) {
@@ -55,6 +81,7 @@ function Board() {
 
   return (
     <div>
+      <button onClick={searchBoards} >ddd</button>
       <div className="boardContainer">
         <div className="board-nav">
           <h1>{boardName}</h1>
@@ -71,10 +98,10 @@ function Board() {
         </div>
  
         <Routes>
-          <Route path="notice" element={<Notice boardData={boardData} />} />
-          <Route path="news" element={<News boardData={boardData}/>} />
-          <Route path="freeboard" element={<FreeBoard boardData={boardData}/>} />             
-          <Route path="review" element={<Review boardData={boardData}/>} />          
+          <Route path="notice" element={<Notice boardData={boardData} searchBoards={searchBoards} />} />
+          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards}/>} />
+          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} />} />             
+          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} />} />          
         </Routes>
       </div>
 

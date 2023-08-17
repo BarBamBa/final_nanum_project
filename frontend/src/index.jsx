@@ -1,16 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
+import Admin from './Admin.jsx'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   // <React.StrictMode>
-    <BrowserRouter >
-      <App />
-    </BrowserRouter>
+  <BrowserRouter >
+    <Routes>
+      <Route path='/*' element={<App />} />
+      <Route path="/admin/*" element={<Admin />} />
+    </Routes>
+  </BrowserRouter>
   // </React.StrictMode>
 
 )
