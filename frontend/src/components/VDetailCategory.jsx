@@ -49,16 +49,16 @@ const [data, setData] = useState({});
         <div className='categoryItem'><p className='itemName'>봉사기간</p> {stringFormat(data.progrmBgnde)} ~ {stringFormat(data.progrmEndde)}</div>
         <div className='categoryItem'><p className='itemName'>모집인원</p> {data.rcritNmpr} 명 / 일</div>
         <div className='categoryItem'><p className='itemName'>신청인원</p> {data.appTotal} 명</div>
-        <div className='categoryItem'><p className='itemName'>봉사장소</p> {data.actPlace} 🗺️</div>
+        <div className='categoryItem'><p className='itemName'>봉사장소</p> {data.actPlace}</div>
         <div className='categoryItem'><p className='itemName'>봉사기관</p>  {data.mnnstNm}</div>
-        <div className='categoryItem'><p className='itemName'>봉사자유형</p> {data.adultPosblAt === 'Y' ? '성인가능 ' : '성인불가능 '}
-                                                   {data.yngbgsPosblAt === 'Y' ? '청소년가능 ' : '청소년불가능 '}
+        <div className='categoryItem'><p className='itemName'>연령제한</p> {data.adultPosblAt === 'Y' ? '성인가능 ' : '성인불가 '}
+                                                   {data.yngbgsPosblAt === 'Y' ? '청소년가능 ' : '청소년불가 '}
                                                    {data.grpPosblAt === 'Y' ? '기업·단체 ' : ''}
         </div>
         <div className='categoryItem'><p className='itemName'>활동요일</p> {data.actWkdy}</div>
         <div className='categoryItem'><p className='itemName'>봉사분야</p> {data.srvcClCode}</div>
         <div className='categoryItem'><p className='itemName'>봉사시간</p> {data.actBeginTm}시 ~ {data.actEndTm}시 </div>
-        <div className='categoryItem state'><p className='itemName'>모집상태</p>  {data.progrmSttusSe === 1 ? '모집대기'
+        <div className='categoryItem state'><p className='itemName'>모집상태</p> {data.progrmSttusSe === 1 ? '모집대기'
                                                : data.progrmSttusSe === 2 ? '모집중' : '모집완료'}
         </div>
         <div className='categoryItem file'><p className='itemName'>첨부파일</p></div>

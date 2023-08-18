@@ -93,7 +93,7 @@ public class RemoteApiService {
         JSONArray markerArray = new JSONArray();
 
 //        for(int i = 0; i < param.length()-1; i++) {
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 5; i++) {
             String registNo = "" + param.getJSONObject(i).getInt("progrmRegistNo");
             JSONObject object = new JSONObject(getDetailInfo(url, registNo));
 

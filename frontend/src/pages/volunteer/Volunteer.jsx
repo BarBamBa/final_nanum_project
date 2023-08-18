@@ -3,14 +3,15 @@ import SearchBar from '../../components/SearchBar'
 import '/src/scss/Volunteer.scss'
 import VolunteerList from '../../components/VolunteerList'
 import MapBox from '../../components/MapBox';
+import IntersectionObserver from '../../components/hooks/IntersectionObserver';
 
 function Volunteer() {
 
   const [tab, setTab] = useState(true);
-  const [onCheck, setOnCheck] = useState('');
+  const [onCheck, setOnCheck] = useState(2);
   const [params, setParams] = useState({
-    // numOfRows: 30,
-    // pageNo: 5,
+    // numOfRows: 10,
+    // pageNo: 1,
     schCateGu: 'all',
     keyword: '',
     schSido: '',
@@ -71,7 +72,7 @@ function Volunteer() {
       <div className='result'>
         { tab ? 
           <div className='volunteerList'>
-            <div className='page'>[전체 {data.length}건,  현재페이지 {1} / {1}]</div>
+            <div className='page'>[전체 {data.length}건]</div>
             { data.length < 1 ? "검색 결과가 없습니다." : data.map((Item, idx) => 
               Item.progrmSttusSe === onCheck && <VolunteerList data={Item} num={idx} key={idx} />
             )}
