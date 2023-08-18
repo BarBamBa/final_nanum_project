@@ -32,11 +32,12 @@ public class WebSecurityConfig {
         http
             .httpBasic().disable()
             .csrf().disable()
-            .authorizeHttpRequests((auth) -> auth
-
-                    .requestMatchers("/api/**").permitAll()
-                    .anyRequest().authenticated()
-            );
+//            .authorizeHttpRequests((auth) -> auth
+//
+//                    .requestMatchers("/api/**").permitAll()
+//                    .anyRequest().authenticated()
+//            )
+            ;
         return http.build();
     }
 
