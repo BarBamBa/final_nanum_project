@@ -45,7 +45,7 @@ function CalendarReserve({sendDataToReserve}) {
   //이번달
   let [currentMonth, setCurrentMonth] = useState(format(today, "yyyy-MM"))
   //선택한 날짜
-  let [selectedDay, setSelectedDay] = useState(today);
+  const [selectedDay, setSelectedDay] = useState(today);
   let firstDayCurrentMonth = parse(currentMonth, "yyyy-MM", new Date())
   let days = useMemo(() => eachDayOfInterval({
     //시작일 구하기
@@ -70,9 +70,11 @@ function CalendarReserve({sendDataToReserve}) {
     data: data
   });
   //선택 날짜 전달 함수
-  const sendDatas = (selectedDay) => {
-    setSendData(selectedDay);
-    sendDataToReserve(sendData);
+  const sendDatas = () => {
+    sendDataToReserve({
+      selectedDay: selectedDay, // 변경된 selectedDay 값을 보냄
+      data: data
+    });
   }
   return (
     <>
@@ -123,6 +125,7 @@ function CalendarReserve({sendDataToReserve}) {
                     onClick={() => {
                       isBefore(day, today) ? '' : setSelectedDay(day) ||
                       isAfter(day, today) ? setSelectedDay(day) : ''
+                      console.log("선택날짜:" + selectedDay);
                     }}
                     className={
                       isEqual(day, today) ? "dateLabel today" : "" ||
