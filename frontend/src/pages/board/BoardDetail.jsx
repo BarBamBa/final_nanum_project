@@ -83,6 +83,8 @@ function BoardDetail() {
         console.error(error);
       })
     console.log(parentId);
+    console.log(replyIdx);
+    console.log(childReplyIdx);
   }
 
 
@@ -170,7 +172,7 @@ function BoardDetail() {
     if (editReplyContent == "") {
       setEditReplyFlg(false);
       setEditChildReplyFlg(false);
-      setReplyIdx(0);
+      // setReplyIdx(0);
       alert("수정완료");
       return;
     }
@@ -182,7 +184,7 @@ function BoardDetail() {
     if (!confirm("수정하시겠습니까?")) {
       setEditReplyFlg(false);
       setEditChildReplyFlg(false);
-      setReplyIdx(0);
+      // setReplyIdx(0);
       return;
     }
 
@@ -198,7 +200,7 @@ function BoardDetail() {
         console.log(res);
         setEditReplyFlg(false);
         setEditChildReplyFlg(false);
-        setReplyIdx(0);
+        // setReplyIdx(0);
         setEditReplyContent("");
         fetchReplies();
         fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
@@ -221,7 +223,6 @@ function BoardDetail() {
     if (!confirm("삭제하시겠습니까?")) {
       setEditReplyFlg(false);
       setEditChildReplyFlg(false);
-      setReplyIdx(0);
       return;
     }
 
@@ -237,7 +238,6 @@ function BoardDetail() {
         console.log(res);
         // setEditReplyFlg(false);
         // setEditChildReplyFlg(false);
-        setReplyIdx(0);
         fetchReplies();
         fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
         alert("삭제완료");

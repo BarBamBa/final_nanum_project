@@ -18,15 +18,15 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
-    @GetMapping("/boards") //게시판 리스트 조회
-    public ResponseEntity<List<BoardResponse>> getAllBoards() {
-        List<BoardResponse> boards = adminService.getAllBoard()
-                .stream()
-                .map(BoardResponse::new)
-                .toList();
-
-        return ResponseEntity.ok()
-                .body(boards);
-    }
+//    @GetMapping("/boards") //게시판 리스트 조회
+//    public ResponseEntity<List<BoardResponse>> getAllBoards() {
+//        List<BoardResponse> boards = adminService.getAllBoard()
+//                .stream()
+//                .map(BoardResponse::new)
+//                .toList();
+//
+//        return ResponseEntity.ok()
+//                .body(boards);
+//    }
 
 }

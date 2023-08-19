@@ -12,8 +12,8 @@ import java.util.List;
 public class AdminService {
     private final BoardRepository boardRepository;
 
-    public List<Board> getAllBoard() {
-        List<Board> boardList = boardRepository.findAll();
-        return boardList;
-    }
+//    public List<Board> getAllBoard() {
+//        List<Board> boardList = boardRepository.findAll();
+//        return boardList;
+//    }
 }

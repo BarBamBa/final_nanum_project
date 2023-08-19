@@ -27,6 +27,8 @@ public class BoardResponse {
 
     private final Long userId;
 
+    private final String nick;
+
     private final String name;
 
     private final Integer likeCount;
@@ -42,6 +44,7 @@ public class BoardResponse {
         this.createAt2 = LocalDate.from(board.getCreateAt());
         this.updateAt = board.getUpdateAt();
         this.userId = board.getUsers().getId();
+        this.nick = board.getUsers().getNickname();
         this.name = board.getUsers().getName();
         this.likeCount = board.getLikeCount();
     }

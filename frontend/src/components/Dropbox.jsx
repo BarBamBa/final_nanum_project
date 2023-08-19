@@ -64,7 +64,7 @@ function Dropbox() {
         {menuState.navItem3 && (
           <ul className='dropBox'>
 
-            <li className='dropItem'><Link to={'/board/notice'} state={{boardKind:"1", boardName:"공지사항"}}>공지사항</Link></li>
+            <li className='dropItem'><Link to={'board/'} state={{boardKind:"1", boardName:"공지사항"}}>공지사항</Link></li>
             <li className='dropItem'><Link to={'board/news'} state={{boardKind:"2", boardName:"소식공유"}}>소식공유</Link></li>
             <li className='dropItem'><Link to={'board/freeboard'} state={{boardKind:"3", boardName:"자유게시판"}}>자유게시판</Link></li>
             <li className='dropItem'><Link to={'board/review'} state={{boardKind:"4", boardName:"봉사후기"}}>봉사후기</Link></li>

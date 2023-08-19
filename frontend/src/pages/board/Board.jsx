@@ -3,8 +3,8 @@ import Notice from "./Notice";
 import FreeBoard from "./FreeBoard";
 import News from "./News";
 import Review from "./Review";
-import '../../scss/board/Board.css'
-import '../../scss/board/Notice.css'
+import '../../scss/board/Board.scss'
+import '../../scss/board/Notice.scss'
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "../../scss/Paging.css";
 
@@ -30,7 +30,7 @@ function Board() {
         console.log(data);
         const filteredData = data
         .filter(item => item.flg === boardKind)
-        .sort((a, b) => a.id - b.id);
+        // .sort((a, b) => a.id - b.id);
         setBoardData(filteredData);
       } catch (error) {
         console.error(error);
@@ -81,12 +81,11 @@ function Board() {
 
   return (
     <div>
-      <button onClick={searchBoards} >ddd</button>
       <div className="boardContainer">
         <div className="board-nav">
           <h1>{boardName}</h1>
           <div className="board-button">
-            <button onClick={()=>{navigate("notice");navigateBtn("공지사항","1");}} 
+            <button onClick={()=>{navigate("");navigateBtn("공지사항","1");}} 
               style={boardName==="공지사항"?{color:"#546d01"}:null} >공지사항</button>
             <button onClick={()=>{navigate("news");navigateBtn("소식공유","2");}}
               style={boardName==="소식공유"?{color:"#546d01"}:null} >소식공유</button>
@@ -98,7 +97,7 @@ function Board() {
         </div>
  
         <Routes>
-          <Route path="notice" element={<Notice boardData={boardData} searchBoards={searchBoards} />} />
+          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} />} />
           <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards}/>} />
           <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} />} />             
           <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} />} />          

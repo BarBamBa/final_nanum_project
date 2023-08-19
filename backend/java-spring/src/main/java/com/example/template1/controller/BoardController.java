@@ -19,13 +19,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final ReplyService replyService;
+
 
     @GetMapping("/boards") //게시판 리스트 조회
     public ResponseEntity<List<BoardResponse>> getAllBoards() {
         List<BoardResponse> boards = boardService.getAllBoard()
                 .stream()
-                .filter(board -> board.getStatus() == 'Y') //게시글 상태 N은 삭제상태로 설정
+//                .filter(board -> board.getStatus() == 'Y') //게시글 상태 N은 삭제상태로 설정
                 .map(BoardResponse::new)
                 .toList();
 
@@ -77,43 +77,5 @@ public class BoardController {
             .body(deleteBoard);
     }
 
-    @GetMapping("/replies/{id}") //댓글 리스트 조회
-    public ResponseEntity<List<ReplyResponse>> getAllReplies(@PathVariable Long id) {
-        List<ReplyResponse> replies = replyService.getAllReply(id)
-                .stream()
-                .filter(reply -> reply.getStatus() == 'Y')
-                .map(ReplyResponse::new)
-                .toList();
 
-        return ResponseEntity.ok()
-                .body(replies);
-    }
-
-    @GetMapping("/child-replies/{id}") // 대댓글 리스트 조회
-    public ResponseEntity<List<ReplyResponse>> getAllChildReplies(@PathVariable Reply id) {
-        List<ReplyResponse> replies = replyService.getAllChildReply(id)
-                .stream()
-                .filter(reply -> reply.getStatus() == 'Y')
-                .map(ReplyResponse::new)
-                .toList();
-
-        return ResponseEntity.ok()
-                .body(replies);
-    }
-    @PostMapping("/replies/post/{id}") //댓글 입력
-    public ResponseEntity<Reply> addReply(@PathVariable Long id, @RequestBody ReplyRequest request) {
-        Reply savedReply = replyService.saveReply(id, request);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedReply);
-
-    }
-
-    @PutMapping("/replies/update/{id}") //댓글 수정
-    public ResponseEntity<Reply> removeReply(@PathVariable Long id, @RequestBody ReplyRequest request) {
-
-        Reply deleteReply = replyService.deleteOrEditReply(id, request);
-
-        return ResponseEntity.ok()
-                .body(deleteReply);
-    }
 }
