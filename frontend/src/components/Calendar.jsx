@@ -15,8 +15,8 @@ function Calendar({ params, setParams }) {
     // console.log('end: ', format(new Date(endDate), 'yyyy-MM-dd'));
     setParams({
       ...params,
-      schprogrmBgnde: format(new Date(startDate), 'yyyy-MM-dd'),
-      progrmEndde: format(new Date(endDate), 'yyyy-MM-dd'),
+      schprogrmBgnde: format(new Date(startDate), 'yyyyMMdd'),
+      progrmEndde: format(new Date(endDate), 'yyyyMMdd'),
     });
   }, [dateRange, endDate, startDate]);
 

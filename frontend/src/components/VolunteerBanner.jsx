@@ -27,11 +27,12 @@ function VolunteerBanner() {
             })
           });
           const result = await res.json();
+          console.log(result);
           return result;
         }	
         
         fetchData().then(res => {
-          setData(res);
+          setData(res.items.item);
         });
     }, []);
 

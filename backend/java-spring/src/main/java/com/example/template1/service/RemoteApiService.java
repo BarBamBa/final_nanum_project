@@ -75,18 +75,22 @@ public class RemoteApiService {
     }
 
     private String getListString(JSONObject jsonObject) {
+        JSONObject orgObject = jsonObject.getJSONObject("response")
+                .getJSONObject("body");
         JSONArray jsonArray = jsonObject.getJSONObject("response")
                 .getJSONObject("body")
                 .getJSONObject("items")
                 .getJSONArray("item");
-        JSONArray newJsonArray = new JSONArray();
+//        JSONArray newJsonArray = new JSONArray();
         for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject arrayObject = jsonArray.getJSONObject(i);
             JSONObject newArrayobject = replaceRegion(arrayObject);
-            newJsonArray.put(newArrayobject);
+//            newJsonArray.put(newArrayobject);
+            orgObject = replaceItem(orgObject, newArrayobject, i);
         }
 
-        return newJsonArray.toString();
+//        return newJsonArray.toString();
+        return orgObject.toString();
     }
 
     public String getMarkerList(String url, JSONArray param) {
@@ -177,6 +181,18 @@ public class RemoteApiService {
         } else {
             change = change.replace(actWkdy, "비대면");
         }
+
+        return new JSONObject(change);
+    }
+
+    private JSONObject replaceItem(JSONObject jsonObject, JSONObject object, int i) {
+        String change = jsonObject.toString();
+        String target = jsonObject.getJSONObject("items")
+                .getJSONArray("item")
+                .getJSONObject(i)
+                .toString();
+        String item = object.toString();
+        change = change.replace(target, item);
 
         return new JSONObject(change);
     }

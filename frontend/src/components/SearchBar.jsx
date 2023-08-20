@@ -7,7 +7,8 @@ import VCodeSelect from './VCodeSelect';
 import Calendar from './Calendar';
 
 
-function SearchBar({ params, setParams, setData, onCheck, handleCheck }) {
+function SearchBar({ params, setParams, setData,
+                     setPage, onCheck, handleCheck }) {
 
   // const {data} = props;
   const [ onSearchHeader, setOnSearchHeader ] = useState(true);
@@ -54,20 +55,21 @@ function SearchBar({ params, setParams, setData, onCheck, handleCheck }) {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        ...params
+        ...params,
+        pageNo: '1',
       })
     })
     .then(res => res.json())
     .then(res => {
-      setData(res);
+      setData(res.items.item);
     });
   }
 
   // 초기화 버튼 클릭 이벤트
   const handleSearchInit = () => {
     setParams({
-        // numOfRows: 30,
-      // pageNo: 5,
+      numOfRows: '10',
+      pageNo: '1',
       schCateGu: 'all',
       keyword: '',
       schSido: '',
@@ -79,6 +81,7 @@ function SearchBar({ params, setParams, setData, onCheck, handleCheck }) {
       adultPosblAt: '',
       yngbgsPosblAt: '',
     });
+    setPage(1);
   } 
 
   return (
