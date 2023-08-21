@@ -134,7 +134,7 @@ function Login() {
             <GoogleLogin
               onSuccess={handleGoogleLoginSuccess}
               onFailure={handleGoogleLoginFailure}
-              className="custom-google-login-button2"
+              className="custom-google-login-button"
              
             />
           </GoogleOAuthProvider>
