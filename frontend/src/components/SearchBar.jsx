@@ -7,8 +7,8 @@ import VCodeSelect from './VCodeSelect';
 import Calendar from './Calendar';
 
 
-function SearchBar({ params, setParams, setData,
-                     setPage, onCheck, handleCheck }) {
+function SearchBar({ params, setParams, setData, setCount,
+                     setPage, setMoreData, onCheck, handleCheck }) {
 
   // const {data} = props;
   const [ onSearchHeader, setOnSearchHeader ] = useState(true);
@@ -62,6 +62,11 @@ function SearchBar({ params, setParams, setData,
     .then(res => res.json())
     .then(res => {
       setData(res.items.item);
+      setCount(res.totalCount);
+    })
+    .catch((error) => {
+      setMoreData(false);
+      return;
     });
   }
 

@@ -37,30 +37,40 @@ function Volunteer() {
     }
   }
 
+  // useIntersectionObserver을 통해 fetchData 함수 동작 시
   const fetchData = async() => {
-        await fetch('/api/list', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ...params,
-            pageNo: "" + page,
-          })
-        })
-        .then(res => res.json())
-        .then(res => {
-          setData((prev) => prev.concat(res.items.item));
-          setPage((prev) => prev + 1);
-          setCount(res.totalCount);
-        })
-        .catch((error) => {
-          setMoreData(false);
-          return;
-        });
-      };
+    await fetch('/api/list', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...params,
+        pageNo: "" + page,
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      setCount(res.totalCount);
+      if(res.items) {
+        setData((prev) => prev.concat(res.items.item));
+      }
+      if(data.lenth + 9 >= count) {
+        setMoreData(false);
+        return;
+      }
+      setPage((prev) => prev + 1); 
+    })
+    .catch((error) => {
+      setMoreData(false);
+      throw error;
+    });
+  };
 
   const target = useIntersectionObserver(async (entry, observer) => {
+    if(!moreData || !tab) {
+      return;
+    }
     observer.unobserve(entry.target);
     await fetchData();
     observer.observe(entry.target);
@@ -74,8 +84,7 @@ function Volunteer() {
       <div className='pageTitle'>
         <span>봉사활동찾기</span>
       </div>     
-      <SearchBar params={params} setParams={setParams} setData={setData} setMoreData={setMoreData}
-                 page={page} setPage={setPage} onCheck={onCheck} handleCheck={handleCheck} />
+      <SearchBar params={params} setParams={setParams} setData={setData} setMoreData={setMoreData} setCount={setCount} setPage={setPage} onCheck={onCheck} handleCheck={handleCheck} />
       <div className='volunteerTab'>
         <div className={`tabOption ${tab ? 'selected' : ''}`} onClick={() => setTab(true)}>목록보기</div>
         <div className={`tabOption ${tab ? '' : 'selected'}`} onClick={() => setTab(false)}>지도보기</div>
@@ -93,7 +102,7 @@ function Volunteer() {
             <MapBox data={data} />
           </div> 
         }
-        { moreData && tab ? <div ref={target}></div> : null }
+        <div ref={target}></div>
       </div>
     </main>
   )

@@ -32,7 +32,7 @@ const useIntersectionObserver = (onIntersect, option) => {
         ...option
       });
       observer.observe(ref.current);
-    };
+    }
     return () => observer  && observer.disconnect();
   }, [ref, checkIntersect]);
   return ref;
