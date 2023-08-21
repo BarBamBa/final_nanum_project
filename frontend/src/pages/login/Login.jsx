@@ -1,111 +1,111 @@
 import React, { useState } from 'react'
-import './Login.css'
-import axios from 'axios';
-import { GoogleLogin } from "@react-oauth/google";
-import {GoogleOAuthProvider} from "@react-oauth/google";
-import {useNavigate} from 'react-router-dom' 
+// import './Login.css'
+// import axios from 'axios';
+// import { GoogleLogin } from "@react-oauth/google";
+// import {GoogleOAuthProvider} from "@react-oauth/google";
+// import {useNavigate} from 'react-router-dom' 
 
 function Login() {
 
-  /*
+//   /*
 
-  구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
+//   구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
 
-  구글 clientPw : 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
+//   구글 clientPw : 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
 
-  */
+//   */
 
-  const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
-  const navigate = useNavigate();
+//   const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
+//   const navigate = useNavigate();
 
-  const handleGoogleLoginSuccess = (res) => {
-    console.log(res);
-    // Handle successful login
-  };
+//   const handleGoogleLoginSuccess = (res) => {
+//     console.log(res);
+//     // Handle successful login
+//   };
 
-  const handleGoogleLoginFailure = (err) => {
-    console.log(err);
-    // Handle login failure
-  };
+//   const handleGoogleLoginFailure = (err) => {
+//     console.log(err);
+//     // Handle login failure
+//   };
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [errorMessage, setErrorMessage] = useState('');
 
-//======== 이메일 ==============================================
-  const onEmailHandler = (e) => {
-    setEmail(e.target.value);
-    setErrorMessage('');
-  }
+// //======== 이메일 ==============================================
+//   const onEmailHandler = (e) => {
+//     setEmail(e.target.value);
+//     setErrorMessage('');
+//   }
 
-//======== 비밀번호 ==============================================
-  const onPasswordHandler = (e) => {
-    setPassword(e.target.value);
-    setErrorMessage('');
-  }
+// //======== 비밀번호 ==============================================
+//   const onPasswordHandler = (e) => {
+//     setPassword(e.target.value);
+//     setErrorMessage('');
+//   }
 
 
-  ////======== 스프링연결 ==============================================
-  const onClickLogin = () => {
-    console.log("click login");
-    console.log("Email : ", email);
-    console.log("Password : ", password);
+//   ////======== 스프링연결 ==============================================
+//   const onClickLogin = () => {
+//     console.log("click login");
+//     console.log("Email : ", email);
+//     console.log("Password : ", password);
 
-    axios
-      .post("api/login", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res)
-        console.log("res.data.email ::", res.data.email);
-        console.log("res.data.msg ::", res.data.msg);
+//     axios
+//       .post("api/login", {
+//         email: email,
+//         password: password,
+//       })
+//       .then((res) => {
+//         console.log(res)
+//         console.log("res.data.email ::", res.data.email);
+//         console.log("res.data.msg ::", res.data.msg);
 
-        if (email === '') {
+//         if (email === '') {
 
-          setErrorMessage('이메일을 입력해주세요.');
-          return;
+//           setErrorMessage('이메일을 입력해주세요.');
+//           return;
 
-        } else if (password === ''){
+//         } else if (password === ''){
 
-          setErrorMessage('비밀번호를 입력해주세요.');
-          return;
+//           setErrorMessage('비밀번호를 입력해주세요.');
+//           return;
 
-        }else if (res.data.email === undefined) {
+//         }else if (res.data.email === undefined) {
 
-          console.log("=======================", res.data.msg);
-          alert("입력하신 이메일과 비밀번호를 확인해 주세요.");
+//           console.log("=======================", res.data.msg);
+//           alert("입력하신 이메일과 비밀번호를 확인해 주세요.");
 
-        } else if(res.data.email === email) {
+//         } else if(res.data.email === email) {
 
-          console.log("=======================", "로그인 성공");
-          sessionStorage.setItem("user_email", email);
-          sessionStorage.setItem("name", res.data.name);
-          alert("로그인 성공")
+//           console.log("=======================", "로그인 성공");
+//           sessionStorage.setItem("user_email", email);
+//           sessionStorage.setItem("name", res.data.name);
+//           alert("로그인 성공")
 
-          document.location.href = "/";
-        }
+//           document.location.href = "/";
+//         }
 
       
 
-      })
-      .catch();
+//       })
+//       .catch();
 
-  }
-
-
-
-  //=== 엔터키 이벤트 ========================
-  const OnkeyPress = e => {
-    if(e.key === 'Enter'){
-      onClickLogin();
-    }
-  }
+//   }
 
 
 
-  return (
-    <>
+//   //=== 엔터키 이벤트 ========================
+//   const OnkeyPress = e => {
+//     if(e.key === 'Enter'){
+//       onClickLogin();
+//     }
+//   }
+
+
+
+//   return (
+//     <>
       <form >
         <div className="login-box">
               
@@ -153,10 +153,10 @@ function Login() {
         </div>
     
       </form>  
-    </>
+//     </>
    
-  )
-}
+//   )
+// }
 
 
 export default Login
