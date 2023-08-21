@@ -59,4 +59,22 @@ public class Users extends BaseEntity {
     @Column(nullable = true)
     private char status;
 
+
+
+//    @Builder
+//    public Users(char gender, String phone, String address, int age, String nickname,
+//                 String name, String password, String email, String role, String provider, String providerId) {
+//        this.gender = gender;
+//        this.phone = phone;
+//        this.address = address;
+//        this.nickname = nickname;
+//        this.age = age;
+//        this.name = name;
+//        this.password = password;
+//        this.email = email;
+//        this.role = role;
+//        this.provider = provider;
+//        this.providerId = providerId;
+//
+//    }
 }
