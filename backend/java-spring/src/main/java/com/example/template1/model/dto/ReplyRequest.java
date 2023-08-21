@@ -24,4 +24,5 @@ public class ReplyRequest {
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
+
 }

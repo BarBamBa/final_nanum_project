@@ -19,7 +19,8 @@ function FreeBoard(props) {
   const [keyword, setKeyword] = useState();
 
   const handlePageChange = (page) => {
-    setPage(page);  };
+    setPage(page);  
+  };
 
   const handleSearchBoard =()=> {
     console.log("noticepage",keyword);
