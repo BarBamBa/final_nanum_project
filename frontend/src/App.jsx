@@ -20,7 +20,6 @@ import VolunteerReview from './pages/myPage/VolunteerReview';
 import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import './scss/App.scss'
-import { Route, Routes } from 'react-router-dom';
 
 function App() {
 
