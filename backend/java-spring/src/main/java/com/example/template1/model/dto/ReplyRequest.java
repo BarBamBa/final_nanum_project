@@ -17,11 +17,12 @@ public class ReplyRequest {
 
     private String content;
 
-    private char status;
+    private char status = 'Y';
 
     private Long reply;
 
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
+
 }

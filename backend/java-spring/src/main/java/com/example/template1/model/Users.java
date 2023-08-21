@@ -56,7 +56,7 @@ public class Users extends BaseEntity {
 
     private String phone;
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 
 }

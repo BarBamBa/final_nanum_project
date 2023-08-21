@@ -39,6 +39,7 @@ public class ReplyResponse {
         this.createAt = reply.getCreateAt();
         this.createAt2 = LocalDate.from(reply.getCreateAt());
         this.updateAt = reply.getUpdateAt();
+
         if (reply.getReply() == null) {
             this.reply = null;
 

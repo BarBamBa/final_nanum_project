@@ -16,11 +16,15 @@ function Review(props) {
   
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [keyword, setKeyword] = useState();
 
   const handlePageChange = (page) => {
     setPage(page);  };
 
-
+  const handleSearchBoard =()=> {
+    console.log("noticepage",keyword);
+    props.searchBoards(keyword);
+  }
 
   const startIndex = (page - 1) * 10;
   const endIndex = startIndex + 10;
@@ -29,9 +33,10 @@ function Review(props) {
   return (
     <div>
       <div className="search-box">
-        <input placeholder="검색어를 입력해주세요"></input>
+        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e)=>{setKeyword(e.target.value), console.log(keyword);}} ></input>
+        <button onClick={handleSearchBoard}>검색</button>
       </div>
-      <table>
+      <table className="board-table">
         <thead>
           <tr>
             <th className="table-head">번호</th>
