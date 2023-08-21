@@ -63,6 +63,8 @@
     color: #fff;
     border-radius: 5px;
     margin-left: 5px;
+    position: relative;
+    bottom: 2px;
 }
 
 .check-btn:hover {
@@ -178,6 +180,8 @@ button{
       color: #fff;
       border-radius: 5px;
       margin-left: 5px;
+      position: relative;
+      bottom: 2px;
   }
 
   .search-btn:hover {
@@ -268,7 +272,21 @@ button{
     border-radius: 3px;
   }
 
+/* ======= 비밀번호 보기 버튼 css ====================================================== */
+.PwShowBtn{
+  border: 1px solid #383838;
+  margin-left: 10px;
+  padding: 7px;
+  background-color: #9DCB09;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
 
+.PwShowBtn{
+  cursor : pointer;
+}
 
 /* =======회원가입 버튼 css=============================================== */
   .signup-btn{
