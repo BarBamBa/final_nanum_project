@@ -24,6 +24,7 @@ public class Notice extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 
 }

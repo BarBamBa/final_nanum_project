@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = {"board","Parents_No"})
 public class Reply extends BaseEntity{
 
     @Id
@@ -33,6 +32,7 @@ public class Reply extends BaseEntity{
     @JoinColumn(name = "Parents_No")
     private Reply reply;
 
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 
 }

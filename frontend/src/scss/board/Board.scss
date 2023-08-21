@@ -36,6 +36,13 @@
 }
 .board-detail-header {
 }
+.board-title {
+  display: flex;
+  justify-content: space-between;
+}
+.board-reportBtn {
+  margin : 10px;
+}
 .board-writter-info {
   display: flex;
   justify-content: flex-end;
@@ -43,6 +50,14 @@
 .board-detail-content {
   min-height: 800px;
   border: 1px solid #ccc;
+}
+.board-detail-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+.board-detail-btn button {
+  margin-left : 16px;
 }
 .board-reply-container {
   padding:30px;
