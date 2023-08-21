@@ -16,19 +16,19 @@ function AdBoard() {
   };
   //-----------페이징-------------
 
+  //게시판 조회
+  async function fetchBoards() {
+    await fetch("/api/admin/boards")
+      .then((response) => response.json())
+      .then((data) => {
+        setBoardData(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   useEffect(() => {
-    //게시판 조회
-    async function fetchBoards() {
-      await fetch("/api/admin/boards")
-        .then((response) => response.json())
-        .then((data) => {
-          setBoardData(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
     fetchBoards();
   }, []);
 
@@ -40,6 +40,7 @@ function AdBoard() {
           boardData={boardData}
           page={page}
           handlePageChange={handlePageChange}
+          fetchBoards={fetchBoards}
         />
       </div>
     </>

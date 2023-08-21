@@ -19,20 +19,37 @@ public class AdminService {
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
         return boardList;
     }
-    public List<Board> deleteBoard(List<BoardRequest> request) {
+    public List<Board> deleteBoard(List<BoardRequest> request) { //게시글 삭제로 전환
         List<Board> deletedBoards = new ArrayList<>();
 
         for (BoardRequest boardRequest : request) {
             Long id = boardRequest.getId();
-            Optional<Board> optionalBoard = boardRepository.findById(id);
+            Optional<Board> boardItem = boardRepository.findById(id);
 
-            if (optionalBoard.isPresent()) {
-                Board board = optionalBoard.get();
-                board.setStatus('N'); // 예시로 상태를 "N"으로 변경
+            if (boardItem.isPresent()) {
+                Board board = boardItem.get();
+                board.setStatus('N');
                 deletedBoards.add(boardRepository.save(board));
             }
         }
 
         return deletedBoards;
+    }
+
+    public List<Board> revertBoard(List<BoardRequest> request) { //게시글 복구
+        List<Board> revertBoards = new ArrayList<>();
+
+        for (BoardRequest boardRequest : request) {
+            Long id = boardRequest.getId();
+            Optional<Board> boardItem = boardRepository.findById(id);
+
+            if (boardItem.isPresent()) {
+                Board board = boardItem.get();
+                board.setStatus('Y');
+                revertBoards.add(boardRepository.save(board));
+            }
+        }
+
+        return revertBoards;
     }
 }

@@ -30,12 +30,28 @@ public class AdminController {
                 .body(boards);
     }
 
-    @PutMapping("/boards/delete")
+    @PutMapping("/boards/delete") //게시글 삭제
     public ResponseEntity<List<Board>> deleteBoards(@RequestBody List<BoardRequest> request) {
         List<Board> deleteList = adminService.deleteBoard(request);
 
         return ResponseEntity.ok()
                 .body(deleteList);
     }
+
+    @PutMapping("/boards/revert") //게시글 삭제
+    public ResponseEntity<List<Board>> revertBoards(@RequestBody List<BoardRequest> request) {
+        List<Board> revertList = adminService.revertBoard(request);
+
+        return ResponseEntity.ok()
+                .body(revertList);
+    }
+
+//    @PostMapping("/boards/category")
+//    public ResponseEntity<List<Board>> (@RequestBody List<BoardRequest> request) {
+//        List<Board> deleteList = adminService.deleteBoard(request);
+//
+//        return ResponseEntity.ok()
+//                .body(deleteList);
+//    }
 
 }

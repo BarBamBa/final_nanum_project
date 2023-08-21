@@ -2,12 +2,28 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import Pagination from "react-js-pagination";
 
-function AdBoardList({ boardData, page, handlePageChange }) {
+function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
     //-----------페이징-------------
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + 10;
     const paginatedBoardData = boardData.slice(startIndex, endIndex);
     //-----------페이징-------------
+
+    const [boardCategory, setBoardCategory] = useState(1);
+
+    async function selectCategory(category) {
+        await fetch("/api/admin/boards/category", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({flg:category})
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+    }
 
     //-----------체크박스-------------
     const [checkItems, setCheckItems] = useState([]); //체크박스에 담은 리스트
@@ -49,9 +65,10 @@ function AdBoardList({ boardData, page, handlePageChange }) {
     console.log("체크된 글 리스트", checkItems);
     //-----------체크박스-------------
 
+
     //-----------글 삭제-------------
     async function deleteBoard() {
-        const jsonList = checkItems.map(id => ({id}));
+        const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
         console.log(jsonList);
         if (!confirm("삭제하시겠습니까?")) {
             return;
@@ -66,12 +83,40 @@ function AdBoardList({ boardData, page, handlePageChange }) {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+                fetchBoards();
+                setCheckItems([]);
             })
             .catch((error) => {
                 console.log(error);
             });
     }
     //-----------글 삭제-------------
+
+    //-----------글 복구-------------
+    async function revertBoard() {
+        const jsonList = checkItems.map(id => ({ id }));
+        console.log(jsonList);
+        if (!confirm("복구하시겠습니까??")) {
+            return;
+        }
+        await fetch("/api/admin/boards/revert", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonList),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                fetchBoards();
+                setCheckItems([]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    //-----------글 복구-------------
     return (
         <div className='ad-board'>
             <div className='ad-board-manage-bar'>
@@ -80,11 +125,12 @@ function AdBoardList({ boardData, page, handlePageChange }) {
                         <tr>
                             <td>게시판 선택</td>
                             <td>
-                                <select>
-                                    <option>공지사항</option>
-                                    <option>소식공유</option>
-                                    <option>자유게시판</option>
-                                    <option>봉사후기</option>
+                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value) }} value={boardCategory}>
+                                    <option value={0}>전체보기</option>
+                                    <option value={1}>공지사항</option>
+                                    <option value={2}>소식공유</option>
+                                    <option value={3}>자유게시판</option>
+                                    <option value={4}>봉사후기</option>
                                 </select>
                             </td>
                         </tr>
@@ -113,11 +159,13 @@ function AdBoardList({ boardData, page, handlePageChange }) {
                         <th className="ad-board-head">작성자ID</th>
                         <th className='ad-board-head'>Nick</th>
                         <th className='ad-board-head'>게시판 종류</th>
+                        <th className='ad-board-head'>게시판 상태</th>
                         <th className="ad-board-head">등록일</th>
                     </tr>
                 </thead>
                 <tbody>
                     {paginatedBoardData.map((board, i) => {
+
                         return (
                             <tr key={board.id}>
                                 <td className="ad-board-checkbox">
@@ -132,7 +180,18 @@ function AdBoardList({ boardData, page, handlePageChange }) {
                                 <td className="ad-board-item ad-board-title" onClick={() => { navigate(`/board/detail/${board.id}`) }}>{board.title}</td>
                                 <td className="ad-board-item ad-board-nick">{board.userId}</td>
                                 <td className="ad-board-item ad-board-nick">{board.nick}</td>
-                                <td className="ad-board-item ad-board-nick">{board.flg}</td>
+                                <td className="ad-board-item ad-board-nick">
+                                    {board.flg === "1"
+                                        ? "공지사항"
+                                        : board.flg === "2"
+                                            ? "소식공유"
+                                            : board.flg === "3"
+                                                ? "자유게시판"
+                                                : board.flg === "4"
+                                                    ? "봉사후기"
+                                                    : ""
+                                    }</td>
+                                <td className="ad-board-item ad-board-nick">{board.status === "Y" ? "게시" : "삭제"}</td>
                                 <td className="ad-board-item ad-board-date">{board.createAt}</td>
                             </tr>
                         );
@@ -141,6 +200,7 @@ function AdBoardList({ boardData, page, handlePageChange }) {
                 </tbody>
             </table>
             <button onClick={deleteBoard}>선택삭제</button>
+            <button onClick={revertBoard}>선택복구</button>
             <Pagination
                 activePage={page} // 현재 페이지
                 itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
