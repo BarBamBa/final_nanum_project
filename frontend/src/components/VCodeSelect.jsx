@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function VCodeSelect({ params, setParams }) {
 
@@ -59,7 +59,7 @@ function VCodeSelect({ params, setParams }) {
         ))}
       </select>
       {/* 하위분야코드 셀렉트 박스 */}
-      <select value={params.schnanmClCode} onChange={handleSmallSelectChange}>
+      <select value={params.schnanmClCode} onChange={handleSmallSelectChange}>HY
         <option value="" disabled>
           분야코드
         </option>

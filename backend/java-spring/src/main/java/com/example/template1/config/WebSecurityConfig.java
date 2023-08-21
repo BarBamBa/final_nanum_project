@@ -19,13 +19,6 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-
-//     @Bean
-//     public WebSecurityCustomizer configure() {
-//         return (web) -> web.ignoring()
-//             .requestMatchers(toH2Console());
-//     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {

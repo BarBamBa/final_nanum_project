@@ -1,10 +1,17 @@
-//Header grid
+//Header
 header{
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #546D01;
   width: 100%;
-  
+  .navBar {
+    width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .logoWrap{
     #logoImg{
       width: 8rem;
@@ -12,6 +19,53 @@ header{
     }
   }
 }
+
+//========= 로그인 후 버튼 ====================================================
+.loginName {
+  position: relative;
+  margin-top: 0px;
+  font-weight: bold;
+  border: 3px solid #a2c42f;
+  border-radius: 5px;
+  height: 40px;
+  top: 15px;
+  padding: 5px;
+  background-color: rgba(51, 139, 33, 0.185);
+}
+
+.loginImg{
+  position: relative;
+  top: 8px;
+  margin-right: 3px;
+  width: 30px;
+  height: 23px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
+.logoutBtn {
+  border: 3px solid #8f8f8f;
+  margin-top: 25px;
+  height: 20px;
+  padding: 10px 20px 10px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: white;
+  margin-left: 10px;
+  color: #8f8f8f;
+  
+}
+
+.logoutBtn img {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  top: 6px;
+  left: 7px;
+}
+
+//********* 로그인 후 버튼  끝 *********************************************
 
 nav{
   margin: 0;

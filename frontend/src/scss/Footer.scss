@@ -1,5 +1,5 @@
 footer {
-  grid-area: "Footer";
+  grid-area: footer;
   background-color: #546D01;
   color: white;
   display: flex;
@@ -7,40 +7,47 @@ footer {
   width: 100%;
   height: 200px;
 
-  ul{
-    width: 150px;
-    list-style: none;
+  .footerBar {
+    width: 1440px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-
-  }
-
-  li{
-    width: 120px;
-    height: 20px;
-    margin: 5px;
-  }
-
-  .footerMenuName {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  a {
-    color: white;
-  }
-
-  a:hover {
-      height: 25px;
-      text-align: center;
-      list-style-type: none;
-      margin: 10px 0px;
-      font-size: 17px;
-      font-weight: 400;
-      cursor: pointer;
-      transition: font-size 0.3s ease;
-      
+    justify-content: space-between;
+    
+    ul{
+      width: 150px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
     }
+  
+    li{
+      width: 120px;
+      height: 20px;
+      margin: 5px;
+    }
+  
+    .footerMenuName {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  
+    a {
+      color: white;
+    }
+  
+    a:hover {
+        height: 25px;
+        text-align: center;
+        list-style-type: none;
+        margin: 10px 0px;
+        font-size: 17px;
+        font-weight: 400;
+        cursor: pointer;
+        transition: font-size 0.3s ease;
+        
+      }
+  }
 }

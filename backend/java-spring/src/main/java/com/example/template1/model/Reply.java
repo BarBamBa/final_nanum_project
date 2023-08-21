@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@ToString(exclude = {"board","childReply"})
 public class Reply extends BaseEntity{
 
     @Id

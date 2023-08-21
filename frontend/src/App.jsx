@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
 import Main from './pages/Main';
