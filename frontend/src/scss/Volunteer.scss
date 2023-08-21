@@ -1,0 +1,398 @@
+// 봉사활동검색 메인페이지
+
+main {
+  width: 1440px;
+
+  .pageTitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    font-size: 40px;
+    border-bottom: 3px solid #D6D6D6;
+    padding: 15px 0px;
+    span {
+      padding-left: 20px;
+    }
+  }
+}
+
+// 봉사활동 검색 카테고리 컴포넌트
+
+.searchBar {
+  width: 1000px;
+  height: auto;
+  margin: 30px auto;
+
+  .searchHeader {
+    width: 100%;
+    background-color: #546D01;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 0px;
+    
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 25px;
+      cursor: pointer;
+    }
+
+    .searchArrow {
+      width: 25px;
+      height: 25px;
+    }
+
+    .down {
+        transform: rotate(180deg);
+    }
+  }
+
+  .searchContents {
+    border: 1px solid #546D01;
+    margin-top: 0;
+    display: block; /* 기본적으로 표시되도록 설정 */
+    height: auto;
+    opacity: 1; /* 기본적으로 불투명도 1로 설정 */
+    // 열고 닫을 때 애니메이션 
+    // transition: max-height 0.5s ease-in-out, opacity 0.1s ease-in-out;
+    
+    &.closed {
+      height: 0; /* 닫혔을 때 최대 높이를 0으로 설정하여 숨김 */
+      opacity: 0; /* 닫혔을 때 불투명도를 0으로 설정하여 페이드아웃 */
+    }
+
+    input[type="text"]{
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      color: #343434;
+
+      &:focus {
+        border-color: #A4CC22;
+        outline: none;
+        box-shadow: 0 0 2px rgba(#A4CC22, 1);
+      }
+    }
+
+    select {
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      color: #343434;
+
+      &:focus {
+        border-color: #A4CC22;
+        outline: none;
+        box-shadow: 0 0 2px rgba(#A4CC22, 1);
+      }
+    }
+    .table {
+      width: 1000px;
+      height: auto;
+
+      .tableTr {
+        width: 100%;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px dashed #D6D6D6;
+
+        .trTitle {
+          width: 150px;
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold;
+        }
+        .tableTdField {
+          width: auto;
+        }
+
+        .tableTd {
+          width: 350px;
+        }
+      }    
+        .status {
+          display: flex;
+          align-items: center;
+          
+
+          label {  
+            margin: 0 10px;
+          }
+          /* 모집상태 체크박스 스타일 변경 */
+          input[type="checkbox"]{
+            display: none;
+          }
+
+          input[type="checkbox"] + label {
+                  display: inline-block;
+                  width: 100px;
+                  height: 30px;
+                  border:1px solid #546D01;
+                  position: relative;
+                  border-radius: 3px;
+                  line-height: 30px;
+                  text-align: center; 
+                }
+
+          input[id="statusWait"]:checked + label,
+          input[id="statusIng"]:checked + label,
+          input[id="statusDone"]:checked + label {
+                  font-size: 17px;
+                  width: 100px;
+                  height: 30px;
+                  text-align: center;
+                  left: 0;
+                  top:0;
+                  color: #fff;
+                  background-color: #546D01;
+                  
+                }
+        }
+
+        .checkboxCustom {
+          display: flex;
+          align-items: center;         
+
+          span {
+            margin-right: 20px;
+          }
+
+            /* 체크박스 스타일 변경 */
+          input[type="checkbox"]{
+            display: none;
+          }
+
+          input[type="checkbox"] + label{
+                  display: inline-block;
+                  width: 18px;
+                  height: 18px;
+                  border:1px solid #546D01;
+                  position: relative;
+                  border-radius: 3px;
+                  margin-right: 5px;
+                  cursor: pointer;
+                }
+          input[id="adult"]:checked + label::after, input[id="student"]:checked + label::after{
+                  content:'✔';
+                  font-size: 18px;
+                  width: 18px;
+                  height: 18px;
+                  text-align: center;
+                  position: absolute;
+                  left: 0;
+                  top:0;
+                  color: #546D01;
+                  
+                }
+        
+        }  
+    }
+  }
+}
+
+// 목록, 지도 탭
+
+.volunteerTab {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid #546D01;
+  border-top: 1px solid #546D01;
+
+  .tabOption {
+    box-sizing: border-box;
+    width: 50%;
+    height: 50px;
+    margin: auto 0;
+    border-right: 1px solid #546D01;
+    border-bottom: 1px solid #546D01;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 50px;
+
+    &.selected {
+      border-top: 8px solid #546D01;
+      border-bottom: 8px solid #fff;
+    }
+  }
+}
+
+// 목록, 지도 컨텐츠
+
+.result {
+  width: 1000px;
+  margin: 0 auto;
+
+  .volunteerList {
+    margin: 20px 0;
+
+    .page {
+      margin: 15px 0;
+    }
+    .volunteerListBox {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      grid-template-areas: 
+      "state title date"
+      "state detail1 date"
+      "state detail2 date"
+      ;
+      grid-template-columns: 10% 80% 10%;
+      grid-template-rows: 40% 30% 30%;
+      padding: 10px;
+      border-top: 1px dashed #D6D6D6;
+      height: 100px;
+
+      .listState {
+        grid-area: state;
+        background-color: #A4CC22;
+        border: 1px solid #A4CC22;
+        border-radius: 5px;
+        color: white;
+        width: 80px;
+        height: 30px;
+        text-align: center;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        line-height: 30px;
+      }
+
+      .listTitle {
+        grid-area: title;
+        font-size: 20px;
+        font-weight: bolder;
+        //한 줄 넘어갈 시 생략
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+
+      .listDetail1 {
+        grid-area: detail1;
+        font-size: 14px;
+
+        span {
+          margin: 0 20px;
+        }
+      }
+
+      .listDetail2 {
+        grid-area: detail2;
+        font-size: 14px;
+        
+        span {
+          margin: 0 20px;
+        }
+      }
+
+      .listDate {
+        grid-area: date;
+        color: #546D01;
+
+        .listDateNum {
+          font-size: 19px;
+          // color: #A4CC22;
+          text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+
+          &.end {
+            color: darken(red, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  // 지도 하위 태그 
+  .mapBox {
+    border-left: 1px solid #546D01;
+
+    .wrap {
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      background-color: white;
+      margin-bottom: 150px;
+
+      .info {
+
+        .close {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-bottom: 5px;
+          background-color: #546D01;
+          padding: 5px;
+
+          .TfiClose {
+            color: white;
+          }
+
+          .TfiClose:hover {
+            cursor:pointer;
+          }
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 0.9rem;
+          padding: 5px;
+        }
+
+        .body {
+
+          .desc {
+            padding: 5px;
+            font-size: 0.8rem;
+          }
+
+          .goToVolunteer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 0.8rem;
+            padding: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+//카테고리 검색창 버튼 디자인 변경
+.btnBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 100px;
+    height: 40px;  
+    color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);           
+  }
+
+  #btnSearch {
+    background-color: #A4CC22;
+
+    &:active {
+      background-color: darken(#A4CC22, 10%);
+    }
+  }
+
+  #btnReset {
+    background-color: #546D01;
+
+    &:active {
+      background-color: darken(#546D01, 10%);
+    }
+  }
+}
