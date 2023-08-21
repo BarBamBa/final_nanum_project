@@ -1,29 +1,20 @@
 import React from 'react'
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import Modal from "react-modal";
 
-function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
+function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoards, selectCategory, reportedBoard }) {
+    const navigate = useNavigate();
     //-----------페이징-------------
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + 10;
     const paginatedBoardData = boardData.slice(startIndex, endIndex);
     //-----------페이징-------------
 
-    const [boardCategory, setBoardCategory] = useState(1);
-
-    async function selectCategory(category) {
-        await fetch("/api/admin/boards/category", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({flg:category})
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        })
-    }
+    const [boardCategory, setBoardCategory] = useState(0); // 게시판 카테고리
+    const [reportedFlg, setReportedFlg] = useState(false); // 신고 게시판 flg
+    const [isOpen, setIsOpen] = useState(false); // 신고리스트 모달창 flg
 
     //-----------체크박스-------------
     const [checkItems, setCheckItems] = useState([]); //체크박스에 담은 리스트
@@ -83,8 +74,9 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                fetchBoards();
                 setCheckItems([]);
+                setBoardCategory(boardCategory);
+                selectCategory(boardCategory);
             })
             .catch((error) => {
                 console.log(error);
@@ -109,8 +101,9 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                fetchBoards();
                 setCheckItems([]);
+                setBoardCategory(boardCategory);
+                selectCategory(boardCategory);
             })
             .catch((error) => {
                 console.log(error);
@@ -125,7 +118,7 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
                         <tr>
                             <td>게시판 선택</td>
                             <td>
-                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value) }} value={boardCategory}>
+                                <select onChange={(e) => { selectCategory(e.target.value), setBoardCategory(e.target.value) }} value={boardCategory}>
                                     <option value={0}>전체보기</option>
                                     <option value={1}>공지사항</option>
                                     <option value={2}>소식공유</option>
@@ -161,6 +154,7 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
                         <th className='ad-board-head'>게시판 종류</th>
                         <th className='ad-board-head'>게시판 상태</th>
                         <th className="ad-board-head">등록일</th>
+                        <th className="ad-board-head">신고</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -193,6 +187,7 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
                                     }</td>
                                 <td className="ad-board-item ad-board-nick">{board.status === "Y" ? "게시" : "삭제"}</td>
                                 <td className="ad-board-item ad-board-date">{board.createAt}</td>
+                                <td className="ad-board-item ad-board-date" style={board.reportYn == "Y" ? { color: "red" } : null} ><span onClick={() => { setIsOpen(true), reportedBoard(board.id) }}>{board.reportYn}</span></td>
                             </tr>
                         );
                     })}
@@ -212,8 +207,83 @@ function AdBoardList({ boardData, page, handlePageChange, fetchBoards }) {
                 nextPageText=">>" // "다음"을 나타낼 텍스트
                 onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             />
+
+            {/* 신고사유 모달창 */}
+            <Modal
+                style={modalStyle}
+                isOpen={isOpen}
+                onRequestClose={() => { setIsOpen(false) }}
+            >
+                {reportData.length == 0 ? <span>신고내역이없습니다.</span> :
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>사유</th>
+                                    <th>게시판번호</th>
+                                    <th>게시자ID</th>
+                                    <th>신고자ID</th>
+                                    <th>신고일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {reportData.map((data, i) => {
+                                    console.log(data.length);
+                                    return (
+
+                                        <tr key={data.id}>
+                                            <td>{data.id}</td>
+                                            <td>{data.reason == 1
+                                                ? "폭력"
+                                                : data.reason == 2
+                                                    ? "광고"
+                                                    : data.reason == 3
+                                                        ? "선정성"
+                                                        : data.reason == 4
+                                                            ? "게시판성격과 무관"
+                                                            : ""}</td>
+                                            <td>{data.boardId}</td>
+                                            <td>{data.reportedId}</td>
+                                            <td>{data.reporterId}</td>
+                                            <td>{data.createAt2}</td>
+                                        </tr>
+                                    )
+                                })
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+            </Modal>
         </div>
     )
 }
+const modalStyle = {
+    overlay: {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 10,
+    },
+    content: {
+        width: "1200px",
+        display: "flex",
+        justifyContent: "center",
+        overflow: "auto",
+        top: "42vh",
+        left: "38vw",
+        right: "38vw",
+        bottom: "42vh",
+        WebkitOverflowScrolling: "touch",
+        borderRadius: "14px",
+        outline: "none",
+        zIndex: 10,
+    },
+};
 
 export default AdBoardList

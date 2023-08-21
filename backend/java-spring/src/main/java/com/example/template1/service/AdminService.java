@@ -1,7 +1,9 @@
 package com.example.template1.service;
 
+import com.example.template1.model.Report;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.repository.BoardRepository;
+import com.example.template1.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.template1.model.Board;
@@ -14,13 +16,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminService {
     private final BoardRepository boardRepository;
+    private final ReportRepository reportRepository;
 
     public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
         return boardList;
     }
 
-    public List<Board> getBoardByCategory(char flg) {
+    public List<Report> getAllReport(long boardId) { // 신고된 게시판 조회
+        List<Report> boardList = reportRepository.findByBoard_Id(boardId);
+        return boardList;
+    }
+
+    public List<Board> getBoardByCategory(char flg) { //게시판 카테고리 조회
+        if(flg == '0') {
+            List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
+            return boardList;
+        }
         List<Board> boardList = boardRepository.findByFlgOrderByCreateAtDesc(flg);
 
         return boardList;

@@ -1,11 +1,12 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
-import lombok.AllArgsConstructor;
+import com.example.template1.model.Report;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class BoardResponse {
@@ -27,6 +28,10 @@ public class BoardResponse {
 
     private final Long userId;
 
+    private final List<Report> reports;
+
+    private final char reportYn;
+
     private final String nick;
 
     private final String name;
@@ -47,6 +52,11 @@ public class BoardResponse {
         this.nick = board.getUsers().getNickname();
         this.name = board.getUsers().getName();
         this.likeCount = board.getLikeCount();
+        this.reports = board.getReports();
+        if (board.getReports().isEmpty()) {
+            this.reportYn = 'N';
+        } else { this.reportYn = 'Y';}
+
     }
 
 }

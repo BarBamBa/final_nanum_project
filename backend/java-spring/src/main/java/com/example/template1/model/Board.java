@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
@@ -32,6 +33,10 @@ public class Board extends BaseEntity{
 
 //    @OneToMany(mappedBy = "board")
 //    List<BoardImg> boardImg = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    List<Report> reports = new ArrayList<>();
 
     private String title;
 

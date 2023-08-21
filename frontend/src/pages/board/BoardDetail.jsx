@@ -5,8 +5,9 @@ import Modal from "react-modal";
 function BoardDetail() {
   let { id } = useParams();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const [reportReason, setReportReason] = useState(1);
+
+  const [isOpen, setIsOpen] = useState(false); // 신고 모달창 flg
+  const [reportReason, setReportReason] = useState(1); // 신고 사유 value
 
   const [boardData, setBoardData] = useState({}); //게시글 정보
   const [replyData, setReplyData] = useState([]); //댓글 리스트
@@ -292,7 +293,7 @@ function BoardDetail() {
             <h3>글제목 : {boardData.title}</h3>
             <button
               className="board-reportBtn"
-              onClick={()=>{setIsOpen(true)}}>신고</button>
+              onClick={()=>{setIsOpen(true)}}>게시글신고</button>
           </div>
           <div className="board-writter-info">
             <p>글쓴이 : {boardData.name}</p>
