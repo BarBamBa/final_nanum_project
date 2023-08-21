@@ -46,12 +46,12 @@ public class AdminController {
                 .body(revertList);
     }
 
-//    @PostMapping("/boards/category")
-//    public ResponseEntity<List<Board>> (@RequestBody List<BoardRequest> request) {
-//        List<Board> deleteList = adminService.deleteBoard(request);
-//
-//        return ResponseEntity.ok()
-//                .body(deleteList);
-//    }
+    @PostMapping("/boards/category")
+    public ResponseEntity<List<Board>> getBoardsByCategory(@RequestBody BoardRequest request) {
+        List<Board> boardList = adminService.getBoardByCategory(request.getFlg());
+
+        return ResponseEntity.ok()
+                .body(boardList);
+    }
 
 }

@@ -16,7 +16,10 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findAllByOrderByCreateAtDesc();
     List<Board> findByTitleContainingAndFlg(String title, char flg);
 
-    @Query("SELECT b FROM Board b JOIN FETCH b.users u WHERE b.status = 'Y' ORDER BY b.createAt DESC")
-    List<Board> findAllByOrderByCreateAtDescWithUserInfo();
+    List<Board> findByFlgOrderByCreateAtDesc(char flg);
+
+//    @Query("SELECT b FROM Board b JOIN FETCH b.users u WHERE b.status = 'Y' ORDER BY b.createAt DESC")
+//    List<Board> findAllByOrderByCreateAtDescWithUserInfo();
+
 
 }

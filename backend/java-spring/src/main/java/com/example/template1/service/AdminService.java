@@ -19,6 +19,12 @@ public class AdminService {
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
         return boardList;
     }
+
+    public List<Board> getBoardByCategory(char flg) {
+        List<Board> boardList = boardRepository.findByFlgOrderByCreateAtDesc(flg);
+
+        return boardList;
+    }
     public List<Board> deleteBoard(List<BoardRequest> request) { //게시글 삭제로 전환
         List<Board> deletedBoards = new ArrayList<>();
 

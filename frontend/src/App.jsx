@@ -10,6 +10,7 @@ import MyPage from './pages/myPage/MyPage';
 import Qna from './pages/qna/Qna';
 import SignUp from './pages/signUp/SignUp';
 import Volunteer from './pages/volunteer/Volunteer';
+import Vdetail from './pages/volunteer/Vdetail';
 import BoardDetail from './pages/board/BoardDetail';
 import BoardInputForm from './components/BoardInputForm'
 import FindUser from './pages/login/FindUser';
