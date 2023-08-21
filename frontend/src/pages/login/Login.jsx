@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import './Login.css'
 import axios from 'axios';
-import { GoogleLogin } from "@react-oauth/google";
-import {GoogleOAuthProvider} from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
+// import {GoogleOAuthProvider} from "@react-oauth/google";
 import {useNavigate} from 'react-router-dom' 
 
 function Login() {
 
-  /*
+//   /*
 
-  구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
+//   구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
 
-  구글 clientPw : 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
+//   구글 clientPw : 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
 
-  */
+//   */
 
   const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
   const navigate = useNavigate();
@@ -130,14 +130,14 @@ function Login() {
           </div>
 
 
-          <GoogleOAuthProvider clientId={clientId}>
+          {/* <GoogleOAuthProvider clientId={clientId}>
             <GoogleLogin
               onSuccess={handleGoogleLoginSuccess}
               onFailure={handleGoogleLoginFailure}
               className="custom-google-login-button"
              
             />
-          </GoogleOAuthProvider>
+          </GoogleOAuthProvider> */}
 
       
 

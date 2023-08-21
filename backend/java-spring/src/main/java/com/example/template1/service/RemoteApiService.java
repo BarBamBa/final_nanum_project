@@ -75,6 +75,9 @@ public class RemoteApiService {
     }
 
     private String getListString(JSONObject jsonObject) {
+        if (jsonObject.getJSONObject("response").getJSONObject("body").isEmpty()) {
+            return null;
+        }
         JSONObject orgObject = jsonObject.getJSONObject("response")
                 .getJSONObject("body");
         JSONArray jsonArray = jsonObject.getJSONObject("response")
