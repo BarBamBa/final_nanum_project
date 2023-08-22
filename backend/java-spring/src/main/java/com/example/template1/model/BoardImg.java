@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@ToString(exclude = "board")
 public class BoardImg extends BaseEntity {
 
     @Id

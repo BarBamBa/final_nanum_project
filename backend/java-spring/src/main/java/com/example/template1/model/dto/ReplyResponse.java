@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter
@@ -25,7 +26,9 @@ public class ReplyResponse {
 
     private final LocalDateTime createAt;
 
-    private final LocalDate createAt2;
+    private final LocalDate createAt2;// yyyy-MM-dd 형태
+
+    private final String createAt3;// yyyy-MM-dd HH:mm:ss ㅎ형태
 
     private final LocalDateTime updateAt;
 
@@ -38,6 +41,8 @@ public class ReplyResponse {
         this.status = reply.getStatus();
         this.createAt = reply.getCreateAt();
         this.createAt2 = LocalDate.from(reply.getCreateAt());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.createAt3 = reply.getCreateAt().format(formatter);
         this.updateAt = reply.getUpdateAt();
 
         if (reply.getReply() == null) {

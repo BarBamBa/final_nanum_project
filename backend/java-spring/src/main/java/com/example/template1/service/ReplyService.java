@@ -15,18 +15,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReplyService {
     private final ReplyRepository replyRepository;
-    public List<Reply> getAllReply(long id) {
+    public List<Reply> getAllReply(long id) { //boardId로 댓글 모두 조회
         List<Reply> replyList = replyRepository.findAllByBoardIdAndReplyIsNull(id);
         return replyList;
     }
 
-    public List<Reply> getAllChildReply(Reply id) {
+    public List<Reply> getAllChildReply(Reply id) { //parentsId 로 대댓글 조회
         List<Reply> replyList = replyRepository.findAllByReply(id);
         return replyList;
 
     }
 
-    public Reply saveReply(long id, ReplyRequest request) {
+    public Reply saveReply(long id, ReplyRequest request) { //댓글입력
         Users users = new Users();
         users.setId(1L); //userid 임의로 1로 지정
 
@@ -61,7 +61,7 @@ public class ReplyService {
     }
 
     @Transactional
-    public Reply deleteOrEditReply(long id, ReplyRequest request) {
+    public Reply deleteOrEditReply(long id, ReplyRequest request) { //댓글/대댓글 수정
         Reply reply = replyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
         // content가 비어서 오는 경우 삭제기능
         if(request.getContent() != null) {

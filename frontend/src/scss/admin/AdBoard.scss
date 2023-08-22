@@ -3,18 +3,21 @@
     border: 1px solid #ccc;
     margin: auto;
     padding: 10px;
-    width:70%;
+    width: 70%;
 }
-.ad-board {
 
-}
+.ad-board {}
+
 .ad-board-manage-table {
     border: 1px solid #ccc;
     border-collapse: collapse;
 }
+
 .ad-board-manage-table td {
     border: 1px solid #ccc;
+    padding: 10px;
 }
+
 .ad-board-table {
     border: 1px solid #ccc;
     border-collapse: collapse;
@@ -25,11 +28,32 @@
     border: 1px solid #ccc;
     background-color: #f5f4f4;
     text-align: center;
-    padding: 0 16px;
+    padding: 0 10px;
+}
+.ad-board-head-checkbox {
+    width: 80px;
+    
 }
 
-.ad-board-item {
+.ad-board-table td{
     background-color: white;
     border: 1px solid #ccc;
-    padding: 0 16px;
+    padding: 0 10px;
+}
+.ad-board-title span {
+    text-decoration: underline;
+    text-underline-position: under;
+    cursor: pointer;
+}
+
+.ad-board-replyCount span{
+    text-decoration: underline;
+    text-underline-position: under;
+    cursor: pointer;
+}
+
+.ad-board-reportYn span{
+    text-decoration: underline;
+    text-underline-position: under;
+    cursor: pointer;
 }

@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class Report extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name="BOARD_ID") //신고 할 게시판
+    @JsonBackReference
     private Board board;
 
     private String reason; //사유

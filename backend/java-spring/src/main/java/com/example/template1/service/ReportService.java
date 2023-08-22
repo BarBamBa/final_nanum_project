@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class ReportService {
 
     private final ReportRepository reportRepository;
-    public Report saveReport(ReportRequest request, long id) throws Exception {
+    public Report saveReport(ReportRequest request, long id) throws Exception { // report 저장
 
         Users users = new Users();
         users.setId(request.getUsers());
@@ -37,7 +37,7 @@ public class ReportService {
     }
 
 
-    public boolean DuplicateTest(ReportRequest request, long id) { //중복신고 검사
+    public boolean DuplicateTest(ReportRequest request, long id) { // 중복신고 검사
 
         return reportRepository.existsByReporterIdAndBoardId(request.getReporter(), id);
     }

@@ -24,8 +24,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(value = AuditingEntityListener.class)
-//@ToString(exclude = "boards")
+
 public class Users extends BaseEntity implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
