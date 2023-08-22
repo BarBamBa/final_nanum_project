@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import Admin from './Admin.jsx'
+import Modal from "react-modal";
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -12,9 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter >
     <Routes>
       <Route path='/*' element={<App />} />
-      {/* <Route path="/admin/*" element={<Admin />} /> */}
+      <Route path="/admin/*" element={<Admin />} />
     </Routes>
   </BrowserRouter>
   // </React.StrictMode>
 
 )
+// react-modal용 컴포넌트 추가
+Modal.setAppElement('#root') //App.js

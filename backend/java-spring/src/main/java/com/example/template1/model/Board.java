@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
@@ -15,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@ToString(exclude = "users")
 public class Board extends BaseEntity{
 
     @Id
@@ -27,11 +27,16 @@ public class Board extends BaseEntity{
     @JoinColumn(name = "USER_ID")
     private Users users;
 
-//    @OneToMany(mappedBy = "board")
-//    List<Reply> replies = new ArrayList<>();
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    List<Reply> replies = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "board")
 //    List<BoardImg> boardImg = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    List<Report> reports = new ArrayList<>();
 
     private String title;
 

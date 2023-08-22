@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,7 @@ public class Reply extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
+    @JsonBackReference
     private Board board;
 
     @Column(columnDefinition = "TEXT")

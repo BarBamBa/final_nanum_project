@@ -22,4 +22,5 @@ public class ReportRequest {
 
     private String reason;
 
+
 }
