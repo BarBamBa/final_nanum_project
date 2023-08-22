@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@ToString(exclude = "users")
 public class Board extends BaseEntity{
 
     @Id
