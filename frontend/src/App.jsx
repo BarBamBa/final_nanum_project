@@ -21,7 +21,6 @@ import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import './scss/App.scss'
-import Reserve from './pages/volunteer/Reserve';
 
 function App() {
 
