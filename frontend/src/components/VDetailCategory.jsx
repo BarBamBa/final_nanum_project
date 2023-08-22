@@ -40,8 +40,8 @@ const [data, setData] = useState({});
   return (
     <div className='vDetail'>
       <div className='buttonLine'>
-        <button id='btnToList'><Link to='/volunteer'>목록으로</Link></button>
-        <button id='btnSubmit'>신청하기</button>
+        <Link to='/volunteer'><button id='btnToList'>목록으로</button></Link>
+        <Link to={`/reserve/${progrmRegistNo}`} state={{data : data}}><button id='btnSubmit'>신청하기</button></Link>
       </div>
       <div className='vDetailCategory'>
         <div className='categoryItem title'>{data.progrmSj}</div>

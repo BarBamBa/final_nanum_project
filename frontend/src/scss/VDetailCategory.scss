@@ -11,37 +11,38 @@
     display: flex;
     justify-content: space-between;
 
-    button {
-      width: 100px;
-      height: 40px;  
-      color: white;
-      border: none;
-      margin: 10px;
-      border-radius: 5px;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);        
-    }
-
     a {
       color: white;
-      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);   
-    }
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2); 
+      cursor: pointer;  
 
-    #btnSubmit {
-      background-color: #A4CC22;
+      button {
+        width: 100px;
+        height: 40px;  
+        color: white;
+        border: none;
+        margin: 10px;
+        border-radius: 5px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);     
+        cursor: pointer;     
+      }
 
-      &:active {
-        background-color: darken(#A4CC22, 10%);
+      #btnSubmit {
+        background-color: #A4CC22;
+  
+        &:active {
+          background-color: darken(#A4CC22, 10%);
+        }
+      }
+  
+      #btnToList {
+        background-color: #546D01;
+  
+        &:active {
+          background-color: darken(#546D01, 10%);
+        }
       }
     }
-
-    #btnToList {
-      background-color: #546D01;
-
-      &:active {
-        background-color: darken(#546D01, 10%);
-      }
-    }
-
   }
 //봉사활동 세부사항
   .vDetailCategory{
