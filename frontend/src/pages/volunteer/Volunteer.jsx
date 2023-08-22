@@ -67,14 +67,24 @@ function Volunteer() {
     });
   };
 
-  const target = useIntersectionObserver(async (entry, observer) => {
+  const targetRef = useIntersectionObserver(async (entry, observer) => {
     if(!moreData || !tab) {
       return;
     }
     observer.unobserve(entry.target);
     await fetchData();
     observer.observe(entry.target);
+
+    // targetRef가 로드되었을 때 .spin 클래스 추가
+    if (targetRef.current) {
+      targetRef.current.classList.add('spin');
+    }
+
   }, {});
+
+  useEffect(() => {
+    console.log("페이지 번호: " + page);
+  }, [page])
 
   useEffect(()=> {
   }, [params])
@@ -94,15 +104,15 @@ function Volunteer() {
           <div className='volunteerList'>
             <div className='page'>[전체 {count}건]</div>
             { data.length < 1 ? "검색 결과가 없습니다." : data.map((Item, idx) => 
-              Item.progrmSttusSe === onCheck && <VolunteerList data={Item} num={idx} key={idx} />
+              Item.progrmSttusSe === onCheck && <VolunteerList data={Item} num={idx} key={idx} page={page} />
             )}
+            <div ref={targetRef} className='target'></div>
           </div> 
           : 
           <div className='mapBox'>
             <MapBox data={data} />
           </div> 
         }
-        <div ref={target}></div>
       </div>
     </main>
   )

@@ -1,9 +1,12 @@
 import { differenceInDays } from "date-fns"
 import { Link, Route, Routes } from "react-router-dom";
 import Vdetail from "../pages/volunteer/Vdetail";
+import { useEffect, useState } from "react";
 
 
 function VolunteerList (props) {
+
+    const { page } = props;
 
     function stringToDate(str) {
         const string = str + "";

@@ -29,7 +29,23 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path="/manager/*" element={<Manager/>} />
+        <Route path="/about" element={<About/>} /> 
+        <Route path="/volunteer/*" element={<Volunteer/>} />
+        <Route path="/vdetail/*" element={<Vdetail/>} />
+        <Route path="/reserve/*" element={<Reserve/>} />
+        <Route path="/board/*" element={<Board/>} />
+        <Route path="/MyVolunteer/*" element={<MyVolunteer/>} />
+        <Route path="/VolunteerSpec/*" element={<VolunteerSpec/>} />
+        <Route path="/VolunteerReview/*" element={<VolunteerReview/>} />
+        <Route path="/VolunteerHeaders/*" element={<VolunteerHeaders/>} />
+        <Route path='/board/detail/:id' element={<BoardDetail/>} />
+        <Route path='/board/input' element={<BoardInputForm/>} />
+        <Route path="/mypage/*" element={<MyPage/>} />
+        <Route path="/WishList/*" element={<WishList/>} />
+        <Route path="/qna/*" element={<Qna/>} />
+        <Route path="/login/*" element={<Login/>} />
+        <Route path="/FindUser/*" element={<FindUser/>} />
+        <Route path="/signup/*" element={<SignUp/>} />
       </Routes>
       <Footer />
     </>

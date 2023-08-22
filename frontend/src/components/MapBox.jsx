@@ -53,7 +53,7 @@ function MapBox({ data }) {
       // center={{ lat: marker[0].latlng.lat, lng: marker[0].latlng.lng }}
       // center={{ lat: 37.495506, lng: 126.88829 }}
       center={ marker.length > 0 ? { lat: marker[0].latlng.lat, lng: marker[0].latlng.lng } : { lat: 37.495506, lng: 126.88829 }} // 조건문을 이용해 setState 동작 전에 Map이 로드되어도 기본 값을 할당해 에러 방지, setState 동작 후 동적으로 중앙 위치 조정
-      style={{ width: "1000px", height: "600px" }}
+      className='map'
       level={6}
     >
       {marker.map((position, index) => (
