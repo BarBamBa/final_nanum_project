@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import CalendarReserve from '../../components/CalenderReserve'
 
@@ -9,6 +9,8 @@ function Reserve() {
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);
   }
+
+  const nav = useNavigate();
   
   function stringFormat(str) {
     const string = str + "";
@@ -16,7 +18,29 @@ function Reserve() {
     const month = string.substring(4, 6);
     const date = string.substring(6, string.length);
     return year + "-" + month + "-" + date;
-}
+  }
+
+  const fetchApplication = async () => {
+    console.log("transfered");
+    await fetch('/api/reserve', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: receivedData.data,
+        date: format(receivedData.selectedDay, 'yyyyMMdd'),
+      })
+    })
+    .then(res => res.json)
+    .then(res => {
+      console.log(res);
+      // nav("/");
+    })
+    .catch(err => {
+      throw err;
+    })
+  }
 
   return (
   <>
@@ -45,7 +69,7 @@ function Reserve() {
                 <span><strong>선택하신 일자가 맞습니까?</strong></span>
               </div>
               <div className='btnChoose'>
-                <button id='btnConfirm'>네</button>
+                <button id='btnConfirm' onClick={() => fetchApplication()}>네</button>
                 <button id='btnDeny' onClick={() => setReceivedData(null)}>아니오</button>
               </div>
             </div>
