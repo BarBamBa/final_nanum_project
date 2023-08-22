@@ -51,7 +51,6 @@ const [data, setData] = useState({});
           </button>
         </Link>
       </div>
-      </div>
       <div className='vDetailCategory'>
         <div className='categoryItem title'>{data.progrmSj}</div>
         <div className='categoryItem'><p className='itemName'>모집기간</p> {stringFormat(data.noticeBgnde)} ~ {stringFormat(data.noticeEndde)}</div>
