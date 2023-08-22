@@ -17,7 +17,7 @@ function AdBoard() {
   };
   //-----------페이징-------------
 
-  //게시판 조회
+  // 게시판 조회
   async function fetchBoards() {
     await fetch("/api/admin/boards")
       .then((res) => res.json())
@@ -41,7 +41,7 @@ function AdBoard() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("selectCategory",data);
         setBoardData(data);
       })
   }

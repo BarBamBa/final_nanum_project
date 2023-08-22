@@ -1,10 +1,8 @@
 package com.example.template1.controller;
 
 import com.example.template1.model.Board;
-import com.example.template1.model.dto.BoardRequest;
-import com.example.template1.model.dto.BoardResponse;
-import com.example.template1.model.dto.ReportRequest;
-import com.example.template1.model.dto.ReportResponse;
+import com.example.template1.model.Reply;
+import com.example.template1.model.dto.*;
 import com.example.template1.service.AdminService;
 import com.example.template1.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +49,7 @@ public class AdminController {
                 .body(deleteList);
     }
 
-    @PutMapping("/boards/revert") //게시글 삭제
+    @PutMapping("/boards/revert") //게시글 복구
     public ResponseEntity<List<Board>> revertBoards(@RequestBody List<BoardRequest> request) {
         List<Board> revertList = adminService.revertBoard(request);
 
@@ -59,7 +57,7 @@ public class AdminController {
                 .body(revertList);
     }
 
-    @PostMapping("/boards/category")
+    @PostMapping("/boards/category") //게시글 카테고리로 조회
     public ResponseEntity<List<BoardResponse>> getBoardsByCategory(@RequestBody BoardRequest request) {
         List<BoardResponse> boardList = adminService.getBoardByCategory(request.getFlg())
                 .stream()
@@ -70,4 +68,19 @@ public class AdminController {
                 .body(boardList);
     }
 
+    @PutMapping("/reply/delete") //댓글 삭제
+    public ResponseEntity<List<Reply>> deleteReplies(@RequestBody List<ReplyRequest> request) {
+        List<Reply> deleteList = adminService.deleteReply(request);
+
+        return ResponseEntity.ok()
+                .body(deleteList);
+    }
+
+    @PutMapping("/reply/revert") //댓글 삭제
+    public ResponseEntity<List<Reply>> revertReplies(@RequestBody List<ReplyRequest> request) {
+        List<Reply> revertList = adminService.revertReply(request);
+
+        return ResponseEntity.ok()
+                .body(revertList);
+    }
 }

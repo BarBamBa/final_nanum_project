@@ -265,12 +265,12 @@ function BoardDetail() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if( data == true) {
-          alert ("이미 신고한 게시글 입니다.");
+        if (data == true) {
+          alert("이미 신고한 게시글 입니다.");
           setIsOpen(false);
           return;
         }
-        alert ("신고되었습니다.");
+        alert("신고되었습니다.");
         setIsOpen(false);
       })
       .catch((error) => {
@@ -293,7 +293,7 @@ function BoardDetail() {
             <h3>글제목 : {boardData.title}</h3>
             <button
               className="board-reportBtn"
-              onClick={()=>{setIsOpen(true)}}>게시글신고</button>
+              onClick={() => { setIsOpen(true) }}>게시글신고</button>
           </div>
           <div className="board-writter-info">
             <p>글쓴이 : {boardData.name}</p>
@@ -410,7 +410,6 @@ function BoardDetail() {
             ) : null}
             {/* 대댓글달기 end */}
 
-
             {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
               <div className="board-child-reply-container">
 
@@ -456,22 +455,17 @@ function BoardDetail() {
 
             ) : null}
 
-
-
-
           </div>
-
-
         ))}
       </div>
-      <Modal 
-      style={modalStyle}
-      isOpen={isOpen}
-      onRequestClose={()=>{setIsOpen(false)}}
-      >        
+      <Modal
+        style={modalStyle}
+        isOpen={isOpen}
+        onRequestClose={() => { setIsOpen(false) }}
+      >
         <div>
           <label htmlFor="selectbar">신고사유</label>
-          <select id="selectbar" onChange={(e)=>{setReportReason(e.target.value)}} value={reportReason}>
+          <select id="selectbar" onChange={(e) => { setReportReason(e.target.value) }} value={reportReason}>
             <option value={1}>폭력/욕설</option>
             <option value={2}>광고물</option>
             <option value={3}>선정적인 게시물</option>
@@ -481,33 +475,33 @@ function BoardDetail() {
         </div>
       </Modal>
     </div >
-    
+
   );
 
 }
 
 const modalStyle = {
-	overlay: {
-		position: "fixed",
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
-		zIndex: 10,
-	},
-	content: {
-		display: "flex",
-		justifyContent: "center",
-		overflow: "auto",
-		top: "42vh",
-		left: "38vw",
-		right: "38vw",
-		bottom: "42vh",
-		WebkitOverflowScrolling: "touch",
-		borderRadius: "14px",
-		outline: "none",
-		zIndex: 10,
-	},
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10,
+  },
+  content: {
+    display: "flex",
+    justifyContent: "center",
+    overflow: "auto",
+    top: "42vh",
+    left: "38vw",
+    right: "38vw",
+    bottom: "42vh",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "14px",
+    outline: "none",
+    zIndex: 10,
+  },
 };
 
 export default BoardDetail;

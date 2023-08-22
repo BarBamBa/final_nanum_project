@@ -28,8 +28,9 @@ public class Board extends BaseEntity{
     @JoinColumn(name = "USER_ID")
     private Users users;
 
-//    @OneToMany(mappedBy = "board")
-//    List<Reply> replies = new ArrayList<>();
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    List<Reply> replies = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "board")
 //    List<BoardImg> boardImg = new ArrayList<>();

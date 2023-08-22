@@ -1,8 +1,11 @@
 package com.example.template1.service;
 
+import com.example.template1.model.Reply;
 import com.example.template1.model.Report;
 import com.example.template1.model.dto.BoardRequest;
+import com.example.template1.model.dto.ReplyRequest;
 import com.example.template1.repository.BoardRepository;
+import com.example.template1.repository.ReplyRepository;
 import com.example.template1.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class AdminService {
     private final BoardRepository boardRepository;
     private final ReportRepository reportRepository;
+    private final ReplyRepository replyRepository;
 
     public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
@@ -69,5 +73,39 @@ public class AdminService {
         }
 
         return revertBoards;
+    }
+
+    public List<Reply> deleteReply(List<ReplyRequest> request) { //게시글 삭제로 전환
+        List<Reply> deletedReplies = new ArrayList<>();
+
+        for (ReplyRequest replyRequest : request) {
+            Long id = replyRequest.getId();
+            Optional<Reply> replyItem = replyRepository.findById(id);
+
+            if (replyItem.isPresent()) {
+                Reply reply = replyItem.get();
+                reply.setStatus('N');
+                deletedReplies.add(replyRepository.save(reply));
+            }
+        }
+
+        return deletedReplies;
+    }
+
+    public List<Reply> revertReply(List<ReplyRequest> request) { //게시글 복구로 전환
+        List<Reply> revertReplies = new ArrayList<>();
+
+        for (ReplyRequest replyRequest : request) {
+            Long id = replyRequest.getId();
+            Optional<Reply> replyItem = replyRepository.findById(id);
+
+            if (replyItem.isPresent()) {
+                Reply reply = replyItem.get();
+                reply.setStatus('Y');
+                revertReplies.add(replyRepository.save(reply));
+            }
+        }
+
+        return revertReplies;
     }
 }
