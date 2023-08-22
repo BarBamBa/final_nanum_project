@@ -1,11 +1,14 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
-import lombok.AllArgsConstructor;
+import com.example.template1.model.Reply;
+import com.example.template1.model.Report;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 public class BoardResponse {
@@ -21,11 +24,19 @@ public class BoardResponse {
 
     private final LocalDateTime createAt;
 
-    private final LocalDate createAt2;// 게시판 시간 뺀 날짜 표시용
+    private final LocalDate createAt2;// yyyy-MM-dd 형태
+
+    private final String createAt3;// yyyy-MM-dd HH:mm:ss ㅎ형태
 
     private final LocalDateTime updateAt;
 
     private final Long userId;
+
+    private final List<Report> reports;
+
+    private final List<Reply> replies;
+
+    private final char reportYn;
 
     private final String nick;
 
@@ -42,11 +53,19 @@ public class BoardResponse {
         this.flg = board.getFlg();
         this.createAt = board.getCreateAt();
         this.createAt2 = LocalDate.from(board.getCreateAt());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.createAt3 = board.getCreateAt().format(formatter);
         this.updateAt = board.getUpdateAt();
         this.userId = board.getUsers().getId();
         this.nick = board.getUsers().getNickname();
         this.name = board.getUsers().getName();
         this.likeCount = board.getLikeCount();
+        this.reports = board.getReports();
+        this.replies = board.getReplies();
+        if (board.getReports().isEmpty()) {
+            this.reportYn = 'N';
+        } else { this.reportYn = 'Y';}
+
     }
 
 }

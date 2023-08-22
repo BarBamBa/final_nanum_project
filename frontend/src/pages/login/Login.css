@@ -103,14 +103,6 @@ body {
   color: #A4CC22;
 }
 
-.custom-google-login-button{
-  
-  background-color: red;
-  width: 150px;
-  position: relative;
-  z-index: 1;
-}
-
 
 
 /* ======구글 로그인 버튼 css==========================================*/

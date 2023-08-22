@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,4 +32,9 @@ public class QnA extends BaseEntity{
 
     @Column(columnDefinition = "TEXT")
     private String MContent;
+
+    private char flg; //1 : FAQ, 2: QnA
+
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
+    private char status;
 }
