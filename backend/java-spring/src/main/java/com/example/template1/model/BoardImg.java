@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = "board")
+//@ToString(exclude = "board")
 public class BoardImg extends BaseEntity {
 
     @Id
@@ -30,12 +30,15 @@ public class BoardImg extends BaseEntity {
 
     private String name;
 
-    public BoardImg( Long id, String path, String name, Board board, Users users) {
-        this.id = id;
-        this.path = path;
-        this.name = name;
-        this.board = board;
-        this.users = users;
-    }
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
+    private char status;
+
+//    public BoardImg( Long id, String path, String name, Board board, Users users) {
+//        this.id = id;
+//        this.path = path;
+//        this.name = name;
+//        this.board = board;
+//        this.users = users;
+//    }
 
 }

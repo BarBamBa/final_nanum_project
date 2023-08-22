@@ -31,7 +31,7 @@ function VolunteerBanner() {
         }	
         
         fetchData().then(res => {
-          setData(res);
+          setData(res.items.item);
         });
     }, []);
 

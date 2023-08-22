@@ -58,7 +58,7 @@ function VolunteerList (props) {
             일후 마감
             </div>
             <Routes>
-                <Route path='/vdetail/vol=' data={data.progrmRegistNo} element={<Vdetail />} ></Route>
+                <Route path='/vdetail/vol=' data={data.progrmRegistNo} element={<Vdetail />}></Route>
             </Routes>
         </div>
         

@@ -1,6 +1,6 @@
 package com.example.template1.controller;
 
-import com.example.template1.service.RemoteApiService;
+import com.example.template1.service.Test1Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/test1")
 @RequiredArgsConstructor
 public class Test1Controller {
-
-    private final RemoteApiService remoteApiService;
+    private final Test1Service test1Service;
 
     @GetMapping("/gettest1")
     public String gettest1() {

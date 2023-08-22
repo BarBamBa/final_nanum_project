@@ -18,11 +18,13 @@ body {
 /* ======로그인 css========================================== */
 
 .login-textbox {
-  width: 400px;
-  height: 40px;
+  width: 390px;
+  height: 50px;
   border-radius: 10px;
   border: solid 1px black;
   margin-bottom: 15px;
+  font-size: 20px;
+  padding-left: 10px;
 }
 
 .login-box {
@@ -44,6 +46,16 @@ body {
 }
 
 
+/* ====== 오류메시지 css========================================== */
+
+.login-error-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  margin-top: -3px;
+}
+
+
 /* ======회원가입, 아이디, 비번찾기 css========================================== */
 
 .page-change{
@@ -61,7 +73,7 @@ body {
 
 .login-button{
   background-color: #A4CC22;
-  font-size: 28px;
+  font-size: 27px;
   font-weight: bold;
   text-align: center;
   color: #FFF;
@@ -90,6 +102,7 @@ body {
   background-color: #FFF;
   color: #A4CC22;
 }
+
 
 
 /* ======구글 로그인 버튼 css==========================================*/

@@ -24,5 +24,6 @@ public class Applicants extends BaseEntity{
     @JoinColumn(name = "VOLUNTEER_ID")
     private Volunteer volunteer;
 
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 }

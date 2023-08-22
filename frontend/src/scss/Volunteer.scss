@@ -309,8 +309,58 @@ main {
     }
   }
 
+  // 지도 하위 태그 
   .mapBox {
-    border: 1px solid #546D01;
+    border-left: 1px solid #546D01;
+
+    .wrap {
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      background-color: white;
+      margin-bottom: 150px;
+
+      .info {
+
+        .close {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-bottom: 5px;
+          background-color: #546D01;
+          padding: 5px;
+
+          .TfiClose {
+            color: white;
+          }
+
+          .TfiClose:hover {
+            cursor:pointer;
+          }
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 0.9rem;
+          padding: 5px;
+        }
+
+        .body {
+
+          .desc {
+            padding: 5px;
+            font-size: 0.8rem;
+          }
+
+          .goToVolunteer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 0.8rem;
+            padding: 5px;
+          }
+        }
+      }
+    }
   }
 }
 //카테고리 검색창 버튼 디자인 변경

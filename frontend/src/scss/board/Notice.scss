@@ -1,13 +1,12 @@
-table {
+.board-table {
   border-collapse: collapse;
   width: 100%;
 }
 
-th,
+.table-head,
 td {
   border-top: 1px solid #ccc;
   padding: 16px;
-  text-align: left;
 }
 .table-head {
   text-align: center;
@@ -16,7 +15,7 @@ td {
   text-align: center;
 }
 
-th {
+.table-head {
   border-top: 2px solid #546d01;
   border-bottom: 2px solid #546d01;
 }

@@ -75,24 +75,32 @@ public class RemoteApiService {
     }
 
     private String getListString(JSONObject jsonObject) {
+        if (jsonObject.getJSONObject("response").getJSONObject("body").isEmpty()) {
+            return null;
+        }
+        JSONObject orgObject = jsonObject.getJSONObject("response")
+                .getJSONObject("body");
         JSONArray jsonArray = jsonObject.getJSONObject("response")
                 .getJSONObject("body")
                 .getJSONObject("items")
                 .getJSONArray("item");
-        JSONArray newJsonArray = new JSONArray();
+//        JSONArray newJsonArray = new JSONArray();
         for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject arrayObject = jsonArray.getJSONObject(i);
             JSONObject newArrayobject = replaceRegion(arrayObject);
-            newJsonArray.put(newArrayobject);
+//            newJsonArray.put(newArrayobject);
+            orgObject = replaceItem(orgObject, newArrayobject, i);
         }
 
-        return newJsonArray.toString();
+//        return newJsonArray.toString();
+        return orgObject.toString();
     }
 
     public String getMarkerList(String url, JSONArray param) {
         JSONArray markerArray = new JSONArray();
 
-        for(int i = 0; i < param.length()-1; i++) {
+//        for(int i = 0; i < param.length()-1; i++) {
+        for(int i = 0; i < 5; i++) {
             String registNo = "" + param.getJSONObject(i).getInt("progrmRegistNo");
             JSONObject object = new JSONObject(getDetailInfo(url, registNo));
 
@@ -108,6 +116,8 @@ public class RemoteApiService {
             latlng.put("lng", Float.parseFloat(arealalo[1]));
 
             marker.put("latlng", latlng);
+            marker.put("progrmRegistNo", object.getInt("progrmRegistNo"));
+            marker.put("postAdres", object.getString("postAdres"));
 
             markerArray.put(marker);
         }
@@ -174,6 +184,18 @@ public class RemoteApiService {
         } else {
             change = change.replace(actWkdy, "비대면");
         }
+
+        return new JSONObject(change);
+    }
+
+    private JSONObject replaceItem(JSONObject jsonObject, JSONObject object, int i) {
+        String change = jsonObject.toString();
+        String target = jsonObject.getJSONObject("items")
+                .getJSONArray("item")
+                .getJSONObject(i)
+                .toString();
+        String item = object.toString();
+        change = change.replace(target, item);
 
         return new JSONObject(change);
     }
