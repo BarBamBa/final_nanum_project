@@ -21,6 +21,7 @@ import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import './scss/App.scss'
+import Reserve from './pages/volunteer/Reserve';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/volunteer/*" element={<Volunteer />} />
         <Route path="/vdetail/*" element={<Vdetail/>} />
+        <Route path="/reserve/*" element={<Reserve/>} />
         <Route path="/board/*" element={<Board />} />
         <Route path="/MyVolunteer/*" element={<MyVolunteer />} />
         <Route path="/VolunteerSpec/*" element={<VolunteerSpec />} />

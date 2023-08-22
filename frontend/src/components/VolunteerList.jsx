@@ -38,8 +38,7 @@ function VolunteerList (props) {
     return (
         <div className='volunteerListBox'>
             <div className='listState'>{data.progrmSttusSe == '1' ? '모집대기 '
-                                        : data.progrmSttusSe == '2' ? '모집중 ' : '모집완료 '}
-                                        
+                                        : data.progrmSttusSe == '2' ? '모집중 ' : '모집완료 '}                  
             </div>
             <Link to={'/vdetail/' + `${data.progrmRegistNo}`} state={{ progrmRegistNo : data.progrmRegistNo }}>
                 <div className='listTitle'>{data.title}</div>
@@ -52,13 +51,14 @@ function VolunteerList (props) {
                 <span><strong>봉사기간</strong> : {data.period}</span>
                 <span><strong>봉사분야</strong> : {data.category}</span>
             </div>
-            
             <div className='listDate'> 
-            <strong className={leftDate > 5 ? 'listDateNum' : 'listDateNum end'}>{leftDate}</strong>
-            일후 마감
+                <strong className={data.progrmSttusSe != '3' ? (leftDate > 5 ? 'listDateNum' : 'listDateNum end') : 'listDateNum end'}>
+                    {data.progrmSttusSe == '3' ? '마감' : leftDate}
+                </strong>
+                {data.progrmSttusSe == '3' ? '' : '일후 마감'}
             </div>
             <Routes>
-                <Route path='/vdetail/vol=' data={data.progrmRegistNo} element={<Vdetail />}></Route>
+                <Route path='/vdetail/' data={data.progrmRegistNo} element={<Vdetail />}></Route>
             </Routes>
         </div>
         
