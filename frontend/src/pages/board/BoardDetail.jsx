@@ -284,7 +284,7 @@ function BoardDetail() {
     <div className="board-detail-container">
       {/* 게시글 영역 */}
       <div className="board-detail-kind">
-        <h2>{BoardFlg(boardData.flg)}</h2>
+        <h1>{BoardFlg(boardData.flg)}</h1>
       </div>
 
       <div className="board-detail-box">
