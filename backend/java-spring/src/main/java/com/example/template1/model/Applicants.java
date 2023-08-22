@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Columns;
 
+import java.time.LocalDateTime;
+
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Applicants extends BaseEntity{
@@ -23,6 +26,8 @@ public class Applicants extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "VOLUNTEER_ID")
     private Volunteer volunteer;
+
+    private LocalDateTime selectedDay;
 
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;

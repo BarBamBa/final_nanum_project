@@ -7,7 +7,7 @@ import '/src/scss/DatePicker.scss';
 registerLocale('ko', ko);
 
 function Calendar({ params, setParams }) {
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, endDate] = dateRange;
 
   useEffect(() => {

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,11 +29,11 @@ public class Volunteer {
 
     private LocalDateTime endDate;
 
-    private char rStatus;
+    private int rStatus;
 
-    private int cityCode;
+    private String city;
 
-    private int districtCode;
+    private String district;
 
     private char aFlg;
 
@@ -42,9 +43,9 @@ public class Volunteer {
 
     private String location;
 
-    private LocalDateTime startTime;
+    private int startTime;
 
-    private LocalDateTime endTime;
+    private int endTime;
 
     private LocalDateTime rStartDate;
 
