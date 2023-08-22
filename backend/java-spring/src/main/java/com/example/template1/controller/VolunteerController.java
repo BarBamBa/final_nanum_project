@@ -4,6 +4,7 @@ import com.example.template1.model.Users;
 import com.example.template1.model.Volunteer;
 import com.example.template1.model.dto.VolunteerRequestDto;
 import com.example.template1.model.dto.VolunteerResponseDto;
+import com.example.template1.repository.UsersRepository;
 import com.example.template1.service.ApplicantService;
 import com.example.template1.service.UserService;
 import com.example.template1.service.VolunteerService;
@@ -26,6 +27,7 @@ public class VolunteerController {
 
     private final VolunteerService volunteerService;
     private final ApplicantService applicantService;
+    private final UsersRepository usersRepository;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA);
 
     @PostMapping("/reserve")
@@ -40,19 +42,17 @@ public class VolunteerController {
             volunteer = volunteerService.addVolunteer(dto);
         }
         if (applicantService.existByUserIdAndVolunteerIdAndSelectedDay(users.getId(), volunteer.getId(),
-                LocalDate.parse(new JSONObject(data).getJSONObject("date")
-                        .getString("selectedDay"), dateTimeFormatter).atStartOfDay())) {
+                LocalDate.parse(new JSONObject(data).getString("date"), dateTimeFormatter).atStartOfDay())) {
             System.out.println("application already exists");
         } else {
             applicantService.addApplicant(users, volunteer,
-                LocalDate.parse(new JSONObject(data).getJSONObject("date")
-                        .getString("selectedDay"), dateTimeFormatter).atStartOfDay());
+                LocalDate.parse(new JSONObject(data).getString("date"), dateTimeFormatter).atStartOfDay());
         }
         return new VolunteerResponseDto(volunteer).toString();
     }
 
     private Users usersFactory() {
-        return Users.builder()
+        Users user =  Users.builder()
                 .name("test")
                 .phone("test")
                 .address("test")
@@ -61,5 +61,6 @@ public class VolunteerController {
                 .nickname("test")
                 .age(99)
                 .build();
+        return usersRepository.save(user);
     }
 }
