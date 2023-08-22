@@ -1,12 +1,20 @@
 package com.example.template1.controller;
 
+
 import com.example.template1.model.Users;
+import com.example.template1.model.dto.TokenInfo;
 import com.example.template1.model.dto.UsersDto;
+import com.example.template1.model.dto.UsersRequsetDto;
+import com.example.template1.repository.UsersRepository;
 import com.example.template1.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.el.parser.Token;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,7 +28,7 @@ import java.util.Map;
 public class UserApiController {
 
     private final UserService userService;
-
+    private UsersRepository usersRepository;
 
 
 
@@ -52,17 +60,22 @@ public class UserApiController {
 
 
     //======= 로그인 ==========================================
+
     @PostMapping("/login")
-    public Users login(@RequestBody final UsersDto params){
-        Users entity = userService.findBy(params);
-        return entity;
+    public ResponseEntity<?> login(@RequestBody UsersRequsetDto usersRequsetDto) {
+        TokenInfo tokenInfo = userService.login(usersRequsetDto.getEmail(), usersRequsetDto.getPassword());
+
+        if (tokenInfo == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
+        } else {
+            return ResponseEntity.ok(tokenInfo); // 토큰 정보 반환
+        }
     }
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {
         return ResponseEntity.ok("Logged out successfully");
     }
-
 
 
 }

@@ -52,13 +52,11 @@ function Volunteer() {
     .then(res => res.json())
     .then(res => {
       setCount(res.totalCount);
-      if(res.items) {
-        setData((prev) => prev.concat(res.items.item));
-      }
       if(data.lenth + 9 >= count) {
         setMoreData(false);
         return;
       }
+      setData((prev) => prev.concat(res.items.item));
       setPage((prev) => prev + 1); 
     })
     .catch((error) => {
@@ -113,6 +111,9 @@ function Volunteer() {
             <MapBox data={data} />
           </div> 
         }
+
+        <div className={`loader ${tab ? 'selected' : ''}`} ref={target}>{ tab ? 'Loading...' : '※ 검색결과는 상위 5개 항목만 표시됩니다.'}</div>
+
       </div>
     </main>
   )

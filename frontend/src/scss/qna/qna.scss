@@ -1,0 +1,56 @@
+.qnaContainer {
+    width: 1440px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.qna-nav {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #546D01;
+}
+
+.qna-notice {
+    border: 1px solid #A4CC22;
+    border-radius: 10px;
+    padding: 10px 30px;
+    margin-top: 16px;
+}
+
+.qna-notice li {
+    list-style-type: square;
+    margin-bottom: 20px;
+}
+
+.qna-tab {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.qna-tab button {
+    margin: 10px;
+    border: none;
+    background-color: white;
+    color: #e6e6e6;
+    text-align: center;
+    font-family: Anonymous Pro;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.qna-head {
+    text-align: center;
+    border-top: 2px solid #546d01;
+    border-bottom: 2px solid #546d01;
+    padding: 16px;
+}
+
+.qna-table td {
+  border-top: 1px solid #ccc;
+  padding: 16px;
+}

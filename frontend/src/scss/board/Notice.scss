@@ -3,22 +3,21 @@
   width: 100%;
 }
 
-.table-head,
-td {
+
+.board-table td {
   border-top: 1px solid #ccc;
   padding: 16px;
 }
 .table-head {
   text-align: center;
+  border-top: 2px solid #546d01;
+  border-bottom: 2px solid #546d01;
+  padding: 16px;
 }
 .table-no, .table-date {
   text-align: center;
 }
 
-.table-head {
-  border-top: 2px solid #546d01;
-  border-bottom: 2px solid #546d01;
-}
 .search-box {
   display: flex;
   justify-content: center;

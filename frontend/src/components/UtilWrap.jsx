@@ -5,27 +5,41 @@ import '../scss/Header.scss'
 
 function UtilWrap() {
 
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("name") === null) {
-      console.log("isLogin ?? :: ", isLogin);
-    } else {
+    if (sessionStorage.getItem("nickname")) {
       setIsLogin(true);
       console.log("isLogin ?? :: ", isLogin);
     }
-
-  })
+    console.log(isLogin);
+  }, [isLogin])
 
   
   const handleLogout = () => {
-    // Perform logout actions here, e.g., clearing session storage
-    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
+    sessionStorage.removeItem("nickname");
     setIsLogin(false);
   }
   
-
   
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    const refreshToken = sessionStorage.getItem("refreshToken");
+
+    if (accessToken && refreshToken) {
+      console.log("Access Token:", accessToken);
+      console.log("Refresh Token:", refreshToken);
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, []);
+
+
+
 
   return (
     <>
@@ -35,7 +49,7 @@ function UtilWrap() {
           <Link to={`/MyPage`} className="loginName">
             
             <img src="/images/mainProfile.png" className='loginImg' />
-            {sessionStorage.getItem("name")} 님! 안녕하세요! 
+            {sessionStorage.getItem("nickname")} 님! 안녕하세요! 
 
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
             로그아웃 <img src='/images/logoutIcon.png' />
@@ -43,9 +57,7 @@ function UtilWrap() {
 
           </Link>
 
-         
-
-   
+ 
         </>
       ) : (
         <>

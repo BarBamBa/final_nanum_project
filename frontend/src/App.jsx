@@ -45,7 +45,6 @@ function App() {
         <Route path="/qna/*" element={<Qna/>} />
         <Route path="/login/*" element={<Login/>} />
         <Route path="/FindUser/*" element={<FindUser/>} />
-        <Route path="/signup/*" element={<SignUp/>} />
       </Routes>
       <Footer />
     </>
