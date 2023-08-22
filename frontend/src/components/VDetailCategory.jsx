@@ -37,12 +37,19 @@ const [data, setData] = useState({});
         });
     }, []);
 
+  const handleSubmit = event => {
+    if(data.progrmSttusSe === 3) event.preventDefault();
+  }
+
   return (
     <div className='vDetail'>
       <div className='buttonLine'>
-      <div className='buttonLine'>
-        <Link to='/volunteer'><button id='btnToList'>목록으로</button></Link>
-        <Link to={`/reserve/${progrmRegistNo}`} state={{data : data}}><button id='btnSubmit'>신청하기</button></Link>
+        <Link to='/volunteer'><button className='btnToList'>목록으로</button></Link>
+        <Link onClick={handleSubmit} to={`/reserve/${progrmRegistNo}`} state={{data : data}} >
+          <button className={data.progrmSttusSe === 3 ? 'btnClose' : 'btnSubmit'}>
+            {data.progrmSttusSe === 3 ? '신청마감' : '신청하기'}
+          </button>
+        </Link>
       </div>
       </div>
       <div className='vDetailCategory'>

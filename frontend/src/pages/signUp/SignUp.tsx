@@ -279,10 +279,8 @@ const calculateAge = (birthDate) => {
   const onChangePhon = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const inputPhon = e.target.value;
 
-    // Remove any non-numeric characters from the input
     const numericInput = inputPhon.replace(/\D/g, '');
 
-    // Format the numeric input with hyhens
     const formattedPhone = numericInput.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 
     setPhone(formattedPhone);
