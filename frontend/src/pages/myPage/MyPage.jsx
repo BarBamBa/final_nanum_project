@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './css/MyPage.css'
 
 
@@ -7,6 +9,7 @@ import './css/MyPage.css'
 
 function MyPage() {
 
+   
   return (
 
     <>
@@ -25,7 +28,8 @@ function MyPage() {
               <img src="/images/profile.png" className="profile-icon" alt="프로필 아이콘"></img>    
             </div>
   
-            <div className="myPage-email">email@gmail.com</div>
+            <div className="myPage-email"></div>
+            {/* {userInfo.email} */}
         
           </article>
 
@@ -34,8 +38,8 @@ function MyPage() {
 
             <div className="myPage-category">이름</div>
             
-            <div className="myPage-textBox">홍길동</div>
-
+            <div className="myPage-textBox"></div>
+            {/* {userInfo.name} */}
 
           {/* ==닉네임 전홥번호========== */}
             <div className="myPage-span">
@@ -44,8 +48,10 @@ function MyPage() {
             </div>
 
             <div className="myPage-textBox2">
-              <span>동번서번</span>
-              <span>010-1234-1234</span>
+              <span></span>
+              <span></span>
+              {/* <span>{userInfo.nickname}</span>
+              <span>{userInfo.phone}</span> */}
             </div>
 
 
@@ -54,16 +60,16 @@ function MyPage() {
             <div className="myPage-category">주소</div>
   
       
-          <div className="myPage-textBox">서울특별시 **구 **동 **************</div>
-
+          <div className="myPage-textBox"></div>
+          {/* {userInfo.address} */}
 
           {/* ==이메일========== */}
             <div className="myPage-category">이메일</div>
-            <div className="myPage-textBox">email@gmail.com</div>
-
-            <a href='http://localhost:5173/MyVolunteer' className="mypage-change">나의 자원봉사
+            <div className="myPage-textBox"></div>
+            <Link to={`/MyVolunteer`} className="mypage-change">
+                  나의 자원봉사
               <img src="/images/siteChange.png" className="siteIcon" alt="외부사이트 이동 아이콘"></img> 
-            </a>
+            </Link>
           </div>
           
       
