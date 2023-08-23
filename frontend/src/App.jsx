@@ -21,6 +21,7 @@ import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import './scss/App.scss'
+import ScrollTopButton from './components/ScrollTopButton';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/login/*" element={<Login/>} />
         <Route path="/FindUser/*" element={<FindUser/>} />
       </Routes>
+      <ScrollTopButton />
       <Footer />
     </>
   )

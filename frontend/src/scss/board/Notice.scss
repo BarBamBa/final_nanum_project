@@ -21,13 +21,32 @@
 .search-box {
   display: flex;
   justify-content: center;
-  margin: 16px;
-}
-.search-box input {
-  font-size: 20px;
-  padding: 0px 10px;
-  width: 460px;
-  height: 60px;
-  border-radius: 15px;
-  border: 2px solid #546D01;
+  align-items: center;
+  margin: 15px 0;
+
+
+  input {
+    font-size: 20px;
+    padding: 0px 10px;
+    width: 450px;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #546D01;
+  }
+  button {
+    display: none;
+  }
+  .searchBtn {
+    cursor: pointer;
+
+    .searchIcon {
+      color: #546D01;
+      width: 30px;
+      height: 30px;
+      
+      &:active {
+        color: #A4CC22;
+      }
+    }
+  }
 }
