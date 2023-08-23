@@ -2,6 +2,7 @@ package com.example.template1.model.dto;
 
 
 import com.example.template1.model.Users;
+import com.example.template1.model.enums.Authority;
 import com.example.template1.repository.UsersRepository;
 import lombok.*;
 
@@ -29,6 +30,8 @@ public class UsersDto {
 
     private char gender;
 
+    private Authority authority;
+
 
     public UsersDto(Users users) {
         this.id = users.getId();
@@ -40,6 +43,7 @@ public class UsersDto {
         this.address = users.getAddress();
         this.phone = users.getPhone();
         this.gender = users.getGender();
+        this.authority = users.getAuthority();
     }
 
 

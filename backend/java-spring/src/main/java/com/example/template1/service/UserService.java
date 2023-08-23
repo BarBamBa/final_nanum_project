@@ -47,6 +47,7 @@ public class UserService {
                 .nickname(dto.getNickname())
                 .phone(dto.getPhone())
                 .gender(dto.getGender())
+                .authority(dto.getAuthority())
                 .build();
         System.out.println(users.getId());
         String encodedPassword = passwordEncoder.encode(dto.getPassword());

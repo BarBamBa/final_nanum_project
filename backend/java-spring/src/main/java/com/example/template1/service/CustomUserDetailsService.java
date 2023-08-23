@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
-//    private final PasswordEncoder passwordEncoder;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
@@ -39,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails createUserDetails(Users users) {
-        GrantedAuthority authorities = new SimpleGrantedAuthority(users.getAuthority());
+        GrantedAuthority authorities = new SimpleGrantedAuthority(users.getAuthority().name());
 
         return new User(
                 String.valueOf(users.getId()),

@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
-
+import { useToken } from './TokenCheck';
 
 function UtilWrap() {
 
-
   const [isLogin, setIsLogin] = useState(false);
-  const [userId, setUserId] = useState("");
-
+  const [userId, setUserId] = useState(false);
+  
   useEffect(() => {
     if (sessionStorage.getItem("nickname")) {
       setIsLogin(true);
       console.log("isLogin ?? :: ", isLogin);
     }
     console.log(isLogin);
-    console.log(sessionStorage);
   }, [isLogin])
 
   
@@ -27,48 +25,6 @@ function UtilWrap() {
   }
   
   
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    const refreshToken = sessionStorage.getItem("refreshToken");
-
-    if (accessToken && refreshToken) {
-      console.log("Access Token:", accessToken);
-      console.log("Refresh Token:", refreshToken);
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    
-		if(isLogin){
-      console.log(sessionStorage.getItem("accessToken"));
-			fetch('/api/user/me', {
-				method: 'GET',
-				headers: {
-					"Content-Type" : "application/json",
-					"Authorization" : "Bearer "+ sessionStorage.getItem("accessToken"),
-				}
-			})
-			.then(res => {
-				if(res){
-					console.log(res);
-					return res.json();
-				}
-			})
-			.then(data => {
-        console.log(data);
-        if(data){
-          setUserId(data.id);
-        }
-      })
-		}
-	}, [isLogin]);
-
-
-
-
   return (
     <>
      {isLogin ? (
@@ -76,7 +32,8 @@ function UtilWrap() {
           <div className="loginName">
             <Link to={`/MyPage`} >
               <img src="/images/mainProfile.png" className='loginImg' />
-              {sessionStorage.getItem("nickname")} 님! 안녕하세요!
+              {sessionStorage.getItem("nickname")} 
+             님! 안녕하세요!
             </Link>
             
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
