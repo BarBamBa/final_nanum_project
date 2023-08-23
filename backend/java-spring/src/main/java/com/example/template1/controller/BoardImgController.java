@@ -91,16 +91,19 @@ public class BoardImgController {
     @GetMapping("/image/{imageName}")
     public ResponseEntity<byte[]> getImage(@PathVariable String imageName) throws IOException {
         // 이미지 파일 경로 설정
-        String imagePath = "images/" + imageName;
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + imagePath);
+        String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\src\\main\\resources\\images\\" + imageName;
+
+//        String imagePath = "images/" + imageName;
+//        //ClassPathResource : build 폴더를 상대경로로잡아 서버 재시작해야 재대로 로드됨
+//        ClassPathResource resource = new ClassPathResource(imagePath);
+//        byte[] imageBytes = Files.readAllBytes(Path.of(resource.getURI()));
 
         // 이미지 파일을 ClassPathResource(프로젝트 내 상대경로)를 통해 가져오고 byte 배열로 변환
-        ClassPathResource resource = new ClassPathResource(imagePath);
-        byte[] imageBytes = Files.readAllBytes(Path.of(resource.getURI()));
+        byte[] imageBytes = Files.readAllBytes(Path.of(imagePath));
 
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + Path.of(resource.getURI()));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + imagePath);
         // 이미지 파일의 MIME 타입 설정
-        MediaType mediaType = MediaType.IMAGE_PNG; // 이미지타입 png로 저장 고정
+        MediaType mediaType = MediaType.IMAGE_PNG; // 이미지타입 저장
 
         return ResponseEntity.ok()
                 .contentType(mediaType)

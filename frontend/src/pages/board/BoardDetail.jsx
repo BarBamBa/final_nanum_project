@@ -313,7 +313,8 @@ function BoardDetail() {
 
               )
             })}
-            <p>글내용 : {boardData.content}</p>
+            {/* <p>글내용 : {boardData.content}</p> */}
+            <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
           </div>
 
           <div className="board-detail-btn">
