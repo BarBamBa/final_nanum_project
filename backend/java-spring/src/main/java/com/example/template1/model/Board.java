@@ -31,8 +31,9 @@ public class Board extends BaseEntity{
     @JsonManagedReference
     List<Reply> replies = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "board")
-//    List<BoardImg> boardImg = new ArrayList<>();
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    List<BoardImg> boardImgs = new ArrayList<>();
 
     @OneToMany(mappedBy = "board")
     @JsonManagedReference
