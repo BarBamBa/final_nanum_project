@@ -12,9 +12,9 @@ import { TokenCheck } from "../../components/TokenCheck";
 
 
 function Board() {
-  const idd = useContext(TokenCheck);
+  const userId = useContext(TokenCheck);
   // const [isLogin, userId] = TokenCheck();
-  console.log(idd.userId);
+  console.log(userId.userId);
   // console.log(userId);
 
   const navigate = useNavigate();
