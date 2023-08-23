@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "/src/scss/board/InputForm.scss";
+import "/src/scss/board/BoardInputForm.scss";
 import axios from "axios";
 
 function BoardInputForm() {

@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class BoardImg extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "BOARD_ID")
+    @JsonBackReference
     private Board board;
 
     @ManyToOne
