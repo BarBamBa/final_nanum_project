@@ -7,6 +7,7 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from 'react-icons/bs'
 import BoardDetail from "./BoardDetail";
 
 
@@ -36,7 +37,8 @@ function Notice(props) {
     <div>
       <div className="search-box">
         <input placeholder="검색어를 입력해주세요" type="text" onChange={(e)=>{setKeyword(e.target.value), console.log(keyword);}} ></input>
-        <button onClick={handleSearchBoard}>검색</button>
+        <button onClick={handleSearchBoard} id="searchBtn">검색</button>
+        <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon"/></label>
       </div>
       <table className="board-table">
         <thead>

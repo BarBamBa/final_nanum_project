@@ -22,8 +22,8 @@ import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import QnaDetail from './pages/qna/QnaDetail';
 import './scss/App.scss'
+import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
-
 
 function App() {
 
@@ -52,6 +52,7 @@ function App() {
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
         </Routes>
+        <ScrollTopButton />
         <Footer />
       </TokenCheckProvider>
     </>
