@@ -73,17 +73,16 @@ function UtilWrap() {
     <>
      {isLogin ? (
         <>
-          
-          <Link to={`/MyPage`} className="loginName">
+          <div className="loginName">
+            <Link to={`/MyPage`} >
+              <img src="/images/mainProfile.png" className='loginImg' />
+              {sessionStorage.getItem("nickname")} 님! 안녕하세요!
+            </Link>
             
-            <img src="/images/mainProfile.png" className='loginImg' />
-            {sessionStorage.getItem("nickname")} 님! 안녕하세요! 
-
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
-            로그아웃 <img src='/images/logoutIcon.png' />
-           </Link>
-
-          </Link>
+              로그아웃 <img src='/images/logoutIcon.png' />
+            </Link>
+          </div>
 
  
         </>
