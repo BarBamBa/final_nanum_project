@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -102,6 +103,17 @@ public class UserService {
         }
 
 
+    }
+
+    //유저 정보 조회
+    public UsersDto getMyInfoBySecurity() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
+        Long id = Long.valueOf(authentication.getName());
+
+        Optional<UsersDto> userOptional
+                = usersRepository.findById(id).map(UsersDto::new);
+        return userOptional.orElse(null);
     }
 
 

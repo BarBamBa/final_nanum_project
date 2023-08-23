@@ -77,5 +77,11 @@ public class UserApiController {
         return ResponseEntity.ok("Logged out successfully");
     }
 
-
+    //유저 정보 조회
+    @GetMapping("/user/me")
+    public ResponseEntity<UsersDto> getMyUserInfo() {
+        System.out.println(">>>>>>>>>>>>>user/me");
+        UsersDto myInfoBySecurity = userService.getMyInfoBySecurity();
+        return ResponseEntity.ok(myInfoBySecurity);
+    }
 }

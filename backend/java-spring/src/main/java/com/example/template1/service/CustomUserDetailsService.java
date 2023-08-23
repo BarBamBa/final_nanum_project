@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,14 +39,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails createUserDetails(Users users) {
-        List<GrantedAuthority> authorities = users.getRoles().stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        GrantedAuthority authorities = new SimpleGrantedAuthority(users.getAuthority());
 
         return new User(
-                users.getUsername(),
+                String.valueOf(users.getId()),
                 users.getPassword(),
-                authorities
+                Collections.singleton(authorities)
         );
     }
 }

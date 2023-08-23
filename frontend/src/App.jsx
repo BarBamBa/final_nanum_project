@@ -20,6 +20,7 @@ import VolunteerReview from './pages/myPage/VolunteerReview';
 import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
+import QnaDetail from './pages/qna/QnaDetail';
 import './scss/App.scss'
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
         <Route path="/qna/*" element={<Qna/>} />
         <Route path="/login/*" element={<Login/>} />
         <Route path="/FindUser/*" element={<FindUser/>} />
+        <Route path="/signup/*" element={<SignUp />} />
+        <Route path="/qna/detail/:id" element={<QnaDetail />} />
       </Routes>
       <Footer />
     </>
