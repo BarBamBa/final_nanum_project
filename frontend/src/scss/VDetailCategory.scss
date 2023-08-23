@@ -27,15 +27,20 @@
         cursor: pointer;     
       }
 
-      #btnSubmit {
+      .btnSubmit {
         background-color: #A4CC22;
   
         &:active {
           background-color: darken(#A4CC22, 10%);
         }
       }
-  
-      #btnToList {
+      
+      .btnClose {
+        background-color: #A4CC22;
+        cursor: default;
+      }
+
+      .btnToList {
         background-color: #546D01;
   
         &:active {

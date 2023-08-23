@@ -7,6 +7,7 @@ function UtilWrap() {
 
 
   const [isLogin, setIsLogin] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (sessionStorage.getItem("nickname")) {
@@ -14,6 +15,7 @@ function UtilWrap() {
       console.log("isLogin ?? :: ", isLogin);
     }
     console.log(isLogin);
+    console.log(sessionStorage);
   }, [isLogin])
 
   
@@ -37,6 +39,32 @@ function UtilWrap() {
       setIsLogin(false);
     }
   }, []);
+
+  useEffect(() => {
+    
+		if(isLogin){
+      console.log(sessionStorage.getItem("accessToken"));
+			fetch('/api/user/me', {
+				method: 'GET',
+				headers: {
+					"Content-Type" : "application/json",
+					"Authorization" : "Bearer "+ sessionStorage.getItem("accessToken"),
+				}
+			})
+			.then(res => {
+				if(res){
+					console.log(res);
+					return res.json();
+				}
+			})
+			.then(data => {
+        console.log(data);
+        if(data){
+          setUserId(data.id);
+        }
+      })
+		}
+	}, [isLogin]);
 
 
 
