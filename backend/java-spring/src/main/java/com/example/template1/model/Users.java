@@ -1,5 +1,6 @@
 package com.example.template1.model;
 
+import com.example.template1.model.enums.Authority;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.pl.REGON;
@@ -64,7 +65,9 @@ public class Users extends BaseEntity implements UserDetails {
 
     private String phone;
 
-    private String authority;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "authority")
+    private Authority authority;
 
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;

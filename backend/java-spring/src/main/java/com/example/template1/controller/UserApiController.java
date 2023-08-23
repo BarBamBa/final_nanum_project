@@ -4,6 +4,7 @@ package com.example.template1.controller;
 import com.example.template1.model.Board;
 import com.example.template1.model.Users;
 import com.example.template1.model.dto.*;
+import com.example.template1.model.enums.Authority;
 import com.example.template1.repository.UsersRepository;
 import com.example.template1.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,9 @@ public class UserApiController {
     @PostMapping("/signup")
     public String signUp(@RequestBody UsersDto usersDto){
         System.out.println(usersDto.getEmail());
+
+        usersDto.setAuthority(Authority.ROLE_USER);
+
         return "" + userService.saveUser(usersDto);
     }
 
