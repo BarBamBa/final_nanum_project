@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TokenCheck } from "./TokenCheck";
 import "/src/scss/board/BoardInputForm.scss";
 import axios from "axios";
 
 function BoardInputForm() {
+  // 유저정보
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
+  // 유저정보
+
   const location = useLocation();
   const navigate = useNavigate();
   // const [boardId, setBoardId] = useState("");
@@ -24,7 +31,7 @@ function BoardInputForm() {
         content: contentValue,
         flg: location.state.boardKind,
         users: {
-          id: 1 //로그인 기능 구현시 수정 할 예정
+          id: userId.userId //로그인 기능 구현시 수정 할 예정
         },
       };
     } 

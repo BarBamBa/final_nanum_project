@@ -111,6 +111,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log("ddddd", data);
                 setCheckItems([]);
                 setBoardCategory(boardCategory);
+                setReportOnly(false);
                 selectCategory(boardCategory);
                 console.log("boardCategory", boardCategory);
             })
@@ -139,6 +140,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 setCheckItems([]);
                 setBoardCategory(boardCategory);
+                setReportOnly(false);
                 selectCategory(boardCategory);
             })
             .catch((error) => {
@@ -166,6 +168,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 selectCategory(boardCategory);
                 setCheckReplyItems([]);
+                setReportOnly(false);
                 setIsOpenReply(false);
             })
             .catch((error) => {
@@ -194,6 +197,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 selectCategory(boardCategory);
                 setCheckReplyItems([]);
+                setReportOnly(false);
                 setIsOpenReply(false);
             })
             .catch((error) => {
@@ -230,7 +234,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                             </td>
                             {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
                             <td>신고된 게시글만 보기</td>
-                            <td><input type='checkbox' onChange={(e) => selectCategory(boardCategory, e.target.checked)}></input></td>
+                            <td><input type='checkbox' onChange={(e) => {setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
                         </tr>
                     </tbody>
                 </table>
