@@ -12,41 +12,41 @@ function VDetailCategory() {
     const month = string.substring(4, 6);
     const date = string.substring(6, string.length);
     return year + "-" + month + "-" + date;
-}
+  }
 
-const location = useLocation();
-const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
-const [data, setData] = useState({});
+  const location = useLocation();
+  const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
+  const [data, setData] = useState({});
 
   useEffect(() => {
-		const fetchData = async() => {
-          const res = await fetch('/api/detail', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              progrmRegistNo : progrmRegistNo,
-            })
-          });
-          const result = res.json();
-          return result;
-        }	
-        
-        fetchData().then(res => {
-          setData(res);
-        });
-    }, []);
+    const fetchData = async () => {
+      const res = await fetch('/api/detail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          progrmRegistNo: progrmRegistNo,
+        })
+      });
+      const result = res.json();
+      return result;
+    }
+
+    fetchData().then(res => {
+      setData(res);
+    });
+  }, []);
 
   const handleSubmit = event => {
-    if(data.progrmSttusSe === 3) event.preventDefault();
+    if (data.progrmSttusSe === 3) event.preventDefault();
   }
 
   return (
     <div className='vDetail'>
       <div className='buttonLine'>
         <Link to='/volunteer'><button className='btnToList'>목록으로</button></Link>
-        <Link onClick={handleSubmit} to={`/reserve/${progrmRegistNo}`} state={{data : data}} >
+        <Link onClick={handleSubmit} to={`/reserve/${progrmRegistNo}`} state={{ data: data }} >
           <button className={data.progrmSttusSe === 3 ? 'btnClose' : 'btnSubmit'}>
             {data.progrmSttusSe === 3 ? '신청마감' : '신청하기'}
           </button>

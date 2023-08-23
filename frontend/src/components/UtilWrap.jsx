@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
-
+import { useToken } from './TokenCheck';
 
 function UtilWrap() {
 
-
   const [isLogin, setIsLogin] = useState(false);
-
+  const [userId, setUserId] = useState(false);
+  
   useEffect(() => {
     if (sessionStorage.getItem("nickname")) {
       setIsLogin(true);
@@ -25,37 +25,21 @@ function UtilWrap() {
   }
   
   
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    const refreshToken = sessionStorage.getItem("refreshToken");
-
-    if (accessToken && refreshToken) {
-      console.log("Access Token:", accessToken);
-      console.log("Refresh Token:", refreshToken);
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
-
-
-
-
   return (
     <>
      {isLogin ? (
         <>
-          
-          <Link to={`/MyPage`} className="loginName">
+          <div className="loginName">
+            <Link to={`/MyPage`} >
+              <img src="/images/mainProfile.png" className='loginImg' />
+              {sessionStorage.getItem("nickname")} 
+             님! 안녕하세요!
+            </Link>
             
-            <img src="/images/mainProfile.png" className='loginImg' />
-            {sessionStorage.getItem("nickname")} 님! 안녕하세요! 
-
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
-            로그아웃 <img src='/images/logoutIcon.png' />
-           </Link>
-
-          </Link>
+              로그아웃 <img src='/images/logoutIcon.png' />
+            </Link>
+          </div>
 
  
         </>

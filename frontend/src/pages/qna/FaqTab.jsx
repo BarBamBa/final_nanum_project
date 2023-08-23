@@ -9,6 +9,7 @@ import {
 } from "react-icons/ai";
 
 function FaqTab({ qnaData }) {
+    const navigate = useNavigate();
 
 
     return (
@@ -40,7 +41,7 @@ function FaqTab({ qnaData }) {
                         return (
                             <tr key={qna.id}>
                                 <td className="table-no">{i+1}</td>
-                                <td className="table-title">{qna.mtitle}</td>
+                                <td className="table-title" onClick={()=>{navigate(`/qna/detail/${qna.id}`)}} >{qna.mtitle}</td>
                                 <td className="table-date">{qna.createAt2}</td>
                             </tr>
                         );

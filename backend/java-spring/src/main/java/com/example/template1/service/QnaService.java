@@ -16,4 +16,9 @@ public class QnaService {
 
         return qnaList;
     }
+
+    public QnA getQna(long id) {
+        QnA qna = qnARepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
+        return qna;
+    }
 }
