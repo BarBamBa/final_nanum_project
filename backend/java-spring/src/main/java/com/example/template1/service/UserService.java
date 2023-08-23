@@ -1,6 +1,7 @@
 package com.example.template1.service;
 
 import com.example.template1.config.JwtTokenProvider;
+import com.example.template1.model.Board;
 import com.example.template1.model.Users;
 import com.example.template1.model.dto.TokenInfo;
 import com.example.template1.model.dto.UsersDto;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -101,9 +103,6 @@ public class UserService {
             return null;
         }
 
-
     }
-
-
 
 }

@@ -1,10 +1,9 @@
 package com.example.template1.controller;
 
 
+import com.example.template1.model.Board;
 import com.example.template1.model.Users;
-import com.example.template1.model.dto.TokenInfo;
-import com.example.template1.model.dto.UsersDto;
-import com.example.template1.model.dto.UsersRequsetDto;
+import com.example.template1.model.dto.*;
 import com.example.template1.repository.UsersRepository;
 import com.example.template1.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -76,6 +78,5 @@ public class UserApiController {
     public ResponseEntity<String> logout() {
         return ResponseEntity.ok("Logged out successfully");
     }
-
 
 }
