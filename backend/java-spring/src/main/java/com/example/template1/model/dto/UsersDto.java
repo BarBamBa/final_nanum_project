@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 @Setter
 public class UsersDto {
+    private Long id;
 
     private String name;
 
@@ -30,6 +31,7 @@ public class UsersDto {
 
 
     public UsersDto(Users users) {
+        this.id = users.getId();
         this.name = users.getName();
         this.age = users.getAge();
         this.password = users.getPassword();
