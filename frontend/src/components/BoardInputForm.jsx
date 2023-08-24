@@ -1,39 +1,79 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "/src/scss/board/InputForm.scss";
+import { TokenCheck } from "./TokenCheck";
+import "/src/scss/board/BoardInputForm.scss";
 import axios from "axios";
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 function BoardInputForm() {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [boardId, setBoardId] = useState("");
+  console.log("input kind : " + location.state);
+
+  // 유저정보
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
+  // 유저정보
+
+  // 제목 내용 관리 state 수정이면 boardData에서 title값 가져와 초기값 설정
   const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
-  const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
-  console.log(location.state);
+  // 글 내용 관리 state => 에디터 적용이후 일단 비활성
+  // const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
+
+  // 에디터 컨텐츠 담을 state (초기값 empty로)
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  // 데이터에 컨텐츠를 입력하면 state에 저장
+  const onEditorStateChange = (newEditorState) => {
+    setEditorState(newEditorState);
+  };
+
+  // 에디터에서 줄바꿈이나 글자 스타일을 적용한 글을 태그까지 담아 db에 담기위해  html 형식으로 변환
+  const contentRaw = convertToRaw(editorState.getCurrentContent());
+  const contentHtml = draftToHtml(contentRaw);    
+
+  // 수정버튼으로 들어오면 db에 있던 컨텐츠를 다시 에디터에 담기위해 html 형태에서 에디터에 담기위한 형태로 변환
+  useEffect(() => {
+    if (location.state.formKind === "modify") {
+      const contentHtml = location.state.boardData.content;
+      const blocksFromHtml = convertFromHTML(contentHtml);
+      const contentState = ContentState.createFromBlockArray(
+        blocksFromHtml.contentBlocks,
+        blocksFromHtml.entityMap
+      );
+      setEditorState(EditorState.createWithContent(contentState));
+    }
+  }, [location.state.formKind]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let boardId;
     // 게시판 글 정보 저장 시작    
-    let data ;
+    let data;
     // 글쓰기번튼누르면 userid를 전송
+
     if (location.state.formKind === "write") {
       data = {
         title: titleValue,
-        content: contentValue,
+        // content: contentValue,
+        content: contentHtml,
         flg: location.state.boardKind,
         users: {
-          id: 1 //로그인 기능 구현시 수정 할 예정
+          id: userInfo.userId //로그인 기능 구현시 수정 할 예정
         },
       };
-    } 
+    }
 
     // 수정버튼누르면 boardid를 전송
-    if (location.state.formKind === "modify"){
+    if (location.state.formKind === "modify") {
       data = {
         title: titleValue,
-        content: contentValue,
+        content: contentHtml,
         id: location.state.boardData.id
       };
     }
@@ -51,7 +91,7 @@ function BoardInputForm() {
         .then(res => {
           boardId = res.id;
           // navigate("/board/news");
-          console.log("boardId",boardId);
+          console.log("boardId", boardId);
           // handleFileUpload(e);
           // alert("게시글 등록성공");
         });
@@ -64,7 +104,7 @@ function BoardInputForm() {
     const fileInput = e.target.querySelector('input[name="upload"]');
     console.log(fileInput.files);
 
-    if ( fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
+    if (fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
       alert("등록완료");
       navigate("/board");
     }
@@ -102,6 +142,8 @@ function BoardInputForm() {
     }
   };
 
+
+
   return (
     <div className="inputContainer">
       <div className="board-input-nav">
@@ -129,11 +171,9 @@ function BoardInputForm() {
               <td>내용</td>
               <td>
                 <div className="board-input ContentBox">
-                  <textarea
-                    className="form-control"
-                    name="content"
-                    value={contentValue}
-                    onChange={(e) => setContentValue(e.target.value)}
+                  <Editor
+                    editorState={editorState}
+                    onEditorStateChange={onEditorStateChange}
                   />
                 </div>
               </td>

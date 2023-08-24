@@ -40,8 +40,15 @@ spring:
     username: root
     password: 1234
 
-
   devtools:
     livereload:
       enabled: true
+
+
+
+  jwt:
+    header: Authorization
+    secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+    token-validity-in-seconds: 86400
+
 

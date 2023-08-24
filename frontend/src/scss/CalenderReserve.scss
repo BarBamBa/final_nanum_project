@@ -4,9 +4,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 80px;
-  font-size: 40px;
-  border-bottom: 3px solid #D6D6D6;
+  height: 60px;
+  font-size: 30px;
+  border-bottom: 2px solid #D6D6D6;
   padding: 15px 0px;
   span {
     padding-left: 20px;
@@ -27,6 +27,7 @@
       height: 25px;
       width: 25px;
       color: #546D01;
+      padding: 15px;
       
       &:hover {
         color: #A4CC22;
@@ -150,5 +151,94 @@
         cursor: pointer;
       }
     }
+  }
+}
+//예약정보 확인 페이지
+
+.reserveConfirm {
+  padding: 100px 0;
+  .reserveInfo {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #A4CC22;
+    border-radius: 5px;
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+
+    .reserveInfoTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+      background-color: #A4CC22;
+      color: white;
+      font-size: 20px;
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .reserveDetail1 {
+      display: flex;
+      flex-direction: column;
+      
+      span {
+        height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 10px;
+      }
+    }
+
+    .reserveDetail2 {
+      display: flex;
+      flex-direction: column
+      ;
+      span {
+        height: 40px;
+        padding: 0 10px;
+      }
+    }
+
+    .reserveDetail3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      span {
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .btnChoose {
+        button {
+          width: 100px;
+          height: 40px;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          
+        }
+
+        #btnConfirm {
+          background-color: #A4CC22;
+          &:hover {
+            background-color: darken(#A4CC22, 10%);
+          }
+        }
+  
+        #btnDeny {
+          background-color: #546D01;
+          &:hover {
+            background-color: darken(#546D01, 5%);
+          }
+        }
+      }
+    }
+
   }
 }

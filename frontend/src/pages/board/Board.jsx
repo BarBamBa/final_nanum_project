@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import {useState,useEffect,useContext } from "react";
 import Notice from "./Notice";
 import FreeBoard from "./FreeBoard";
 import News from "./News";
@@ -7,11 +7,16 @@ import '../../scss/board/Board.scss'
 import '../../scss/board/Notice.scss'
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import "../../scss/Paging.css";
+import { TokenCheck } from "../../components/TokenCheck";
 
 
 
 function Board() {
-  
+  const userId = useContext(TokenCheck);
+  // const [isLogin, userId] = TokenCheck();
+  console.log(userId.userId);
+  // console.log(userId);
+
   const navigate = useNavigate();
   const location = useLocation();
   const [boardName, setBoardName] = useState("공지사항");

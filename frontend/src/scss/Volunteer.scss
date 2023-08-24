@@ -8,12 +8,12 @@ main {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 80px;
-    font-size: 40px;
-    border-bottom: 3px solid #D6D6D6;
+    height: 60px;
+    font-size: 32px;
+    border-bottom: 2px solid #D6D6D6;
     padding: 15px 0px;
     span {
-      padding-left: 20px;
+      padding-left: 50px;
     }
   }
 }
@@ -208,17 +208,19 @@ main {
   .tabOption {
     box-sizing: border-box;
     width: 50%;
-    height: 50px;
+    height: 60px;
     margin: auto 0;
     border-right: 1px solid #546D01;
     border-bottom: 1px solid #546D01;
     text-align: center;
-    font-size: 1.5rem;
-    line-height: 50px;
+    font-size: 1.2rem;
+    line-height: 3;
 
     &.selected {
       border-top: 8px solid #546D01;
-      border-bottom: 8px solid #fff;
+      border-bottom: none;
+      font-weight: bold;
+      line-height: 2.5;
     }
   }
 }
@@ -228,9 +230,36 @@ main {
 .result {
   width: 1000px;
   margin: 0 auto;
+  padding-bottom: 150px;
 
   .volunteerList {
-    margin: 20px 0;
+    margin: 0 0 100px 0;
+
+    /* 로딩 애니메이션.css */
+    .target {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 100px auto;
+
+      &.spin {
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        border: dashed 5px #546D01;
+        margin-bottom: 200px;
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 2.5s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
+      
+      @-webkit-keyframes spin {
+        from   {  -webkit-transform: rotate(0deg); }
+        to   {  -webkit-transform: rotate(360deg); }
+      }
+
+    }
 
     .page {
       margin: 15px 0;
@@ -240,12 +269,12 @@ main {
       justify-items: center;
       align-items: center;
       grid-template-areas: 
-      "state title date"
       "state detail1 date"
+      "state title date"
       "state detail2 date"
       ;
       grid-template-columns: 10% 80% 10%;
-      grid-template-rows: 40% 30% 30%;
+      grid-template-rows: 20% 50% 30%;
       padding: 10px;
       border-top: 1px dashed #D6D6D6;
       height: 100px;
@@ -266,7 +295,7 @@ main {
       .listTitle {
         grid-area: title;
         font-size: 20px;
-        font-weight: bolder;
+        font-weight: bold;
         //한 줄 넘어갈 시 생략
         display: -webkit-inline-box;
         -webkit-box-orient: vertical;
@@ -274,12 +303,20 @@ main {
         overflow: hidden;
       }
 
+      .flowerIcon {
+        color: #546D01;
+        width: 14px;
+        height: 14px;
+      }
+
       .listDetail1 {
         grid-area: detail1;
         font-size: 14px;
+        display: flex;
+        width: 100%;
 
         span {
-          margin: 0 20px;
+          margin: 0 5px;
         }
       }
 
@@ -288,7 +325,7 @@ main {
         font-size: 14px;
         
         span {
-          margin: 0 20px;
+          margin: 0 10px;
         }
       }
 
@@ -311,7 +348,17 @@ main {
 
   // 지도 하위 태그 
   .mapBox {
+    width: 999px;
     border-left: 1px solid #546D01;
+    border-right: 1px solid #546D01;
+    border-bottom: 1px solid #546d01;
+
+    .map {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 600px;
+    }
 
     .wrap {
       border: 1px solid #546D01;

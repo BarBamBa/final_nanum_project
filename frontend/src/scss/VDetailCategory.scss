@@ -3,7 +3,12 @@
   height: auto;
   margin: 0 auto;
   padding-bottom: 100px;
-  
+  //카테고리 부분 아이콘
+  .circleIcon {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+  }
 
 // 버튼라인
   .buttonLine {
@@ -27,15 +32,20 @@
         cursor: pointer;     
       }
 
-      #btnSubmit {
+      .btnSubmit {
         background-color: #A4CC22;
   
         &:active {
           background-color: darken(#A4CC22, 10%);
         }
       }
-  
-      #btnToList {
+      
+      .btnClose {
+        background-color: #A4CC22;
+        cursor: default;
+      }
+
+      .btnToList {
         background-color: #546D01;
   
         &:active {
@@ -47,14 +57,10 @@
 //봉사활동 세부사항
   .vDetailCategory{
     width: 1200px;
-    border-top: 3px solid #546D01;
-    border-bottom: 3px solid #546D01;
-    border-left: 1px solid #546D01;
-    border-right: 1px solid #546D01;
+    border: 1px solid #546D01;
     display: grid;
     grid-template-columns: repeat(2, 50%);
     white-space: pre-wrap;
-    
     margin: 0 auto;
     
     .categoryItem {
@@ -62,36 +68,47 @@
       grid-template-areas: 
       "category content"
       ;
-      grid-template-columns: 20% 80%;
+      grid-template-columns: 15% 85%;
       border-bottom: 1px dashed #D6D6D6;
-      padding: 10px 10px;
-      height: 30px;
-      line-height: 30px;
+      height: 50px;
+      align-content: center;
+      align-items: center;
 
       .itemName {
         grid-area: category;
-        width: 80px;
-        margin: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0 5px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
       }
 
       &.title {
-        display: block;
         grid-column-start: 1;
         grid-column-end: 3;
         border-bottom: 1px solid #546D01;
         background-color: #546D01;
         color: white;
-        font-size: 24px;
+        font-size: 20px;
+        padding-left: 15px;
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        line-height: 50px;
+        //한 줄 넘어갈 시 생략
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
       }
       &.state {
         grid-column-start: 1;
-        grid-column-end: 3;
+        border-bottom: none;
       }
   
       &.file {
         grid-column-start: 1;
-        grid-column-end: 3;
         border: none;
       }
     }
@@ -118,28 +135,32 @@
   .contactList {
     width: 1200px;
     min-height: 250px;
-    border-top: 3px solid #546D01;
-    border-bottom: 3px solid #546D01;
-    border-left: 1px solid #546D01;
-    border-right: 1px solid #546D01;
+    border: 1px solid #546D01;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto;
 
+    
     .contactTitle {
+      display: flex;
+      align-items: center;
       height: 30px;
       font-size: 20px;
       background-color: #546D01;
       color: white;
       padding: 10px;
-      line-height: 30px;
+
+      .phoneIcon {
+      color: white;
+      margin-right: 5px;
+      }
     }
 
     .contactItem {
       height: 30px;
       line-height: 25px;
-      padding: 0 20px;
+      padding: 0 10px;
       margin: 0;
       border-bottom: 1px dashed #D6D6D6;
 
