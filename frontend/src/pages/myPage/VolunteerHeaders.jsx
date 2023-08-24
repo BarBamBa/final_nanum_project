@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import './css/VolunteerHeaders.css'
+import '/src/scss/myPage/VolunteerHeaders.scss'
 
 
 
@@ -23,46 +23,28 @@ function VolunteerHeaders() {
   return (
     
     <>
-
-      <div className="Vhead-font">나의 자원봉사</div>
-      <div className="Vhead-font-bottom"></div>
-    
-
-      <div className="volunteer-header-container">
-        <ul className="volunteer-tab">
-
-          <li>
-            <a
-              href="http://localhost:5173/MyVolunteer"
-              className={activeTab === 0 ? 'active' : ''}
-              onClick={() => handleTabClick(0)}
-            >
-              나의자원봉사
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="http://localhost:5173/VolunteerSpec"
-              className={activeTab === 1 ? 'active' : ''}
-              onClick={() => handleTabClick(1)}
-            >
-              봉사내역
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="http://localhost:5173/VolunteerReview"
-              className={activeTab === 2 ? 'active' : ''}
-              onClick={() => handleTabClick(2)}
-            >
-              봉사후기
-            </a>
-          </li>
-
-        </ul>
-      </div>
+        <div className="volunteer-header-container">
+          <ul className="volunteer-tab">
+            <li className={activeTab === 0 ? 'selected' : ''}
+                onClick={() => handleTabClick(0)}>
+              <a href="http://localhost:5173/MyVolunteer" className={activeTab === 0 ? 'selected' : ''} >
+                나의자원봉사
+              </a>
+            </li>
+            <li className={activeTab === 1 ? 'selected' : ''}
+                onClick={() => handleTabClick(1)}>
+              <a href="http://localhost:5173/VolunteerSpec" className={activeTab === 1 ? 'selected' : ''}>
+                봉사완료내역
+              </a>
+            </li>
+            <li className={activeTab === 2 ? 'selected' : ''}
+                onClick={() => handleTabClick(2)}>
+              <a href="http://localhost:5173/VolunteerReview" className={activeTab === 2 ? 'selected' : ''}>
+                내가작성한글
+              </a>
+            </li>
+          </ul>
+        </div>
     </>
   );
 }

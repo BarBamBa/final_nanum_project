@@ -31,4 +31,5 @@ public class Applicants extends BaseEntity{
 
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
+
 }

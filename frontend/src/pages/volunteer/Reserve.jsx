@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import CalendarReserve from '../../components/CalenderReserve'
+import CalendarReserve from '../../components/CalendarReserve';
 import { FiCircle } from 'react-icons/fi'
 
 function Reserve() {
