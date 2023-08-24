@@ -11,7 +11,7 @@ function VolunteerReview() {
         <br/><br/><br/>
       
         <div class="volunteer-request-container">
-          <div class="volunteer-request">봉사후기 [전체 3건]</div>
+          <div class="volunteer-request">내가작성한글 [전체 3건]</div>
           <div class="category-bottom"></div>
           
           <table class="volunteer-request-table">

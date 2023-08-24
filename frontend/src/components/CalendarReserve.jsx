@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import '../scss/CalendarReserve.scss'
+import '../scss/CalendarReserve.scss';
 import {
   add,
   eachDayOfInterval,

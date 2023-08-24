@@ -1,13 +1,12 @@
 package com.example.template1.service;
 
-import com.example.template1.model.Applicants;
-import com.example.template1.model.Users;
-import com.example.template1.model.Volunteer;
+import com.example.template1.model.*;
 import com.example.template1.repository.ApplicantsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -33,5 +32,14 @@ public class ApplicantService {
         return applicantsRepository.save(applicants);
     }
 
+    public List<Applicants> getAllMyVolunteer() { //나의자원봉사내역조회
+        List<Applicants> applicantsList = applicantsRepository.findAllByOrderByCreateAtDesc();
+        return applicantsList;
+    }
+
+    public Applicants getMyVolunteerById(long id) {
+        Applicants applicants = applicantsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
+        return applicants;
+    }
 
 }

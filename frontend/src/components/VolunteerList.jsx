@@ -56,9 +56,9 @@ function VolunteerList (props) {
             </div>
             <div className='listDate'> 
                 <strong className={data.progrmSttusSe != '3' ? (leftDate > 5 ? 'listDateNum' : 'listDateNum end') : 'listDateNum end'}>
-                    {data.progrmSttusSe == '3' ? '마감' : leftDate}
+                    {data.progrmSttusSe == '3' ? '마감' : leftDate >= 0 ? leftDate : '마감' }
                 </strong>
-                {data.progrmSttusSe == '3' ? '' : '일후 마감'}
+                {data.progrmSttusSe == '3' ? '' : leftDate >= 0 ?  '일후 마감' : ''}
             </div>
             <Routes>
                 <Route path='/vdetail/' data={data.progrmRegistNo} element={<Vdetail />}></Route>
