@@ -89,6 +89,7 @@ function BoardInputForm() {
       })
         .then(res => res.json())
         .then(res => {
+          console.log("res", res);
           boardId = res.id;
           // navigate("/board/news");
           console.log("boardId", boardId);
@@ -116,6 +117,7 @@ function BoardInputForm() {
 
         formData2.append('file', fileInput.files[i]);
         formData2.append('boardId', boardId);
+        formData2.append('userId', userInfo.userId);
 
         try {
           const uploadResponse = await axios.post("/api/board/file/upload",

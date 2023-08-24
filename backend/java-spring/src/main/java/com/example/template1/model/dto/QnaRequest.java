@@ -14,17 +14,13 @@ public class QnaRequest {
 
     private Long id;
 
-    private Users userId;
+    private Long userId;
 
-    private Users managerId;
+    private String title;
 
-    private String uTitle;
+    private String content;
 
-    private String uContent;
-
-    private String mTitle;
-
-    private String mContent;
+    private Long parentNo;
 
     private char flg;
 

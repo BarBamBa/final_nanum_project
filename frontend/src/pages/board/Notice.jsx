@@ -16,13 +16,17 @@ function Notice(props) {
   const boardData = props.boardData;
   console.log(props);
   
-  const navigate = useNavigate();
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate();  
   const [keyword, setKeyword] = useState();
 
+  const [page, setPage] = useState(1);
+  const startIndex = (page - 1) * 10;
+  const endIndex = startIndex + 10;
+  const paginatedBoardData = boardData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setPage(page);  
   };
+
 
   const handleSearchBoard =()=> {
     console.log("noticepage",keyword);
@@ -40,10 +44,7 @@ function Notice(props) {
     })
   }
 
-  const startIndex = (page - 1) * 10;
-  const endIndex = startIndex + 10;
-
-  const paginatedBoardData = boardData.slice(startIndex, endIndex);
+  
   return (
     <div>
       <div className="search-box">

@@ -23,6 +23,7 @@ public class QnaController {
         List<QnaResponse> qnaList = qnaService.getAllQna()
                 .stream()
                 .filter(qna -> qna.getStatus() == 'Y')
+                .filter(qna -> qna.getQna() == null)
                 .map(QnaResponse::new)
                 .toList();
 
@@ -48,5 +49,12 @@ public class QnaController {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(updateQna);
         }
+    }
+
+    @PostMapping("/qna/post/answer")
+    public ResponseEntity<QnA> responseQnA(@RequestBody QnaRequest request) {
+        QnA qna = qnaService.replyQnA(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(qna);
     }
 }

@@ -22,7 +22,7 @@ public class ReplyResponse {
 
     private final char status;
 
-    private final Long reply;
+    private final Long reply; //부모댓글번호
 
     private final LocalDateTime createAt;
 
@@ -47,7 +47,6 @@ public class ReplyResponse {
 
         if (reply.getReply() == null) {
             this.reply = null;
-
         } else {
             this.reply = reply.getReply().getId();
         }
