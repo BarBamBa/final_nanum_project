@@ -72,6 +72,9 @@ public class Users extends BaseEntity implements UserDetails {
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
     private char status;
 
+    @Column(columnDefinition = "CHAR(1) DEFAULT 'N'")
+    private char emailVerify;
+
 //    @Transient
 //    private List<String> roles = new ArrayList<>();
 
