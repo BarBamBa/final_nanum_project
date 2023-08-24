@@ -1,7 +1,8 @@
 package com.example.template1.service;
 
-import com.example.template1.config.JwtTokenProvider;
+import com.example.template1.model.EmailAuth;
 import com.example.template1.model.Users;
+import com.example.template1.repository.EmailAuthRepository;
 import com.example.template1.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Random;
 
 import static java.time.LocalTime.now;
@@ -26,9 +29,7 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final SpringTemplateEngine templateEngine;
     private final UsersRepository usersRepository;
-    private final JwtTokenProvider jwtTokenProvider;
-
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
+    private final EmailAuthRepository emailAuthRepository;
 
     @Transactional
     public void verificationMail(String email, String token) {
@@ -36,36 +37,35 @@ public class EmailService {
         Users user = usersRepository.findByEmail(email);
 
         // 토큰 정보 가져오기
-//        EmailAuth emailAuth = emailauthRepository.findByAuthToken(token);
+        EmailAuth emailAuth = emailAuthRepository.findEmailAuthByEmailAndAuthToken(email, token);
 
         // 인증 토큰 검사 & 사용자 정보와 비교 후 토큰 만료 및 이메일 인증 완료
-//        if(user.getEmail().equals(emailAuth.getEmail()) && emailAuth.getExpiration() > now()) {
-//            user.setEmailVerify(true);
-//            emailAuth.setUseToken(true);
-//            emailauthRepository.save(emailAuth);
-//            usersRepository.save(user);
-//        }
+        if(emailAuth.getExpiration().isBefore(ChronoLocalDateTime.from(now()))) {
+            user.setEmailVerify('Y');
+            emailAuth.setUseToken(true);
+            emailAuthRepository.save(emailAuth);
+            usersRepository.save(user);
+        }
     }
 
     @Async
     public void sendVerificationMail(String email) {
         // 이메일 인증용 토큰 발급
-//        EmailAuth emailAuth = EmailAuth.builder()
-//                .email(email)
-//                .authToken(codeBuilder())
-//                .expiration(new Date(new Date().getTime() + ACCESS_TOKEN_EXPIRE_TIME))
-//                .useToken(false)
-//                .build();
-//
-//        emailauthRepository.save(emailAuth);
+        EmailAuth emailAuth = EmailAuth.builder()
+                .email(email)
+                .authToken(codeBuilder())
+                .useToken(false)
+                .build();
 
-        // 이메일 인증용 토큰 링크 이메일 발송
-//        SimpleMailMessage mail = new SimpleMailMessage();
-//        mail.setTo(email);
-//        mail.setSubject("[나눔] 이메일 인증 메일입니다.");
-//        mail.setText(setContext(email, emailAuth.getAuthToken(), "VerifyEmail"));
+        emailAuthRepository.save(emailAuth);
 
-//        javaMailSender.send(mail);
+//         이메일 인증용 토큰 링크 이메일 발송
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(email);
+        mail.setSubject("[나눔] 이메일 인증 메일입니다.");
+        mail.setText(setContext(email, emailAuth.getAuthToken(), "VerifyEmail"));
+
+        javaMailSender.send(mail);
     }
 
     @Async
