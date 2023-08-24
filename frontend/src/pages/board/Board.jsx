@@ -12,10 +12,8 @@ import { TokenCheck } from "../../components/TokenCheck";
 
 
 function Board() {
-  const userId = useContext(TokenCheck);
-  // const [isLogin, userId] = TokenCheck();
-  console.log(userId.userId);
-  // console.log(userId);
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,10 +100,10 @@ function Board() {
         </div>
  
         <Routes>
-          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} />} />
-          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards}/>} />
-          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} />} />             
-          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} />} />          
+          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />
+          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />
+          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />             
+          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />          
         </Routes>
       </div>
 
