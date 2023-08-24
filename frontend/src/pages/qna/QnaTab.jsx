@@ -8,7 +8,8 @@ import {
     AiOutlineDoubleRight,
 } from "react-icons/ai";
 
-function QnaTab() {
+function QnaTab({ qnaData }) {
+    const navigate = useNavigate();
     return (
         <>
             <div className="search-box">
@@ -34,6 +35,16 @@ function QnaTab() {
                         );
                     })} */}
 
+                    {qnaData.map((qna, i) => {
+                        return (
+                            <tr key={qna.id}>
+                                <td className="table-no">{i + 1}</td>
+                                <td className="table-title" onClick={() => { navigate(`/qna/detail/${qna.id}`, { state: { boardKind: "1" } }) }} >{qna.utitle}</td>
+                                <td className="table-date">{qna.createAt2}</td>
+                            </tr>
+                        );
+                    })}
+
                 </tbody>
             </table>
             {/* <Pagination
@@ -47,6 +58,9 @@ function QnaTab() {
                 nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
                 onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             /> */}
+            <div>
+                <button onClick={() => { navigate("/qna/input", { state: { boardKind: "2", formKind: "write" } }) }} >글쓰기</button>
+            </div>
         </>
     )
 }

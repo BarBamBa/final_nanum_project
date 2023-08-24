@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import CalendarReserve from '../../components/CalenderReserve'
+import { FiCircle } from 'react-icons/fi'
 
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
@@ -40,6 +41,12 @@ function Reserve() {
     .catch(err => {
       throw err;
     })
+
+    alert("신청되었습니다!");
+  }
+
+  const handleDeny = () => {
+    setReceivedData(null);
   }
 
   return (
@@ -52,9 +59,10 @@ function Reserve() {
           : 
           <div className='reserveConfirm'>
             <div className='reserveInfo'>
+              <div className='reserveInfoTitle'>신청 내역 확인</div>
               <div className='reserveDetail1'>
-                  <span><strong>모집기관</strong> : {receivedData.data.nanmmbyNm + "  "}</span>
                   <span><strong>활동명</strong> : {receivedData.data.progrmSj + "  "}</span>
+                  <span><strong>주소</strong> : {receivedData.data.nanmmbyNm + "  "}</span>
                   <span><strong>장소</strong> : {receivedData.data.actPlace + "  "}</span>                      
               </div>
               <div className='reserveDetail2'>
@@ -63,14 +71,12 @@ function Reserve() {
                   <span><strong>봉사분야</strong> : {receivedData.data.srvcClCode}</span>
               </div>
               <div className='reserveDetail3'>
-                <span><strong>선택일자</strong> : {format(receivedData.selectedDay, 'yyyy-MM-dd')}</span>
-              </div>
-              <div className='reserveChoose'>
-                <span><strong>선택하신 일자가 맞습니까?</strong></span>
-              </div>
-              <div className='btnChoose'>
-                <button id='btnConfirm' onClick={() => fetchApplication()}>네</button>
-                <button id='btnDeny' onClick={() => setReceivedData(null)}>아니오</button>
+                <span>선택일자 : <strong>{format(receivedData.selectedDay, 'yyyy-MM-dd')}</strong></span>
+                <span>선택하신 일자가 맞습니까?</span>
+                <div className='btnChoose'>
+                  <button id='btnConfirm' onClick={() => fetchApplication()}>네</button>
+                  <button id='btnDeny' onClick={handleDeny}>아니오</button>
+                </div>
               </div>
             </div>
           </div>

@@ -1,11 +1,13 @@
 package com.example.template1.controller;
 
+import com.example.template1.model.QnA;
 import com.example.template1.model.dto.BoardResponse;
 import com.example.template1.model.dto.QnaResponse;
 import com.example.template1.service.QnaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +20,7 @@ public class QnaController {
     private final QnaService qnaService;
 
     @GetMapping("/qna")
-    public ResponseEntity<List<QnaResponse>> getAllQnas() {
+    public ResponseEntity<List<QnaResponse>> findAllQna() {
         List<QnaResponse> qnaList = qnaService.getAllQna()
                 .stream()
                 .filter(qna -> qna.getStatus() == 'Y')
@@ -27,5 +29,12 @@ public class QnaController {
 
         return ResponseEntity.ok()
                 .body(qnaList);
+    }
+
+    @GetMapping("/qna/{id}")
+    public ResponseEntity<QnaResponse> findQna(@PathVariable long id) {
+        QnA qna = qnaService.getQna(id);
+        return ResponseEntity.ok()
+                .body(new QnaResponse(qna));
     }
 }

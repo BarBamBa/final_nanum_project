@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Login.css'
 import axios from 'axios';
-// import { GoogleLogin } from "@react-oauth/google";
-// import {GoogleOAuthProvider} from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import {GoogleOAuthProvider} from "@react-oauth/google";
 import {useNavigate} from 'react-router-dom' 
 
 function Login() {
@@ -18,19 +18,12 @@ function Login() {
   const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
   const navigate = useNavigate();
 
-  const handleGoogleLoginSuccess = (res) => {
-    console.log(res);
-    // Handle successful login
-  };
-
-  const handleGoogleLoginFailure = (err) => {
-    console.log(err);
-    // Handle login failure
-  };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+
+  
 
 //======== 이메일 ==============================================
   const onEmailHandler = (e) => {
@@ -60,36 +53,38 @@ function Login() {
         console.log(res)
         console.log("res.data.email ::", res.data.email);
         console.log("res.data.msg ::", res.data.msg);
+        console.log("res.data.nickname ::", res.data.nickname);
+        console.log('토큰 정보:', res.data.refreshToken);
 
         if (email === '') {
-
           setErrorMessage('이메일을 입력해주세요.');
           return;
-
-        } else if (password === ''){
-
+        } else if (password === '') {
           setErrorMessage('비밀번호를 입력해주세요.');
           return;
-
-        }else if (res.data.email === undefined) {
-
-          console.log("=======================", res.data.msg);
-          alert("입력하신 이메일과 비밀번호를 확인해 주세요.");
-
-        } else if(res.data.email === email) {
-
-          console.log("=======================", "로그인 성공");
+        } else if (res.data === '로그인 실패') {
+          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
+        } else {
+          console.log("로그인 성공");
           sessionStorage.setItem("user_email", email);
-          sessionStorage.setItem("name", res.data.name);
-          alert("로그인 성공")
+          sessionStorage.setItem("nickname", res.data);
 
+            // 토큰 정보 추출
+            sessionStorage.setItem("user_email", email);
+            sessionStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
+            sessionStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
+            sessionStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
+
+            alert("로그인 성공");
           document.location.href = "/";
         }
-
-      
+     
 
       })
       .catch();
+
+        //유저 정보 가져오기
+
 
   }
 
@@ -128,17 +123,6 @@ function Login() {
           <div>
             <button className="login-button" type='button' onClick={onClickLogin}>로그인</button>
           </div>
-
-
-          {/* <GoogleOAuthProvider clientId={clientId}>
-            <GoogleLogin
-              onSuccess={handleGoogleLoginSuccess}
-              onFailure={handleGoogleLoginFailure}
-              className="custom-google-login-button"
-             
-            />
-          </GoogleOAuthProvider> */}
-
       
 
           <a href="/" className="social-button" id="google-connect" >

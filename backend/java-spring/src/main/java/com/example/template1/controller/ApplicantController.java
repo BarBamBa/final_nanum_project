@@ -10,4 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ApplicantController {
 
+    // 예약 취소
+
+    // 예약 목록
+
 }
