@@ -11,7 +11,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 function BoardInputForm() {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("input kind : " + location.state);
+  console.log("input kind : ", location.state.boardKind);
 
   // 유저정보
   const userInfo = useContext(TokenCheck);
@@ -34,7 +34,7 @@ function BoardInputForm() {
 
   // 에디터에서 줄바꿈이나 글자 스타일을 적용한 글을 태그까지 담아 db에 담기위해  html 형식으로 변환
   const contentRaw = convertToRaw(editorState.getCurrentContent());
-  const contentHtml = draftToHtml(contentRaw);    
+  const contentHtml = draftToHtml(contentRaw);
 
   // 수정버튼으로 들어오면 db에 있던 컨텐츠를 다시 에디터에 담기위해 html 형태에서 에디터에 담기위한 형태로 변환
   useEffect(() => {
@@ -64,7 +64,7 @@ function BoardInputForm() {
         content: contentHtml,
         flg: location.state.boardKind,
         users: {
-          id: userInfo.userId //로그인 기능 구현시 수정 할 예정
+          id: userInfo.userId 
         },
       };
     }
@@ -153,49 +153,63 @@ function BoardInputForm() {
       <div className="board-input-form">
         <form onSubmit={handleSubmit}>
           <table>
-            <tr>
-              <td>제목</td>
-              <td>
-                <div className="board-input titleBox">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="title"
-                    value={titleValue}
-                    onChange={(e) => setTitleValue(e.target.value)}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>내용</td>
-              <td>
-                <div className="board-input ContentBox">
-                  <Editor
-                    editorState={editorState}
-                    onEditorStateChange={onEditorStateChange}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>파일첨부</td>
-              <td>
-                <div className="board-input uploadBox">
-                  <input
-                    type="file"
-                    multiple="multiple"
-                    className="form-control"
-                    name="upload"
-                  />
-                </div>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>제목</td>
+                <td>
+                  <div className="board-input titleBox">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      value={titleValue}
+                      onChange={(e) => setTitleValue(e.target.value)}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>내용</td>
+                <td>
+                  <div className="board-input ContentBox">
+                    <Editor
+                      editorState={editorState}
+                      onEditorStateChange={onEditorStateChange}
+
+                      localization={{
+                        locale: 'ko',
+                      }}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>파일첨부</td>
+                <td>
+                  <div className="board-input uploadBox">
+                    <input
+                      type="file"
+                      multiple="multiple"
+                      className="form-control"
+                      name="upload"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <div className="board-input submitBox">
+                    <button type="submit">
+                      {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
           </table>
 
-          <button type="submit" className="board-input submitBox">
-            {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
-          </button>
+
         </form>
       </div>
     </div>

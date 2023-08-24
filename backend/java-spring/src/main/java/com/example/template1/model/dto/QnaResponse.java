@@ -17,13 +17,13 @@ public class QnaResponse  {
 
     private final Long managerId;
 
-    private final String UTitle;
+    private final String uTitle;
 
-    private final String UContent;
+    private final String uContent;
 
-    private final String MTitle;
+    private final String mTitle;
 
-    private final String MContent;
+    private final String mContent;
 
     private final char flg;
 
@@ -49,16 +49,16 @@ public class QnaResponse  {
         }
 
 
-        if (qna.getManager() == null) { // qna 관리자가 답변을 달기전에는 null
+        if (qna.getUsers() == null) { // qna 관리자가 답변을 달기전에는 null
             this.managerId = null;
         } else {
-            this.managerId = qna.getManager().getId();
+            this.managerId = qna.getUsers().getId();
         }
 
-        this.UTitle = qna.getUTitle();
-        this.UContent = qna.getUContent();
-        this.MTitle = qna.getMContent();
-        this.MContent = qna.getMContent();
+        this.uTitle = qna.getUTitle();
+        this.uContent = qna.getUContent();
+        this.mTitle = qna.getMContent();
+        this.mContent = qna.getMContent();
         this.flg = qna.getFlg();
         this.status = qna.getStatus();
         this.createAt = qna.getCreateAt();

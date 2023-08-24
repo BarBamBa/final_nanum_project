@@ -11,7 +11,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 function QnaInputForm() {
     const location = useLocation();
     const navigate = useNavigate();
-    console.log("input kind : " + location.state);
+    console.log("input kind : " , location.state);
 
     // 유저정보
     const userInfo = useContext(TokenCheck);
@@ -20,7 +20,8 @@ function QnaInputForm() {
     // 유저정보
 
     // 제목 내용 관리 state 수정이면 boardData에서 title값 가져와 초기값 설정
-    const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
+    // const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
+    const [titleValue, setTitleValue] = useState("");
     // 글 내용 관리 state => 에디터 적용이후 일단 비활성
     // const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
 
@@ -51,29 +52,41 @@ function QnaInputForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let boardId;
-        // 게시판 글 정보 저장 시작    
+        let qnaId;
         let data;
-        // 글쓰기번튼누르면 userid를 전송
 
-        if (location.state.formKind === "write") {
+        if (location.state.formKind === "write" && location.state.boardKind === "1") {
             data = {
-                title: titleValue,
-                // content: contentValue,
-                content: contentHtml,
+                mTitle: titleValue,
+                mContent: contentHtml,
                 flg: location.state.boardKind,
-                users: {
-                    id: userInfo.userId //로그인 기능 구현시 수정 할 예정
-                },
+                managerId: {id :userInfo.userId},
             };
         }
 
         // 수정버튼누르면 boardid를 전송
-        if (location.state.formKind === "modify") {
+        if (location.state.formKind === "modify" && location.state.boardKind === "1") {
             data = {
-                title: titleValue,
-                content: contentHtml,
-                id: location.state.boardData.id
+                mTitle: titleValue,
+                mContent: contentHtml,
+                id: location.state.qnaData.id
+            };
+        }
+
+        if (location.state.formKind === "write" && location.state.boardKind === "2") {
+            data = {
+                uTitle: titleValue,
+                uContent: contentHtml,
+                flg: location.state.boardKind,
+                userId: {id :userInfo.userId},
+            };
+        }
+
+        if (location.state.formKind === "modify" && location.state.boardKind === "2") {
+            data = {
+                uTitle: titleValue,
+                uContent: contentHtml,
+                id: location.state.qnaData.id
             };
         }
         console.log(data);
@@ -88,9 +101,9 @@ function QnaInputForm() {
             })
                 .then(res => res.json())
                 .then(res => {
-                    boardId = res.id;
+                    qnaId = res.id;
                     // navigate("/board/news");
-                    console.log("boardId", boardId);
+                    console.log("qnaId", qnaId);
                     // handleFileUpload(e);
                     // alert("게시글 등록성공");
                 });
@@ -105,7 +118,7 @@ function QnaInputForm() {
 
         if (fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
             alert("등록완료");
-            navigate("/board");
+            navigate("/qna");
         }
 
         if (fileInput) {
@@ -114,10 +127,10 @@ function QnaInputForm() {
                 const formData2 = new FormData();
 
                 formData2.append('file', fileInput.files[i]);
-                formData2.append('boardId', boardId);
+                formData2.append('qnaId', qnaId);
 
                 try {
-                    const uploadResponse = await axios.post("/api/board/file/upload",
+                    const uploadResponse = await axios.post("/api/qna/file/upload",
                         formData2,
                         {
                             headers: {
@@ -129,7 +142,7 @@ function QnaInputForm() {
                     if (uploadResponse.status === 200) {
                         console.log("파일 업로드 성공:", uploadResponse);
                         alert("등록완료");
-                        navigate("/board");
+                        navigate("/qna");
                     } else {
                         console.error("파일 업로드 에러:", uploadResponse.statusText);
                     }
@@ -172,6 +185,9 @@ function QnaInputForm() {
                                     <Editor
                                         editorState={editorState}
                                         onEditorStateChange={onEditorStateChange}
+                                        localization={{
+                                            locale: 'ko',
+                                          }}
                                     />
                                 </div>
                             </td>

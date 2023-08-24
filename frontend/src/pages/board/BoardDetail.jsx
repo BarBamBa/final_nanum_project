@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { TokenCheck } from "../../components/TokenCheck";
 import Modal from "react-modal";
 
 function BoardDetail() {
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
 
   let { id } = useParams();
   const navigate = useNavigate();
@@ -14,7 +18,7 @@ function BoardDetail() {
   const [replyData, setReplyData] = useState([]); //댓글 리스트
   const [childReplyData, setChildReplyData] = useState([]); //대댓글 리스트
 
-  const [newReplyData, setNewReplyData] = useState(); //댓글작성용데이터
+  const [newReplyData, setNewReplyData] = useState({}); //댓글작성용데이터
   const [editReplyContent, setEditReplyContent] = useState(); //댓글수정용데이터
   const [newChildReplyData, setNewChildReplyData] = useState({}); //대댓글작성용데이터
 
@@ -123,7 +127,8 @@ function BoardDetail() {
         return;
       }
       data = {
-        content: newReplyData
+        content: newReplyData,
+        userId: userInfo.userId,
       }
     } else {
       if (newChildReplyData == null) {
@@ -135,7 +140,8 @@ function BoardDetail() {
       }
       data = {
         content: newChildReplyData.content,
-        reply: newChildReplyData.reply //부모댓글 번호
+        userId: userInfo.userId,
+        parentNo: newChildReplyData.reply //부모댓글 번호
       };
     }
     console.log(data);
@@ -251,8 +257,8 @@ function BoardDetail() {
   // 게시글 신고
   const reportBoard = async () => {
     let data = {
-      reporter: 2,
-      users: 1,
+      reporter: userInfo.userId,
+      users: boardData.userId,
       reason: reportReason
     }
     fetch(`/api/report/${id}`, {
@@ -307,7 +313,7 @@ function BoardDetail() {
               return (
                 <>
                   <img src={`http://localhost:9090/api/image/${img.name}`}></img>
-                  
+
                   <p>{boardData.boardImgs.length}</p>
                 </>
 
@@ -316,11 +322,15 @@ function BoardDetail() {
             {/* <p>글내용 : {boardData.content}</p> */}
             <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
           </div>
+          {
+            boardData.userId == userInfo.userId && (
+              <div className="board-detail-btn">
+                <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
+                <button onClick={removeBoard}>삭제</button>
+              </div>
+            )
+          }
 
-          <div className="board-detail-btn">
-            <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
-            <button onClick={removeBoard}>삭제</button>
-          </div>
 
 
         </div>
@@ -388,17 +398,25 @@ function BoardDetail() {
                 </div>
 
                 <div className="reply-modifyBtn-area">
+                  {/* 댓글 수정 삭제 버튼 */}
+                  {
+                    data.userId == userInfo.userId && (
+                      <>
+                        <button
+                          onClick={() => {
+                            setEditReplyFlg(true);
+                            setReplyIdx(i);
+                            console.log(data.content);
+                            console.log(typeof (data.content));
+                          }}>수정</button>     
+  
+                        <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
+                      </>
+                    )
+                  }
 
-                  {/* 댓글수정버튼 */}
-                  <button
-                    onClick={() => {
-                      setEditReplyFlg(true);
-                      setReplyIdx(i);
-                    }}>수정</button>
-                  {/* 수정버튼 end */}
+       
 
-                  {/* 댓글삭제 */}
-                  <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
                 </div>
 
               </div>
@@ -448,15 +466,21 @@ function BoardDetail() {
                       {/* 대댓글 내용 수정창 전환영역 end*/}
 
                       {/*  대댓글 수정버튼 */}
-                      <button
-                        onClick={() => {
-                          setEditChildReplyFlg(true);
-                          setChildReplyIdx(j);
-                          console.log(j);
-                        }}>수정</button>
+                      {
+                        childData.userId == userInfo.userId && (
+                          <>
+                            <button
+                              onClick={() => {
+                                setEditChildReplyFlg(true);
+                                setChildReplyIdx(j);
+                                console.log(j);
+                              }}>수정</button>
 
-                      {/* 대댓글 삭제버튼 */}
-                      <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
+                            <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
+                          </>
+                        )
+                      }
+
 
                     </div>
                   ))}

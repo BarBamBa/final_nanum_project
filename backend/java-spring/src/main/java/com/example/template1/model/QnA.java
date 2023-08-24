@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class QnA extends BaseEntity{
 
     @Id
@@ -21,17 +22,17 @@ public class QnA extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "MANAGER_ID")
-    private Manager manager;
+    private Users manager;
 
-    private String UTitle;
-
-    @Column(columnDefinition = "TEXT")
-    private String UContent;
-
-    private String MTitle;
+    private String uTitle;
 
     @Column(columnDefinition = "TEXT")
-    private String MContent;
+    private String uContent;
+
+    private String mTitle;
+
+    @Column(columnDefinition = "TEXT")
+    private String mContent;
 
     private char flg; //1 : FAQ, 2: QnA
 

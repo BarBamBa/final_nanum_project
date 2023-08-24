@@ -27,6 +27,17 @@ function News(props) {
     props.searchBoards(keyword);
   }
 
+  const handleWrite = () => {
+    console.log(props.userInfo.userId);
+    if(props.userInfo.userId == null) {
+      alert("로그인 이후 이용 가능한 기능입니다.");
+      return;
+    }
+    navigate('/board/input', {
+      state: { boardName: "소식공유", boardKind: "2", formKind: "write" }
+    })
+  }
+
   const startIndex = (page - 1) * 10;
   const endIndex = startIndex + 10;
 
@@ -69,7 +80,7 @@ function News(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      <button onClick={()=>{navigate('/board/input', {state:{boardName:"소식공유",boardKind:"2",formKind:"write"}})}}>글쓰기</button>
+      <button onClick={handleWrite}>글쓰기</button>
     </div>
   );
 }

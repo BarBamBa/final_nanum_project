@@ -1,5 +1,6 @@
 package com.example.template1.model.dto;
 
+import com.example.template1.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,17 +14,17 @@ public class QnaRequest {
 
     private Long id;
 
-    private Long userId;
+    private Users userId;
 
-    private Long managerId;
+    private Users managerId;
 
-    private String UTitle;
+    private String uTitle;
 
-    private String UContent;
+    private String uContent;
 
-    private String MTitle;
+    private String mTitle;
 
-    private String MContent;
+    private String mContent;
 
     private char flg;
 

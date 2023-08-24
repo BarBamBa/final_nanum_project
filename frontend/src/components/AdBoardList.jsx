@@ -224,7 +224,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                         <tr>
                             <td>게시판 선택</td>
                             <td>
-                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, true), handlePageChange(1) }} value={boardCategory}>
+                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false) ,handlePageChange(1) }} value={boardCategory}>
                                     <option value={0}>전체보기</option>
                                     <option value={1}>공지사항</option>
                                     <option value={2}>소식공유</option>
