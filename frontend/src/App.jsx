@@ -7,6 +7,7 @@ import About from './pages/about/About';
 import Board from './pages/board/Board';
 import Login from './pages/login/Login';
 import MyPage from './pages/myPage/MyPage';
+import MypageModify from './pages/myPage/MypageModify';
 import Qna from './pages/qna/Qna';
 import SignUp from './pages/signUp/SignUp';
 import Volunteer from './pages/volunteer/Volunteer';
@@ -45,6 +46,7 @@ function App() {
             <Route path='/board/detail/:id' element={<BoardDetail/>} />
             <Route path='/board/input' element={<BoardInputForm/>} />
             <Route path="/mypage/*" element={<MyPage/>} />
+            <Route path="/MypageModify/*" element={<MypageModify/>} />
             <Route path="/WishList/*" element={<WishList/>} />
             <Route path="/qna/*" element={<Qna/>} />
             <Route path="/login/*" element={<Login/>} />

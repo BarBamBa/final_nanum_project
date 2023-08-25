@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './css/MyPage.css'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -39,7 +40,20 @@ function MyPage() {
     fetchProfile();
   }, []);
 
+  const modify = ((e) => {
+    
+  })
+
+
+    const navigate = useNavigate();
+
+    const myPageModify = () => {
+      navigate('/MypageModify');
+    }
+
   
+
+
   return (
 
     <>
@@ -51,29 +65,18 @@ function MyPage() {
 
         <div className="myPage-Container">
 
-          
-          {/* <article className="myPage-Item"> */}
-      
-            {/* <div className="profile-icon-bg">
-              <img src="/images/profile.png" className="profile-icon" alt="프로필 아이콘"></img>    
-            </div>
-  
-            <div className="myPage-email">{userInfo.email}</div> */}
- 
-        
-          {/* </article> */}
-
           {/* ==이름========== */}
-            <div className="myPage-Item">
+          <div className="myPage-Item">
 
-            <div className="myPage-category">이름</div>
-            
-            <div className="myPage-textBox">{userInfo.name}</div>
+          <div className="myPage-category">이름</div>
+          
+          <div className="myPage-textBox">{userInfo.name}</div>
 
 
           {/* ==이메일========== */}
-            <div className="myPage-category">이메일</div>
-            <div className="myPage-textBox">{userInfo.email}</div>
+          <div className="myPage-category">이메일</div>
+
+          <div className="myPage-textBox">{userInfo.email}</div>
 
 
           {/* ==닉네임 전홥번호========== */}
@@ -90,9 +93,8 @@ function MyPage() {
 
           {/* ==주소========== */}
 
-            <div className="myPage-category">주소</div>
+          <div className="myPage-category">주소</div>
   
-      
           <div className="myPage-textBox">{userInfo.address}</div>
   
 
@@ -103,10 +105,12 @@ function MyPage() {
               <img src="/images/siteChange.png" className="siteIcon" alt="외부사이트 이동 아이콘"></img> 
             </Link>
 
-            <button className="myPage-btn">정보수정하기</button>
+            <Link to={`/MypageModify`}>
+              <button  className="myPage-btn">정보수정하기</button>
+            </Link>
           </div>
           
-      
+     
         </div>
            
     </form>
