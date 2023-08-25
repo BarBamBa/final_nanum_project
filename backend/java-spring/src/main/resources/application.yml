@@ -44,20 +44,11 @@ spring:
     livereload:
       enabled: true
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${mail.username}
-    password: ${mail.password}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          timeout: 5000
-          starttls:
-            enable: true
+
 
   jwt:
     header: Authorization
     secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
     token-validity-in-seconds: 86400
+
+

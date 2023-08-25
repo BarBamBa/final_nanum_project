@@ -2,13 +2,14 @@ package com.example.template1.controller;
 
 import com.example.template1.model.QnA;
 import com.example.template1.model.dto.BoardResponse;
-import com.example.template1.model.dto.QnaRequest;
 import com.example.template1.model.dto.QnaResponse;
 import com.example.template1.service.QnaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -23,7 +24,6 @@ public class QnaController {
         List<QnaResponse> qnaList = qnaService.getAllQna()
                 .stream()
                 .filter(qna -> qna.getStatus() == 'Y')
-                .filter(qna -> qna.getQna() == null)
                 .map(QnaResponse::new)
                 .toList();
 
@@ -36,25 +36,5 @@ public class QnaController {
         QnA qna = qnaService.getQna(id);
         return ResponseEntity.ok()
                 .body(new QnaResponse(qna));
-    }
-
-    @PostMapping("/qna/post")
-    public ResponseEntity<QnA> addOrUpdateQnA(@RequestBody QnaRequest request) {
-        if (request.getId() == null) {
-            QnA saveQna = qnaService.saveQna(request);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(saveQna);
-        } else {
-            QnA updateQna = qnaService.updateQna(request);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(updateQna);
-        }
-    }
-
-    @PostMapping("/qna/post/answer")
-    public ResponseEntity<QnA> responseQnA(@RequestBody QnaRequest request) {
-        QnA qna = qnaService.replyQnA(request);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(qna);
     }
 }

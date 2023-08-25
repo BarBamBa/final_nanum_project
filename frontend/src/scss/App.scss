@@ -196,10 +196,8 @@ img {
 
 button,
 input,
-input:not(
-  .category-box, .age-box, .category-address, .category-address2, .findUser-textbox, 
-  .login-textbox, .email-box, .number-input, .modify-textBox, .modify-check, .findUser-textbox
-          ),
+input:not(.category-box, .age-box, .category-address, .category-address2, 
+          .login-textbox, .email-box, .number-input),
 optgroup,
 select,
 textarea {
