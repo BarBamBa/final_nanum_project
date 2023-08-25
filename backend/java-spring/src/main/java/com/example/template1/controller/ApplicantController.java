@@ -15,7 +15,7 @@ import java.util.List;
 public class ApplicantController {
     private final ApplicantService applicantService;
 
-    @GetMapping("/volunteer") // 모든 봉사활동 예약 리스트 조회
+    @GetMapping("/allVolunteer") // 모든 봉사활동 예약 리스트 조회
     public ResponseEntity<List<ApplicantsResponse>> getAllVolunteers() {
         List<ApplicantsResponse> myVolunteers = applicantService.getAllVolunteer()
                 .stream()
@@ -28,7 +28,7 @@ public class ApplicantController {
     }
 
     @GetMapping("/myVolunteer")  // 사용자의 봉사활동 예약 리스트 조회
-    public ResponseEntity<List<ApplicantsResponse>> getAllVolunteers(@RequestBody Long userId) {
+    public ResponseEntity<List<ApplicantsResponse>> getAllVolunteersByUserId(@RequestBody Long userId) {
         List<ApplicantsResponse> myVolunteers = applicantService.getAllVolunteerByUserId(userId)
                 .stream()
                 .map(ApplicantsResponse::new)
