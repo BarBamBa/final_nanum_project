@@ -1,7 +1,6 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
-import com.example.template1.model.BoardImg;
 import com.example.template1.model.Reply;
 import com.example.template1.model.Report;
 import lombok.Getter;
@@ -37,8 +36,6 @@ public class BoardResponse {
 
     private final List<Reply> replies;
 
-    private final List<BoardImg> boardImgs;
-
     private final char reportYn;
 
     private final String nick;
@@ -65,7 +62,6 @@ public class BoardResponse {
         this.likeCount = board.getLikeCount();
         this.reports = board.getReports();
         this.replies = board.getReplies();
-        this.boardImgs = board.getBoardImgs();
         if (board.getReports().isEmpty()) {
             this.reportYn = 'N';
         } else { this.reportYn = 'Y';}
