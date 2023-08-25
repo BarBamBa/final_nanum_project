@@ -1,6 +1,7 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Reply;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,11 @@ public class ReplyRequest {
 
     private char status = 'Y';
 
-    private Long reply;
+    private Long parentNo;
+
+    private Long userId;
+
+    private Long boardId;
 
     private LocalDateTime createAt;
 

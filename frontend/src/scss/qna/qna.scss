@@ -51,11 +51,67 @@
 }
 
 .qna-table td {
-  border-top: 1px solid #ccc;
-  padding: 16px;
+    border-top: 1px solid #ccc;
+    padding: 16px;
 }
 
 .qna-detail-container {
     width: 1440px;
     margin: 0 auto;
+}
+
+.qna-detail-box {
+    padding: 30px;
+}
+
+.qna-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.qna-writter-info {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.qna-detail-content {
+    min-height: 800px;
+    border: 1px solid #ccc;
+}
+
+.qna-detail-qnatab-content {
+    min-height: 400px;
+    border: 1px solid #ccc;
+    padding: 16px;
+}
+
+.qna-detail-qnatab-response {
+    min-height: 400px;
+    padding: 30PX;
+}
+
+.qna-detail-qnatab-btn {
+    display: flex;
+    justify-content: flex-end;
+
+
+}
+
+.qna-detail-qnatab-response {
+    .rdw-editor-toolbar {
+        display: none;
+    }
+}
+
+.qna-detail-container {
+    .DraftEditor-root {
+        border: 1px solid #ccc !important;
+        height: 250px;
+    }
+}
+
+.qna-detail-container {
+    .rdw-editor-wrapper {
+        height: 300px !important;
+    }
 }

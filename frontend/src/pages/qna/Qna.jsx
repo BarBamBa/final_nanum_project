@@ -22,6 +22,7 @@ function Qna() {
       })
   }
   useEffect(() => {
+    console.log(qnaKind);
     fetchQna();
   }, [qnaKind])
 
@@ -53,7 +54,7 @@ function Qna() {
         </div>
         <Routes>
           <Route path='' element={<FaqTab qnaData={qnaData}/>} />
-          <Route path='qna' element={<QnaTab />} />
+          <Route path='qna' element={<QnaTab qnaData={qnaData}/>} />
         </Routes>
       </div>
     </>
