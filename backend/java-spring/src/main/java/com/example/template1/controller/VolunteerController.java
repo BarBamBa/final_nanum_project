@@ -10,6 +10,7 @@ import com.example.template1.service.UserService;
 import com.example.template1.service.VolunteerService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,41 +27,17 @@ import java.util.Locale;
 public class VolunteerController {
 
     private final VolunteerService volunteerService;
-    private final ApplicantService applicantService;
-    private final UsersRepository usersRepository;
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA);
 
-    @PostMapping("/reserve")
-    public String addVolunteerAndApplication(@RequestBody String data) {
+    @PostMapping("/reserve")  // 봉사활동 예약
+    public ResponseEntity addVolunteerAndApplication(@RequestBody String data) {
 
-        VolunteerRequestDto dto = new VolunteerRequestDto(new JSONObject(data).getJSONObject("data"), dateTimeFormatter);
-        Users users = usersFactory();
-        Volunteer volunteer;
-        if (volunteerService.existByNumber(dto.getNumber())) {
-            volunteer = volunteerService.findVolunteerByNumber(dto.getNumber());
-        } else {
-            volunteer = volunteerService.addVolunteer(dto);
-        }
-        if (applicantService.existByUserIdAndVolunteerIdAndSelectedDay(users.getId(), volunteer.getId(),
-                LocalDate.parse(new JSONObject(data).getString("date"), dateTimeFormatter).atStartOfDay())) {
-            System.out.println("application already exists");
-        } else {
-            applicantService.addApplicant(users, volunteer,
-                LocalDate.parse(new JSONObject(data).getString("date"), dateTimeFormatter).atStartOfDay());
-        }
-        return new VolunteerResponseDto(volunteer).toString();
-    }
+        VolunteerRequestDto dto = new VolunteerRequestDto(new JSONObject(data).getJSONObject("data"));
+        LocalDateTime date = LocalDate.parse(new JSONObject(data).getString("date"), formatter).atStartOfDay();
+        Long uid = new JSONObject(data).getLong("userId");
 
-    private Users usersFactory() {
-        Users user =  Users.builder()
-                .name("test")
-                .phone("test")
-                .address("test")
-                .password("test")
-                .email("test")
-                .nickname("test")
-                .age(99)
-                .build();
-        return usersRepository.save(user);
+        volunteerService.volunteerValidation(dto, uid, date);
+
+        return ResponseEntity.ok().build();
     }
 }

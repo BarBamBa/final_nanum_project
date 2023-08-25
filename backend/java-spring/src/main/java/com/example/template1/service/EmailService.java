@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.context.Context;
@@ -30,26 +31,51 @@ public class EmailService {
     private final SpringTemplateEngine templateEngine;
     private final UsersRepository usersRepository;
     private final EmailAuthRepository emailAuthRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void verificationMail(String email, String token) {
+        Users user = new Users();
+        EmailAuth emailAuth = new EmailAuth();
+
         // 사용자 정보 가져오기
-        Users user = usersRepository.findByEmail(email);
+        if(usersRepository.existsByEmail(email)) {
+            user = usersRepository.findByEmail(email);
+        }
 
         // 토큰 정보 가져오기
-        EmailAuth emailAuth = emailAuthRepository.findEmailAuthByEmailAndAuthToken(email, token);
+        if(emailAuthRepository.existsByEmailAndAuthToken(email, token)) {
+            emailAuth = emailAuthRepository.findEmailAuthByEmailAndAuthToken(email, token);
+        }
+
+        if (user == null || emailAuth == null) {
+            System.out.println("#### There's no emailAuth matches with request data ####");
+            return;
+        }
 
         // 인증 토큰 검사 & 사용자 정보와 비교 후 토큰 만료 및 이메일 인증 완료
-        if(emailAuth.getExpiration().isBefore(ChronoLocalDateTime.from(now()))) {
+        if(!emailAuth.isExpired()) {
             user.setEmailVerify('Y');
-            emailAuth.setUseToken(true);
+            emailAuth.expired();
             emailAuthRepository.save(emailAuth);
             usersRepository.save(user);
+            System.out.println("#### Email has verified ####");
+        } else {
+            System.out.println("#### The Token is OutDated ####");
+            emailAuth.expired();
+            emailAuthRepository.save(emailAuth);
         }
     }
 
     @Async
     public void sendVerificationMail(String email) {
+
+        // 사용자 이메일 확인
+        if(!usersRepository.existsByEmail(email)) {
+            System.out.println("#### There's no user matches with request data ####");
+            return;
+        }
+
         // 이메일 인증용 토큰 발급
         EmailAuth emailAuth = EmailAuth.builder()
                 .email(email)
@@ -59,13 +85,14 @@ public class EmailService {
 
         emailAuthRepository.save(emailAuth);
 
-//         이메일 인증용 토큰 링크 이메일 발송
+        // 이메일 인증용 토큰 링크 이메일 발송
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(email);
         mail.setSubject("[나눔] 이메일 인증 메일입니다.");
-        mail.setText(setContext(email, emailAuth.getAuthToken(), "VerifyEmail"));
+        mail.setText(setContext(email, emailAuth.getAuthToken(), "Verifymail"));
 
         javaMailSender.send(mail);
+        System.out.println("#### The Verification Mail has been sent ####");
     }
 
     @Async
@@ -73,7 +100,7 @@ public class EmailService {
         // 사용자 임시 비밀번호 적용
         Users user = usersRepository.findByEmail(email);
         String code = codeBuilder();
-        user.setPassword(code);
+        user.setPassword(passwordEncoder.encode(code));
         usersRepository.save(user);
 
         // 임시 비밀번호 이메일 발송
@@ -83,6 +110,7 @@ public class EmailService {
         mail.setText(setContext(email, code, "TemporalPasswordMail"));
 
         javaMailSender.send(mail);
+        System.out.println("#### The Temporal Password Mail has been sent ####");
     }
 
     // 16자리 무작위 문자열 구성

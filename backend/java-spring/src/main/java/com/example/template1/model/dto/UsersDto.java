@@ -32,7 +32,6 @@ public class UsersDto {
 
     private Authority authority;
 
-
     public UsersDto(Users users) {
         this.id = users.getId();
         this.name = users.getName();

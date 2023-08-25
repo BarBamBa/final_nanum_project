@@ -2,6 +2,7 @@ package com.example.template1.service;
 
 import com.example.template1.model.*;
 import com.example.template1.repository.ApplicantsRepository;
+import com.example.template1.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,34 +12,50 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class ApplicantService {
+
     private final ApplicantsRepository applicantsRepository;
+    private final UsersRepository usersRepository;
 
-    public Boolean existByVolunteerId(Long volunteer_id) {
+    // 봉사활동 예약
+    public void addApplicant(Users users, Volunteer volunteer, LocalDateTime selectedDay) {
 
-        return applicantsRepository.existsByVolunteerId(volunteer_id);
-    }
-    public Boolean existByUserIdAndVolunteerIdAndSelectedDay(Long users_id, Long volunteer_id, LocalDateTime selectedDay) {
+        // 중복 예약 방지
+        if(applicantsRepository.existsByUsersAndVolunteerAndSelectedDay(users, volunteer, selectedDay)) {
+            System.out.println("#### The application already exist ####");
+            return;
+        }
 
-        return applicantsRepository.existsByUsersIdAndVolunteerIdAndSelectedDay(users_id, volunteer_id, selectedDay);
-    };
-
-    public Applicants addApplicant(Users users, Volunteer volunteer, LocalDateTime selectedDay) {
         Applicants applicants = Applicants.builder()
                 .users(users)
                 .volunteer(volunteer)
                 .selectedDay(selectedDay)
                 .build();
 
-        return applicantsRepository.save(applicants);
+        applicantsRepository.save(applicants);
     }
 
-    public List<Applicants> getAllMyVolunteer() { //나의자원봉사내역조회
-        List<Applicants> applicantsList = applicantsRepository.findAllByOrderByCreateAtDesc();
-        return applicantsList;
+    // 모든 봉사활동 신청 내역 조회
+    public List<Applicants> getAllVolunteer() {
+        return applicantsRepository.findAllByOrderByCreateAtDesc();
     }
 
+    // 사용자의 봉사활동 신청 내역 조회
+    public List<Applicants> getAllVolunteerByUserId(Long userId) {
+
+        // 사용자 ID 확인
+        if (!usersRepository.existsById(userId)) {
+            System.out.println("#### There's no User matches with request data ####");
+            return null;
+        }
+        Users user = usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("not found" + userId));
+
+        return applicantsRepository.findAllByUsersOrderByCreateAtDesc(user);
+    }
+
+    // 개별 봉사활동 신청 내역 조회
     public Applicants getMyVolunteerById(long id) {
         Applicants applicants = applicantsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
+
         return applicants;
     }
 
