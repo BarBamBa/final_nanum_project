@@ -30,8 +30,9 @@ function AdBoard() {
   }
 
   //카테고리로 조회
-  async function selectCategory(category) {
+  async function selectCategory(category, checked) {
     console.log(category);
+    console.log(checked);
     await fetch("/api/admin/boards/category", {
       method: "POST",
       headers: {
@@ -41,10 +42,19 @@ function AdBoard() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("selectCategory",data);
+        console.log("selectCategory", data);
+        if(checked) {
+          const reportOnlyData = data.filter(item => item.reportYn === "Y");          
+          setBoardData(reportOnlyData);
+          return;
+        }
         setBoardData(data);
       })
+      .catch((error) => {
+        console.log(error);
+      })
   }
+
 
   //신고된 게시판 조회
   async function reportedBoard(id) {

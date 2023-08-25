@@ -7,6 +7,7 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from 'react-icons/bs'
 import BoardDetail from "./BoardDetail";
 
 
@@ -15,28 +16,41 @@ function Notice(props) {
   const boardData = props.boardData;
   console.log(props);
   
-  const navigate = useNavigate();
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate();  
   const [keyword, setKeyword] = useState();
 
+  const [page, setPage] = useState(1);
+  const startIndex = (page - 1) * 10;
+  const endIndex = startIndex + 10;
+  const paginatedBoardData = boardData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setPage(page);  
   };
+
 
   const handleSearchBoard =()=> {
     console.log("noticepage",keyword);
     props.searchBoards(keyword);
   }
 
-  const startIndex = (page - 1) * 10;
-  const endIndex = startIndex + 10;
+  const handleWrite = () => {
+    console.log(props.userInfo.userId);
+    if(props.userInfo.userId == null) {
+      alert("로그인 이후 이용 가능한 기능입니다.");
+      return;
+    }
+    navigate('/board/input', {
+      state: { boardName: "공지사항", boardKind: "1", formKind: "write" }
+    })
+  }
 
-  const paginatedBoardData = boardData.slice(startIndex, endIndex);
+  
   return (
     <div>
       <div className="search-box">
         <input placeholder="검색어를 입력해주세요" type="text" onChange={(e)=>{setKeyword(e.target.value), console.log(keyword);}} ></input>
-        <button onClick={handleSearchBoard}>검색</button>
+        <button onClick={handleSearchBoard} id="searchBtn">검색</button>
+        <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon"/></label>
       </div>
       <table className="board-table">
         <thead>
@@ -70,7 +84,7 @@ function Notice(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      <button onClick={()=>{navigate('/board/input', {state:{boardName:"공지사항",boardKind:"1",formKind:"write"}})}}>글쓰기</button>
+      <button onClick={handleWrite}>글쓰기</button>
     </div>
   );
 }

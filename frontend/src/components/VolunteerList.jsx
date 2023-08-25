@@ -1,7 +1,7 @@
 import { differenceInDays } from "date-fns"
 import { Link, Route, Routes } from "react-router-dom";
+import { LuFlower } from 'react-icons/lu'
 import Vdetail from "../pages/volunteer/Vdetail";
-import { useEffect, useState } from "react";
 
 
 function VolunteerList (props) {
@@ -43,22 +43,22 @@ function VolunteerList (props) {
             <div className='listState'>{data.progrmSttusSe == '1' ? '모집대기 '
                                         : data.progrmSttusSe == '2' ? '모집중 ' : '모집완료 '}                  
             </div>
+            <div className='listDetail1'>
+                <LuFlower className="flowerIcon"/><span>{data.category}</span>
+            </div>
             <Link to={'/vdetail/' + `${data.progrmRegistNo}`} state={{ progrmRegistNo : data.progrmRegistNo }}>
                 <div className='listTitle'>{data.title}</div>
             </Link>
-            <div className='listDetail1'>
-                <span><strong>모집기관</strong> : {data.organization + "  "}</span>
-                <span><strong>모집기간</strong> : {data.recruit + "  "}</span>                            
-            </div>
             <div className='listDetail2'>
-                <span><strong>봉사기간</strong> : {data.period}</span>
-                <span><strong>봉사분야</strong> : {data.category}</span>
+                <span><strong>모집기관</strong> : {data.organization + "  "}</span>
+                {/* <span><strong>모집기간</strong> : {data.recruit + "  "}</span>    */}
+                <span><strong>봉사기간</strong> : {data.period}</span>                       
             </div>
             <div className='listDate'> 
                 <strong className={data.progrmSttusSe != '3' ? (leftDate > 5 ? 'listDateNum' : 'listDateNum end') : 'listDateNum end'}>
-                    {data.progrmSttusSe == '3' ? '마감' : leftDate}
+                    {data.progrmSttusSe == '3' ? '마감' : leftDate >= 0 ? leftDate : '마감' }
                 </strong>
-                {data.progrmSttusSe == '3' ? '' : '일후 마감'}
+                {data.progrmSttusSe == '3' ? '' : leftDate >= 0 ?  '일후 마감' : ''}
             </div>
             <Routes>
                 <Route path='/vdetail/' data={data.progrmRegistNo} element={<Vdetail />}></Route>

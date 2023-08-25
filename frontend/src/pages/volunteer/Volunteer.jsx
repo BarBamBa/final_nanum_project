@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { differenceInDays } from 'date-fns'
 import SearchBar from '../../components/SearchBar'
 import '/src/scss/Volunteer.scss'
 import VolunteerList from '../../components/VolunteerList'
@@ -90,7 +91,7 @@ function Volunteer() {
   return (
     <main>
       <div className='pageTitle'>
-        <span>봉사활동찾기</span>
+        <span>봉사활동검색</span>
       </div>     
       <SearchBar params={params} setParams={setParams} setData={setData} setMoreData={setMoreData} setCount={setCount} setPage={setPage} onCheck={onCheck} handleCheck={handleCheck} />
       <div className='volunteerTab'>
@@ -112,7 +113,7 @@ function Volunteer() {
           </div> 
         }
 
-        <div className={`loader ${tab ? 'selected' : ''}`} ref={target}>{ tab ? 'Loading...' : '※ 검색결과는 상위 5개 항목만 표시됩니다.'}</div>
+        {/* <div className={`loader ${tab ? 'selected' : ''} ${tab}`} ref={targetRef}>{ tab ? 'Loading...' : '※ 검색결과는 상위 5개 항목만 표시됩니다.'}</div> */}
 
       </div>
     </main>
