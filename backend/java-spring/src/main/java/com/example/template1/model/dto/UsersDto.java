@@ -36,15 +36,6 @@ public class UsersDto {
 
     private Authority authority;
 
-    private LocalDateTime createAt;
-
-    private LocalDate createAt2;// yyyy-MM-dd 형태
-
-    private String createAt3;// yyyy-MM-dd HH:mm:ss ㅎ형태
-
-    private LocalDateTime updateAt;
-
-
     public UsersDto(Users users) {
         this.id = users.getId();
         this.name = users.getName();
