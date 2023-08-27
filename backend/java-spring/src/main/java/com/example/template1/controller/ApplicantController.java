@@ -16,8 +16,20 @@ public class ApplicantController {
     private final ApplicantService applicantService;
 
     // 봉사활동 예약 취소
+    @GetMapping("/app/cancel")
+    public ResponseEntity cancelApplicant(@RequestBody Long userId, Long id) {
+        applicantService.cancelApp(userId, id);
+
+        return ResponseEntity.ok().build();
+    }
 
     // 봉사활동 예약 승인
+    @GetMapping("/app/permit")
+    public ResponseEntity grantApplicant(@RequestBody Long userId, Long id) {
+        applicantService.grantApp(userId, id);
+
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/allVolunteer") // 모든 봉사활동 예약 리스트 조회
     public ResponseEntity<List<ApplicantsResponse>> getAllVolunteers() {
@@ -43,7 +55,7 @@ public class ApplicantController {
     }
 
     @GetMapping("/myVolunteer/{id}") // 봉사활동 예약 개별 조회
-    public ResponseEntity<ApplicantsResponse> findMyVolunteerById(@PathVariable long id) {
+    public ResponseEntity<ApplicantsResponse> findMyVolunteerById(@PathVariable Long id) {
         Applicants myVolunteerById = applicantService.getMyVolunteerById(id);
         return ResponseEntity.ok()
                 .body(new ApplicantsResponse(myVolunteerById));
