@@ -61,18 +61,22 @@
   background-color: #fff;
 }
 
-.main div:not(.head-font-bottom) {
+.main div:not(
+  .head-font-bottom, .head-font, .tab, .find-error, .find-success, .findUser-button, .find-Email
+  ) {
   margin: 0 auto;
   width: 850px;
   position: relative;
   left: 85px;
   font-family: 'Noto Serif KR', serif;
+  margin-bottom: 10px;
+  
 }
 
 .tab {
   overflow: hidden;
-  position: relative;
-  left: 140px;
+
+  margin-left: 830px;
 }
 
 .tab label {
@@ -104,15 +108,34 @@
 /* ==========아이디찾기 css================================== */
 
 .findUser-textbox {
-  width: 400px;
+  width: 370px;
   height: 40px;
   border-radius: 10px;
   border: solid 1px black;
-  margin-bottom: 15px;
+  font-size: 20px;
 }
 
 
+.find-error{
+  margin-left: 145px;
+  font-size: 20px;
+  color: red;
+}
 
+.find-success{
+  margin-left: 160px;
+  font-size: 20px;
+  color: rgb(56, 206, 26);
+}
+
+.find-Email{
+  color: blue;
+  width: 350px;
+  font-size: 23px;
+  position: relative;
+  bottom: 170px;
+  left: 40px;
+}
 
 
 /* ==========찾기버튼 css================================== */
@@ -120,27 +143,15 @@
   background-color: #A4CC22;
   font-size: 25px;
   font-weight: bold;
-  text-align: center;
   color: #FFF;
   border: solid 2px #546D01;
   cursor: pointer;
-  display: inline-block;
   height: 50px;
-  line-height: 50px;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-  width: 400px;
+  width: 390px;
   border-radius: 10px;
-  margin-top: 5px auto;
   outline: rgb(255, 255, 255) none 0px;
-  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
   margin-bottom: 200px;
+  margin-top: 10px;
   }
 
 .findUser-button:hover{

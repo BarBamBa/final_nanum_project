@@ -32,6 +32,7 @@ function AdBoard() {
   //카테고리로 조회
   async function selectCategory(category, checked) {
     console.log(category);
+    console.log(checked);
     await fetch("/api/admin/boards/category", {
       method: "POST",
       headers: {

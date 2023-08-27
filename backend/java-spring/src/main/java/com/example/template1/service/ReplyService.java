@@ -28,15 +28,19 @@ public class ReplyService {
 
     public Reply saveReply(long id, ReplyRequest request) { //댓글입력
         Users users = new Users();
-        users.setId(1L); //userid 임의로 1로 지정
+        users.setId(request.getUserId());
 
         Board board = new Board();
         board.setId(id);
 
-        Reply reply = null;
+        Reply reply = new Reply();
+        reply.setId(request.getParentNo());
+
+        Reply replyData = null;
+
         // 부모댓글 id가 없이 넘어오면 댓글입력
-        if (request.getReply() == null) {
-            reply = Reply.builder()
+        if (request.getParentNo() == null) {
+            replyData = Reply.builder()
                     .content(request.getContent())
                     .status('Y')
                     .users(users)
@@ -44,12 +48,12 @@ public class ReplyService {
                     .build();
         }
         // 부모댓글 id가 넘어오면 대댓글 입력
-        if (request.getReply() != null) {
-            Reply reply2 = new Reply();
-            reply2.setId(request.getReply());
-            reply = Reply.builder()
+        if (request.getParentNo() != null) {
+//            Reply reply2 = new Reply();
+//            reply2.setId(request.getParentNo());
+            replyData = Reply.builder()
                     .content(request.getContent())
-                    .reply(reply2)
+                    .reply(reply)
                     .status('Y')
                     .users(users)
                     .board(board)
@@ -57,7 +61,7 @@ public class ReplyService {
         }
 
 
-        return replyRepository.save(reply);
+        return replyRepository.save(replyData);
     }
 
     @Transactional

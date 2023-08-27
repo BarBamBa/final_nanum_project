@@ -22,6 +22,7 @@ function Qna() {
       })
   }
   useEffect(() => {
+    console.log(qnaKind);
     fetchQna();
   }, [qnaKind])
 

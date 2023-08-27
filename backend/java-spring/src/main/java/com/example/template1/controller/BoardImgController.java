@@ -34,7 +34,7 @@ public class BoardImgController {
 //    private String fileDir;
 
     @PostMapping("/board/file/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("boardId") int id) throws IOException {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("boardId") long boardId, @RequestParam("userId") long userId) throws IOException {
         String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\src\\main\\resources\\images";
 //        String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\build\\resources\\main\\images";
         System.out.println(">>>>>>>>>>>>>>>>>>>>>" +imagePath);
@@ -54,18 +54,17 @@ public class BoardImgController {
 
             // 파일 저장 및 DB에 저장할 이미지 정보 생성
 
-            Board board2 = new Board();
+            Board board = new Board();
+            board.setId(boardId);
 
-            board2.setId((long) id);
-
-            Users users2 = new Users();
-            users2.setId(1L); // 임시로 user_id 1로 지정
+            Users users = new Users();
+            users.setId(userId);
 
             BoardImg boardImg = BoardImg.builder()
                     .path(uploadPath)
                     .name(saveFileName)
-                    .board(board2)
-                    .users(users2)
+                    .board(board)
+                    .users(users)
                     .build();
 
             // 이미지 정보를 DB에 저장하는 dao 실행
