@@ -298,12 +298,22 @@ function BoardDetail() {
           <div className="board-detail-header">
             <div className="board-title">
               <h3>글제목 : {boardData.title}</h3>
-              <button
-                className="board-reportBtn"
-                onClick={() => { setIsOpen(true) }}>게시글신고</button>
+              {
+                boardData.flg == "3" || boardData.flg == "4" ? (
+                  <button
+                    className="board-reportBtn"
+                    onClick={() => { setIsOpen(true) }}>게시글신고
+                  </button>
+                ) : null
+              }
+
             </div>
             <div className="board-writter-info">
-              <p>글쓴이 : {boardData.name}</p>
+              {
+                boardData.flg == "3" || boardData.flg == "4" ? (
+                  <p>글쓴이 : {boardData.name}</p>
+                ) : null
+              }
               <p>등록일 : {boardData.createAt2}</p>
             </div>
           </div>
@@ -323,12 +333,12 @@ function BoardDetail() {
             <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
           </div>
           {
-            boardData.userId == userInfo.userId && (
+            boardData.userId == userInfo.userId || userInfo.auth == "ROLE_ADMIN" ? (
               <div className="board-detail-btn">
                 <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
                 <button onClick={removeBoard}>삭제</button>
               </div>
-            )
+            ) : null
           }
 
 
@@ -337,167 +347,173 @@ function BoardDetail() {
 
 
         {/* 댓글영역 */}
-        <div className="board-reply-container">
-          <div className="board-reply-header">
-            <p>댓글({replyData.length})</p>
-            <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
-          </div>
-
-
-          {postReplyFlg ?
-            <div className="board-reply-input">
-              <input
-                type="text"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setNewReplyData(e.target.value);
-                }} />
-              <button onClick={newReplyHandle} >입력</button>
-            </div> : null}
-
-          {replyData.map((data, i) => (
-
-            <div key={i} className="board-reply-content">
-              {/* 댓글작성자 */}
-              <div className="reply-writter">
-                <p>글쓴이 : {data.name}</p>
+        {
+          boardData.flg == "3" || boardData.flg == "4" ? (
+            <div className="board-reply-container">
+              <div className="board-reply-header">
+                <p>댓글({replyData.length})</p>
+                <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
               </div>
 
-              {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
-              {editReplyFlg && replyIdx === i ? (
-                <div>
+
+              {postReplyFlg ?
+                <div className="board-reply-input">
                   <input
                     type="text"
-                    value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
                     onChange={(e) => {
-                      // e.preventDefault;
-                      setEditReplyContent(e.target.value);
-                    }}
-                  />
-                  <button onClick={() => { modifyReplyHandle(data.id); }}>저장</button>
-                  <button onClick={() => { setEditReplyFlg(!editReplyFlg); }}>취소</button>
-                </div>
-              ) : (
-                <>
-                  {/* 댓글내용 */}
-                  <div className="reply-content">{data.content}</div>
-                </>
-              )}
-
-              {/* 댓글날짜 */}
-              <div className="reply-date">{data.createAt2}</div>
-
-              <div className="reply-button-area">
-
-                <div className="reply-childBtn-area">
-                  {/* 대댓글보기버튼 */}
-                  <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>대댓글보기</p>
-
-                  {/* 대댓글달기버튼 */}
-                  <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setReplyIdx(i); }}>댓글달기</p>
-                </div>
-
-                <div className="reply-modifyBtn-area">
-                  {/* 댓글 수정 삭제 버튼 */}
-                  {
-                    data.userId == userInfo.userId && (
-                      <>
-                        <button
-                          onClick={() => {
-                            setEditReplyFlg(true);
-                            setReplyIdx(i);
-                            console.log(data.content);
-                            console.log(typeof (data.content));
-                          }}>수정</button>     
-  
-                        <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
-                      </>
-                    )
-                  }
-
-       
-
-                </div>
-
-              </div>
-
-              {/* 대댓글달기 input 영역 */}
-              {postChildReplyFlg && replyIdx === i ? (
-                <div className="child-reply-input">
-                  <input
-                    type="text"
-                    name={data.id}
-                    onChange={(e) => {
-                      console.log(e.target.name);
-                      // console.log(e.target.value);
-                      setNewChildReplyData({ content: e.target.value, reply: e.target.name });
+                      console.log(e.target.value);
+                      setNewReplyData(e.target.value);
                     }} />
-                  <button onClick={newReplyHandle}>작성</button>
-                  <button onClick={() => { setChildReplyFlg(false); }}> 취소 </button>
-                </div>
-              ) : null}
-              {/* 대댓글달기 end */}
+                  <button onClick={newReplyHandle} >입력</button>
+                </div> : null}
 
-              {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
-                <div className="board-child-reply-container">
+              {replyData.map((data, i) => (
 
-                  {childReplyData.map((childData, j) => (
-                    <div key={j} className="board-child-reply-content">
+                <div key={i} className="board-reply-content">
+                  {/* 댓글작성자 */}
+                  <div className="reply-writter">
+                    <p>글쓴이 : {data.name}</p>
+                  </div>
 
-                      <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
+                  {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
+                  {editReplyFlg && replyIdx === i ? (
+                    <div>
+                      <input
+                        type="text"
+                        value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
+                        onChange={(e) => {
+                          // e.preventDefault;
+                          setEditReplyContent(e.target.value);
+                        }}
+                      />
+                      <button onClick={() => { modifyReplyHandle(data.id); }}>저장</button>
+                      <button onClick={() => { setEditReplyFlg(!editReplyFlg); }}>취소</button>
+                    </div>
+                  ) : (
+                    <>
+                      {/* 댓글내용 */}
+                      <div className="reply-content">{data.content}</div>
+                    </>
+                  )}
 
-                      {/* 대댓글 내용 / 수정창 전환영역 */}
-                      {editChildReplyFlg && childReplyIdx === j ? (
-                        <div>
-                          <input
-                            type="text"
-                            value={editReplyContent || childData.content}
-                            onChange={(e) => {
-                              setEditReplyContent(e.target.value);
-                            }}
-                          />
-                          <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
-                          <button onClick={() => { setEditChildReplyFlg(false); }}>취소</button>
-                        </div>
+                  {/* 댓글날짜 */}
+                  <div className="reply-date">{data.createAt2}</div>
 
-                      ) : (
-                        <div className="child-reply-content">{childData.content}</div>
-                      )}
-                      {/* 대댓글 내용 수정창 전환영역 end*/}
+                  <div className="reply-button-area">
 
-                      {/*  대댓글 수정버튼 */}
+                    <div className="reply-childBtn-area">
+                      {/* 대댓글보기버튼 */}
+                      <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>대댓글보기</p>
+
+                      {/* 대댓글달기버튼 */}
+                      <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setReplyIdx(i); }}>댓글달기</p>
+                    </div>
+
+                    <div className="reply-modifyBtn-area">
+                      {/* 댓글 수정 삭제 버튼 */}
                       {
-                        childData.userId == userInfo.userId && (
+                        data.userId == userInfo.userId && (
                           <>
                             <button
                               onClick={() => {
-                                setEditChildReplyFlg(true);
-                                setChildReplyIdx(j);
-                                console.log(j);
+                                setEditReplyFlg(true);
+                                setReplyIdx(i);
+                                console.log(data.content);
+                                console.log(typeof (data.content));
                               }}>수정</button>
 
-                            <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
+                            <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
                           </>
                         )
                       }
 
 
+
                     </div>
-                  ))}
+
+                  </div>
+
+                  {/* 대댓글달기 input 영역 */}
+                  {postChildReplyFlg && replyIdx === i ? (
+                    <div className="child-reply-input">
+                      <input
+                        type="text"
+                        name={data.id}
+                        onChange={(e) => {
+                          console.log(e.target.name);
+                          // console.log(e.target.value);
+                          setNewChildReplyData({ content: e.target.value, reply: e.target.name });
+                        }} />
+                      <button onClick={newReplyHandle}>작성</button>
+                      <button onClick={() => { setChildReplyFlg(false); }}> 취소 </button>
+                    </div>
+                  ) : null}
+                  {/* 대댓글달기 end */}
+
+                  {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
+                    <div className="board-child-reply-container">
+
+                      {childReplyData.map((childData, j) => (
+                        <div key={j} className="board-child-reply-content">
+
+                          <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
+
+                          {/* 대댓글 내용 / 수정창 전환영역 */}
+                          {editChildReplyFlg && childReplyIdx === j ? (
+                            <div>
+                              <input
+                                type="text"
+                                value={editReplyContent || childData.content}
+                                onChange={(e) => {
+                                  setEditReplyContent(e.target.value);
+                                }}
+                              />
+                              <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
+                              <button onClick={() => { setEditChildReplyFlg(false); }}>취소</button>
+                            </div>
+
+                          ) : (
+                            <div className="child-reply-content">{childData.content}</div>
+                          )}
+                          {/* 대댓글 내용 수정창 전환영역 end*/}
+
+                          {/*  대댓글 수정버튼 */}
+                          {
+                            childData.userId == userInfo.userId && (
+                              <>
+                                <button
+                                  onClick={() => {
+                                    setEditChildReplyFlg(true);
+                                    setChildReplyIdx(j);
+                                    console.log(j);
+                                  }}>수정</button>
+
+                                <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
+                              </>
+                            )
+                          }
+
+
+                        </div>
+                      ))}
+
+                    </div>
+
+                  ) : null}
 
                 </div>
-
-              ) : null}
-
+              ))}
             </div>
-          ))}
-        </div>
+          ) : null
+        }
+
         <Modal
           style={modalStyle}
           isOpen={isOpen}
           onRequestClose={() => { setIsOpen(false) }}
         >
           <div>
+            <h3 className="report-head">신고 사유를 선택해 주세요.</h3>
             <label htmlFor="selectbar">신고사유</label>
             <select id="selectbar" onChange={(e) => { setReportReason(e.target.value) }} value={reportReason}>
               <option value={1}>폭력/욕설</option>
@@ -506,6 +522,7 @@ function BoardDetail() {
               <option value={4}>게시판 성격과 무관한 게시물</option>
             </select>
             <button onClick={reportBoard}>신고</button>
+            <li className="report-alert">허위 신고 시 본인도 불이익을 받을 수 있습니다.</li>
           </div>
         </Modal>
       </div >
