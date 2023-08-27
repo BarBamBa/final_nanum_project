@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '/src/scss/VDetailCategory.scss'
+import { isToday } from 'date-fns';
 import { Link, useLocation } from 'react-router-dom';
 import { FiPhone, FiCircle } from 'react-icons/fi'
 
@@ -13,6 +14,15 @@ function VDetailCategory() {
     const date = string.substring(6, string.length);
     return year + "-" + month + "-" + date;
   }
+
+  function stringToDate(str) {
+    const string = str + "";
+    const year = string.substring(0, 4);
+    const month = string.substring(4, 6);
+    const date = string.substring(6, string.length);
+    return new Date(year + "-" + month + "-" + date);
+}
+
 
   const location = useLocation();
   const progrmRegistNo = JSON.stringify(location.state.progrmRegistNo);
@@ -39,16 +49,20 @@ function VDetailCategory() {
   }, []);
 
   const handleSubmit = event => {
-    if (data.progrmSttusSe === 3) event.preventDefault();
+    if (data.progrmSttusSe === 3) {
+      event.preventDefault();
+    } else if(stringToDate(data.noticeEndde) <= new Date() ) {
+      event.preventDefault();
+    }
   }
-
+  console.log("마감일자: " + stringFormat(data.noticeEndde));
   return (
     <div className='vDetail'>
       <div className='buttonLine'>
         <Link to='/volunteer'><button className='btnToList'>목록으로</button></Link>
         <Link onClick={handleSubmit} to={`/reserve/${progrmRegistNo}`} state={{ data: data }} >
           <button className={data.progrmSttusSe === 3 ? 'btnClose' : 'btnSubmit'}>
-            {data.progrmSttusSe === 3 ? '신청마감' : '신청하기'}
+            {data.progrmSttusSe === 3  ? '신청마감' : stringToDate(data.noticeEndde) <= new Date() ? '신청마감' : '신청하기'}
           </button>
         </Link>
       </div>

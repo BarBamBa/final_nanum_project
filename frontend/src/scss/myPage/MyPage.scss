@@ -1,0 +1,180 @@
+.mypage-form {
+  min-height: 100vh;
+
+  .pageTitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    font-size: 32px;
+    border-bottom: 2px solid #D6D6D6;
+    padding: 15px 0px;
+
+    span {
+      padding-left: 50px;
+    }
+  }
+
+  .myPage-Container {
+    width: 700px;
+    height: 400px;
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: repeat(6, 50px);
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    gap: 10px;
+
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
+
+/* =====카테고리 이름 및 텍스트박스 css ====================================== */
+    .myPage-category {
+
+    }
+    .myPage-textBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #D6D6D6;
+      border-radius: 5px;
+      height: 40px;
+      width: 400px;
+      white-space: pre-wrap;
+
+      overflow: hidden;
+    }
+    .buttonBox {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .toMyVolunteer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #546D01;
+        border: 1px solid #546D01;
+        border-radius: 5px;
+        color: white;
+        height: 40px;
+        width: 160px;
+
+        &:hover {
+          background-color: darken(#546D01, 5%);
+        }
+
+        .siteIcon {
+          color: white;
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      .myPage-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #A4CC22;
+        border: 1px solid #A4CC22;
+        border-radius: 5px;
+        color: white;
+        height: 40px;
+        width: 160px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+          background-color: darken(#A4CC22, 5%);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// /* =====닉네임, 전화번호 css ====================================== */
+// .myPage-span{
+//   margin-top: 15px;
+//   margin-bottom: 10px;
+// }
+
+// .myPage-span span{
+//   margin-right: 120px;
+//   font-weight: bold;
+//   font-family: 'Black Han Sans', sans-serif;
+//   font-family: 'Noto Serif KR', serif;  
+// }
+
+// .myPage-textBox2 {
+//   margin-top: 5px;
+//   margin-bottom: 10px;
+// }
+
+// .myPage-textBox2 span{
+//   display: inline-block;
+//   height: 30px;
+//   width: 160px;
+//   border: 1px solid transparent;
+//   /* background-color: rgba(223, 226, 212, 0.678); */
+//   border-radius: 5px;
+//   padding: 6px 5px 5px 5px;
+//   margin-right: 10px;
+//   font-size: 17px;
+  
+// }
+
+
+
+// /* =====나의자원봉사 링크 css ====================================== */
+
+// .mypage-change{
+//   display: inline-block;
+//   width: 350px;
+//   height: 45px;
+//   background-color: #52e92465;
+//   text-decoration: none;
+//   color: black;
+//   border-radius: 10px;
+//   margin: 15px auto;
+//   margin-left: 130px;
+//   padding: 5px;
+//   text-align: center;
+//   font-weight: bold;
+//   font-family: 'Black Han Sans', sans-serif;
+//   font-family: 'Noto Serif KR', serif;
+// }
+
+
+// /* =====정보수정 버튼 css ====================================== */
+
+//  .myPage-btn{
+//     width: 200px;
+//     height: 40px;
+//     margin: 20px auto;
+//     margin-top: 25px;
+//     font-family: 'Black Han Sans', sans-serif;
+//     font-family: 'Noto Serif KR', serif;
+//     margin-left: 210px;
+//     border: 2px solid #9DCB09 ;
+//     background-color: #9DCB09;
+//     border-radius: 10px;
+//     text-align: center;
+//     font-size: 20px;
+//     font-weight: bold;
+//     color: #fff;
+//     width: 200px;
+//     height: 45p
+//   }
+
+//   .myPage-btn button:hover{
+//     background-color: #FFF;
+//     color: #9DCB09;
+//   }

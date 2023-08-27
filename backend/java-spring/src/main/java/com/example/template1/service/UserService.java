@@ -120,5 +120,15 @@ public class UserService {
     }
 
 
+    //유저 아이디 찾기
+    public String findEmailByNameAndPhone(String name, String phone) {
+        Users user = usersRepository.findByNameAndPhone(name, phone);
+
+        if (user != null) {
+            return user.getEmail();
+        } else {
+            return null;
+        }
+    }
 
 }

@@ -7,12 +7,15 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VolunteerRequestDto {
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA);
 
     private int number;
     private String title;
@@ -33,8 +36,7 @@ public class VolunteerRequestDto {
     private int rCapacity;
 
     @Builder
-    public VolunteerRequestDto(JSONObject jsonObject, DateTimeFormatter formatter) {
-
+    public VolunteerRequestDto(JSONObject jsonObject) {
         this.number = jsonObject.getInt("progrmRegistNo");
         this.title = jsonObject.getString("progrmSj");
         this.org = jsonObject.getString("mnnstNm");

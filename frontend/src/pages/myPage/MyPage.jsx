@@ -2,6 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './css/MyPage.css'
+import { useNavigate } from 'react-router-dom';
+import { FiExternalLink } from 'react-icons/fi'
+import '/src/scss/myPage/MyPage.scss'
+
 
 
 
@@ -39,41 +43,40 @@ function MyPage() {
     fetchProfile();
   }, []);
 
-  
-  return (
+
+  const modify = ((e) => {
+    
+  })
+
+
+    const navigate = useNavigate();
+
+    const myPageModify = () => {
+      navigate('/MypageModify');
+    }
+
+ 
+    
+return (
 
     <>
       <form className='mypage-form'>
-
-        <div className="myPage-head-font">회원정보</div>
-
-        <div className="myPage-head-bottom"></div>
-
+        <div className="pageTitle"><span>회원정보</span></div>
         <div className="myPage-Container">
 
-          
-          {/* <article className="myPage-Item"> */}
-      
-            {/* <div className="profile-icon-bg">
-              <img src="/images/profile.png" className="profile-icon" alt="프로필 아이콘"></img>    
-            </div>
-  
-            <div className="myPage-email">{userInfo.email}</div> */}
- 
-        
-          {/* </article> */}
 
           {/* ==이름========== */}
-            <div className="myPage-Item">
+          <div className="myPage-Item">
 
-            <div className="myPage-category">이름</div>
-            
-            <div className="myPage-textBox">{userInfo.name}</div>
+          <div className="myPage-category">이름</div>
+          
+          <div className="myPage-textBox">{userInfo.name}</div>
 
 
           {/* ==이메일========== */}
-            <div className="myPage-category">이메일</div>
-            <div className="myPage-textBox">{userInfo.email}</div>
+          <div className="myPage-category">이메일</div>
+
+          <div className="myPage-textBox">{userInfo.email}</div>
 
 
           {/* ==닉네임 전홥번호========== */}
@@ -90,27 +93,28 @@ function MyPage() {
 
           {/* ==주소========== */}
 
-            <div className="myPage-category">주소</div>
+          <div className="myPage-category">주소</div>
   
-      
           <div className="myPage-textBox">{userInfo.address}</div>
   
 
-          {/* ==나의 자원봉사 및 정보수정 버튼========== */}
 
-            <Link to={`/MyVolunteer`} className="mypage-change">
+          {/* ==나의 자원봉사 및 정보수정 버튼========== */}
+          <div className='buttonBox'>
+            <Link to={`/MyVolunteer`} className="toMyVolunteer" >
                   나의 자원봉사
-              <img src="/images/siteChange.png" className="siteIcon" alt="외부사이트 이동 아이콘"></img> 
+              <FiExternalLink className="siteIcon" alt="외부사이트 이동 아이콘" userInfo={userInfo}/>
             </Link>
 
-            <button className="myPage-btn">정보수정하기</button>
+            <Link to={`/MypageModify`}>
+              <button  className="myPage-btn">정보수정하기</button>
+            </Link>
           </div>
           
-      
+     
         </div>
            
     </form>
-
     </>
 
   )

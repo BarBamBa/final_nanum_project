@@ -91,4 +91,21 @@ public class UserApiController {
         return ResponseEntity.ok(myInfoBySecurity);
     }
 
+
+    // 아이디찾기
+    @PostMapping("/find-email")
+    public ResponseEntity<Map<String, String>> findEmail(@RequestBody UsersDto usersDto) {
+        String foundEmail = userService.findEmailByNameAndPhone(usersDto.getName(), usersDto.getPhone());
+
+        if (foundEmail != null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("foundEmail", foundEmail);
+            return ResponseEntity.ok(response);
+        } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "일치하는 정보를 찾을 수 없습니다.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
 }

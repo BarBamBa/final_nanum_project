@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { TokenCheck } from '../../components/TokenCheck';
 import { format } from 'date-fns';
-import CalendarReserve from '../../components/CalenderReserve'
+import CalendarReserve from '../../components/CalenderReserve';
 import { FiCircle } from 'react-icons/fi'
 
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
+  const userInfo = useContext(TokenCheck);
 
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);
@@ -22,7 +24,6 @@ function Reserve() {
   }
 
   const fetchApplication = async () => {
-    console.log("transfered");
     await fetch('/api/reserve', {
       method: 'POST',
       headers: {
@@ -31,18 +32,19 @@ function Reserve() {
       body: JSON.stringify({
         data: receivedData.data,
         date: format(receivedData.selectedDay, 'yyyyMMdd'),
+        id: userInfo.userId,
       })
     })
     .then(res => res.json)
     .then(res => {
       console.log(res);
-      // nav("/");
     })
     .catch(err => {
       throw err;
     })
 
     alert("신청되었습니다!");
+    nav("/");
   }
 
   const handleDeny = () => {
