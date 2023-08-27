@@ -70,15 +70,8 @@ function MyPage() {
             </Link>
             <button className="myPage-btn">정보수정하기</button> 
           </div>
-<<<<<<< HEAD
-          
-        </div>
-        </div> 
-      </form>
-=======
         </div>       
     </form>
->>>>>>> 342942196f1d3fbcb216b8ffc3995bc34f00789a
     </>
 
   )

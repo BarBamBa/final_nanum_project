@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '/src/scss/myPage/VolunteerHeaders.scss'
+import { Link } from 'react-router-dom';
 
 
 
@@ -25,23 +26,26 @@ function VolunteerHeaders() {
     <>
         <div className="volunteer-header-container">
           <ul className="volunteer-tab">
-            <li className={activeTab === 0 ? 'selected' : ''}
+            <li>
+              <Link to='/MyVolunteer' 
+                className={activeTab === 0 ? 'selected' : ''}
                 onClick={() => handleTabClick(0)}>
-              <a href="http://localhost:5173/MyVolunteer" className={activeTab === 0 ? 'selected' : ''} >
-                나의자원봉사
-              </a>
+                  나의자원봉사
+              </Link>  
             </li>
-            <li className={activeTab === 1 ? 'selected' : ''}
+            <li>           
+              <Link to='/VolunteerSpec' 
+                className={activeTab === 1 ? 'selected' : ''}
                 onClick={() => handleTabClick(1)}>
-              <a href="http://localhost:5173/VolunteerSpec" className={activeTab === 1 ? 'selected' : ''}>
-                봉사완료내역
-              </a>
+                  봉사완료내역
+              </Link>
             </li>
-            <li className={activeTab === 2 ? 'selected' : ''}
+            <li>
+              <Link to='/VolunteerReview' 
+                className={activeTab === 2 ? 'selected' : ''}
                 onClick={() => handleTabClick(2)}>
-              <a href="http://localhost:5173/VolunteerReview" className={activeTab === 2 ? 'selected' : ''}>
-                내가작성한글
-              </a>
+                  내가작성한글
+              </Link>
             </li>
           </ul>
         </div>
