@@ -8,6 +8,7 @@ import { FiCircle } from 'react-icons/fi'
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
   const userInfo = useContext(TokenCheck);
+  console.log("ddd",userInfo);
 
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);

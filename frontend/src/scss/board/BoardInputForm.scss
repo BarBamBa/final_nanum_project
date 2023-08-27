@@ -9,7 +9,7 @@
   border-bottom: 4px solid #546d01;
   position: relative;
 }
-.titleBox {
+.titleBox, .volunteerBox {
   padding : 16px;
 }
 
@@ -40,7 +40,7 @@
 .DraftEditor-root {
   border: 1px solid #F1F1F1;
 }
-.ContentBox {
+.contentBox {
   margin: 0 auto;
   width:1000px;
   height: 700px;

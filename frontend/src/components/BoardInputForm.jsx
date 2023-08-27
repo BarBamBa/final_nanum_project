@@ -7,11 +7,14 @@ import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReviewSelectForm from "./ReviewSelectForm";
 
 function BoardInputForm() {
   const location = useLocation();
   const navigate = useNavigate();
   console.log("input kind : ", location.state.boardKind);
+  console.log("input data : ", location.state.boardData);
+  const boardKind = location.state.boardKind;
 
   // 유저정보
   const userInfo = useContext(TokenCheck);
@@ -23,7 +26,8 @@ function BoardInputForm() {
   const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
   // 글 내용 관리 state => 에디터 적용이후 일단 비활성
   // const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
-
+  const [volunteerValue, setVolunteerValue] = useState(location.state.formKind === "modify" ? location.state.boardData.volunteerId : "");
+  console.log("volvalue", volunteerValue);
   // 에디터 컨텐츠 담을 state (초기값 empty로)
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -62,10 +66,13 @@ function BoardInputForm() {
         title: titleValue,
         // content: contentValue,
         content: contentHtml,
-        flg: location.state.boardKind,
+        flg: boardKind,
         users: {
-          id: userInfo.userId 
+          id: userInfo.userId
         },
+        volunteer: {
+          id: volunteerValue
+        }
       };
     }
 
@@ -74,7 +81,10 @@ function BoardInputForm() {
       data = {
         title: titleValue,
         content: contentHtml,
-        id: location.state.boardData.id
+        id: location.state.boardData.id,
+        volunteer: {
+          id: volunteerValue
+        }
       };
     }
     console.log(data);
@@ -170,10 +180,13 @@ function BoardInputForm() {
                   </div>
                 </td>
               </tr>
+              {
+                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue}/>
+              }
               <tr>
                 <td>내용</td>
                 <td>
-                  <div className="board-input ContentBox">
+                  <div className="board-input contentBox">
                     <Editor
                       editorState={editorState}
                       onEditorStateChange={onEditorStateChange}
