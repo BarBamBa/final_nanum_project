@@ -118,6 +118,9 @@ public class RemoteApiService {
             marker.put("latlng", latlng);
             marker.put("progrmRegistNo", object.getInt("progrmRegistNo"));
             marker.put("postAdres", object.getString("postAdres"));
+            marker.put("progrmBgnde", object.get("progrmBgnde") + "");
+            marker.put("progrmEndde", object.get("progrmEndde") + "");
+            marker.put("srvcClCode", object.getString("srvcClCode"));
 
             markerArray.put(marker);
         }

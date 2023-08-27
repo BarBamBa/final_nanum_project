@@ -4,9 +4,12 @@ import com.example.template1.model.EmailAuth;
 import com.example.template1.model.Users;
 import com.example.template1.repository.EmailAuthRepository;
 import com.example.template1.repository.UsersRepository;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,14 +64,14 @@ public class EmailService {
             usersRepository.save(user);
             System.out.println("#### Email has verified ####");
         } else {
-            System.out.println("#### The Token is OutDated ####");
             emailAuth.expired();
             emailAuthRepository.save(emailAuth);
+            System.out.println("#### The Token is OutDated ####");
         }
     }
 
     @Async
-    public void sendVerificationMail(String email) {
+    public void sendVerificationMail(String email) throws MessagingException {
 
         // 사용자 이메일 확인
         if(!usersRepository.existsByEmail(email)) {
@@ -85,18 +88,22 @@ public class EmailService {
 
         emailAuthRepository.save(emailAuth);
 
-        // 이메일 인증용 토큰 링크 이메일 발송
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setSubject("[나눔] 이메일 인증 메일입니다.");
-        mail.setText(setContext(email, emailAuth.getAuthToken(), "Verifymail"));
+        // 이메일 인증용 링크 구성
+        String authUrl = "http://localhost:9090/api/confirm/email/" + email + "/token/" + emailAuth.getAuthToken();
 
-        javaMailSender.send(mail);
+        // 이메일 인증용 토큰 링크 이메일 발송
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        helper.setTo(email);
+        helper.setSubject("[나눔] 이메일 인증 메일입니다.");
+        helper.setText(setContext(email, authUrl, "Verifymail"), true);
+
+        javaMailSender.send(message);
         System.out.println("#### The Verification Mail has been sent ####");
     }
 
     @Async
-    public void sendTemporalPasswordMail(String email) {
+    public void sendTemporalPasswordMail(String email) throws MessagingException {
         // 사용자 임시 비밀번호 적용
         Users user = usersRepository.findByEmail(email);
         String code = codeBuilder();
@@ -104,12 +111,13 @@ public class EmailService {
         usersRepository.save(user);
 
         // 임시 비밀번호 이메일 발송
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setSubject("[나눔] 비밀번호 재설정 메일입니다.");
-        mail.setText(setContext(email, code, "TemporalPasswordMail"));
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        helper.setTo(email);
+        helper.setSubject("[나눔] 비밀번호 재설정 메일입니다.");
+        helper.setText(setContext(email, code, "TemporalPasswordMail"), true);
 
-        javaMailSender.send(mail);
+        javaMailSender.send(message);
         System.out.println("#### The Temporal Password Mail has been sent ####");
     }
 

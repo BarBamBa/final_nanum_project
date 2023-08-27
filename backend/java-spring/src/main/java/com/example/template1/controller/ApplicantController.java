@@ -15,6 +15,10 @@ import java.util.List;
 public class ApplicantController {
     private final ApplicantService applicantService;
 
+    // 봉사활동 예약 취소
+
+    // 봉사활동 예약 승인
+
     @GetMapping("/allVolunteer") // 모든 봉사활동 예약 리스트 조회
     public ResponseEntity<List<ApplicantsResponse>> getAllVolunteers() {
         List<ApplicantsResponse> myVolunteers = applicantService.getAllVolunteer()
@@ -40,8 +44,8 @@ public class ApplicantController {
 
     @GetMapping("/myVolunteer/{id}") // 봉사활동 예약 개별 조회
     public ResponseEntity<ApplicantsResponse> findMyVolunteerById(@PathVariable long id) {
-        Applicants myVoluteerById = applicantService.getMyVolunteerById(id);
+        Applicants myVolunteerById = applicantService.getMyVolunteerById(id);
         return ResponseEntity.ok()
-                .body(new ApplicantsResponse(myVoluteerById));
+                .body(new ApplicantsResponse(myVolunteerById));
     }
 }

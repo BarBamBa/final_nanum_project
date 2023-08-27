@@ -16,6 +16,8 @@ public class VolunteerService {
     private final VolunteerRepository volunteerRepository;
     private final UsersRepository usersRepository;
 
+    // 봉사활동 신청
+    // 봉사활동 DB 등록 여부 확인 -> DB 저장 혹은 존재하는 봉사활동 불러오기 -> 신청 정보 저장
     public void volunteerValidation(VolunteerRequestDto dto, Long uid, LocalDateTime date) {
 
         // 사용자 ID 확인

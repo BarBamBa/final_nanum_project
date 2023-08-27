@@ -18,6 +18,14 @@ function MapBox({ data }) {
     }
   }
 
+  function stringFormat(str) {
+    const string = str + "";
+    const year = string.substring(0, 4);
+    const month = string.substring(4, 6);
+    const date = string.substring(6, string.length);
+    return year + "-" + month + "-" + date;
+}
+
   // const locations = [
 	// 	{ title: '민원실 내 업무 보조(민원안내 및 서식작성 지원)', latlng: { lat: 37.495506, lng: 126.88829 } },
 	// 	{ title: '[구로종합사회복지관] 구로구를 깨끗하게 해줄 자원봉사자 모집', latlng: { lat: 37.48682, lng: 126.89082 } },
@@ -75,7 +83,11 @@ function MapBox({ data }) {
                     </div>
                 <div className="title">{position.title}</div>
                 <div className="body">
-                  <div className="desc">{position.postAdres}</div>
+                  <div className="desc">
+                    <p>{position.postAdres}</p>
+                    <p>{position.srvcClCode}</p>
+                    <p>{stringFormat(position.progrmBgnde)} ~ {stringFormat(position.progrmEndde)}</p>
+                  </div>
                   <Link to={'/vdetail/' + `${position.progrmRegistNo}`} state={{ progrmRegistNo : position.progrmRegistNo }}
                   title="상세보기" className='goToVolunteer'>
                     상세보기
