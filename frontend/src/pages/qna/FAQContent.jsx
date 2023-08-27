@@ -1,14 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
+import { TokenCheck } from "../../components/TokenCheck";
 
 function FAQContent({ qnaData }) {
     const navigate = useNavigate();
+
+    const userInfo = useContext(TokenCheck);
+    console.log(userInfo.userId);
+    console.log(userInfo.auth);
 
     const handleModify = () => {
         navigate('/qna/input', {
             state: { qnaData: qnaData, formKind: "modify", boardKind: "1" }
         });
     }
+
+    // qna 삭제
+    const removeQna = async () => {
+
+        const id = qnaData.id;
+        if (!confirm("삭제하시겠습니까?")) {
+            return;
+        }
+        fetch(`/api/qna/delete/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status: "N" }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <div className='qna-detail-container'>
@@ -32,10 +60,15 @@ function FAQContent({ qnaData }) {
                 </div>
 
             </div>
-            <div>
-                <button onClick={handleModify}>수정</button>
-                <button>삭제</button>
-            </div>
+            {
+                userInfo.auth == "ROLE_ADMIN" && (
+                    <div>
+                        <button onClick={handleModify}>수정</button>
+                        <button onClick={removeQna}>삭제</button>
+                    </div>
+                )
+            }
+
         </div>
     )
 }

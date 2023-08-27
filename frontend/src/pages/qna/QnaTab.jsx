@@ -9,13 +9,16 @@ import {
     AiOutlineRight,
     AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from 'react-icons/bs'
 
-function QnaTab({ qnaData }) {
+function QnaTab({ qnaData, searchQna, qnaKind }) {
     const navigate = useNavigate();
 
     const userInfo = useContext(TokenCheck);
     console.log(userInfo.userId);
     console.log(userInfo.auth);
+
+    const [keyword, setKeyword] = useState(); //검색어
 
     const [page, setPage] = useState(1);
     const startIndex = (page - 1) * 10;
@@ -29,11 +32,23 @@ function QnaTab({ qnaData }) {
         navigate(`/qna/detail/${id}`, { state: { boardKind: "2" } })
     }
 
+    const handleSearchQna = () => {
+        console.log(keyword);
+        searchQna(keyword);
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearchQna();
+        }
+    };
+
     return (
         <>
             <div className="search-box">
-                <input placeholder="검색어를 입력해주세요" type="text" onChange="" ></input>
-                <button onClick="">검색</button>
+                <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword); }} onKeyPress={handleKeyPress}></input>
+                <button onClick={handleSearchQna} id="searchBtn">검색</button>
+                <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon" /></label>
             </div>
             <table className="qna-table">
                 <thead>
@@ -48,12 +63,7 @@ function QnaTab({ qnaData }) {
                         return (
                             <tr key={qna.id}>
                                 <td className="table-no">{i + 1}</td>
-                                <td className="table-title" >
-                                    {
-                                        userInfo.userId == qna.userId ? <span onClick={() => toDetail(qna.id)} >{qna.title}</span> : <span style={{color:"#ccc"}}>비밀글입니다</span>
-                                    }
-                                    
-                                </td>
+                                <td className="table-title" ><span onClick={() => toDetail(qna.id)} >{qna.title}</span></td>
                                 <td className="table-date">{qna.createAt2}</td>
                             </tr>
                         );

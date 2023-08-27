@@ -1,6 +1,8 @@
 package com.example.template1.controller;
 
+import com.example.template1.model.Board;
 import com.example.template1.model.QnA;
+import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.model.dto.BoardResponse;
 import com.example.template1.model.dto.QnaRequest;
 import com.example.template1.model.dto.QnaResponse;
@@ -18,7 +20,7 @@ import java.util.List;
 public class QnaController {
     private final QnaService qnaService;
 
-    @GetMapping("/qna")
+    @GetMapping("/qna") // qna 리스트
     public ResponseEntity<List<QnaResponse>> findAllQna() {
         List<QnaResponse> qnaList = qnaService.getAllQna()
                 .stream()
@@ -31,14 +33,27 @@ public class QnaController {
                 .body(qnaList);
     }
 
-    @GetMapping("/qna/{id}")
+    @GetMapping("/qna/{id}") // qna상세글
     public ResponseEntity<QnaResponse> findQna(@PathVariable long id) {
         QnA qna = qnaService.getQna(id);
         return ResponseEntity.ok()
                 .body(new QnaResponse(qna));
     }
 
-    @PostMapping("/qna/post")
+    @PostMapping("/qna/search") //  qna 검색
+    public ResponseEntity<List<QnaResponse>> searchingQna(@RequestBody QnaRequest request) {
+        List<QnaResponse> qnaList = qnaService.searchQna(request.getTitle(), request.getFlg())
+                .stream()
+                .filter(qna -> qna.getStatus() == 'Y')
+                .filter(qna -> qna.getQna() == null)
+                .map(QnaResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(qnaList);
+    }
+
+    @PostMapping("/qna/post") // qna 글쓰기 / 수정
     public ResponseEntity<QnA> addOrUpdateQnA(@RequestBody QnaRequest request) {
         if (request.getId() == null) {
             QnA saveQna = qnaService.saveQna(request);
@@ -51,7 +66,16 @@ public class QnaController {
         }
     }
 
-    @PostMapping("/qna/post/answer")
+    @PutMapping("/qna/delete/{id}") // qna 삭제
+    public ResponseEntity<QnA> removeQna(@PathVariable Long id, @RequestBody QnaRequest request) {
+
+        QnA qna = qnaService.deleteQna(id, request);
+
+        return ResponseEntity.ok()
+                .body(qna);
+    }
+
+    @PostMapping("/qna/post/answer") //qna 답변
     public ResponseEntity<QnA> responseQnA(@RequestBody QnaRequest request) {
         QnA qna = qnaService.replyQnA(request);
         return ResponseEntity.status(HttpStatus.CREATED)

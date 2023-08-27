@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import { TokenCheck } from "../../components/TokenCheck";
 import {
   AiOutlineLeft,
   AiOutlineDoubleLeft,
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from 'react-icons/bs'
 
 
 
 function Review(props) {
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
+
   const boardData = props.boardData;
   console.log(props);
   
@@ -25,6 +31,12 @@ function Review(props) {
     console.log("noticepage",keyword);
     props.searchBoards(keyword);
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchBoard();
+    }
+  };
 
   const handleWrite = () => {
     console.log(props.userInfo.userId);
@@ -44,8 +56,9 @@ function Review(props) {
   return (
     <div>
       <div className="search-box">
-        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e)=>{setKeyword(e.target.value), console.log(keyword);}} ></input>
-        <button onClick={handleSearchBoard}>검색</button>
+        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword);}} onKeyPress={handleKeyPress}></input>
+        <button onClick={handleSearchBoard} id="searchBtn">검색</button>
+        <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon" /></label>
       </div>
       <table className="board-table">
         <thead>
