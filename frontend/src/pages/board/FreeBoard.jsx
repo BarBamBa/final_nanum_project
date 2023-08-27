@@ -22,7 +22,7 @@ function FreeBoard(props) {
 
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
 
   const handlePageChange = (page) => {
     setPage(page);

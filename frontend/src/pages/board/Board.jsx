@@ -1,4 +1,4 @@
-import {useState,useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Notice from "./Notice";
 import FreeBoard from "./FreeBoard";
 import News from "./News";
@@ -32,7 +32,7 @@ function Board() {
         const data = await response.json();
         console.log(data);
         const filteredData = data
-        .filter(item => item.flg === boardKind)
+          .filter(item => item.flg === boardKind)
         // .sort((a, b) => a.id - b.id);
         setBoardData(filteredData);
       } catch (error) {
@@ -45,27 +45,37 @@ function Board() {
 
   //게시판 검색 조회
   const searchBoards = async (keyword) => {
-    console.log("keyword",keyword);
+    console.log("keyword", keyword);
+    console.log("boardKind", boardKind);
+    let data;
+    if (keyword == undefined) {
+      data = {
+        title: null,
+        flg: boardKind
+      }
+    } else {
+      data = {
+        title: keyword,
+        flg: boardKind
+      }
+    }
 
     fetch("/api/boards/search", {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        title: keyword,
-        flg: boardKind
-      }),
+      body: JSON.stringify(data),
 
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      setBoardData(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setBoardData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   useEffect(() => {
@@ -77,10 +87,10 @@ function Board() {
     }
   }, [location.state]);
 
-   const navigateBtn =(name, kind) => {
+  const navigateBtn = (name, kind) => {
     setBoardName(name);
     setBoardKind(kind);
-   }
+  }
 
   return (
     <div>
@@ -88,22 +98,22 @@ function Board() {
         <div className="board-nav">
           <h1>{boardName}</h1>
           <div className="board-button">
-            <button onClick={()=>{navigate("");navigateBtn("공지사항","1");}} 
-              style={boardName==="공지사항"?{color:"#546d01"}:null} >공지사항</button>
-            <button onClick={()=>{navigate("news");navigateBtn("소식공유","2");}}
-              style={boardName==="소식공유"?{color:"#546d01"}:null} >소식공유</button>
-            <button onClick={()=>{navigate("freeboard");navigateBtn("자유게시판","3");}}
-              style={boardName==="자유게시판"?{color:"#546d01"}:null} >자유게시판</button>
-            <button onClick={()=>{navigate("review");navigateBtn("봉사후기","4");}}
-              style={boardName==="봉사후기"?{color:"#546d01"}:null} >봉사후기</button>
+            <button onClick={() => { navigate(""); navigateBtn("공지사항", "1"); }}
+              style={boardName === "공지사항" ? { color: "#546d01" } : null} >공지사항</button>
+            <button onClick={() => { navigate("news"); navigateBtn("소식공유", "2"); }}
+              style={boardName === "소식공유" ? { color: "#546d01" } : null} >소식공유</button>
+            <button onClick={() => { navigate("freeboard"); navigateBtn("자유게시판", "3"); }}
+              style={boardName === "자유게시판" ? { color: "#546d01" } : null} >자유게시판</button>
+            <button onClick={() => { navigate("review"); navigateBtn("봉사후기", "4"); }}
+              style={boardName === "봉사후기" ? { color: "#546d01" } : null} >봉사후기</button>
           </div>
         </div>
- 
+
         <Routes>
-          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />
-          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />
-          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} userInfo={userInfo}/>} />             
-          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />          
+          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
+          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
+          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
+          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
         </Routes>
       </div>
 

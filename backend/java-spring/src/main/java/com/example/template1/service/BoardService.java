@@ -26,8 +26,13 @@ public class BoardService {
         return board;
     }
 
-    public List<Board> searchBoard(String title, char flg) { //게시판 검색
-        List<Board> boardList = boardRepository.findByTitleContainingAndFlg(title, flg);
+    public List<Board> searchBoard(String title, char flg) { //게시판 검색 (검색어와 게시판종류로)
+        List<Board> boardList;
+        if (title == null) { // 검색어가 비어있는 경우 모든 게시글 반환
+            boardList = boardRepository.findByFlgOrderByCreateAtDesc(flg);
+        } else {
+            boardList = boardRepository.findByTitleContainingAndFlg(title, flg);
+        }
         return boardList;
     }
 
