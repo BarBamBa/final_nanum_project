@@ -1,15 +1,8 @@
-
-/* 폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@600&display=swap');
-
 .head-font {
   font-size: 35px;
   font-weight: bold;
   margin-top: 50px;
   margin-left: 20px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-family: 'Noto Serif KR', serif;
   color: #202020;
 }
 
@@ -49,7 +42,6 @@
   color: #A4CC22;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .content > div {
@@ -62,22 +54,16 @@
   background-color: #fff;
 }
 
-.main div:not(.head-font-bottom) {
+.main div:not(.head-font-bottom, .find-Email) {
   margin: 0 auto;
   width: 850px;
   position: relative;
-  left: 80px;
-  font-family: 'Noto Serif KR', serif;
+  left: 82px;
 }
 
 .tab {
   overflow: hidden;
-<<<<<<< HEAD
   margin-left: 355px;
-=======
-  position: relative;
-  left: 140px;
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
 }
 
 .tab label {
@@ -109,7 +95,7 @@
 /* ==========아이디찾기 css================================== */
 
 .findUser-textbox {
-  width: 400px;
+  width: 380px;
   height: 40px;
   border-radius: 10px;
   border: solid 1px black;
@@ -118,7 +104,6 @@
 
 
 
-<<<<<<< HEAD
 .find-success{
   margin-left: 160px;
   font-size: 20px;
@@ -135,11 +120,9 @@
   padding: 5px;
   font-size: 23px;
   position: relative;
-  bottom: 170px;
+  bottom: 60px;
   left: 7px;
 }
-=======
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
 
 
 /* ==========찾기버튼 css================================== */
@@ -153,26 +136,14 @@
   cursor: pointer;
   display: inline-block;
   height: 50px;
-  line-height: 50px;
   text-decoration: none;
   text-transform: uppercase;
   vertical-align: middle;
   width: 400px;
   border-radius: 10px;
-  margin-top: 5px auto;
   outline: rgb(255, 255, 255) none 0px;
-<<<<<<< HEAD
   margin-bottom: 100px;
   margin-top: 10px;
-=======
-  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-  margin-bottom: 200px;
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
   }
 
 .findUser-button:hover{

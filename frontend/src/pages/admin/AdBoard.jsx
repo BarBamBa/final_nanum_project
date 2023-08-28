@@ -20,18 +20,19 @@ function AdBoard() {
   // 게시판 조회
   async function fetchBoards() {
     await fetch("/api/admin/boards")
-      .then((res) => res.json())
-      .then((data) => {
-        setBoardData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          setBoardData(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   //카테고리로 조회
-  async function selectCategory(category) {
+  async function selectCategory(category, checked) {
     console.log(category);
+    console.log(checked);
     await fetch("/api/admin/boards/category", {
       method: "POST",
       headers: {
@@ -39,12 +40,21 @@ function AdBoard() {
       },
       body: JSON.stringify({ flg: category })
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("selectCategory",data);
-        setBoardData(data);
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("selectCategory", data);
+          if(checked) {
+            const reportOnlyData = data.filter(item => item.reportYn === "Y");
+            setBoardData(reportOnlyData);
+            return;
+          }
+          setBoardData(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   }
+
 
   //신고된 게시판 조회
   async function reportedBoard(id) {
@@ -56,11 +66,11 @@ function AdBoard() {
       },
       body: JSON.stringify({ board: id })
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setReportData(data);
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setReportData(data);
+        })
 
   }
 
@@ -69,20 +79,20 @@ function AdBoard() {
   }, []);
 
   return (
-    <>
-      <div className='ad-container'>
-        <h1>게시글 리스트</h1>
-        <AdBoardList
-          boardData={boardData}
-          reportData={reportData}
-          page={page}
-          handlePageChange={handlePageChange}
-          fetchBoards={fetchBoards}
-          selectCategory={selectCategory}
-          reportedBoard={reportedBoard}
-        />
-      </div>
-    </>
+      <>
+        <div className='ad-container'>
+          <h1>게시글 리스트</h1>
+          <AdBoardList
+              boardData={boardData}
+              reportData={reportData}
+              page={page}
+              handlePageChange={handlePageChange}
+              fetchBoards={fetchBoards}
+              selectCategory={selectCategory}
+              reportedBoard={reportedBoard}
+          />
+        </div>
+      </>
 
   )
 }
