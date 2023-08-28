@@ -40,7 +40,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
         Oauth2UserDto dto = OAuth2Attributes.extract(registrationId, attributes);
-        Users user = usersRepository.save(dto.toEntity());
+        Users user = saveOrUpdate(dto);
 
         jwtTokenProvider.generateToken(user);
 
@@ -59,6 +59,21 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         customAttribute.put("name", dto.getNickname());
         customAttribute.put("email", dto.getEmail());
         return customAttribute;
+    }
+
+    private Users saveOrUpdate(Oauth2UserDto dto) {
+        Users user = new Users();
+
+        // OAuth 서비스 사이트에서 유저 정보 변경이 있을 수 있기 때문에 우리 DB에도 update
+
+        if(usersRepository.existsByEmail(dto.getEmail())) {
+            user = usersRepository.findByEmail(dto.getEmail());
+            user.setNickname(dto.getNickname());
+        } else {
+            user = dto.toEntity();
+        }
+
+        return usersRepository.save(user);
     }
 
     public Users getUserByEmail(String email) {
