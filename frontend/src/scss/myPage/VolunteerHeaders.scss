@@ -2,6 +2,8 @@
   width: 1440px;
   margin: 0 auto;
   height: 150px;
+  display: flex;
+  align-items: center;
   
   .volunteer-tab{
     display: flex;
@@ -13,32 +15,26 @@
 
 
     li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #D6D6D6;
-      border-bottom: none;
-      border-radius: 10px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-      height: 50px;
-      width: 150px;
-      margin-left: 30px;
-      cursor: pointer;
-      
-      &.selected {
-        background-color: #A4CC22;
-        border: 1px solid #A4CC22;
-        color: white;
-        font-size: 17px;
-        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-      }
 
       a {
-          display: block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid #D6D6D6;
+          border-bottom: none;
+          border-radius: 10px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          height: 50px;
+          width: 150px;
+          margin-left: 30px;
 
           &.selected {
+            background-color: #A4CC22;
+            border: 1px solid #A4CC22;
             color: white;
+            font-size: 17px;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
           }
       }
     }

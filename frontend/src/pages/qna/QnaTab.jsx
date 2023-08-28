@@ -43,6 +43,16 @@ function QnaTab({ qnaData, searchQna, qnaKind }) {
         }
     };
 
+    const handleWrite = () => {
+        if (userInfo.userId == null) {
+            alert("로그인 이후 이용 가능한 기능입니다.");
+            return;
+        }
+        navigate("/qna/input", {
+            state: { boardKind: "2", formKind: "write" }
+        })
+    }
+
     return (
         <>
             <div className="search-box">
@@ -83,7 +93,7 @@ function QnaTab({ qnaData, searchQna, qnaKind }) {
                 onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             />
             <div>
-                <button onClick={() => { navigate("/qna/input", { state: { boardKind: "2", formKind: "write" } }) }} >글쓰기</button>
+                <button onClick={handleWrite} >글쓰기</button>
             </div>
         </>
     )
