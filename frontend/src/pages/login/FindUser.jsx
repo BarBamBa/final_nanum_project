@@ -62,7 +62,7 @@ function FindUser() {
 
 
   
-//== 전화번호 유효성 =====
+//== 전화번호 유효성 ==============================
   const onChangePhon = useCallback((e) => {
     const inputPhon = e.target.value;
 
@@ -124,7 +124,7 @@ function FindUser() {
           <div className="head-font-bottom"></div>
 
           <div className="logo-div">
-          <img src="/images/logo2.png" className="findUser-logo" alt="로고이미지"></img>
+          <img src="/images/logo.png" className="findUser-logo" alt="로고이미지"></img>
           </div>
 
           <div className="content">

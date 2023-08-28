@@ -131,4 +131,23 @@ public class UserService {
         }
     }
 
+
+    // 유저 정보 업데이트
+    @Transactional
+    public void updateUser(UsersDto dto) {
+        Users user = usersRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        if(!user.getEmail().equals(dto.getEmail())) {
+            user.setEmailVerify('N');
+        }
+        user.setEmail(dto.getEmail());
+        user.setNickname(dto.getNickname());
+        user.setPhone(dto.getPhone());
+        user.setAddress(dto.getAddress());
+
+
+        usersRepository.save(user);
+    }
+
 }

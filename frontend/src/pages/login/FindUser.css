@@ -21,10 +21,11 @@
 /* ========== 로고 css================================== */
 
 .findUser-logo{
-  width: 500px;
+  width: 450px;
   height: 250px;
   margin-top: 100px;
-  margin-left: 150px;
+  margin-left: 175px;
+  margin-bottom: -20px;
 }
 
 
@@ -67,7 +68,7 @@
   margin: 0 auto;
   width: 850px;
   position: relative;
-  left: 85px;
+  left: 80px;
   font-family: 'Noto Serif KR', serif;
   margin-bottom: 10px;
   
@@ -75,8 +76,7 @@
 
 .tab {
   overflow: hidden;
-
-  margin-left: 830px;
+  margin-left: 355px;
 }
 
 .tab label {
@@ -129,12 +129,17 @@
 }
 
 .find-Email{
-  color: blue;
-  width: 350px;
+  /* background-color: rgba(162, 238, 166, 0.2); */
+  /* border: 3px solid #A4CC22; */
+  color: #A4CC22;
+  border-radius: 10px;
+  text-align: center;
+  width: 380px;
+  padding: 5px;
   font-size: 23px;
   position: relative;
   bottom: 170px;
-  left: 40px;
+  left: 7px;
 }
 
 
@@ -150,7 +155,7 @@
   width: 390px;
   border-radius: 10px;
   outline: rgb(255, 255, 255) none 0px;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
   margin-top: 10px;
   }
 

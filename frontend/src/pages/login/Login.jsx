@@ -66,14 +66,14 @@ function Login() {
           alert('입력하신 이메일과 비밀번호를 확인해주세요.');
         } else {
           console.log("로그인 성공");
-          sessionStorage.setItem("user_email", email);
-          sessionStorage.setItem("nickname", res.data);
-
+          localStorage.setItem("user_email", email);
+          localStorage.setItem("nickname", res.data);
+          console.log(localStorage)
             // 토큰 정보 추출
-            sessionStorage.setItem("user_email", email);
-            sessionStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
-            sessionStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
-            sessionStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
+            localStorage.setItem("user_email", email);
+            localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
+            localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
+            localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
 
             alert("로그인 성공");
           document.location.href = "/";
@@ -104,7 +104,7 @@ function Login() {
       <form >
         <div className="login-box">
               
-        <img className="logo-size" src="/images/logo2.png" alt="로고이미지" />
+        <img className="logo-size" src="/images/logo.png" alt="로고이미지" />
       
         <div>
           <input type='email' value={email} onChange={onEmailHandler} 

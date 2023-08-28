@@ -9,18 +9,19 @@ function UtilWrap() {
   const [userId, setUserId] = useState(false);
   
   useEffect(() => {
-    if (sessionStorage.getItem("nickname")) {
+    if (localStorage.getItem("nickname")) {
       setIsLogin(true);
       console.log("isLogin ?? :: ", isLogin);
     }
     console.log(isLogin);
+    console.log(localStorage)
   }, [isLogin])
 
   
   const handleLogout = () => {
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("nickname");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("nickname");
     setIsLogin(false);
   }
   
@@ -32,7 +33,7 @@ function UtilWrap() {
           <div className="loginName">
             <Link to={`/MyPage`} >
               <img src="/images/mainProfile.png" className='loginImg' />
-              {sessionStorage.getItem("nickname")} 
+              {localStorage.getItem("nickname")} 
              님! 안녕하세요!
             </Link>
             

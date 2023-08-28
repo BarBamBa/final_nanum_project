@@ -39,7 +39,7 @@
 
 /* =====카테고리 이름 및 텍스트박스 css ====================================== */
 
-.myPage-Item {
+.myPage-Item:not(.modifySuccess, .modifyError) {
   padding: 10px;
   font-size: 20px;
 }
@@ -70,29 +70,28 @@
   
 }
 
-/* =====왼쪽 이미지 및 email 박스 css ====================================== */
-
-.profile-icon{
-  margin-top: 30px;
-  width: 200px;
-  height: 200px;
-  border: 3px solid #a6bd5a;
-  border-radius: 50%;
-  background-color: #ddebdd23;
-}
-
-
-.myPage-email {
-  margin-top: 5px;
-  text-align: center;
-  font-size: 14px;
-  width: 200px;
-  height: 25px;
-  /* background-color: rgba(223, 226, 212, 0.678); */
-  border-radius: 5px;
+/* =====email 인증 버튼 css ====================================== */
+.email-Check{
+  width: 130px;
+  padding: 5px;
   font-family: 'Black Han Sans', sans-serif;
   font-family: 'Noto Serif KR', serif;
-  
+  border: 2px solid #9DCB09 ;
+  background-color: #9DCB09;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  margin-left: 270px;
+  position: relative;
+
+}
+
+.email-Check:hover {
+  background-color: #FFF;
+  color: #9DCB09;
 }
 
 
@@ -131,11 +130,12 @@
 
 /* =====나의자원봉사 링크 css ====================================== */
 
-.mypage-change{
+.toMyVolunteer{
   display: inline-block;
   width: 350px;
   height: 45px;
-  background-color: #52e92465;
+  background-color: #83ee79a6;
+  border: 3px solid #48aa07;
   text-decoration: none;
   color: black;
   border-radius: 10px;
@@ -159,14 +159,18 @@
 
 /* =====정보수정 버튼 css ====================================== */
 
+.myPage-btn-div{
+  width: 630px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
  .myPage-btn{
     width: 200px;
-    height: 40px;
+    height: 45px;
     margin: 20px auto;
-    margin-top: 25px;
     font-family: 'Black Han Sans', sans-serif;
     font-family: 'Noto Serif KR', serif;
-    margin-left: 210px;
     border: 2px solid #9DCB09 ;
     background-color: #9DCB09;
     border-radius: 10px;
@@ -174,8 +178,8 @@
     font-size: 20px;
     font-weight: bold;
     color: #fff;
-    width: 200px;
-    height: 45p
+    display: inline-block;
+    margin-left: 10px;
   }
 
   .myPage-btn button:hover{
