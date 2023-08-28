@@ -1,14 +1,20 @@
 package com.example.template1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class QnA extends BaseEntity{
 
     @Id
@@ -19,19 +25,28 @@ public class QnA extends BaseEntity{
     @JoinColumn(name = "USER_ID")
     private Users users;
 
+//    @ManyToOne
+//    @JoinColumn(name = "MANAGER_ID")
+//    private Users manager;
+
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    //    private String mTitle;
+//
+//    @Column(columnDefinition = "TEXT")
+//    private String mContent;
+
     @ManyToOne
-    @JoinColumn(name = "MANAGER_ID")
-    private Manager manager;
+    @JoinColumn(name = "Parent_No")
+    @JsonBackReference
+    private QnA qna;
 
-    private String UTitle;
-
-    @Column(columnDefinition = "TEXT")
-    private String UContent;
-
-    private String MTitle;
-
-    @Column(columnDefinition = "TEXT")
-    private String MContent;
+    @OneToMany(mappedBy = "qna")
+    @JsonManagedReference
+    List<QnA> answers = new ArrayList<>();
 
     private char flg; //1 : FAQ, 2: QnA
 

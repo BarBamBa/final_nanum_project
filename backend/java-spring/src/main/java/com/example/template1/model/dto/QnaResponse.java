@@ -6,6 +6,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 public class QnaResponse  {
@@ -13,15 +14,15 @@ public class QnaResponse  {
 
     private final Long userId;
 
-    private final Long managerId;
+    private final String nickname;
 
-    private final String UTitle;
+    private final String title;
 
-    private final String UContent;
+    private final String content;
 
-    private final String MTitle;
+    private final Long parentNo;
 
-    private final String MContent;
+    private final List<QnA> answers;
 
     private final char flg;
 
@@ -37,22 +38,11 @@ public class QnaResponse  {
 
     public QnaResponse(QnA qna) {
         this.id = qna.getId();
-
-        if (qna.getUsers() == null) { // FaQ에는 유저가 글을 등록 할 수 없으므로 null필요
-            this.userId = null;
-        } else {
-            this.userId = qna.getUsers().getId();
-        }
-
-        if (qna.getManager() == null) { // qna 관리자가 답변을 달기전에는 null
-            this.managerId = null;
-        } else {
-            this.managerId = qna.getManager().getId();
-        }
-        this.UTitle = qna.getUTitle();
-        this.UContent = qna.getUContent();
-        this.MTitle = qna.getMContent();
-        this.MContent = qna.getMContent();
+        this.userId = qna.getUsers().getId();
+        this.nickname = qna.getUsers().getNickname();
+        this.title = qna.getTitle();
+        this.content = qna.getContent();
+        this.answers = qna.getAnswers();
         this.flg = qna.getFlg();
         this.status = qna.getStatus();
         this.createAt = qna.getCreateAt();
@@ -60,6 +50,12 @@ public class QnaResponse  {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.createAt3 = qna.getCreateAt().format(formatter);
         this.updateAt = qna.getUpdateAt();
+
+        if(qna.getQna() == null) {
+            this.parentNo = null;
+        } else {
+            this.parentNo = qna.getQna().getId();
+        }
 
     }
 }
