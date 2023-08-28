@@ -72,12 +72,7 @@
 
 .tab {
   overflow: hidden;
-<<<<<<< HEAD
   margin-left: 355px;
-=======
-  position: relative;
-  left: 140px;
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
 }
 
 .tab label {
@@ -118,7 +113,6 @@
 
 
 
-<<<<<<< HEAD
 .find-success{
   margin-left: 160px;
   font-size: 20px;
@@ -138,8 +132,6 @@
   bottom: 170px;
   left: 7px;
 }
-=======
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
 
 
 /* ==========찾기버튼 css================================== */
@@ -161,18 +153,8 @@
   border-radius: 10px;
   margin-top: 5px auto;
   outline: rgb(255, 255, 255) none 0px;
-<<<<<<< HEAD
   margin-bottom: 100px;
   margin-top: 10px;
-=======
-  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-  margin-bottom: 200px;
->>>>>>> b76713dd2a2fd257847d82381c914df06f387381
   }
 
 .findUser-button:hover{
