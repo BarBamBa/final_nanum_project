@@ -69,6 +69,7 @@ return (
             <div className="myPage-category">주소</div>
             <div className="myPage-textBox">{userInfo.address}</div>   
           {/* ==나의 자원봉사 및 정보수정 버튼========== */}
+        
           <div className='buttonBox'>
               <Link to={`/PasswordConfirm`}>
                 <button type='button' className="myPage-password-btn">비밀번호 변경</button>

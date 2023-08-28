@@ -54,11 +54,11 @@
   background-color: #fff;
 }
 
-.main div:not(.head-font-bottom) {
+.main div:not(.head-font-bottom, .find-Email) {
   margin: 0 auto;
   width: 850px;
   position: relative;
-  left: 80px;
+  left: 82px;
 }
 
 .tab {
@@ -95,7 +95,7 @@
 /* ==========아이디찾기 css================================== */
 
 .findUser-textbox {
-  width: 400px;
+  width: 380px;
   height: 40px;
   border-radius: 10px;
   border: solid 1px black;
@@ -120,7 +120,7 @@
   padding: 5px;
   font-size: 23px;
   position: relative;
-  bottom: 170px;
+  bottom: 60px;
   left: 7px;
 }
 
@@ -136,13 +136,11 @@
   cursor: pointer;
   display: inline-block;
   height: 50px;
-  line-height: 50px;
   text-decoration: none;
   text-transform: uppercase;
   vertical-align: middle;
   width: 400px;
   border-radius: 10px;
-  margin-top: 5px auto;
   outline: rgb(255, 255, 255) none 0px;
   margin-bottom: 100px;
   margin-top: 10px;

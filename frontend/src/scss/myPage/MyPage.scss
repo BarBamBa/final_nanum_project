@@ -17,7 +17,7 @@
 
   .myPage-Container {
     width: 700px;
-    height: 500px;
+    height: 550px;
     margin: 100px auto;
     display: grid;
     grid-template-columns: 25% 75%;
@@ -51,6 +51,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 150px;
 
       .myPage-password-btn {
         border: none;
@@ -58,11 +59,23 @@
         padding: 10px 20px;
         background-color: #546d01;
         color: white;
-        margin: 0;
+        height: 40px;
+        width: 400px;
+        margin-top: 60px;
+        margin-bottom: 20px;
+        margin-left: 120px;
 
         &:hover {
           background-color: darken(#546d01, 5%);
         }
+      }
+
+      .MyVolunteerBox{
+        width: 450px;
+      }
+
+      .myPage-btn-div{
+        margin-left: 25px;
       }
 
       .myPage-btn {
@@ -75,6 +88,8 @@
         color: white;
         padding: 10px 20px;
         text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        margin-left: 5px;
 
         &:hover {
           background-color: darken(#A4CC22, 5%);
