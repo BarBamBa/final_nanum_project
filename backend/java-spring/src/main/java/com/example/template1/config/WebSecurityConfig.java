@@ -1,5 +1,6 @@
 package com.example.template1.config;
 
+import com.example.template1.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
@@ -37,6 +39,8 @@ public class WebSecurityConfig {
 
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,14 +51,23 @@ public class WebSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests()
+            .requestMatchers("/oauth2/**", "/auth/**").permitAll()
             .requestMatchers("/api/login", "/api/**").permitAll()
             .requestMatchers("/api/main").hasRole("USER")
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+            .oauth2Login()
+            .successHandler(customOAuth2SuccessHandler())
+            .userInfoEndpoint() // OAuth 2.0 Provider로부터 사용자 정보를 가져오는 엔드포인트를 지정하는 메서드
+            .userService(customOAuth2UserService)   // OAuth 2.0 인증이 처리되는데 사용될 사용자 서비스를 지정하는 메서드
         ;
 
         return http.build();
+    }
+
+    private AuthenticationSuccessHandler customOAuth2SuccessHandler() {
+        return new CustomOAuth2SuccessHandler(customOAuth2UserService, jwtTokenProvider);
     }
 
     @Bean

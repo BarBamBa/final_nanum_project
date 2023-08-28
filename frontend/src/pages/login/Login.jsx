@@ -122,7 +122,7 @@ function Login() {
           </div>
       
 
-          <a href="/" className="social-button" id="google-connect" >
+          <a href="http://localhost:9090/oauth2/authorization/google" className="social-button" id="google-connect" >
             <span>Connect with Google</span>
           </a>
           
