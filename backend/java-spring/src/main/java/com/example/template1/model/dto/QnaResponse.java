@@ -13,8 +13,6 @@ public class QnaResponse  {
 
     private final Long userId;
 
-    private final String nickname;
-
     private final Long managerId;
 
     private final String UTitle;
@@ -42,19 +40,15 @@ public class QnaResponse  {
 
         if (qna.getUsers() == null) { // FaQ에는 유저가 글을 등록 할 수 없으므로 null필요
             this.userId = null;
-            this.nickname = null;
         } else {
             this.userId = qna.getUsers().getId();
-            this.nickname = qna.getUsers().getNickname();
         }
-
 
         if (qna.getManager() == null) { // qna 관리자가 답변을 달기전에는 null
             this.managerId = null;
         } else {
             this.managerId = qna.getManager().getId();
         }
-
         this.UTitle = qna.getUTitle();
         this.UContent = qna.getUContent();
         this.MTitle = qna.getMContent();

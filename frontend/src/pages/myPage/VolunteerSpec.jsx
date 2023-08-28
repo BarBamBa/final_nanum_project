@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import '/src/scss/myPage/MyVolunteer.scss'
 import VolunteerHeaders from './VolunteerHeaders'
 import { LuFlower } from 'react-icons/lu'
-import { TfiWrite } from 'react-icons/tfi'
+import { BiEditAlt } from 'react-icons/bi'
 
 function VolunteerSpec() {
   return (
@@ -23,7 +23,7 @@ function VolunteerSpec() {
             <span>[봉사기간] selectedDay</span>
           </div>
           <div className='buttonBox'>
-            <Link to='/board/review'>후기쓰러가기<TfiWrite/></Link>
+            <Link to='/board/review'>후기쓰러가기<BiEditAlt/></Link>
           </div>
         </div>
         <div>페이지네이션</div>

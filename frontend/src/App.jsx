@@ -21,7 +21,6 @@ import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import QnaDetail from './pages/qna/QnaDetail';
-import QnaInputForm from './components/QnaInputForm';
 import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
@@ -52,7 +51,6 @@ function App() {
             <Route path="/FindUser/*" element={<FindUser/>} />
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
-            <Route path="/qna/input" element={<QnaInputForm />} />
         </Routes>
         <ScrollTopButton />
         <Footer />

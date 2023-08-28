@@ -1,5 +1,5 @@
 import React from 'react'
-import '/src/scss/myPage/WishList.css'
+import '/src/scss/myPage/WishList.scss'
 
 
 

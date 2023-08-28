@@ -7,9 +7,7 @@ import com.example.template1.model.Users;
 import com.example.template1.service.BoardImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +19,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api")
@@ -34,11 +31,7 @@ public class BoardImgController {
 //    private String fileDir;
 
     @PostMapping("/board/file/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("boardId") int id) throws IOException {
-        String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\src\\main\\resources\\images";
-//        String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\build\\resources\\main\\images";
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>" +imagePath);
-
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("boardId") int id) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("업로드할 파일이 없습니다.");
         }
@@ -50,7 +43,7 @@ public class BoardImgController {
             String saveFileName = generateSaveFileName(originalFilename);
 
             // 파일을 저장할 경로 설정
-            String uploadPath =  imagePath + "\\" + saveFileName;
+            String uploadPath = "D:/" + saveFileName; // 저장 경로 아직 미정
 
             // 파일 저장 및 DB에 저장할 이미지 정보 생성
 
@@ -86,27 +79,5 @@ public class BoardImgController {
         long currentTimeMillis = System.currentTimeMillis();
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         return currentTimeMillis + extension;
-    }
-
-    @GetMapping("/image/{imageName}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String imageName) throws IOException {
-        // 이미지 파일 경로 설정
-        String imagePath = Paths.get("").toAbsolutePath() + "\\backend\\java-spring\\src\\main\\resources\\images\\" + imageName;
-
-//        String imagePath = "images/" + imageName;
-//        //ClassPathResource : build 폴더를 상대경로로잡아 서버 재시작해야 재대로 로드됨
-//        ClassPathResource resource = new ClassPathResource(imagePath);
-//        byte[] imageBytes = Files.readAllBytes(Path.of(resource.getURI()));
-
-        // 이미지 파일을 ClassPathResource(프로젝트 내 상대경로)를 통해 가져오고 byte 배열로 변환
-        byte[] imageBytes = Files.readAllBytes(Path.of(imagePath));
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + imagePath);
-        // 이미지 파일의 MIME 타입 설정
-        MediaType mediaType = MediaType.IMAGE_PNG; // 이미지타입 저장
-
-        return ResponseEntity.ok()
-                .contentType(mediaType)
-                .body(imageBytes);
     }
 }

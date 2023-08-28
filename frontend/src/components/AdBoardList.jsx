@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Modal from "react-modal";
 
-function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoards, selectCategory, reportedBoard, reportViewHandle }) {
+function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoards, selectCategory, reportedBoard }) {
 
     const navigate = useNavigate();
-
     //-----------페이징-------------
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + 10;
@@ -16,7 +15,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
     //-----------페이징-------------
 
     const [boardCategory, setBoardCategory] = useState("0"); // 게시판 카테고리
-    const [reportOnly, setReportOnly] = useState(false);
     const [isOpenReport, setIsOpenReport] = useState(false); // 신고리스트 모달창 flg
     const [isOpenReply, setIsOpenReply] = useState(false);
     console.log(boardCategory);
@@ -111,7 +109,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log("ddddd", data);
                 setCheckItems([]);
                 setBoardCategory(boardCategory);
-                setReportOnly(false);
                 selectCategory(boardCategory);
                 console.log("boardCategory", boardCategory);
             })
@@ -140,7 +137,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 setCheckItems([]);
                 setBoardCategory(boardCategory);
-                setReportOnly(false);
                 selectCategory(boardCategory);
             })
             .catch((error) => {
@@ -168,7 +164,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 selectCategory(boardCategory);
                 setCheckReplyItems([]);
-                setReportOnly(false);
                 setIsOpenReply(false);
             })
             .catch((error) => {
@@ -197,7 +192,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 console.log(data);
                 selectCategory(boardCategory);
                 setCheckReplyItems([]);
-                setReportOnly(false);
                 setIsOpenReply(false);
             })
             .catch((error) => {
@@ -224,7 +218,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                         <tr>
                             <td>게시판 선택</td>
                             <td>
-                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, true), handlePageChange(1) }} value={boardCategory}>
+                                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value) }} value={boardCategory}>
                                     <option value={0}>전체보기</option>
                                     <option value={1}>공지사항</option>
                                     <option value={2}>소식공유</option>
@@ -232,9 +226,6 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                     <option value={4}>봉사후기</option>
                                 </select>
                             </td>
-                            {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
-                            <td>신고된 게시글만 보기</td>
-                            <td><input type='checkbox' onChange={(e) => {setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
                         </tr>
                     </tbody>
                 </table>

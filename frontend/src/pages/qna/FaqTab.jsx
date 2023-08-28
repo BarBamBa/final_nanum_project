@@ -40,8 +40,8 @@ function FaqTab({ qnaData }) {
                     {qnaData.map((qna, i) => {
                         return (
                             <tr key={qna.id}>
-                                <td className="table-no">{i + 1}</td>
-                                <td className="table-title" onClick={() => { navigate(`/qna/detail/${qna.id}`, {state:{boardKind:"1"}}) }} >{qna.mtitle}</td>
+                                <td className="table-no">{i+1}</td>
+                                <td className="table-title" onClick={()=>{navigate(`/qna/detail/${qna.id}`)}} >{qna.mtitle}</td>
                                 <td className="table-date">{qna.createAt2}</td>
                             </tr>
                         );
@@ -60,10 +60,6 @@ function FaqTab({ qnaData }) {
                 nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
                 onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             /> */}
-            <div>
-                <button onClick={() => { navigate("/qna/input", { state: { boardKind: "1", formKind: "write" } }) }} >글쓰기</button>
-            </div>
-
         </>
     )
 }
