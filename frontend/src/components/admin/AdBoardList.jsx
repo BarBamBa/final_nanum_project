@@ -20,6 +20,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
     const [isOpenReport, setIsOpenReport] = useState(false); // 신고리스트 모달창 flg
     const [isOpenReply, setIsOpenReply] = useState(false);
     console.log(boardCategory);
+    
     //-----------체크박스-------------
     const [checkItems, setCheckItems] = useState([]); //체크박스에 담은 게시판 리스트
     const [checkReplyItems, setCheckReplyItems] = useState([]);  //체크박스에 담은 댓글 리스트

@@ -3,6 +3,7 @@ package com.example.template1.repository;
 import com.example.template1.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -15,4 +16,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     Users findByEmail(String email);
 
     Users findByNameAndPhone(String name, String phone);
+
+    List<Users> findAllByOrderByCreateAtDesc();
 }

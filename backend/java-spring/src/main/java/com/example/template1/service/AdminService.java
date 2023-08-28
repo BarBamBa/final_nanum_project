@@ -2,11 +2,13 @@ package com.example.template1.service;
 
 import com.example.template1.model.Reply;
 import com.example.template1.model.Report;
+import com.example.template1.model.Users;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.model.dto.ReplyRequest;
 import com.example.template1.repository.BoardRepository;
 import com.example.template1.repository.ReplyRepository;
 import com.example.template1.repository.ReportRepository;
+import com.example.template1.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.template1.model.Board;
@@ -21,6 +23,7 @@ public class AdminService {
     private final BoardRepository boardRepository;
     private final ReportRepository reportRepository;
     private final ReplyRepository replyRepository;
+    private final UsersRepository usersRepository;
 
     public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
@@ -107,5 +110,10 @@ public class AdminService {
         }
 
         return revertReplies;
+    }
+
+    public List<Users> getAllUser() {
+        List<Users> users = usersRepository.findAllByOrderByCreateAtDesc();
+        return users;
     }
 }

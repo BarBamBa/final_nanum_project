@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
-import AdBoardList from '../../components/AdBoardList';
+import AdBoardList from '../../components/admin/AdBoardList';
 import '../../scss/admin/AdBoard.scss'
 
 function AdBoard() {

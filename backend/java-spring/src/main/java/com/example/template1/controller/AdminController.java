@@ -2,6 +2,7 @@ package com.example.template1.controller;
 
 import com.example.template1.model.Board;
 import com.example.template1.model.Reply;
+import com.example.template1.model.Users;
 import com.example.template1.model.dto.*;
 import com.example.template1.service.AdminService;
 import com.example.template1.service.BoardService;
@@ -82,5 +83,16 @@ public class AdminController {
 
         return ResponseEntity.ok()
                 .body(revertList);
+    }
+
+    @GetMapping("/users") // 유저 리스트
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
+        List<UserResponse> usersList = adminService.getAllUser()
+                .stream()
+                .map(UserResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(usersList);
     }
 }
