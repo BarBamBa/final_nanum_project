@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './FindUser.css';
+import '/src/scss/login/FindUser.scss';
 
 
 function FindUser() {
