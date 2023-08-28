@@ -25,6 +25,7 @@ import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
+import MypageModify from './pages/myPage/MypageModify';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
             <Route path='/board/detail/:id' element={<BoardDetail/>} />
             <Route path='/board/input' element={<BoardInputForm/>} />
             <Route path="/mypage/*" element={<MyPage/>} />
+            <Route path="/MypageModify/*" element={<MypageModify/>} />
             <Route path="/WishList/*" element={<WishList/>} />
             <Route path="/qna/*" element={<Qna/>} />
             <Route path="/login/*" element={<Login/>} />

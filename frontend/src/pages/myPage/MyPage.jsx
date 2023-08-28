@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FiExternalLink } from 'react-icons/fi'
 import '/src/scss/myPage/MyPage.scss'
@@ -69,28 +70,34 @@ return (
             <div className="myPage-category">주소</div>
             <div className="myPage-textBox">{userInfo.address}</div>
           {/* ==나의 자원봉사 및 정보수정 버튼========== */}
+        
           <div className='buttonBox'>
-            <Link to={`/MyVolunteer`} className="toMyVolunteer" >
-                  나의 자원봉사
-              <FiExternalLink className="siteIcon" alt="외부사이트 이동 아이콘" userInfo={userInfo}/>
-            </Link>
+          
+            <div>
 
-            <div className="myPage-btn-div">
-              <Link to={`/MypageModify`}>
-                <button  className="myPage-btn">정보수정하기</button>
-              </Link>
+              <div className='MyVolunteerBox'>
+                <Link to={`/MyVolunteer`} className="toMyVolunteer" >
+                      나의 자원봉사
+                  <FiExternalLink className="siteIcon" alt="외부사이트 이동 아이콘" userInfo={userInfo}/>
+                </Link>
+              </div>
 
-              <Link to={`/PasswordConfirm`}>
-              <button type='button' className="myPage-btn">비밀번호 변경</button>
-              </Link>
+              <div  className="myPage-btn-div">
+                <Link to={`/MypageModify`}>
+                  <button  className="myPage-btn">정보수정하기</button>
+                </Link>
+
+                <Link to={`/PasswordConfirm`}>
+                <button type='button' className="myPage-btn">비밀번호 변경</button>
+                </Link>
+              </div>
 
             </div>
 
           </div>
           
      </div>
-        </div>
-           
+                  
     </form>
     </>
 

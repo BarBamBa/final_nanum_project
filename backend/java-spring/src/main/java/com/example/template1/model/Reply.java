@@ -31,7 +31,7 @@ public class Reply extends BaseEntity{
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "Parents_No")
+    @JoinColumn(name = "Parent_No")
     private Reply reply;
 
     @Column(columnDefinition = "CHAR(1) DEFAULT 'Y'")
