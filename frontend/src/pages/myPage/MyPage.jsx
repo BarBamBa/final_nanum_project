@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FiExternalLink } from 'react-icons/fi'
 import '/src/scss/myPage/MyPage.scss'
@@ -89,8 +89,6 @@ return (
           </div>
           
      </div>
-        </div>
-      </div>
     </form>
     </>
 

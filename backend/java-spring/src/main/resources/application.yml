@@ -9,6 +9,17 @@ spring:
     user:
       name: user
       password: 1234
+    oauth2:
+      client:
+        registration:
+          google:
+#            client-id: ${client.id}
+#            client-secret: ${client.secret}
+            client-id: '825609982374-snafrehlvkfcrbithm2hkcn0pddbtnju.apps.googleusercontent.com'
+            client-secret: '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'
+            scope:
+              - email
+              - profile
 
   jpa:
     show-sql: true
