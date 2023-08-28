@@ -3,7 +3,7 @@ import BoardTab from "./BoardTab";
 import '../../scss/board/Board.scss'
 import '../../scss/board/Notice.scss'
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import "../../scss/Paging.css";
+import "../../scss/Paging.scss";
 import { TokenCheck } from "../../components/TokenCheck";
 
 

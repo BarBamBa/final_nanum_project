@@ -1,15 +1,8 @@
-
-/* 폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@600&display=swap');
-
 .head-font {
   font-size: 35px;
   font-weight: bold;
   margin-top: 50px;
   margin-left: 20px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-family: 'Noto Serif KR', serif;
   color: #202020;
 }
 
@@ -49,7 +42,6 @@
   color: #A4CC22;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .content > div {
@@ -67,7 +59,6 @@
   width: 850px;
   position: relative;
   left: 80px;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .tab {

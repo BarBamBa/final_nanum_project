@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import '/src/scss/mypage/PasswordChange.scss'
+import '/src/scss/myPage/PasswordChange.scss'
 
 
 function PasswordConfirm() {
