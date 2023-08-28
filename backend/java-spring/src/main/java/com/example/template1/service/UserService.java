@@ -141,6 +141,12 @@ public class UserService {
     }
 
     public String findEmailByNameAndPhone(String name, String phone) {
-        return usersRepository.findByNameAndPhone(name, phone).getEmail();
+        Users user = usersRepository.findByNameAndPhone(name, phone);
+
+        if(user != null) {
+            return user.getEmail();
+        } else {
+            return null;
+        }
     }
 }

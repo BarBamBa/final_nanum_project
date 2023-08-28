@@ -140,7 +140,9 @@ function BoardInputForm() {
 
     if (fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
       alert("등록완료");
-      navigate("/board");
+      navigate("/board", {
+        state: { boardKind: boardKind }
+      });
     }
 
     if (fileInput) {

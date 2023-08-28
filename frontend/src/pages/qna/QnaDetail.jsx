@@ -8,17 +8,17 @@ function QnaDetail() {
   let { id } = useParams();
   const [qnaData, setQnaData] = useState();
 
-  // qna 조회
+  // qna 조회 
   async function fetchQna() {
     fetch("/api/qna/" + id)
-        .then((res) => res.json())
-        .then((data) => {
-          setQnaData(data);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
+      .then((res) => res.json())
+      .then((data) => {
+        setQnaData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
   useEffect(() => {
@@ -28,9 +28,9 @@ function QnaDetail() {
 
   console.log(qnaData);
   return (
-      qnaData && (
-          qnaData.flg == 1 ? <FAQContent qnaData={qnaData} /> : <QnaContent qnaData={qnaData} fetchQna={fetchQna} />
-      )
+    qnaData && (
+      qnaData.flg == 1 ? <FAQContent qnaData={qnaData} /> : <QnaContent qnaData={qnaData} fetchQna={fetchQna} />
+    )
   )
 }
 
