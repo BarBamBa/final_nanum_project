@@ -50,26 +50,26 @@ function BoardDetail() {
   // 게시글 조회
   async function fetchBoards() {
     fetch("/api/boards/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        setBoardData(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          setBoardData(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
   // 댓글 조회
   async function fetchReplies() {
     fetch("/api/replies/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        setReplyData(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          setReplyData(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   useEffect(() => {
@@ -80,14 +80,14 @@ function BoardDetail() {
   const fetchChildReplies = async (parentId) => {
 
     fetch("/api/child-replies/" + parentId)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setChildReplyData(data)
-      })
-      .catch((error) => {
-        console.error(error);
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setChildReplyData(data)
+        })
+        .catch((error) => {
+          console.error(error);
+        })
     console.log(parentId);
     console.log(replyIdx);
     console.log(childReplyIdx);
@@ -106,13 +106,13 @@ function BoardDetail() {
       },
       body: JSON.stringify({ status: "N" }),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   };
 
 
@@ -153,22 +153,22 @@ function BoardDetail() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("댓글입력완료", res);
-        setNewReplyData(); // 새 댓글데이터 초기화
-        setNewChildReplyData(); // 새 대댓글데이터 초기화
-        setPostReplyFlg(false); // 댓글 입력창 닫기
-        setChildReplyFlg(false); // 대댓글 입력창 닫기
-        fetchReplies();
-        if (viewChildReplyFlg) {
-          fetchChildReplies(newChildReplyData.reply);
-          // 대댓글 창이 열려있으면 새 대댓글의 parentID로 대댓글 목록 갱신
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          console.log("댓글입력완료", res);
+          setNewReplyData(); // 새 댓글데이터 초기화
+          setNewChildReplyData(); // 새 대댓글데이터 초기화
+          setPostReplyFlg(false); // 댓글 입력창 닫기
+          setChildReplyFlg(false); // 대댓글 입력창 닫기
+          fetchReplies();
+          if (viewChildReplyFlg) {
+            fetchChildReplies(newChildReplyData.reply);
+            // 대댓글 창이 열려있으면 새 대댓글의 parentID로 대댓글 목록 갱신
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   // 댓글 수정
@@ -203,20 +203,20 @@ function BoardDetail() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setEditReplyFlg(false);
-        setEditChildReplyFlg(false);
-        // setReplyIdx(0);
-        setEditReplyContent("");
-        fetchReplies();
-        fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
-        alert("수정완료");
-      })
-      .catch((error) => {
-        console.error(error);
-      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          setEditReplyFlg(false);
+          setEditChildReplyFlg(false);
+          // setReplyIdx(0);
+          setEditReplyContent("");
+          fetchReplies();
+          fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
+          alert("수정완료");
+        })
+        .catch((error) => {
+          console.error(error);
+        })
   }
 
   // 댓글 삭제
@@ -241,18 +241,18 @@ function BoardDetail() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        // setEditReplyFlg(false);
-        // setEditChildReplyFlg(false);
-        fetchReplies();
-        fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
-        alert("삭제완료");
-      })
-      .catch((error) => {
-        console.error(error);
-      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          // setEditReplyFlg(false);
+          // setEditChildReplyFlg(false);
+          fetchReplies();
+          fetchChildReplies(childReplyData[0].reply);//부모댓글id로 대댓글 fetch해서 대댓글 바로렌더링
+          alert("삭제완료");
+        })
+        .catch((error) => {
+          console.error(error);
+        })
   }
 
   // 게시글 신고
@@ -269,271 +269,271 @@ function BoardDetail() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data == true) {
-          alert("이미 신고한 게시글 입니다.");
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data == true) {
+            alert("이미 신고한 게시글 입니다.");
+            setIsOpen(false);
+            return;
+          }
+          alert("신고되었습니다.");
           setIsOpen(false);
-          return;
-        }
-        alert("신고되었습니다.");
-        setIsOpen(false);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        console.error(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error.message);
+          console.error(error);
+        });
   }
   // console.log(process.env.VITE_API_GATEWAY_HOST);
 
   return (
-    boardData && (
-      <div className="board-detail-container">
-        {/* 게시글 영역 */}
-        <div className="board-detail-kind">
-          <h1>{BoardFlg(boardData.flg)}</h1>
-        </div>
-
-        <div className="board-detail-box">
-          <div className="board-detail-header">
-            <div className="board-title">
-              <h3>글제목 : {boardData.title}</h3>
-              {
-                boardData.flg == "3" || boardData.flg == "4" ? (
-                  <button
-                    className="board-reportBtn"
-                    onClick={() => { setIsOpen(true) }}>게시글신고
-                  </button>
-                ) : null
-              }
-
+      boardData && (
+          <div className="board-detail-container">
+            {/* 게시글 영역 */}
+            <div className="board-detail-kind">
+              <h1>{BoardFlg(boardData.flg)}</h1>
             </div>
-            <div className="board-writter-info">
-              {
-                boardData.flg == "3" || boardData.flg == "4" ? (
-                  <p>글쓴이 : {boardData.name}</p>
-                ) : null
-              }
-              <p>등록일 : {boardData.createAt2}</p>
-            </div>
-          </div>
-          {
-            boardData.volunteerId && (
-              <ReviewInfo boardData={boardData}/>
-            )
-          }
 
-          <div className="board-detail-content">
-            {boardData.boardImgs && boardData.boardImgs.map((img, k) => {
-              return (
-                <>
-                  <img src={`http://localhost:9090/api/image/${img.name}`}></img>
-
-                  <p>{boardData.boardImgs.length}</p>
-                </>
-
-              )
-            })}
-            {/* <p>글내용 : {boardData.content}</p> */}
-            <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
-          </div>
-          {
-            boardData.userId == userInfo.userId || userInfo.auth == "ROLE_ADMIN" ? (
-              <div className="board-detail-btn">
-                <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify", boardKind: boardData.flg } }); }}>수정</button>
-                <button onClick={removeBoard}>삭제</button>
-              </div>
-            ) : null
-          }
-
-
-
-        </div>
-
-
-        {/* 댓글영역 */}
-        {
-          boardData.flg == "3" || boardData.flg == "4" ? (
-            <div className="board-reply-container">
-              <div className="board-reply-header">
-                <p>댓글({replyData.length})</p>
-                <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
-              </div>
-
-
-              {postReplyFlg ?
-                <div className="board-reply-input">
-                  <input
-                    type="text"
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setNewReplyData(e.target.value);
-                    }} />
-                  <button onClick={newReplyHandle} >입력</button>
-                </div> : null}
-
-              {replyData.map((data, i) => (
-
-                <div key={i} className="board-reply-content">
-                  {/* 댓글작성자 */}
-                  <div className="reply-writter">
-                    <p>글쓴이 : {data.name}</p>
-                  </div>
-
-                  {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
-                  {editReplyFlg && replyIdx === i ? (
-                    <div>
-                      <input
-                        type="text"
-                        value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
-                        onChange={(e) => {
-                          // e.preventDefault;
-                          setEditReplyContent(e.target.value);
-                        }}
-                      />
-                      <button onClick={() => { modifyReplyHandle(data.id); }}>저장</button>
-                      <button onClick={() => { setEditReplyFlg(!editReplyFlg); }}>취소</button>
-                    </div>
-                  ) : (
-                    <>
-                      {/* 댓글내용 */}
-                      <div className="reply-content">{data.content}</div>
-                    </>
-                  )}
-
-                  {/* 댓글날짜 */}
-                  <div className="reply-date">{data.createAt2}</div>
-
-                  <div className="reply-button-area">
-
-                    <div className="reply-childBtn-area">
-                      {/* 대댓글보기버튼 */}
-                      <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>대댓글보기</p>
-
-                      {/* 대댓글달기버튼 */}
-                      <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setReplyIdx(i); }}>댓글달기</p>
-                    </div>
-
-                    <div className="reply-modifyBtn-area">
-                      {/* 댓글 수정 삭제 버튼 */}
-                      {
-                        data.userId == userInfo.userId && (
-                          <>
-                            <button
-                              onClick={() => {
-                                setEditReplyFlg(true);
-                                setReplyIdx(i);
-                                console.log(data.content);
-                                console.log(typeof (data.content));
-                              }}>수정</button>
-
-                            <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
-                          </>
-                        )
-                      }
-
-
-
-                    </div>
-
-                  </div>
-
-                  {/* 대댓글달기 input 영역 */}
-                  {postChildReplyFlg && replyIdx === i ? (
-                    <div className="child-reply-input">
-                      <input
-                        type="text"
-                        name={data.id}
-                        onChange={(e) => {
-                          console.log(e.target.name);
-                          // console.log(e.target.value);
-                          setNewChildReplyData({ content: e.target.value, reply: e.target.name });
-                        }} />
-                      <button onClick={newReplyHandle}>작성</button>
-                      <button onClick={() => { setChildReplyFlg(false); }}> 취소 </button>
-                    </div>
-                  ) : null}
-                  {/* 대댓글달기 end */}
-
-                  {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
-                    <div className="board-child-reply-container">
-
-                      {childReplyData.map((childData, j) => (
-                        <div key={j} className="board-child-reply-content">
-
-                          <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
-
-                          {/* 대댓글 내용 / 수정창 전환영역 */}
-                          {editChildReplyFlg && childReplyIdx === j ? (
-                            <div>
-                              <input
-                                type="text"
-                                value={editReplyContent || childData.content}
-                                onChange={(e) => {
-                                  setEditReplyContent(e.target.value);
-                                }}
-                              />
-                              <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
-                              <button onClick={() => { setEditChildReplyFlg(false); }}>취소</button>
-                            </div>
-
-                          ) : (
-                            <div className="child-reply-content">{childData.content}</div>
-                          )}
-                          {/* 대댓글 내용 수정창 전환영역 end*/}
-
-                          {/*  대댓글 수정버튼 */}
-                          {
-                            childData.userId == userInfo.userId && (
-                              <>
-                                <button
-                                  onClick={() => {
-                                    setEditChildReplyFlg(true);
-                                    setChildReplyIdx(j);
-                                    console.log(j);
-                                  }}>수정</button>
-
-                                <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
-                              </>
-                            )
-                          }
-
-
-                        </div>
-                      ))}
-
-                    </div>
-
-                  ) : null}
+            <div className="board-detail-box">
+              <div className="board-detail-header">
+                <div className="board-title">
+                  <h3>글제목 : {boardData.title}</h3>
+                  {
+                    boardData.flg == "3" || boardData.flg == "4" ? (
+                        <button
+                            className="board-reportBtn"
+                            onClick={() => { setIsOpen(true) }}>게시글신고
+                        </button>
+                    ) : null
+                  }
 
                 </div>
-              ))}
+                <div className="board-writter-info">
+                  {
+                    boardData.flg == "3" || boardData.flg == "4" ? (
+                        <p>글쓴이 : {boardData.name}</p>
+                    ) : null
+                  }
+                  <p>등록일 : {boardData.createAt2}</p>
+                </div>
+              </div>
+              {
+                  boardData.volunteerId && (
+                      <ReviewInfo boardData={boardData}/>
+                  )
+              }
+
+              <div className="board-detail-content">
+                {boardData.boardImgs && boardData.boardImgs.map((img, k) => {
+                  return (
+                      <>
+                        <img src={`http://localhost:9090/api/image/${img.name}`}></img>
+
+                        <p>{boardData.boardImgs.length}</p>
+                      </>
+
+                  )
+                })}
+                {/* <p>글내용 : {boardData.content}</p> */}
+                <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
+              </div>
+              {
+                boardData.userId == userInfo.userId || userInfo.auth == "ROLE_ADMIN" ? (
+                    <div className="board-detail-btn">
+                      <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify", boardKind: boardData.flg } }); }}>수정</button>
+                      <button onClick={removeBoard}>삭제</button>
+                    </div>
+                ) : null
+              }
+
+
+
             </div>
-          ) : null
-        }
 
-        <Modal
-          style={modalStyle}
-          isOpen={isOpen}
-          onRequestClose={() => { setIsOpen(false) }}
-        >
-          <div>
-            <h3 className="report-head">신고 사유를 선택해 주세요.</h3>
-            <label htmlFor="selectbar">신고사유</label>
-            <select id="selectbar" onChange={(e) => { setReportReason(e.target.value) }} value={reportReason}>
-              <option value={1}>폭력/욕설</option>
-              <option value={2}>광고물</option>
-              <option value={3}>선정적인 게시물</option>
-              <option value={4}>게시판 성격과 무관한 게시물</option>
-            </select>
-            <button onClick={reportBoard}>신고</button>
-            <li className="report-alert">허위 신고 시 본인도 불이익을 받을 수 있습니다.</li>
-          </div>
-        </Modal>
-      </div >
 
-    )
+            {/* 댓글영역 */}
+            {
+              boardData.flg == "3" || boardData.flg == "4" ? (
+                  <div className="board-reply-container">
+                    <div className="board-reply-header">
+                      <p>댓글({replyData.length})</p>
+                      <button onClick={() => { setPostReplyFlg(!postReplyFlg) }}>댓글작성</button>
+                    </div>
+
+
+                    {postReplyFlg ?
+                        <div className="board-reply-input">
+                          <input
+                              type="text"
+                              onChange={(e) => {
+                                console.log(e.target.value);
+                                setNewReplyData(e.target.value);
+                              }} />
+                          <button onClick={newReplyHandle} >입력</button>
+                        </div> : null}
+
+                    {replyData.map((data, i) => (
+
+                        <div key={i} className="board-reply-content">
+                          {/* 댓글작성자 */}
+                          <div className="reply-writter">
+                            <p>글쓴이 : {data.name}</p>
+                          </div>
+
+                          {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
+                          {editReplyFlg && replyIdx === i ? (
+                              <div>
+                                <input
+                                    type="text"
+                                    value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
+                                    onChange={(e) => {
+                                      // e.preventDefault;
+                                      setEditReplyContent(e.target.value);
+                                    }}
+                                />
+                                <button onClick={() => { modifyReplyHandle(data.id); }}>저장</button>
+                                <button onClick={() => { setEditReplyFlg(!editReplyFlg); }}>취소</button>
+                              </div>
+                          ) : (
+                              <>
+                                {/* 댓글내용 */}
+                                <div className="reply-content">{data.content}</div>
+                              </>
+                          )}
+
+                          {/* 댓글날짜 */}
+                          <div className="reply-date">{data.createAt2}</div>
+
+                          <div className="reply-button-area">
+
+                            <div className="reply-childBtn-area">
+                              {/* 대댓글보기버튼 */}
+                              <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>대댓글보기</p>
+
+                              {/* 대댓글달기버튼 */}
+                              <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setReplyIdx(i); }}>댓글달기</p>
+                            </div>
+
+                            <div className="reply-modifyBtn-area">
+                              {/* 댓글 수정 삭제 버튼 */}
+                              {
+                                  data.userId == userInfo.userId && (
+                                      <>
+                                        <button
+                                            onClick={() => {
+                                              setEditReplyFlg(true);
+                                              setReplyIdx(i);
+                                              console.log(data.content);
+                                              console.log(typeof (data.content));
+                                            }}>수정</button>
+
+                                        <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
+                                      </>
+                                  )
+                              }
+
+
+
+                            </div>
+
+                          </div>
+
+                          {/* 대댓글달기 input 영역 */}
+                          {postChildReplyFlg && replyIdx === i ? (
+                              <div className="child-reply-input">
+                                <input
+                                    type="text"
+                                    name={data.id}
+                                    onChange={(e) => {
+                                      console.log(e.target.name);
+                                      // console.log(e.target.value);
+                                      setNewChildReplyData({ content: e.target.value, reply: e.target.name });
+                                    }} />
+                                <button onClick={newReplyHandle}>작성</button>
+                                <button onClick={() => { setChildReplyFlg(false); }}> 취소 </button>
+                              </div>
+                          ) : null}
+                          {/* 대댓글달기 end */}
+
+                          {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
+                              <div className="board-child-reply-container">
+
+                                {childReplyData.map((childData, j) => (
+                                    <div key={j} className="board-child-reply-content">
+
+                                      <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
+
+                                      {/* 대댓글 내용 / 수정창 전환영역 */}
+                                      {editChildReplyFlg && childReplyIdx === j ? (
+                                          <div>
+                                            <input
+                                                type="text"
+                                                value={editReplyContent || childData.content}
+                                                onChange={(e) => {
+                                                  setEditReplyContent(e.target.value);
+                                                }}
+                                            />
+                                            <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
+                                            <button onClick={() => { setEditChildReplyFlg(false); }}>취소</button>
+                                          </div>
+
+                                      ) : (
+                                          <div className="child-reply-content">{childData.content}</div>
+                                      )}
+                                      {/* 대댓글 내용 수정창 전환영역 end*/}
+
+                                      {/*  대댓글 수정버튼 */}
+                                      {
+                                          childData.userId == userInfo.userId && (
+                                              <>
+                                                <button
+                                                    onClick={() => {
+                                                      setEditChildReplyFlg(true);
+                                                      setChildReplyIdx(j);
+                                                      console.log(j);
+                                                    }}>수정</button>
+
+                                                <button onClick={() => { removeReplyHandle(childData.id) }}>삭제</button>
+                                              </>
+                                          )
+                                      }
+
+
+                                    </div>
+                                ))}
+
+                              </div>
+
+                          ) : null}
+
+                        </div>
+                    ))}
+                  </div>
+              ) : null
+            }
+
+            <Modal
+                style={modalStyle}
+                isOpen={isOpen}
+                onRequestClose={() => { setIsOpen(false) }}
+            >
+              <div>
+                <h3 className="report-head">신고 사유를 선택해 주세요.</h3>
+                <label htmlFor="selectbar">신고사유</label>
+                <select id="selectbar" onChange={(e) => { setReportReason(e.target.value) }} value={reportReason}>
+                  <option value={1}>폭력/욕설</option>
+                  <option value={2}>광고물</option>
+                  <option value={3}>선정적인 게시물</option>
+                  <option value={4}>게시판 성격과 무관한 게시물</option>
+                </select>
+                <button onClick={reportBoard}>신고</button>
+                <li className="report-alert">허위 신고 시 본인도 불이익을 받을 수 있습니다.</li>
+              </div>
+            </Modal>
+          </div >
+
+      )
 
   )
 

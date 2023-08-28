@@ -140,4 +140,7 @@ public class UserService {
         usersRepository.save(user);
     }
 
+    public String findEmailByNameAndPhone(String name, String phone) {
+        return usersRepository.findByNameAndPhone(name, phone).getEmail();
+    }
 }
