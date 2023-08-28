@@ -6,6 +6,7 @@ import com.example.template1.model.Users;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.model.dto.QnaRequest;
 import com.example.template1.repository.QnARepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QnaService {
     private final QnARepository qnARepository;
-    public List<QnA> getAllQna() {
+    public List<QnA> getAllQna() { //qna 리스트 조회
         List<QnA> qnaList = qnARepository.findAllByOrderByCreateAtDesc();
-
         return qnaList;
     }
 
-    public QnA getQna(long id) {
+    public QnA getQna(long id) { //qna조회
         QnA qna = qnARepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
         return qna;
     }

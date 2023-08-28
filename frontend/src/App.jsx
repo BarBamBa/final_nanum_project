@@ -24,6 +24,7 @@ import QnaDetail from './pages/qna/QnaDetail';
 import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
+import PasswordConfirm from './pages/myPage/PasswordConfirm';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/qna/*" element={<Qna/>} />
             <Route path="/login/*" element={<Login/>} />
             <Route path="/FindUser/*" element={<FindUser/>} />
+            <Route path='/PasswordConfirm/*' element={<PasswordConfirm/>} />
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
         </Routes>

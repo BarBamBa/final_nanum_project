@@ -8,7 +8,7 @@ import { BiEditAlt } from 'react-icons/bi'
 function VolunteerSpec() {
   return (
     <>
-      <form>    
+      <form>
         <VolunteerHeaders/>
         <div className="volunteer-request-container">
         <div className="volunteer-request">완료된봉사 [전체 3건]</div>
@@ -30,7 +30,7 @@ function VolunteerSpec() {
         <div className="category-bottom"></div>
       </div>
       </form>
-    
+
     </>
   )
 }

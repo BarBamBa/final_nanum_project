@@ -41,7 +41,7 @@ function Board() {
         console.error(error);
       }
     }
-
+    
     fetchBoards();
   }, [boardKind]);
 

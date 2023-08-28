@@ -13,8 +13,8 @@ export const TokenCheckProvider = ({ children }) => {
 
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const refreshToken = sessionStorage.getItem('refreshToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
     if (accessToken && refreshToken) {
       setIsLogin(true);
@@ -30,7 +30,7 @@ export const TokenCheckProvider = ({ children }) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + sessionStorage.getItem('accessToken'),
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
       })
         .then((res) => {

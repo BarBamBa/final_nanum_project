@@ -40,6 +40,32 @@ function CalendarReserve({sendDataToReserve}) {
     '월', '화', '수', '목', '금', '토', '일',
   ]
 
+  // js getDay 요일
+  const getDays = [
+    '일', '월', '화', '수', '목', '금', '토', 
+  ]
+
+  // 선택 가능 요일 문자배열
+  const actDay = location.state.data.actWkdy.split(" ");
+
+  // 선택 가능 요일 숫자 치환
+  function setDays() {
+    for(let i=0; i<actDay.length; i++) {
+      for(let j=0; j<getDays.length; j++) {
+        if(i === actDay.length-1) {
+          actDay[i] !== getDays[j] && getDays[j] !== 1 ? getDays[j] = 0 : getDays[j] = 1;
+          continue;
+        }
+        if(actDay[i] === getDays[j]) {
+          getDays[j] = 1;
+          continue;
+        }
+      }
+    }
+  };
+
+  setDays();
+
   //날짜
   let today = startOfToday()
   //이번달
@@ -114,9 +140,10 @@ function CalendarReserve({sendDataToReserve}) {
                     isEqual(day, selectedDay) && isSameMonth(day, firstDayCurrentMonth) ? 
                           isEqual(day, today) ? "dateLabelBox" :
                               isAfter(day, stringToDate(endDate)) ? "dateLabelBox" : 
-                                isBefore(day,stringToDate(startDate)) ? "dateLabelBox" : "dateLabelBox selectedDay"
-                              : ''
-                              ||
+                                isBefore(day,stringToDate(startDate)) ? "dateLabelBox" : 
+                                  getDays[day.getDay()] !== 1 ? "dateLabelBox" : "dateLabelBox selectedDay"
+                    : ''
+                    ||
                     !isBefore(day, today) ? 'dateLabelBox' : "dateLabelBox before"
                   }
                 >
@@ -145,12 +172,12 @@ function CalendarReserve({sendDataToReserve}) {
                       </time>
                         { 
                         isAfter(today, stringToDate(startDate)) ? 
-                          isAfter(day, today) && isBefore(day, stringToDate(endDate)) ? 
+                          isAfter(day, today) && isBefore(day, stringToDate(endDate)) && getDays[day.getDay()] === 1 ? 
                           <p className='reserveTime'>
                               시작시간: {data.actBeginTm}시      종료시간: {data.actEndTm}시
                           </p> : '' 
                           :
-                          isAfter(day, stringToDate(startDate)) && isBefore(day, stringToDate(endDate)) ? 
+                          isAfter(day, stringToDate(startDate)) && isBefore(day, stringToDate(endDate)) && getDays[day.getDay()] === 1 ? 
                           <p className='reserveTime'>
                               시작시간: {data.actBeginTm}시      종료시간: {data.actEndTm}시
                           </p> : ''

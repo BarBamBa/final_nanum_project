@@ -2,6 +2,7 @@ package com.example.template1.service;
 
 import com.example.template1.model.Board;
 import com.example.template1.model.Users;
+import com.example.template1.model.Volunteer;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.repository.BoardRepository;
 import jakarta.transaction.Transactional;
@@ -40,6 +41,13 @@ public class BoardService {
         Users users = new Users();
         users.setId(request.getUsers().getId());
 
+        Volunteer volunteer = null;
+
+        if (request.getFlg() == '4') { // 봉사후기글일 경우에만 volunteer id  입력
+            volunteer = new Volunteer();
+            volunteer.setId(request.getVolunteer().getId());
+        }
+
         Board board =  Board.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
@@ -47,6 +55,7 @@ public class BoardService {
                 .status(request.getStatus())
                 .likeCount(request.getLikeCount())
                 .users(users)
+                .volunteer(volunteer)
                 .build();
 
         return boardRepository.save(board);
@@ -59,6 +68,7 @@ public class BoardService {
 
         board.setTitle(request.getTitle());
         board.setContent(request.getContent());
+        board.setVolunteer(request.getVolunteer());
 
         return board;
     }

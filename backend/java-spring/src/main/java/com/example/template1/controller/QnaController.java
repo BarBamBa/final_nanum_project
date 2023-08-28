@@ -4,14 +4,13 @@ import com.example.template1.model.Board;
 import com.example.template1.model.QnA;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.model.dto.BoardResponse;
+import com.example.template1.model.dto.QnaRequest;
 import com.example.template1.model.dto.QnaResponse;
 import com.example.template1.service.QnaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class QnaController {
         List<QnaResponse> qnaList = qnaService.getAllQna()
                 .stream()
                 .filter(qna -> qna.getStatus() == 'Y')
+                .filter(qna -> qna.getQna() == null)
                 .map(QnaResponse::new)
                 .toList();
 

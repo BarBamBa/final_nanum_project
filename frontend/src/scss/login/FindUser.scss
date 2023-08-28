@@ -1,0 +1,181 @@
+
+/* 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@600&display=swap');
+
+.head-font {
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-left: 20px;
+  font-family: 'Black Han Sans', sans-serif;
+  font-family: 'Noto Serif KR', serif;
+  color: #202020;
+}
+
+.head-font-bottom {
+  width: 100%;
+  border-bottom: 3px solid #e2e2e2;
+}
+
+/* ========== 로고 css================================== */
+
+.findUser-logo{
+  width: 450px;
+  height: 250px;
+  margin-top: 100px;
+  margin-left: 175px;
+  margin-bottom: -20px;
+}
+
+
+.logo-div{
+  width: 850px;
+}
+
+
+/* ========== 상단탭 css================================== */
+
+.main input[type=radio] {
+	display: none;
+}
+
+#tab-1:checked ~ .tab label:nth-child(1),
+#tab-2:checked ~ .tab label:nth-child(2) {
+  width: 150px;
+	background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  border-bottom: 4px solid #A4CC22;
+  color: #A4CC22;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.content > div {
+	display: none;
+}
+
+#tab-1:checked ~ .content div:nth-child(1),
+#tab-2:checked ~ .content div:nth-child(2)  {
+	display: block;
+  background-color: #fff;
+}
+
+.main div:not(.head-font-bottom) {
+  margin: 0 auto;
+  width: 850px;
+  position: relative;
+  left: 80px;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.tab {
+  overflow: hidden;
+<<<<<<< HEAD
+  margin-left: 355px;
+=======
+  position: relative;
+  left: 140px;
+>>>>>>> b76713dd2a2fd257847d82381c914df06f387381
+}
+
+.tab label {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    width: 150px;
+    text-align: center;
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+    left: 260px;
+    color: #cacaca;
+}
+
+.content > div{
+   padding: 30px;
+   line-height: 1.5;
+   font-size: 17px;
+}
+
+
+
+/* ==========아이디찾기 css================================== */
+
+.findUser-textbox {
+  width: 400px;
+  height: 40px;
+  border-radius: 10px;
+  border: solid 1px black;
+  margin-bottom: 15px;
+}
+
+
+
+<<<<<<< HEAD
+.find-success{
+  margin-left: 160px;
+  font-size: 20px;
+  color: rgb(56, 206, 26);
+}
+
+.find-Email{
+  /* background-color: rgba(162, 238, 166, 0.2); */
+  /* border: 3px solid #A4CC22; */
+  color: #A4CC22;
+  border-radius: 10px;
+  text-align: center;
+  width: 380px;
+  padding: 5px;
+  font-size: 23px;
+  position: relative;
+  bottom: 170px;
+  left: 7px;
+}
+=======
+>>>>>>> b76713dd2a2fd257847d82381c914df06f387381
+
+
+/* ==========찾기버튼 css================================== */
+.findUser-button{
+  background-color: #A4CC22;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  border: solid 2px #546D01;
+  cursor: pointer;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 400px;
+  border-radius: 10px;
+  margin-top: 5px auto;
+  outline: rgb(255, 255, 255) none 0px;
+<<<<<<< HEAD
+  margin-bottom: 100px;
+  margin-top: 10px;
+=======
+  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  margin-bottom: 200px;
+>>>>>>> b76713dd2a2fd257847d82381c914df06f387381
+  }
+
+.findUser-button:hover{
+  background-color: #FFF;
+  color: #A4CC22;
+}
