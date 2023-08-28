@@ -7,6 +7,7 @@ import About from './pages/about/About';
 import Board from './pages/board/Board';
 import Login from './pages/login/Login';
 import MyPage from './pages/myPage/MyPage';
+import MypageModify from './pages/myPage/MypageModify';
 import Qna from './pages/qna/Qna';
 import SignUp from './pages/signUp/SignUp';
 import Volunteer from './pages/volunteer/Volunteer';
@@ -21,6 +22,7 @@ import WishList from './pages/myPage/WishList'
 import VolunteerHeaders from './pages/myPage/VolunteerHeaders';
 import Reserve from './pages/volunteer/Reserve';
 import QnaDetail from './pages/qna/QnaDetail';
+import QnaInputForm from './components/QnaInputForm';
 import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
@@ -55,6 +57,7 @@ function App() {
             <Route path='/PasswordConfirm/*' element={<PasswordConfirm/>} />
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
+            <Route path="/qna/input" element={<QnaInputForm />} />
         </Routes>
         <ScrollTopButton />
         <Footer />

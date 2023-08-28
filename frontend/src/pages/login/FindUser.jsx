@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../scss/login/FindUser.scss';
 
+
+import '/src/scss/login/FindUser.scss';
 
 
 function FindUser() {

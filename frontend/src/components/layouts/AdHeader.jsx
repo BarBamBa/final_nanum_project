@@ -9,7 +9,6 @@ function AdHeader() {
       <div className='admin-nav'>
         <ul className='admin-nav-list'>
           <li className='admin-nav-item' onClick={()=>{navigate('')}}>게시판</li>
-          <li className='admin-nav-item' onClick={()=>{navigate('reply')}}>댓글</li>
           <li className='admin-nav-item' onClick={()=>{navigate('user')}}>회원</li>
           <li className='admin-nav-item' onClick={()=>{navigate('qna')}}>문의</li>
           <li className='admin-nav-item' onClick={()=>{navigate('volunteer')}}>봉사활동</li>

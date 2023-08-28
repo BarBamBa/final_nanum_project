@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../../scss/login/Login.scss';
+import '/src/scss/login/Login.scss'
 import axios from 'axios';
 import { GoogleLogin } from "@react-oauth/google";
 import {GoogleOAuthProvider} from "@react-oauth/google";

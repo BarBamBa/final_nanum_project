@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../../scss/myPage/MyPage.scss';
-import '../../scss/myPage/MypageModify.scss';
+import '/src/scss/myPage/MyPage.scss'
+import '/src/scss/myPage/MypageModify.scss'
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';

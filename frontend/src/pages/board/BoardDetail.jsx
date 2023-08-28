@@ -550,6 +550,8 @@ const modalStyle = {
     zIndex: 10,
   },
   content: {
+    width: "400px",
+    height: "180px",
     display: "flex",
     justifyContent: "center",
     overflow: "auto",

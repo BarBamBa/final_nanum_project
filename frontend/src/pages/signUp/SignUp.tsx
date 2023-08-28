@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom/dist';
 
-import '../../scss/signup/SignUp.scss';
+import '/src/scss/signup/SignUp.scss'
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
 import axios from 'axios';

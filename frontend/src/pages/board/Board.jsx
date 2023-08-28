@@ -1,25 +1,19 @@
 import { useState, useEffect, useContext } from "react";
-import Notice from "./Notice";
-import FreeBoard from "./FreeBoard";
-import News from "./News";
-import Review from "./Review";
+import BoardTab from "./BoardTab";
 import '../../scss/board/Board.scss'
 import '../../scss/board/Notice.scss'
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import "../../scss/Paging.css";
+import "../../scss/Paging.scss";
 import { TokenCheck } from "../../components/TokenCheck";
 
 
 
 function Board() {
-  const idd = useContext(TokenCheck);
-  // const [isLogin, userId] = TokenCheck();
-  console.log(idd.userId);
-  // console.log(userId);
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [boardName, setBoardName] = useState("공지사항");
   const [boardKind, setBoardKind] = useState("1");
   const [boardData, setBoardData] = useState([]);
 
@@ -41,7 +35,7 @@ function Board() {
         console.error(error);
       }
     }
-    
+
     fetchBoards();
   }, [boardKind]);
 
@@ -83,40 +77,38 @@ function Board() {
   useEffect(() => {
     // 페이지 로딩 시 URL 매개변수에서 데이터를 가져와서 boardData를 업데이트
     if (location.state) {
-      setBoardName(location.state.boardName);
       setBoardKind(location.state.boardKind);
-      console.log(location.state);
     }
   }, [location.state]);
 
-  const navigateBtn = (name, kind) => {
-    setBoardName(name);
-    setBoardKind(kind);
-  }
 
   return (
     <div>
       <div className="boardContainer">
         <div className="board-nav">
-          <h1>{boardName}</h1>
+          <h1>{boardKind == "1" ?
+            "공지사항"
+            : boardKind == "2" ?
+              "소식공유"
+              : boardKind == "3" ?
+                "자유게시판"
+                : boardKind == "4" ?
+                  "봉사후기"
+                  : "알수없음"}</h1>
           <div className="board-button">
-            <button onClick={() => { navigate(""); navigateBtn("공지사항", "1"); }}
-              style={boardName === "공지사항" ? { color: "#546d01" } : null} >공지사항</button>
-            <button onClick={() => { navigate("news"); navigateBtn("소식공유", "2"); }}
-              style={boardName === "소식공유" ? { color: "#546d01" } : null} >소식공유</button>
-            <button onClick={() => { navigate("freeboard"); navigateBtn("자유게시판", "3"); }}
-              style={boardName === "자유게시판" ? { color: "#546d01" } : null} >자유게시판</button>
-            <button onClick={() => { navigate("review"); navigateBtn("봉사후기", "4"); }}
-              style={boardName === "봉사후기" ? { color: "#546d01" } : null} >봉사후기</button>
+            <button onClick={() => { setBoardKind("1"); }}
+              style={boardKind === "1" ? { color: "#546d01" } : null} >공지사항</button>
+            <button onClick={() => { setBoardKind("2"); }}
+              style={boardKind === "2" ? { color: "#546d01" } : null} >소식공유</button>
+            <button onClick={() => { setBoardKind("3"); }}
+              style={boardKind === "3" ? { color: "#546d01" } : null} >자유게시판</button>
+            <button onClick={() => { setBoardKind("4"); }}
+              style={boardKind === "4" ? { color: "#546d01" } : null} >봉사후기</button>
           </div>
         </div>
 
-        <Routes>
-          <Route path="" element={<Notice boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
-          <Route path="news" element={<News boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
-          <Route path="freeboard" element={<FreeBoard boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
-          <Route path="review" element={<Review boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} />} />
-        </Routes>
+        <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
+
       </div>
 
 

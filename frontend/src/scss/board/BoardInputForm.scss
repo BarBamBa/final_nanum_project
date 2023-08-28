@@ -4,34 +4,54 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-}
-
-.board-input-nav {
-  border-bottom: 4px solid #546d01;
-  position: relative;
-}
-
-.titleBox,
-.volunteerBox {
-  padding: 16px;
-}
-
-
-.form-control {
-  width: 980px;
-}
-
-
-.ContentBox {
-  .form-control {
-    width: 1000px;
-    height: 450px;
+  
+  .board-input-nav {
+    border-bottom: 4px solid #546d01;
+    position: relative;
   }
-}
 
-.board-input-form {
-  td {
-    width: 100px;
+  .board-input-form {
+    td {
+      width: 100px;
+    }
+
+    .board-input-content-name {
+      text-align: center;
+
+      .ContentBox {
+        .form-control {
+          width: 1000px;
+          height: 450px;
+        }
+      }
+
+      .contentBox {
+        margin: 0 auto;
+        width: 1000px;
+        height: 700px;
+      }
+
+      .submitBox {
+        width: 1040px;
+        display: flex;
+        justify-content: end;
+      }
+      
+    }
+
+    .titleBox,
+    .volunteer-box {
+      padding: 16px;
+
+      .form-control {
+        width: 980px;
+      }
+    }
+
+
+    .uploadBox input {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -46,24 +66,4 @@
 
 .DraftEditor-root {
   border: 1px solid #F1F1F1;
-}
-
-.contentBox {
-  margin: 0 auto;
-  width: 1000px;
-  height: 700px;
-}
-
-.uploadBox input {
-  margin-left: 10px;
-}
-
-.submitBox {
-  width: 1040px;
-  display: flex;
-  justify-content: end;
-}
-
-.board-input-content-name {
-  text-align: center;
 }
