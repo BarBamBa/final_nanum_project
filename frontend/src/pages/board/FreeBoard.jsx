@@ -41,7 +41,7 @@ function FreeBoard(props) {
 
   const handleWrite = () => {
     console.log(props.userInfo.userId);
-    if(props.userInfo.userId == null) {
+    if (props.userInfo.userId == null) {
       alert("로그인 이후 이용 가능한 기능입니다.");
       return;
     }
@@ -57,7 +57,7 @@ function FreeBoard(props) {
   return (
     <div>
       <div className="search-box">
-        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword);}} onKeyPress={handleKeyPress}></input>
+        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword); }} onKeyPress={handleKeyPress}></input>
         <button onClick={handleSearchBoard} id="searchBtn">검색</button>
         <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon" /></label>
       </div>
@@ -94,7 +94,9 @@ function FreeBoard(props) {
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
       {/* <button onClick={() => { navigate('/board/input', { state: { boardName: "자유게시판", boardKind: "3", formKind: "write" } }) }}>글쓰기</button> */}
-      <button onClick={handleWrite} > 글쓰기 </button>
+      <div className="board-write-btn">
+        <button onClick={handleWrite}>글쓰기</button>
+      </div>
     </div>
   );
 }

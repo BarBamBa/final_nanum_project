@@ -5,18 +5,21 @@
   flex-direction: column;
   margin: 0 auto;
 }
+
 .board-input-nav {
   border-bottom: 4px solid #546d01;
   position: relative;
 }
-.titleBox, .volunteerBox {
-  padding : 16px;
+
+.titleBox,
+.volunteerBox {
+  padding: 16px;
 }
 
 
-  .form-control {
-    width: 980px;
-  }
+.form-control {
+  width: 980px;
+}
 
 
 .ContentBox {
@@ -25,31 +28,42 @@
     height: 450px;
   }
 }
+
 .board-input-form {
   td {
     width: 100px;
   }
 }
+
 .rdw-editor-wrapper {
   width: 100%;
   height: 700px;
 }
+
 .rdw-editor-main {
   height: 90% !important;
 }
+
 .DraftEditor-root {
   border: 1px solid #F1F1F1;
 }
+
 .contentBox {
   margin: 0 auto;
-  width:1000px;
+  width: 1000px;
   height: 700px;
 }
+
 .uploadBox input {
-  margin-left:10px;
+  margin-left: 10px;
 }
+
 .submitBox {
   width: 1040px;
   display: flex;
   justify-content: end;
+}
+
+.board-input-content-name {
+  text-align: center;
 }

@@ -12,9 +12,16 @@ import ReviewSelectForm from "./ReviewSelectForm";
 function BoardInputForm() {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("input kind : ", location.state.boardKind);
-  console.log("input data : ", location.state.boardData);
+  // console.log("input kind : ", location.state.boardKind);
+  // console.log("input data : ", location.state.boardData);
+  if (!location.state) {
+    alert("Location state is missing");
+    return;
+  }
+
   const boardKind = location.state.boardKind;
+
+
 
   // 유저정보
   const userInfo = useContext(TokenCheck);
@@ -34,6 +41,7 @@ function BoardInputForm() {
   // 데이터에 컨텐츠를 입력하면 state에 저장
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
+
   };
 
   // 에디터에서 줄바꿈이나 글자 스타일을 적용한 글을 태그까지 담아 db에 담기위해  html 형식으로 변환
@@ -56,6 +64,21 @@ function BoardInputForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (titleValue == "") {
+      alert("제목을 입력해주세요");
+      return;
+    }
+    
+    if (volunteerValue === "" && location.state.boardKind === "4") {
+      alert("후기를 작성할 봉사활동을 선태해주세요");
+      return;
+    }
+
+    if (contentRaw.blocks[0].text === "") {
+      alert("내용을 입력해주세요");
+      return;
+    }
+
     let boardId;
     // 게시판 글 정보 저장 시작    
     let data;
@@ -167,7 +190,7 @@ function BoardInputForm() {
           <table>
             <tbody>
               <tr>
-                <td>제목</td>
+                <td className="board-input-content-name"><span>제목</span></td>
                 <td>
                   <div className="board-input titleBox">
                     <input
@@ -181,16 +204,15 @@ function BoardInputForm() {
                 </td>
               </tr>
               {
-                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue}/>
+                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
               }
               <tr>
-                <td>내용</td>
+                <td className="board-input-content-name"><span>내용</span></td>
                 <td>
                   <div className="board-input contentBox">
                     <Editor
                       editorState={editorState}
                       onEditorStateChange={onEditorStateChange}
-
                       localization={{
                         locale: 'ko',
                       }}
@@ -199,7 +221,7 @@ function BoardInputForm() {
                 </td>
               </tr>
               <tr>
-                <td>파일첨부</td>
+                <td className="board-input-content-name"><span>파일첨부</span></td>
                 <td>
                   <div className="board-input uploadBox">
                     <input
@@ -212,7 +234,7 @@ function BoardInputForm() {
                 </td>
               </tr>
               <tr>
-                <td></td>
+                <td className="board-input-content-name"></td>
                 <td>
                   <div className="board-input submitBox">
                     <button type="submit">
