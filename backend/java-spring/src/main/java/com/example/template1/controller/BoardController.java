@@ -23,7 +23,7 @@ public class BoardController {
     public ResponseEntity<List<BoardResponse>> getAllBoards() {
         List<BoardResponse> boards = boardService.getAllBoard()
                 .stream()
-                .filter(board -> board.getStatus() == 'Y')//게시글 상태 N은 삭제상태로 설정
+                .filter(board -> board.getStatus() == 'Y') //게시글 상태 N은 삭제상태로 설정
                 .map(BoardResponse::new)
                 .toList();
 

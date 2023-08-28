@@ -1,0 +1,26 @@
+.inputContainer {
+  width: 1440px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.board-input-nav {
+  border-bottom: 4px solid #546d01;
+  position: relative;
+}
+.board-input {
+  margin : 16px;
+}
+
+.titleBox {
+  .form-control {
+    width: 1000px;
+  }
+}
+
+.ContentBox {
+  .form-control {
+    width: 1000px;
+    height: 450px;
+  }
+}

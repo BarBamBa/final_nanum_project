@@ -19,17 +19,17 @@ function FreeBoard(props) {
 
   const boardData = props.boardData;
   console.log(props);
-
+  
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
 
   const handlePageChange = (page) => {
-    setPage(page);
+    setPage(page);  
   };
 
-  const handleSearchBoard = () => {
-    console.log("noticepage", keyword);
+  const handleSearchBoard =()=> {
+    console.log("noticepage",keyword);
     props.searchBoards(keyword);
   }
 
@@ -74,7 +74,7 @@ function FreeBoard(props) {
             return (
               <tr key={board.id}>
                 <td className="table-no">{board.id}</td>
-                <td className="table-title" onClick={() => { navigate(`/board/detail/${board.id}`) }}>{board.title}</td>
+                <td className="table-title" onClick={()=>{navigate(`/board/detail/${board.id}`)}}>{board.title}</td>
                 <td className="table-date">{board.createAt2}</td>
               </tr>
             );
