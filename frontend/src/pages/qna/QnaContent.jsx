@@ -31,6 +31,10 @@ function QnaContent({ qnaData, fetchQna }) {
 
     // 답변달기
     const handleResponse = async () => {
+        if (contentRaw.blocks[0].text === "") {
+            alert("내용을 입력해주세요");
+            return;
+        }
         if (!confirm("저장하시겠습니까?")) {
             return;
         }
@@ -58,6 +62,31 @@ function QnaContent({ qnaData, fetchQna }) {
                 console.log(error);
             })
     }
+
+        // qna 삭제
+        const removeQna = async () => {
+
+            const id = qnaData.id;
+            if (!confirm("삭제하시겠습니까?")) {
+                return;
+            }
+            fetch(`/api/qna/delete/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ status: "N" }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    navigate("/qna");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+    
 
     const handleModify = () => {
         navigate('/qna/input', {
@@ -98,7 +127,7 @@ function QnaContent({ qnaData, fetchQna }) {
                                 qnaData.answers.length == 0 ? (
                                     <>
                                         <button onClick={handleModify} >수정</button>
-                                        <button>삭제</button>
+                                        <button onClick={removeQna}>삭제</button>
                                         <button onClick={() => { setAnswerFlg(true) }}>답변달기</button>
                                     </>
                                 ) : null

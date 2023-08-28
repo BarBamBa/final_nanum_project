@@ -89,7 +89,7 @@ function CalendarReserve({sendDataToReserve}) {
             className='monthChangebutton'
             disabled={isThisMonth(new Date(currentMonth))}
           />
-            <h1>{format(firstDayCurrentMonth, " yyyy MM", {locale:ko})}</h1>
+            <h1>{format(firstDayCurrentMonth, " yyyy.MM", {locale:ko})}</h1>
           <IoIosArrowForward onClick={nextMonth} className='monthChangebutton'/>
         </header>
         <div className='calendarBody'> 

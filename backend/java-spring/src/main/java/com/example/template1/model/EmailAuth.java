@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -33,5 +34,9 @@ public class EmailAuth {
 
     public void expired() {
         this.useToken = true;
+    }
+
+    public boolean isExpired() {
+        return this.expiration.isBefore(LocalDateTime.now());
     }
 }

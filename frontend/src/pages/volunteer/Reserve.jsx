@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { TokenCheck } from '../../components/TokenCheck';
 import { format } from 'date-fns';
-import CalendarReserve from '../../components/CalendarReserve';
+import CalendarReserve from '../../components/CalenderReserve';
 import { FiCircle } from 'react-icons/fi'
 
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
+  const userInfo = useContext(TokenCheck);
+  console.log("ddd",userInfo);
 
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);
@@ -22,7 +25,6 @@ function Reserve() {
   }
 
   const fetchApplication = async () => {
-    console.log("transfered");
     await fetch('/api/reserve', {
       method: 'POST',
       headers: {
@@ -31,18 +33,19 @@ function Reserve() {
       body: JSON.stringify({
         data: receivedData.data,
         date: format(receivedData.selectedDay, 'yyyyMMdd'),
+        id: userInfo.userId,
       })
     })
     .then(res => res.json)
     .then(res => {
       console.log(res);
-      // nav("/");
     })
     .catch(err => {
       throw err;
     })
 
     alert("신청되었습니다!");
+    nav("/");
   }
 
   const handleDeny = () => {
@@ -66,7 +69,6 @@ function Reserve() {
                   <span><strong>장소</strong> : {receivedData.data.actPlace + "  "}</span>                      
               </div>
               <div className='reserveDetail2'>
-                  <span><strong>봉사기간</strong> : {stringFormat(receivedData.data.progrmBgnde)} ~ {stringFormat(receivedData.data.progrmEndde)}</span>
                   <span><strong>봉사시간</strong> : {receivedData.data.actBeginTm}시 ~ {receivedData.data.actEndTm}시</span>
                   <span><strong>봉사분야</strong> : {receivedData.data.srvcClCode}</span>
               </div>

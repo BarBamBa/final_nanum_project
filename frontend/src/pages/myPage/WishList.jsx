@@ -1,5 +1,5 @@
 import React from 'react'
-// import '/src/scss/myPage/WishList.css'
+import '/src/scss/myPage/WishList.scss'
 
 
 
@@ -9,9 +9,9 @@ function WishList() {
     <>
       <form>    
 
-      <div class="volunteer-request-container">
-        <div class="volunteer-request">관심목록 [전체 4건]</div>
-        <div class="category-bottom"></div>
+      <div className="volunteer-request-container">
+        <div className="volunteer-request">관심목록 [전체 4건]</div>
+        <div className="category-bottom"></div>
 
 
       <div className='WishList-check'>
@@ -27,7 +27,7 @@ function WishList() {
 
 
         
-        <div class="request-bottom"></div>
+        <div className="request-bottom"></div>
 
       </div>
 

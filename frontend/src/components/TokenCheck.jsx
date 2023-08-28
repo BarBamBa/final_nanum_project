@@ -10,7 +10,6 @@ export const TokenCheckProvider = ({ children }) => {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [auth, setAuth] = useState(null);
 
 
   useEffect(() => {
@@ -42,9 +41,7 @@ export const TokenCheckProvider = ({ children }) => {
         })
         .then((data) => {
           if (data) {
-            console.log(data);
             setUserId(data.id);
-            setAuth(data.authority);
           }
         })
         .catch((error) => {
@@ -57,7 +54,6 @@ export const TokenCheckProvider = ({ children }) => {
   const UserTokenValue = {
     isLogin,
     userId,
-    auth
   };
 
 

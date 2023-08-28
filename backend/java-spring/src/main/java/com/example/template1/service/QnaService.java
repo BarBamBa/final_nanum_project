@@ -1,10 +1,11 @@
 package com.example.template1.service;
 
+import com.example.template1.model.Board;
 import com.example.template1.model.QnA;
 import com.example.template1.model.Users;
+import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.model.dto.QnaRequest;
 import com.example.template1.repository.QnARepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QnaService {
     private final QnARepository qnARepository;
-    public List<QnA> getAllQna() { //qna 리스트 조회
+    public List<QnA> getAllQna() {
         List<QnA> qnaList = qnARepository.findAllByOrderByCreateAtDesc();
+
         return qnaList;
     }
 
-    public QnA getQna(long id) { //qna조회
+    public QnA getQna(long id) {
         QnA qna = qnARepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
         return qna;
     }
 
-    public QnA saveQna(QnaRequest request) {
+    public List<QnA> searchQna(String title, char flg) { //qna 검색 (검색어와 게시판종류로)
+        List<QnA> qnaList;
+        if (title == null) { // 검색어가 비어있는 경우 모든 게시글 반환
+            qnaList = qnARepository.findByFlgOrderByCreateAtDesc(flg);
+        } else {
+            qnaList = qnARepository.findByTitleContainingAndFlg(title, flg);
+        }
+        return qnaList;
+    }
+
+    public QnA saveQna(QnaRequest request) { //qna 글쓰기
         Users users = new Users();
         users.setId(request.getUserId()); // 관리자 id
 
@@ -48,7 +60,14 @@ public class QnaService {
         return qna;
     }
 
-    public QnA replyQnA(QnaRequest request) {
+    @Transactional
+    public QnA deleteQna(long id, QnaRequest request) { //게시글 삭제
+        QnA qna = qnARepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+        qna.setStatus(request.getStatus());
+        return qna;
+    }
+
+    public QnA replyQnA(QnaRequest request) { //qna 답변
         Users users = new Users();
         users.setId(request.getUserId());
 

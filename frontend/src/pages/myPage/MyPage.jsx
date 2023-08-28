@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './css/MyPage.css'
-import { useNavigate } from 'react-router-dom';
 import { FiExternalLink } from 'react-icons/fi'
-// import '/src/scss/myPage/MyPage.scss'
-
+import '/src/scss/myPage/MyPage.scss'
+import VolunteerHeaders from './VolunteerHeaders';
 
 
 
@@ -13,7 +11,7 @@ import { FiExternalLink } from 'react-icons/fi'
 
 function MyPage() {
 
-  const [userInfo, setUserInfo] = useState({}); 
+  const [userInfo, setUserInfo] = useState({});
 
   async function fetchProfile() {
 
@@ -23,7 +21,7 @@ function MyPage() {
         "Content-Type" : "application/json",
         "Authorization" : "Bearer "+ localStorage.getItem("accessToken"),
       }
-    })  
+    })
 
       .then((response) => response.json())
 
@@ -53,47 +51,23 @@ function MyPage() {
 return (
 
     <>
+      <VolunteerHeaders />
       <form className='mypage-form'>
-        <div className="pageTitle"><span>회원정보</span></div>
         <div className="myPage-Container">
-
-
           {/* ==이름========== */}
-          <div className="myPage-Item">
-
-          <div className="myPage-category">이름</div>
-          
-          <div className="myPage-textBox">{userInfo.name}</div>
-
-
+            <div className="myPage-category">이름</div>
+            <div className="myPage-textBox">{userInfo.name}</div>
           {/* ==이메일========== */}
-          <div className="myPage-category">이메일</div>
-    
-          <div className="myPage-textBox">{userInfo.email}
-            <button type='button' className='email-Check'>이메일 인증</button>
-          </div>
-
-
-          {/* ==닉네임 전홥번호========== */}
-
-          <div className="myPage-category">닉네임</div>
-            
-          <div className="myPage-textBox">{userInfo.nickname}</div>
-
-          
-          <div className="myPage-category">전화번호</div>
-          
-          <div className="myPage-textBox">{userInfo.phone}</div>
-
-
+            <div className="myPage-category">이메일</div>
+            <div className="myPage-textBox">{userInfo.email}</div>
+          {/* ==닉네임 전화번호========== */}
+            <div className="myPage-category">닉네임</div>
+            <div className="myPage-textBox">{userInfo.nickname}</div>
+            <div className="myPage-category">전화번호</div>
+            <div className="myPage-textBox">{userInfo.phone}</div>
           {/* ==주소========== */}
-
-          <div className="myPage-category">주소</div>
-  
-          <div className="myPage-textBox">{userInfo.address}</div>
-  
-
-
+            <div className="myPage-category">주소</div>
+            <div className="myPage-textBox">{userInfo.address}</div>
           {/* ==나의 자원봉사 및 정보수정 버튼========== */}
           <div className='buttonBox'>
             <Link to={`/MyVolunteer`} className="toMyVolunteer" >

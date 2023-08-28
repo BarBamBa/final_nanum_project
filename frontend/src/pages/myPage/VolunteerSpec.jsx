@@ -14,7 +14,7 @@ function VolunteerSpec() {
         <div className="volunteer-request">완료된봉사 [전체 3건]</div>
         <div className="category-top"></div>
         <div className="volunteer-request-table">
-          <div className="request-CLCode"><LuFlower className='flowerIcon'/>생활편의지원 {'>'} 활동보조</div>
+           <div className="request-CLCode">{/*<LuFlower className='flowerIcon'/>*/}생활편의지원 {'>'} 활동보조</div> 
           <div className="request-program-title">
             <div>해오름어린이집-경계성 장애 영유아 대상 외부 프로그램 활동</div>
           </div>
