@@ -27,23 +27,30 @@ function VolunteerHeaders() {
         <div className="volunteer-header-container">
           <ul className="volunteer-tab">
             <li>
-              <Link to='/MyVolunteer' 
+              <Link to='/mypage' 
                 className={activeTab === 0 ? 'selected' : ''}
                 onClick={() => handleTabClick(0)}>
-                  나의자원봉사
+                  회원정보
+              </Link>  
+            </li>
+            <li>
+              <Link to='/MyVolunteer' 
+                className={activeTab === 1 ? 'selected' : ''}
+                onClick={() => handleTabClick(1)}>
+                  봉사신청내역
               </Link>  
             </li>
             <li>           
               <Link to='/VolunteerSpec' 
-                className={activeTab === 1 ? 'selected' : ''}
-                onClick={() => handleTabClick(1)}>
+                className={activeTab === 2 ? 'selected' : ''}
+                onClick={() => handleTabClick(2)}>
                   봉사완료내역
               </Link>
             </li>
             <li>
               <Link to='/VolunteerReview' 
-                className={activeTab === 2 ? 'selected' : ''}
-                onClick={() => handleTabClick(2)}>
+                className={activeTab === 3 ? 'selected' : ''}
+                onClick={() => handleTabClick(3)}>
                   내가작성한글
               </Link>
             </li>

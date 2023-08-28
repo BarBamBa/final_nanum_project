@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 function VolunteerReview() {
   return (
     <>
+      <VolunteerHeaders />
       <form>    
-        <VolunteerHeaders />
       <div className="volunteer-request-container">
         <div className="volunteer-request">완료된봉사 [전체 3건]</div>
         <div className="category-top"></div>

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FiExternalLink } from 'react-icons/fi'
 import '/src/scss/myPage/MyPage.scss'
+import VolunteerHeaders from './VolunteerHeaders';
 
 
 
@@ -45,8 +46,8 @@ function MyPage() {
   return (
 
     <>
+      <VolunteerHeaders />
       <form className='mypage-form'>
-        <div className="pageTitle"><span>회원정보</span></div>
         <div className="myPage-Container">
           {/* ==이름========== */}
             <div className="myPage-category">이름</div>
@@ -64,10 +65,6 @@ function MyPage() {
             <div className="myPage-textBox">{userInfo.address}</div>
           {/* ==나의 자원봉사 및 정보수정 버튼========== */}
           <div className='buttonBox'>
-            <Link to={`/MyVolunteer`} className="toMyVolunteer" >
-                  나의 자원봉사
-              <FiExternalLink className="siteIcon" alt="외부사이트 이동 아이콘" userInfo={userInfo}/>
-            </Link>
             <button className="myPage-btn">정보수정하기</button> 
           </div>
         </div>       
