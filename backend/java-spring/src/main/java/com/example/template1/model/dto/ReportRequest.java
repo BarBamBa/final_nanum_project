@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class ReportRequest {
     private Long id;
 
-    private Long users; // 게시물 게시자
+    private Long users;
 
-    private Long reporter; //신고하는 유저
+    private Long reporter;
 
-    private Long board; //신고 게시물
+    private Long board;
 
     private String reason;
 

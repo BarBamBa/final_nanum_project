@@ -10,12 +10,11 @@ export const TokenCheckProvider = ({ children }) => {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [auth, setAuth] = useState(null);
 
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const refreshToken = sessionStorage.getItem('refreshToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
     if (accessToken && refreshToken) {
       setIsLogin(true);
@@ -31,7 +30,7 @@ export const TokenCheckProvider = ({ children }) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + sessionStorage.getItem('accessToken'),
+          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
         },
       })
         .then((res) => {
@@ -42,9 +41,7 @@ export const TokenCheckProvider = ({ children }) => {
         })
         .then((data) => {
           if (data) {
-            console.log(data);
             setUserId(data.id);
-            setAuth(data.authority);
           }
         })
         .catch((error) => {
@@ -57,7 +54,6 @@ export const TokenCheckProvider = ({ children }) => {
   const UserTokenValue = {
     isLogin,
     userId,
-    auth
   };
 
 

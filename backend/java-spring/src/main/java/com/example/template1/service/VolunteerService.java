@@ -1,5 +1,6 @@
 package com.example.template1.service;
 
+import com.example.template1.model.Board;
 import com.example.template1.model.Users;
 import com.example.template1.model.Volunteer;
 import com.example.template1.model.dto.VolunteerRequestDto;
@@ -44,4 +45,12 @@ public class VolunteerService {
         // 봉사 활동 예약
         applicantService.addApplicant(user, volunteer, date);
     }
+
+    public Volunteer getVolunteer(long id) {
+        Volunteer volunteer = volunteerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        return volunteer;
+    }
+
+
 }

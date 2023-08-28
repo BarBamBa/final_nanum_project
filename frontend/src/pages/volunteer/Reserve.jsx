@@ -8,6 +8,7 @@ import { FiCircle } from 'react-icons/fi'
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
   const userInfo = useContext(TokenCheck);
+  console.log("ddd",userInfo);
 
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);
@@ -68,7 +69,6 @@ function Reserve() {
                   <span><strong>장소</strong> : {receivedData.data.actPlace + "  "}</span>                      
               </div>
               <div className='reserveDetail2'>
-                  <span><strong>봉사기간</strong> : {stringFormat(receivedData.data.progrmBgnde)} ~ {stringFormat(receivedData.data.progrmEndde)}</span>
                   <span><strong>봉사시간</strong> : {receivedData.data.actBeginTm}시 ~ {receivedData.data.actEndTm}시</span>
                   <span><strong>봉사분야</strong> : {receivedData.data.srvcClCode}</span>
               </div>

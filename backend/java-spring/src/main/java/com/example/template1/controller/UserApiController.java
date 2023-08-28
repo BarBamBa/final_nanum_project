@@ -91,6 +91,18 @@ public class UserApiController {
         return ResponseEntity.ok(myInfoBySecurity);
     }
 
+    //======= 유저 정보 업데이트 ========================================
+    @PutMapping("/user/update")
+    public ResponseEntity<String> updateUser(@RequestBody UsersDto usersDto) {
+        try {
+            userService.updateUser(usersDto);
+            return ResponseEntity.ok("사용자 정보가 성공적으로 업데이트되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("사용자 정보 업데이트에 실패했습니다.");
+        }
+    }
+
 
     // 아이디찾기
     @PostMapping("/find-email")

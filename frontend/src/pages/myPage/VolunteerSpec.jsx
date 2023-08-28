@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '/src/scss/myPage/MyVolunteer.scss'
 import VolunteerHeaders from './VolunteerHeaders'
-// import { LuFlower, TfiWrite } from 'react-icons/*'
+import { LuFlower } from 'react-icons/lu'
+import { BiEditAlt } from 'react-icons/bi'
 
 function VolunteerSpec() {
   return (
     <>
-      <form>    
+      <form>
         <VolunteerHeaders/>
         <div className="volunteer-request-container">
         <div className="volunteer-request">완료된봉사 [전체 3건]</div>
@@ -22,14 +23,14 @@ function VolunteerSpec() {
             <span>[봉사기간] selectedDay</span>
           </div>
           <div className='buttonBox'>
-            <Link to='/board/review'>후기쓰러가기_{/*<TfiWrite/>*/}</Link>
+            <Link to='/board/review'>후기쓰러가기<BiEditAlt/></Link>
           </div>
         </div>
         <div>페이지네이션</div>
         <div className="category-bottom"></div>
       </div>
       </form>
-    
+
     </>
   )
 }

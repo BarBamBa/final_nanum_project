@@ -2,6 +2,7 @@ package com.example.template1.service;
 
 import com.example.template1.model.Board;
 import com.example.template1.model.Users;
+import com.example.template1.model.Volunteer;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.repository.BoardRepository;
 import jakarta.transaction.Transactional;
@@ -26,14 +27,26 @@ public class BoardService {
         return board;
     }
 
-    public List<Board> searchBoard(String title, char flg) { //게시판 검색
-        List<Board> boardList = boardRepository.findByTitleContainingAndFlg(title, flg);
+    public List<Board> searchBoard(String title, char flg) { //게시판 검색 (검색어와 게시판종류로)
+        List<Board> boardList;
+        if (title == null) { // 검색어가 비어있는 경우 모든 게시글 반환
+            boardList = boardRepository.findByFlgOrderByCreateAtDesc(flg);
+        } else {
+            boardList = boardRepository.findByTitleContainingAndFlg(title, flg);
+        }
         return boardList;
     }
 
     public Board saveBoard(BoardRequest request) { //게시판 글쓰기
         Users users = new Users();
         users.setId(request.getUsers().getId());
+
+        Volunteer volunteer = null;
+
+        if (request.getFlg() == '4') { // 봉사후기글일 경우에만 volunteer id  입력
+            volunteer = new Volunteer();
+            volunteer.setId(request.getVolunteer().getId());
+        }
 
         Board board =  Board.builder()
                 .title(request.getTitle())
@@ -42,6 +55,7 @@ public class BoardService {
                 .status(request.getStatus())
                 .likeCount(request.getLikeCount())
                 .users(users)
+                .volunteer(volunteer)
                 .build();
 
         return boardRepository.save(board);
@@ -54,6 +68,7 @@ public class BoardService {
 
         board.setTitle(request.getTitle());
         board.setContent(request.getContent());
+        board.setVolunteer(request.getVolunteer());
 
         return board;
     }

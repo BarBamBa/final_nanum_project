@@ -33,6 +33,8 @@ public class BoardResponse {
 
     private final Long userId;
 
+    private final Long volunteerId;
+
     private final List<Report> reports;
 
     private final List<Reply> replies;
@@ -66,9 +68,14 @@ public class BoardResponse {
         this.reports = board.getReports();
         this.replies = board.getReplies();
         this.boardImgs = board.getBoardImgs();
+
         if (board.getReports().isEmpty()) {
             this.reportYn = 'N';
         } else { this.reportYn = 'Y';}
+
+        if (board.getVolunteer() == null) {
+            this.volunteerId = null;
+        } else { this.volunteerId = board.getVolunteer().getId(); }
 
     }
 

@@ -10,6 +10,7 @@
   padding: 15px 0px;
   span {
     padding-left: 20px;
+    font-weight: bold;
   }
 }
 //캘린더 예약페이지
@@ -160,10 +161,10 @@
   .reserveInfo {
     display: flex;
     flex-direction: column;
-    border: 2px solid #A4CC22;
+    border: 1px solid #A4CC22;
     border-radius: 5px;
     width: 600px;
-    height: 450px;
+    height: 420px;
     margin: 0 auto;
 
     .reserveInfoTitle {

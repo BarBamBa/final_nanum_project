@@ -52,6 +52,17 @@ function QnaInputForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (titleValue == "") {
+            alert("제목을 입력해주세요");
+            return;
+        }
+
+        if (contentRaw.blocks[0].text === "") {
+            alert("내용을 입력해주세요");
+            return;
+        }
+
         let qnaId;
         let data;
 
@@ -163,35 +174,38 @@ function QnaInputForm() {
             <div className="board-input-form">
                 <form onSubmit={handleSubmit}>
                     <table>
-                        <tr>
-                            <td>제목</td>
-                            <td>
-                                <div className="board-input titleBox">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="title"
-                                        value={titleValue}
-                                        onChange={(e) => setTitleValue(e.target.value)}
-                                    />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>내용</td>
-                            <td>
-                                <div className="board-input ContentBox">
-                                    <Editor
-                                        editorState={editorState}
-                                        onEditorStateChange={onEditorStateChange}
-                                        localization={{
-                                            locale: 'ko',
-                                        }}
-                                    />
-                                </div>
-                            </td>
-                        </tr>
-                        {/* <tr>
+                        <tbody>
+
+
+                            <tr>
+                                <td className="board-input-content-name">제목</td>
+                                <td>
+                                    <div className="board-input titleBox">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="title"
+                                            value={titleValue}
+                                            onChange={(e) => setTitleValue(e.target.value)}
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="board-input-content-name">내용</td>
+                                <td>
+                                    <div className="board-input contentBox">
+                                        <Editor
+                                            editorState={editorState}
+                                            onEditorStateChange={onEditorStateChange}
+                                            localization={{
+                                                locale: 'ko',
+                                            }}
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            {/* <tr>
                             <td>파일첨부</td>
                             <td>
                                 <div className="board-input uploadBox">
@@ -204,11 +218,22 @@ function QnaInputForm() {
                                 </div>
                             </td>
                         </tr> */}
+                            <tr>
+                                <td className="board-input-content-name"></td>
+                                <td>
+                                    <div className="board-input submitBox">
+                                        <button type="submit">
+                                            {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
 
-                    <button type="submit" className="board-input submitBox">
+                    {/* <button type="submit" className="board-input submitBox">
                         {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
-                    </button>
+                    </button> */}
                 </form>
             </div>
         </div>

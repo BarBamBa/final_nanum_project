@@ -1,20 +1,19 @@
+.pageTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  font-size: 32px;
+  border-bottom: 2px solid #D6D6D6;
+  padding: 15px 0px;
+
+  span {
+    padding-left: 50px;
+  }
+}  
 .mypage-form {
   min-height: 100vh;
-
-  .pageTitle {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    font-size: 32px;
-    border-bottom: 2px solid #D6D6D6;
-    padding: 15px 0px;
-
-    span {
-      padding-left: 50px;
-    }
-  }
 
   .myPage-Container {
     width: 700px;

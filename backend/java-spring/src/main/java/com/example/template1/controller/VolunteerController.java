@@ -34,7 +34,7 @@ public class VolunteerController {
 
         VolunteerRequestDto dto = new VolunteerRequestDto(new JSONObject(data).getJSONObject("data"));
         LocalDateTime date = LocalDate.parse(new JSONObject(data).getString("date"), formatter).atStartOfDay();
-        Long uid = new JSONObject(data).getLong("userId");
+        Long uid = new JSONObject(data).getLong("id");
 
         volunteerService.volunteerValidation(dto, uid, date);
 

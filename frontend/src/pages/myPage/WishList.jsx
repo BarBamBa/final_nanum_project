@@ -1,3 +1,6 @@
+import React from 'react'
+import '/src/scss/myPage/WishList.scss'
+
 
 
 function WishList() {
