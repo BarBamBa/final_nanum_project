@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TokenCheck } from "../../components/TokenCheck";
 import Modal from "react-modal";
+import ReviewInfo from "../../components/ReviewInfo";
 
 function BoardDetail() {
   const userInfo = useContext(TokenCheck);
@@ -317,6 +318,11 @@ function BoardDetail() {
               <p>등록일 : {boardData.createAt2}</p>
             </div>
           </div>
+          {
+            boardData.volunteerId && (
+              <ReviewInfo boardData={boardData}/>
+            )
+          }
 
           <div className="board-detail-content">
             {boardData.boardImgs && boardData.boardImgs.map((img, k) => {
@@ -335,7 +341,7 @@ function BoardDetail() {
           {
             boardData.userId == userInfo.userId || userInfo.auth == "ROLE_ADMIN" ? (
               <div className="board-detail-btn">
-                <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify" } }); }}>수정</button>
+                <button onClick={() => { navigate('/board/input', { state: { boardData: boardData, formKind: "modify", boardKind: boardData.flg } }); }}>수정</button>
                 <button onClick={removeBoard}>삭제</button>
               </div>
             ) : null

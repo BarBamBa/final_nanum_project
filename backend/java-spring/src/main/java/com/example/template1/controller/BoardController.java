@@ -1,11 +1,8 @@
 package com.example.template1.controller;
 
-import com.example.template1.model.Board;
-import com.example.template1.model.Reply;
+import com.example.template1.model.*;
 import com.example.template1.model.dto.*;
-import com.example.template1.service.BoardImgService;
-import com.example.template1.service.BoardService;
-import com.example.template1.service.ReplyService;
+import com.example.template1.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +16,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-
+    private final VolunteerService volunteerService;
+    private final ApplicantService applicantService;
 
     @GetMapping("/boards") //게시판 리스트 조회
     public ResponseEntity<List<BoardResponse>> getAllBoards() {
@@ -77,5 +75,22 @@ public class BoardController {
             .body(deleteBoard);
     }
 
+    @GetMapping("/boards/volunteer/{id}") // 리뷰용 봉사 정보 보기
+    public ResponseEntity<VolunteerResponseDto> findVolunteer(@PathVariable long id){
+        Volunteer volunteer = volunteerService.getVolunteer(id);
 
+        return ResponseEntity.ok()
+                .body(new VolunteerResponseDto(volunteer));
+    }
+
+    @GetMapping("/boards/applicants/{id}")
+    public ResponseEntity<List<ApplicantsResponse>> findApplicants(@PathVariable Users id){
+        List<ApplicantsResponse> applicants = applicantService.getApplicants(id)
+                .stream()
+                .map(ApplicantsResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(applicants);
+    }
 }

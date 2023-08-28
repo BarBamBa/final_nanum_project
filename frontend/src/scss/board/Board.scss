@@ -52,6 +52,11 @@
 .board-title {
   display: flex;
   justify-content: space-between;
+
+}
+
+.board-title h3 {
+  margin: 16px;
 }
 
 .board-reportBtn {
@@ -65,7 +70,11 @@
 
 .board-detail-content {
   min-height: 800px;
-  border: 1px solid #ccc;
+  border: 1px solid #546d01;
+}
+
+.board-detail-content div {
+  margin: 20px;
 }
 
 .board-detail-btn {
@@ -148,4 +157,32 @@
   text-align: center;
   margin-top: 16px;
   color: red;
+}
+
+.board-detail-review-info-list {
+  border: 2px solid #546d01;
+  border-bottom: none;
+}
+
+// .board-detail-review-info-list ul {
+//   height: 100%;
+// }
+
+.board-detail-review-dataname {
+  margin: 0 20px;
+}
+.board-detail-review-info {
+  display: flex;
+  border-bottom : 1px dashed #ccc;
+  height: 50px;
+  align-items: center;
+}
+
+.review-field {
+  border: none;
+}
+
+.board-write-btn {
+  display: flex;
+  justify-content: flex-end;
 }

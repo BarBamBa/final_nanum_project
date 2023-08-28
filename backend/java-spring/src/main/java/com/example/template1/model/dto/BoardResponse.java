@@ -1,6 +1,7 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
+import com.example.template1.model.BoardImg;
 import com.example.template1.model.Reply;
 import com.example.template1.model.Report;
 import lombok.Getter;
@@ -32,9 +33,13 @@ public class BoardResponse {
 
     private final Long userId;
 
+    private final Long volunteerId;
+
     private final List<Report> reports;
 
     private final List<Reply> replies;
+
+    private final List<BoardImg> boardImgs;
 
     private final char reportYn;
 
@@ -62,9 +67,15 @@ public class BoardResponse {
         this.likeCount = board.getLikeCount();
         this.reports = board.getReports();
         this.replies = board.getReplies();
+        this.boardImgs = board.getBoardImgs();
+
         if (board.getReports().isEmpty()) {
             this.reportYn = 'N';
         } else { this.reportYn = 'Y';}
+
+        if (board.getVolunteer() == null) {
+            this.volunteerId = null;
+        } else { this.volunteerId = board.getVolunteer().getId(); }
 
     }
 

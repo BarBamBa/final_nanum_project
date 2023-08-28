@@ -1,6 +1,8 @@
 package com.example.template1.service;
 
 import com.example.template1.model.*;
+import com.example.template1.model.dto.ApplicantsRequest;
+import com.example.template1.model.dto.ApplicantsResponse;
 import com.example.template1.model.enums.Authority;
 import com.example.template1.repository.ApplicantsRepository;
 import com.example.template1.repository.UsersRepository;
@@ -102,6 +104,12 @@ public class ApplicantService {
     // 개별 봉사활동 신청 내역 조회
     public Applicants getMyVolunteerById(long id) {
         Applicants applicants = applicantsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));;
+
+        return applicants;
+    }
+
+    public List<Applicants> getApplicants(Users id) {
+        List<Applicants> applicants = applicantsRepository.findByUsers(id);
 
         return applicants;
     }

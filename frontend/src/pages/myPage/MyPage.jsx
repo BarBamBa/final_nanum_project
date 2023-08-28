@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FiExternalLink } from 'react-icons/fi'
@@ -11,17 +11,17 @@ import VolunteerHeaders from './VolunteerHeaders';
 
 function MyPage() {
 
-  const [userInfo, setUserInfo] = useState({}); 
+  const [userInfo, setUserInfo] = useState({});
 
   async function fetchProfile() {
 
     fetch("/api/user/me", {
       method: 'GET',
       headers: {
-        "Content-Type" : "application/json",
-        "Authorization" : "Bearer "+ sessionStorage.getItem("accessToken"),
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + sessionStorage.getItem("accessToken"),
       }
-    })  
+    })
 
       .then((response) => response.json())
 
@@ -41,8 +41,20 @@ function MyPage() {
     fetchProfile();
   }, []);
 
-  console.log(userInfo);
-  
+
+  const modify = ((e) => {
+
+  })
+
+
+  const navigate = useNavigate();
+
+  const myPageModify = () => {
+    navigate('/MypageModify');
+  }
+
+
+
   return (
 
     <>

@@ -31,6 +31,10 @@ function QnaContent({ qnaData, fetchQna }) {
 
     // 답변달기
     const handleResponse = async () => {
+        if (contentRaw.blocks[0].text === "") {
+            alert("내용을 입력해주세요");
+            return;
+        }
         if (!confirm("저장하시겠습니까?")) {
             return;
         }

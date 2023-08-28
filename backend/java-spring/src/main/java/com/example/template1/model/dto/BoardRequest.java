@@ -2,6 +2,7 @@ package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
 import com.example.template1.model.Users;
+import com.example.template1.model.Volunteer;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ public class BoardRequest {
     private Long id;
 
     private Users users;
+
+    private Volunteer volunteer;
 
     private String title;
 

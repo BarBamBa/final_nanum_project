@@ -59,7 +59,7 @@ function Notice(props) {
   return (
     <div>
       <div className="search-box">
-        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword);}} onKeyPress={handleKeyPress}></input>
+        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword); }} onKeyPress={handleKeyPress}></input>
         <button onClick={handleSearchBoard} id="searchBtn">검색</button>
         <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon" /></label>
       </div>
@@ -97,7 +97,9 @@ function Notice(props) {
       />
       {
         userInfo.auth == "ROLE_ADMIN" && (
-          <button onClick={handleWrite}>글쓰기</button>
+          <div className="board-write-btn">
+            <button onClick={handleWrite}>글쓰기</button>
+          </div>
         )
       }
 
