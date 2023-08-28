@@ -3,7 +3,6 @@ package com.example.template1.model.dto;
 
 import com.example.template1.model.Users;
 import com.example.template1.model.enums.Authority;
-import com.example.template1.repository.UsersRepository;
 import lombok.*;
 
 @AllArgsConstructor
@@ -31,7 +30,6 @@ public class UsersDto {
     private char gender;
 
     private Authority authority;
-
 
     public UsersDto(Users users) {
         this.id = users.getId();

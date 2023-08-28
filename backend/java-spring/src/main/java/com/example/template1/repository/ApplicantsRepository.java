@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface ApplicantsRepository extends JpaRepository<Applicants, Long> {
 
-    boolean existsByVolunteerId(Long volunteer_id);
-    boolean existsByUsersIdAndVolunteerIdAndSelectedDay(Long users_id, Long volunteer_id, LocalDateTime selectedDay);
-
+    boolean existsByUsersAndVolunteerAndSelectedDay(Users users, Volunteer volunteer, LocalDateTime selectedDay);
+    Applicants findByIdAndUsers(Long id, Users users);
     List<Applicants> findAllByOrderByCreateAtDesc();
+    List<Applicants> findAllByUsersOrderByCreateAtDesc(Users users);
 }

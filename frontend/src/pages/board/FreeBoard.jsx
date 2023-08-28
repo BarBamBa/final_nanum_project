@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import { TokenCheck } from "../../components/TokenCheck";
 import {
   AiOutlineLeft,
   AiOutlineDoubleLeft,
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from 'react-icons/bs'
 
 
 
 function FreeBoard(props) {
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
+
   const boardData = props.boardData;
   console.log(props);
   
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
 
   const handlePageChange = (page) => {
     setPage(page);  
@@ -27,6 +33,23 @@ function FreeBoard(props) {
     props.searchBoards(keyword);
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchBoard();
+    }
+  };
+
+  const handleWrite = () => {
+    console.log(props.userInfo.userId);
+    if(props.userInfo.userId == null) {
+      alert("로그인 이후 이용 가능한 기능입니다.");
+      return;
+    }
+    navigate('/board/input', {
+      state: { boardName: "자유게시판", boardKind: "3", formKind: "write" }
+    })
+  }
+
   const startIndex = (page - 1) * 10;
   const endIndex = startIndex + 10;
 
@@ -34,8 +57,9 @@ function FreeBoard(props) {
   return (
     <div>
       <div className="search-box">
-        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e)=>{setKeyword(e.target.value), console.log(keyword);}} ></input>
-        <button onClick={handleSearchBoard}>검색</button>
+        <input placeholder="검색어를 입력해주세요" type="text" onChange={(e) => { setKeyword(e.target.value); console.log(keyword);}} onKeyPress={handleKeyPress}></input>
+        <button onClick={handleSearchBoard} id="searchBtn">검색</button>
+        <label htmlFor="searchBtn" className="searchBtn"><BsSearch className="searchIcon" /></label>
       </div>
       <table className="board-table">
         <thead>

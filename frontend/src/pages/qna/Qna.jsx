@@ -2,28 +2,73 @@ import React from 'react'
 import '../../scss/qna/qna.scss'
 import QnaTab from './QnaTab';
 import FaqTab from './FaqTab';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { TokenCheck } from "../../components/TokenCheck";
 
 function Qna() {
   const navigate = useNavigate();
+
+  const userInfo = useContext(TokenCheck);
+  console.log(userInfo.userId);
+  console.log(userInfo.auth);
+
   const [qnaKind, setQnaKind] = useState("1"); //1: FAQ  2:QNA
   const [qnaData, setQnaData] = useState([]);
+  console.log("qnaKind",qnaKind);
 
   // 문의글 리스트 조회
   async function fetchQna() {
     await fetch("/api/qna")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);        
+        console.log(data);
         const filteredData = data
-        .filter(item => item.flg === qnaKind);
+          .filter(item => item.flg === qnaKind);
         setQnaData(filteredData);
       })
   }
+
   useEffect(() => {
+    console.log(qnaKind);
     fetchQna();
   }, [qnaKind])
+
+  //문의글 검색 조회
+  const searchQna = async (keyword) => {
+    console.log("keyword", keyword);
+    console.log("qnaKind", qnaKind);
+
+    let data;
+    if (keyword == undefined) {
+      data = {
+        title: null,
+        flg: qnaKind
+      }
+    } else {
+      data = {
+        title: keyword,
+        flg: qnaKind
+      }
+    }
+
+    fetch("/api/qna/search", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setQnaData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
   return (
     <>
@@ -52,8 +97,8 @@ function Qna() {
             style={qnaKind === "2" ? { color: "#546d01" } : null}>QnA</button>
         </div>
         <Routes>
-          <Route path='' element={<FaqTab qnaData={qnaData}/>} />
-          <Route path='qna' element={<QnaTab />} />
+          <Route path='' element={<FaqTab qnaData={qnaData} searchQna={searchQna} qnaKind={qnaKind}/>} />
+          <Route path='qna' element={<QnaTab qnaData={qnaData} searchQna={searchQna} />} />
         </Routes>
       </div>
     </>
