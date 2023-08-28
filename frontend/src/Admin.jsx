@@ -13,7 +13,6 @@ function Admin() {
             <AdHeader />
             <Routes>
                 <Route path='' element={<AdBoard />} />
-                <Route path='reply' element={<AdReply />} />
                 <Route path='user' element={<AdUser />} />
                 <Route path='qna' element={<AdQna />} />
                 <Route path='volunteer' element={<AdVolunteer />} />
