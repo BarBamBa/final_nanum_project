@@ -212,10 +212,14 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
     //-----------모달창용 댓글목록 불러오기-------------
     const [replyData, setReplyData] = useState([]);
     const getReplies = (replies) => { //댓글수를 클릭하면 해당 게시판의 댓글들을 setReplyData로 담는다
-        console.log(replies);
+        console.log("re",replies);
         setReplyData(replies);
     }
     //-----------모달창용 댓글목록 불러오기-------------
+
+    function formatDate(dateStr) {
+        return dateStr.slice(0, 10); // "LocalDateTime" 으로 온 날짜를 "YYYY-MM-DD" 형태로 포맷팅
+    }
 
     return (
         <div className='ad-board'>
@@ -226,11 +230,11 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                         <td>게시판 선택</td>
                         <td>
                             <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false) ,handlePageChange(1) }} value={boardCategory}>
-                                <option value={0}>전체보기</option>
-                                <option value={1}>공지사항</option>
-                                <option value={2}>소식공유</option>
-                                <option value={3}>자유게시판</option>
-                                <option value={4}>봉사후기</option>
+                                <option value="0">전체보기</option>
+                                <option value="1">공지사항</option>
+                                <option value="2">소식공유</option>
+                                <option value="3">자유게시판</option>
+                                <option value="4">봉사후기</option>
                             </select>
                         </td>
                         {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
@@ -423,7 +427,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                                 ? "삭제"
                                                 : ""}</td>
                                         <td>{reply.reply == null ? "댓글" : `대댓글(${reply.reply.id})`}</td>
-                                        <td>{reply.createAt2}</td>
+                                        <td>{formatDate(reply.createAt)}</td>
                                     </tr>
                                 )
                             })}

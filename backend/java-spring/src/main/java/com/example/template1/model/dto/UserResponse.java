@@ -1,6 +1,8 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Board;
+import com.example.template1.model.Reply;
+import com.example.template1.model.Report;
 import com.example.template1.model.Users;
 import com.example.template1.model.enums.Authority;
 import lombok.Builder;
@@ -44,6 +46,8 @@ public class UserResponse {
     private final LocalDateTime updateAt;
 
 
+
+
     public UserResponse(Users users) {
         this.id = users.getId();
         this.email = users.getEmail();
@@ -61,6 +65,9 @@ public class UserResponse {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.createAt3 = users.getCreateAt().format(formatter);
         this.updateAt = users.getUpdateAt();
+
     }
+
+
 
 }

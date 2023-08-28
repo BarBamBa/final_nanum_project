@@ -35,18 +35,19 @@ public class Users extends BaseEntity implements UserDetails {
     @Column(name = "USER_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "users")
-    @JsonManagedReference
-    List<Board> boards = new ArrayList<>();
+//    @OneToMany(mappedBy = "users")
+//    List<Board> boards = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "users")
 //    List<Applicants> applicants = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "users")
+//    @JsonManagedReference
+//    List<Reply> replies = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "users")
-//    List<Review> reviews = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "users")
-//    List<BoardImg> boardImgs = new ArrayList<>();
+//    @JsonManagedReference
+//    List<Report> reports = new ArrayList<>();
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;

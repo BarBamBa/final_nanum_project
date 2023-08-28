@@ -17,7 +17,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
 
   const [boardCategory, setBoardCategory] = useState("0"); // 게시판 카테고리
   const [reportOnly, setReportOnly] = useState(false);
-  const [isOpenReport, setIsOpenReport] = useState(false); // 신고리스트 모달창 flg
+  const [isOpenBoard, setIsOpenBoard] = useState(false); // 신고리스트 모달창 flg
   const [isOpenReply, setIsOpenReply] = useState(false);
 
   //-----------체크박스-------------
@@ -91,6 +91,14 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
 
   //-----------체크박스-------------
 
+  //-----------모달창용 게시글목록 불러오기-------------
+  const [boardData, setBoardData] = useState([]);
+  const getBoards = (boards) => { //댓글수를 클릭하면 해당 게시판의 댓글들을 setReplyData로 담는다
+    console.log(boards);
+    setBoardData(boards);
+  }
+  //-----------모달창용 게시글목록 불러오기-------------
+  console.log(boardData);
   return (
     <div className='ad-board'>
       <div className='ad-board-manage-bar'>
@@ -164,11 +172,11 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
                 <td className="ad-board-item ad-board-mail">{user.email}</td>
                 <td className="ad-board-item ad-board-phone">{user.phone}</td>
                 <td className="ad-board-item ad-board-nick">{user.nickname}</td>
-                <td className="ad-board-item ad-board-boards">게시글수</td>
-                <td className="ad-board-item ad-board-replies">게시댓글수</td>
+                <td className="ad-board-item ad-board-boards"><span onClick={() => { setBoardData(user.boardList), setIsOpenBoard(true) }} >{user.boardList.length}</span></td>
+                <td className="ad-board-item ad-board-replies">{user.replyList.length}</td>
                 <td className="ad-board-item ad-board-status">{user.status}</td>
                 <td className="ad-board-item ad-board-date">{user.createAt2}</td>
-                <td className="ad-board-item ad-board-date">{user.createAt2}</td>
+                <td className="ad-board-item ad-board-report">{user.reportList.length}</td>
               </tr>
             );
           })}
@@ -190,43 +198,40 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
       />
 
       {/* 신고사유 모달창 */}
-      {/* <Modal
+      <Modal
         style={modalStyle}
-        isOpen={isOpenReport}
-        onRequestClose={() => { setIsOpenReport(false) }}
+        isOpen={isOpenBoard}
+        onRequestClose={() => { setIsOpenBoard(false) }}
       >
-        {reportData.length == 0 ? <span>신고내역이없습니다.</span> :
+        {boardData.length == 0 ? <span>게시글이 없습니다.</span> :
           <div>
             <table>
               <thead>
                 <tr>
                   <th>번호</th>
-                  <th>사유</th>
-                  <th>게시판번호</th>
-                  <th>게시자ID</th>
-                  <th>신고자ID</th>
-                  <th>신고일</th>
+                  <th>제목</th>
+                  <th>게시판종류</th>
+                  <th>등록일</th>
                 </tr>
               </thead>
               <tbody>
-                {reportData.map((data, i) => {
+                {boardData.map((data, i) => {
                   return (
 
                     <tr key={data.id}>
                       <td>{data.id}</td>
-                      <td>{data.reason == 1
-                        ? "폭력"
-                        : data.reason == 2
-                          ? "광고"
-                          : data.reason == 3
-                            ? "선정성"
-                            : data.reason == 4
-                              ? "게시판성격과 무관"
+                      <td>{data.title}</td>
+                      <td>{data.flg == "1"
+                        ? "공지사항"
+                        : data.flg == "2"
+                          ? "소식공유"
+                          : data.flg == "3"
+                            ? "자유게시판"
+                            : data.flg == "4"
+                              ? "봉사후기"
                               : ""}</td>
-                      <td>{data.boardId}</td>
-                      <td>{data.reportedId}</td>
-                      <td>{data.reporterId}</td>
                       <td>{data.createAt2}</td>
+
                     </tr>
                   )
                 })
@@ -236,7 +241,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
           </div>
         }
 
-      </Modal> */}
+      </Modal>
 
       {/* 댓글리스트 모달창 */}
       {/* <Modal
@@ -306,5 +311,30 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
     </div>
   )
 }
+const modalStyle = {
+  overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 10,
+  },
+  content: {
+      width: "1200px",
+      minHeight: "400px",
+      display: "flex",
+      justifyContent: "center",
+      overflow: "auto",
+      top: "30vh",
+      left: "25vw",
+      right: "38vw",
+      bottom: "42vh",
+      WebkitOverflowScrolling: "touch",
+      borderRadius: "14px",
+      outline: "none",
+      zIndex: 10,
+  },
+};
 
 export default AdUserList

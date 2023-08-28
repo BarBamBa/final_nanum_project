@@ -22,6 +22,7 @@ function AdBoard() {
     await fetch("/api/admin/boards")
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setBoardData(data);
         })
         .catch((error) => {
@@ -49,6 +50,7 @@ function AdBoard() {
             return;
           }
           setBoardData(data);
+          console.log(data);
         })
         .catch((error) => {
           console.log(error);
