@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { TokenCheck } from "./TokenCheck";
 import "/src/scss/board/BoardInputForm.scss";
 import axios from "axios";
-import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js";
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-js'
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";

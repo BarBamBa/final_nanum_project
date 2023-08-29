@@ -3,7 +3,7 @@ import BoardTab from "./BoardTab";
 import '../../scss/board/Board.scss'
 import '../../scss/board/Notice.scss'
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import "../../scss/Paging.css";
+import "../../scss/Paging.scss";
 import { TokenCheck } from "../../components/TokenCheck";
 
 
@@ -28,7 +28,7 @@ function Board() {
         const data = await response.json();
         console.log(data);
         const filteredData = data
-          .filter(item => item.flg === boardKind)
+            .filter(item => item.flg === boardKind)
         // .sort((a, b) => a.id - b.id);
         setBoardData(filteredData);
       } catch (error) {
@@ -64,14 +64,14 @@ function Board() {
       body: JSON.stringify(data),
 
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setBoardData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setBoardData(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   }
 
   useEffect(() => {
@@ -105,14 +105,13 @@ function Board() {
             <button onClick={() => { setBoardKind("4"); }}
               style={boardKind === "4" ? { color: "#546d01" } : null} >봉사후기</button>
           </div>
-        </div>
 
         <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
 
       </div>
 
 
-    </div>
+      </div>
   );
 }
 

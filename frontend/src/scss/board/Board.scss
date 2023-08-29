@@ -1,5 +1,6 @@
 .boardContainer {
   width: 1440px;
+  min-height: 100vh;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -9,6 +10,33 @@
   width: 1440px;
   padding: 30px;
   margin: 0 auto;
+
+  .board-detail-kind {
+    border-bottom: 3px solid #546d01;
+  }
+
+  .board-detail-box {
+    padding: 30px;
+  }
+
+  .board-detail-header {
+
+    .board-title {
+    display: flex;
+    justify-content: space-between;
+  
+    }
+
+    .board-reportBtn {
+      margin: 10px;
+    }
+    
+    .board-writter-info {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
 }
 
 .board-nav {
@@ -39,115 +67,92 @@
   padding: 14px;
 }
 
-.board-detail-kind {
-  border-bottom: 3px solid #546d01;
-}
-
-.board-detail-box {
-  padding: 30px;
-}
-
-.board-detail-header {}
-
-.board-title {
-  display: flex;
-  justify-content: space-between;
-
-}
-
 .board-title h3 {
   margin: 16px;
-}
-
-.board-reportBtn {
-  margin: 10px;
-}
-
-.board-writter-info {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .board-detail-content {
   min-height: 800px;
   border: 1px solid #546d01;
-}
 
-.board-detail-content div {
-  margin: 20px;
-}
+  div {
+    margin: 20px;
+  }
 
-.board-detail-btn {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-}
+  .board-detail-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
 
-.board-detail-btn button {
-  margin-left: 16px;
+    button {
+      margin-left: 16px;
+    }
+  }
 }
 
 .board-reply-container {
   padding: 30px;
-}
 
-.board-reply-header {
-  padding: 10px;
-  border-bottom: 1px solid black;
-  display: flex;
-  justify-content: space-between;
-}
+  .board-reply-header {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    
+    button {
+      margin: 16px;
+    }
+  }
 
-.board-reply-header button {
-  margin: 16px;
-}
-
-.board-reply-input {
-  margin: 10px;
+  .board-reply-input {
+    margin: 10px;
+  }
 }
 
 .board-reply-content {
   margin-top: 10px;
   padding: 10px;
   background-color: #F9F9F9;
-}
 
-.reply-button-area {
-  display: flex;
-  justify-content: space-between;
-}
+  .reply-writter,
+  .reply-content,
+  .reply-date,
+  .reply-button-area {
+    margin-bottom: 10px;
 
-.reply-childBtn-area {
-  display: flex;
-}
+    .reply-writter p {
+      font-weight: 700;
+    }
+  }
 
-.reply-childBtn-area p {
-  margin-right: 16px;
-}
-
-.reply-writter,
-.reply-content,
-.reply-date,
-.reply-button-area {
-  margin-bottom: 10px;
-}
-
-.reply-writter p {
-  font-weight: 700;
+  .reply-button-area {
+    display: flex;
+    justify-content: space-between;
+    
+    .reply-childBtn-area {
+      display: flex;
+      
+      p {
+        margin-right: 16px;
+      }
+    }
+  }
 }
 
 .board-child-reply-container {
   border-top: 1px solid #546d01;
   padding: 16px;
+
+  .board-child-reply-content {
+    margin-bottom: 10px;
+    
+    .child-reply-writter {
+      font-weight: 700;
+    }
+  }
 }
 
-.board-child-reply-content {
-  margin-bottom: 10px;
-}
 
-.child-reply-writter {
-  font-weight: 700;
-}
 
 .report-head {
   text-align: center;
@@ -183,6 +188,15 @@
 }
 
 .board-write-btn {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
+  
+  button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: #546d01;
+    color: white;
+  }
 }
