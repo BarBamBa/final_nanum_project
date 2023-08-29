@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import AdUserList from '../../components/admin/AdUserList';
-import '/src/scss/admin/AdBoard.scss'
+import '/src/scss/admin/AdUser.scss'
 
 function AdUser() {
 
