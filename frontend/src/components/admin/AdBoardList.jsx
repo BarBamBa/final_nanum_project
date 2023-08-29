@@ -20,6 +20,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
     const [isOpenReport, setIsOpenReport] = useState(false); // 신고리스트 모달창 flg
     const [isOpenReply, setIsOpenReply] = useState(false);
     console.log(boardCategory);
+    
     //-----------체크박스-------------
     const [checkItems, setCheckItems] = useState([]); //체크박스에 담은 게시판 리스트
     const [checkReplyItems, setCheckReplyItems] = useState([]);  //체크박스에 담은 댓글 리스트
@@ -211,10 +212,14 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
     //-----------모달창용 댓글목록 불러오기-------------
     const [replyData, setReplyData] = useState([]);
     const getReplies = (replies) => { //댓글수를 클릭하면 해당 게시판의 댓글들을 setReplyData로 담는다
-        console.log(replies);
+        console.log("re",replies);
         setReplyData(replies);
     }
     //-----------모달창용 댓글목록 불러오기-------------
+
+    function formatDate(dateStr) {
+        return dateStr.slice(0, 10); // "LocalDateTime" 으로 온 날짜를 "YYYY-MM-DD" 형태로 포맷팅
+    }
 
     return (
         <div className='ad-board'>
@@ -225,16 +230,16 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                         <td>게시판 선택</td>
                         <td>
                             <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false) ,handlePageChange(1) }} value={boardCategory}>
-                                <option value={0}>전체보기</option>
-                                <option value={1}>공지사항</option>
-                                <option value={2}>소식공유</option>
-                                <option value={3}>자유게시판</option>
-                                <option value={4}>봉사후기</option>
+                                <option value="0">전체보기</option>
+                                <option value="1">공지사항</option>
+                                <option value="2">소식공유</option>
+                                <option value="3">자유게시판</option>
+                                <option value="4">봉사후기</option>
                             </select>
                         </td>
                         {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
                         <td>신고된 게시글만 보기</td>
-                        <td><input type='checkbox' onChange={(e) => {setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
+                        <td><input type='checkbox' onChange={(e) => {handlePageChange(1); setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
                     </tr>
                     </tbody>
                 </table>
@@ -246,7 +251,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                     <th className="ad-board-head ad-board-head-checkbox">
                         <input
                             type='checkbox'
-                            onChange={(e) => handleAllCheck(e.target.checked)}
+                            onChange={(e) =>{ handleAllCheck(e.target.checked);}}
                             // checkItems의 갯수와 페이징 된 데이터 갯수가 같을 때 전체 선택
                             // 하나라도 빼면 체크 박스 해제
                             checked={
@@ -422,7 +427,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                                 ? "삭제"
                                                 : ""}</td>
                                         <td>{reply.reply == null ? "댓글" : `대댓글(${reply.reply.id})`}</td>
-                                        <td>{reply.createAt2}</td>
+                                        <td>{formatDate(reply.createAt)}</td>
                                     </tr>
                                 )
                             })}

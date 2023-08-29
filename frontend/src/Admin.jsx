@@ -1,7 +1,6 @@
 import React from 'react'
 import AdHeader from './components/layouts/AdHeader'
 import AdBoard from './pages/admin/AdBoard';
-import AdReply from './pages/admin/AdReply';
 import AdUser from './pages/admin/AdUser';
 import AdQna from './pages/admin/AdQna';
 import AdVolunteer from './pages/admin/AdVolunteer';
