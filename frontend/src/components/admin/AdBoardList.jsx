@@ -239,7 +239,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                         </td>
                         {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
                         <td>신고된 게시글만 보기</td>
-                        <td><input type='checkbox' onChange={(e) => {setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
+                        <td><input type='checkbox' onChange={(e) => {handlePageChange(1); setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked)}} checked={reportOnly ? true : false}></input></td>
                     </tr>
                     </tbody>
                 </table>
@@ -251,7 +251,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                     <th className="ad-board-head ad-board-head-checkbox">
                         <input
                             type='checkbox'
-                            onChange={(e) => handleAllCheck(e.target.checked)}
+                            onChange={(e) =>{ handleAllCheck(e.target.checked);}}
                             // checkItems의 갯수와 페이징 된 데이터 갯수가 같을 때 전체 선택
                             // 하나라도 빼면 체크 박스 해제
                             checked={

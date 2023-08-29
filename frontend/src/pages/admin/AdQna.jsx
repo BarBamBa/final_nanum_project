@@ -7,6 +7,7 @@ import '/src/scss/admin/AdQna.scss'
 function AdQna() {
 
   const [qnaData, setQnaData] = useState([]);
+  const [reportData, setReportData] = useState([]);
 
   //-----------페이징-------------
   const [page, setPage] = useState(1);
@@ -21,7 +22,7 @@ function AdQna() {
     await fetch("/api/admin/qna")
       .then((res) => res.json())
       .then((data) => {
-        console.log("userData", data);
+        console.log("qnaData", data);
         setQnaData(data);
       })
       .catch((error) => {
@@ -33,7 +34,7 @@ function AdQna() {
   async function selectCategory(category, checked) {
     console.log(category);
     console.log(checked);
-    await fetch("/api/admin/boards/category", {
+    await fetch("/api/admin/qna/category", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,35 +45,17 @@ function AdQna() {
       .then((data) => {
         console.log("selectCategory", data);
         if (checked) {
-          const reportOnlyData = data.filter(item => item.reportYn === "Y");
-          setBoardData(reportOnlyData);
+          const reportOnlyData = data.filter(item => item.answers.length == 0);
+          setQnaData(reportOnlyData);
           return;
         }
-        setBoardData(data);
+        setQnaData(data);
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
-
-  // //신고된 게시판 조회
-  // async function reportedBoard(id) {
-  //   console.log(id);
-  //   await fetch("/api/admin/boards/reported", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ board: id })
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setReportData(data);
-  //     })
-
-  // }
 
   useEffect(() => {
     fetchQna();
@@ -84,12 +67,10 @@ function AdQna() {
       <h1>문의글 리스트</h1>
       <AdQnaList
         qnaData={qnaData}
-        // reportData={reportData}
         page={page}
         handlePageChange={handlePageChange}
         fetchQna={fetchQna}
-        // selectCategory={selectCategory}
-      // reportedBoard={reportedBoard}
+        selectCategory={selectCategory}
       />
     </div>
   )

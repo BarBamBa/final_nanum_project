@@ -7,6 +7,8 @@ import '/src/scss/admin/AdBoard.scss'
 function AdUser() {
 
   const [userData, setUserData] = useState([]);
+  const [blackedOnly, setBlackedOnly] = useState(false);
+  const [boardData, setBoardData] = useState([]);
 
   //-----------페이징-------------
   const [page, setPage] = useState(1);
@@ -16,12 +18,13 @@ function AdUser() {
   };
   //-----------페이징-------------
 
-  // 게시판 조회
+  // 유저리스트 조회
   async function fetchUsers() {
     await fetch("/api/admin/users")
       .then((res) => res.json())
       .then((data) => {
         console.log("userData", data);
+
         setUserData(data);
       })
       .catch((error) => {
@@ -29,50 +32,45 @@ function AdUser() {
       });
   }
 
-  //카테고리로 조회
-  async function selectCategory(category, checked) {
-    console.log(category);
-    console.log(checked);
-    await fetch("/api/admin/boards/category", {
+  //검색어로 조회
+  async function searchUser(searchKind, searchKeyword) {
+    let data;
+    console.log("검색어와 키워드 : ", searchKind, searchKeyword);
+    if (searchKind == "all") {
+      data = { name: searchKeyword }
+    }
+    if (searchKind == "id") {
+      data = { id: searchKeyword }
+    }
+    if (searchKind == "name") {
+      data = { name: searchKeyword }
+    }
+    if (searchKind == "email") {
+      data = { email: searchKeyword }
+    }
+    if (searchKind == "nickname") {
+      data = { nickname: searchKeyword }
+    }
+    await fetch("/api/admin/users/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ flg: category })
+      body: JSON.stringify(data)
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("selectCategory", data);
-        if (checked) {
-          const reportOnlyData = data.filter(item => item.reportYn === "Y");
-          setBoardData(reportOnlyData);
-          return;
+        if (data.length == 0) {
+          alert("검색결과가없습니다.");
+          return
         }
-        setBoardData(data);
+        setUserData(data);
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
-
-  //신고된 게시판 조회
-  async function reportedBoard(id) {
-    console.log(id);
-    await fetch("/api/admin/boards/reported", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ board: id })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setReportData(data);
-      })
-
-  }
 
   useEffect(() => {
     fetchUsers();
@@ -83,12 +81,13 @@ function AdUser() {
       <h1>회원 리스트</h1>
       <AdUserList
         userData={userData}
-        // reportData={reportData}
+        setBlackedOnly={setBlackedOnly}
+        blackedOnly={blackedOnly}
         page={page}
         handlePageChange={handlePageChange}
         fetchUsers={fetchUsers}
-        selectCategory={selectCategory}
-        // reportedBoard={reportedBoard}
+        searchUser={searchUser}
+      // getBoardList={getBoardList}
       />
     </div>
   )

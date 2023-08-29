@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Modal from "react-modal";
 
-function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCategory }) {
+function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList, blackedOnly, setBlackedOnly, searchUser }) {
 
   const navigate = useNavigate();
 
@@ -15,8 +15,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
   console.log("paginatedUserData", paginatedUserData);
   //-----------페이징-------------
 
-  const [boardCategory, setBoardCategory] = useState("0"); // 게시판 카테고리
-  const [reportOnly, setReportOnly] = useState(false);
+  const [searchKind, setSearchKind] = useState("all"); // 검색 기준
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [isOpenBoard, setIsOpenBoard] = useState(false); // 신고리스트 모달창 flg
   const [isOpenReply, setIsOpenReply] = useState(false);
 
@@ -59,68 +59,143 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
 
   };
 
-  const handleSingleCheckReply = (checked, id) => {
-    console.log("댓글 체크 여부", checked, id);
-    if (checked) {
-      setCheckReplyItems([...checkReplyItems, id]);
-    } else {
-      setCheckReplyItems(checkReplyItems.filter((el) => el !== id));
+  //-----------유저 블랙-------------
+  async function blackUsers() {
+    const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
+    console.log(jsonList);
+    if (!confirm("차단하시겠습니까?")) {
+      return;
     }
-  };
+    await fetch("/api/admin/users/black", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonList),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCheckItems([]);
+        searchHandle(searchKind, searchKeyword);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //-----------유저 블랙-------------
 
-  const handleAllCheckReply = (checked) => { //모두 체크 기능
-    if (checked) {
-      console.log(replyData.length);
-      console.log(checked);
-      const checklist = [];
-
-      // 페이징해서 10개씩 잘라진 데이터에서 id를 checkItems state에 모두 담는다.
-      // checkitems 에 id가 있는 행에는 체크가 되게 밑에서 조건을 건다
-      replyData.forEach((el) => console.log(el.id));
-      replyData.forEach((el) => checklist.push(el.id));
-      setCheckReplyItems(checklist);
+  //-----------유저 블랙 복구-------------
+  async function revertUsers() {
+    const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
+    console.log(jsonList);
+    if (!confirm("차단을 푸시겠습니까?")) {
+      return;
     }
+    await fetch("/api/admin/users/revert", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonList),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCheckItems([]);
+        searchHandle(searchKind, searchKeyword);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //-----------유저 블랙 복구-------------
 
-    // 반대의 경우 전체 체크 박스 체크 삭제
-    else {
-      setCheckReplyItems([]);
+  //-----------관리자등록-------------
+  async function addAdmin() {
+    const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
+    console.log(jsonList);
+    if (!confirm("관리자로 등록 하시겠습니까?")) {
+      return;
     }
-  };
+    await fetch("/api/admin/users/addAdmin", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonList),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCheckItems([]);
+        searchHandle(searchKind, searchKeyword);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //-----------관리자등록-------------
+
+  //-----------관리자해제-------------
+  async function removeAdmin() {
+    const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
+    console.log(jsonList);
+    if (!confirm("관리자로 등록 하시겠습니까?")) {
+      return;
+    }
+    await fetch("/api/admin/users/removeAdmin", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonList),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCheckItems([]);
+        searchHandle(searchKind, searchKeyword);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //-----------관리자해제-------------
+
+
   console.log("체크된 글 리스트", checkItems);
   console.log("체크된 댓글글 리스트", checkReplyItems);
 
   //-----------체크박스-------------
 
-  //-----------모달창용 게시글목록 불러오기-------------
-  const [boardData, setBoardData] = useState([]);
-  const getBoards = (boards) => { //댓글수를 클릭하면 해당 게시판의 댓글들을 setReplyData로 담는다
-    console.log(boards);
-    setBoardData(boards);
+  async function searchHandle() {
+
+    searchUser(searchKind, searchKeyword);
+    handlePageChange(1);
+    console.log("검색기준 : ", searchKind);
+    console.log("검색어 : ", searchKeyword);
   }
-  //-----------모달창용 게시글목록 불러오기-------------
-  console.log(boardData);
+
   return (
     <div className='ad-board'>
       <div className='ad-board-manage-bar'>
         <table className='ad-board-manage-table'>
           <tbody>
             <tr>
-              <td>게시판 선택</td>
+              <td>회원검색</td>
               <td>
-                <select>
-                  <option>검색기준</option>
-                  <option value={1}>회원번호</option>
-                  <option value={2}>회원이름</option>
-                  <option value={3}>이메일</option>
-                  <option value={4}>NICK</option>
+                <select onChange={(e) => { setSearchKind(e.target.value); }}>
+                  <option value="all">검색기준</option>
+                  <option value="id">회원번호</option>
+                  <option value="name">회원이름</option>
+                  <option value="email">이메일</option>
+                  <option value="nickname">NICK</option>
                 </select>
               </td>
               <td>
-                <input></input>
-                <button>검색</button>
+                <input type="text" onChange={(e) => { setSearchKeyword(e.target.value) }}></input>
+                <button onClick={searchHandle}>검색</button>
               </td>
-              <td>신고된 유저만 보기</td>
-              <td><input type='checkbox'></input></td>
+              <td><button onClick={fetchUsers} >전체보기</button></td>
+              {/* <td>블랙유저만 보기</td>
+              <td><input type="checkbox" onChange={(e) => { setBlackedOnly(!blackedOnly); searchHandle(); console.log(blackedOnly) }}></input></td> */}
             </tr>
           </tbody>
         </table>
@@ -144,14 +219,13 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
             </th>
             <th className="ad-board-head">번호</th>
             <th className="ad-board-head">이름</th>
+            <th className="ad-board-head">나이</th>
             <th className="ad-board-head">Email</th>
             <th className="ad-board-head">H.P</th>
             <th className='ad-board-head'>Nick</th>
-            <th className='ad-board-head'>게시글</th>
-            <th className='ad-board-head'>게시댓글</th>
             <th className='ad-board-head'>회원상태</th>
+            <th className='ad-board-head'>회원등급</th>
             <th className="ad-board-head">가입일</th>
-            <th className="ad-board-head">신고</th>
           </tr>
         </thead>
         <tbody>
@@ -168,23 +242,24 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
                   />
                 </td>
                 <td className="ad-board-item ad-board-id">{user.id}</td>
-                <td className="ad-board-item ad-board-name" onClick={() => { navigate(`/board/detail/${user.id}`) }}><span>{user.name}</span></td>
+                <td className="ad-board-item ad-board-name"><span>{user.name}</span></td>
+                <td className="ad-board-item ad-board-age"><span>{user.age}</span></td>
                 <td className="ad-board-item ad-board-mail">{user.email}</td>
                 <td className="ad-board-item ad-board-phone">{user.phone}</td>
                 <td className="ad-board-item ad-board-nick">{user.nickname}</td>
-                <td className="ad-board-item ad-board-boards"><span onClick={() => { setBoardData(user.boardList), setIsOpenBoard(true) }} >{user.boardList.length}</span></td>
-                <td className="ad-board-item ad-board-replies">{user.replyList.length}</td>
-                <td className="ad-board-item ad-board-status">{user.status}</td>
+                <td className="ad-board-item ad-board-status">{user.status == "Y" ? "활동" : "블랙"}</td>
+                <td className="ad-board-item ad-board-date">{user.authority == "ROLE_USER" ? "유저" : "관리자"}</td>
                 <td className="ad-board-item ad-board-date">{user.createAt2}</td>
-                <td className="ad-board-item ad-board-report">{user.reportList.length}</td>
               </tr>
             );
           })}
 
         </tbody>
       </table>
-      <button onClick="">선택차단</button>
-      <button onClick="">선택복구</button>
+      <button onClick={blackUsers}>선택차단</button>
+      <button onClick={revertUsers}>선택복구</button>
+      <button onClick={addAdmin}>관리자등록</button>
+      <button onClick={removeAdmin}>관리자해제</button>
       <Pagination
         activePage={page} // 현재 페이지
         itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
@@ -196,144 +271,32 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, selectCatego
         nextPageText=">>" // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-
-      {/* 신고사유 모달창 */}
-      <Modal
-        style={modalStyle}
-        isOpen={isOpenBoard}
-        onRequestClose={() => { setIsOpenBoard(false) }}
-      >
-        {boardData.length == 0 ? <span>게시글이 없습니다.</span> :
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>번호</th>
-                  <th>제목</th>
-                  <th>게시판종류</th>
-                  <th>등록일</th>
-                </tr>
-              </thead>
-              <tbody>
-                {boardData.map((data, i) => {
-                  return (
-
-                    <tr key={data.id}>
-                      <td>{data.id}</td>
-                      <td>{data.title}</td>
-                      <td>{data.flg == "1"
-                        ? "공지사항"
-                        : data.flg == "2"
-                          ? "소식공유"
-                          : data.flg == "3"
-                            ? "자유게시판"
-                            : data.flg == "4"
-                              ? "봉사후기"
-                              : ""}</td>
-                      <td>{data.createAt2}</td>
-
-                    </tr>
-                  )
-                })
-                }
-              </tbody>
-            </table>
-          </div>
-        }
-
-      </Modal>
-
-      {/* 댓글리스트 모달창 */}
-      {/* <Modal
-        style={modalStyle}
-        isOpen={isOpenReply}
-        onRequestClose={() => { setIsOpenReply(false), setCheckReplyItems([]) }}
-      >
-        {replyData.length == 0 ? <span>댓글이 없습니다</span> :
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <input
-                      type='checkbox'
-                      onChange={(e) => { handleAllCheckReply(e.target.checked) }}
-                      // checkItems의 갯수와 페이징 된 데이터 갯수가 같을 때 전체 선택
-                      // 하나라도 빼면 체크 박스 해제
-                      checked={
-                        checkReplyItems.length === replyData.length
-                          ? true
-                          : false
-                      }
-                    />
-                  </th>
-                  <th>번호</th>
-                  <th>내용</th>
-                  <th>작성자ID</th>
-                  <th>댓글상태</th>
-                  <th>댓글종류</th>
-                  <th>등록일</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {replyData.map((reply, i) => {
-                  return (
-                    <tr key={reply.id}>
-                      <td>
-                        <input
-                          type='checkbox'
-                          onChange={(e) => handleSingleCheckReply(e.target.checked, reply.id)}
-                          // checkItems에 id가 있으면 체크 아니면 체크 해제
-                          checked={checkReplyItems.includes(reply.id) ? true : false}
-                        />
-                      </td>
-                      <td>{reply.id}</td>
-                      <td>{reply.content}</td>
-                      <td>{reply.users.id}</td>
-                      <td>{reply.status == "Y"
-                        ? "게시"
-                        : reply.status == "N"
-                          ? "삭제"
-                          : ""}</td>
-                      <td>{reply.reply == null ? "댓글" : `대댓글(${reply.reply.id})`}</td>
-                      <td>{reply.createAt2}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-            <button onClick="" >선택삭제</button>
-            <button onClick="" >선택복구</button>
-          </div>
-        }
-      </Modal> */}
     </div>
   )
 }
 const modalStyle = {
   overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: 10,
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10,
   },
   content: {
-      width: "1200px",
-      minHeight: "400px",
-      display: "flex",
-      justifyContent: "center",
-      overflow: "auto",
-      top: "30vh",
-      left: "25vw",
-      right: "38vw",
-      bottom: "42vh",
-      WebkitOverflowScrolling: "touch",
-      borderRadius: "14px",
-      outline: "none",
-      zIndex: 10,
+    width: "1200px",
+    minHeight: "400px",
+    display: "flex",
+    justifyContent: "center",
+    overflow: "auto",
+    top: "30vh",
+    left: "25vw",
+    right: "38vw",
+    bottom: "42vh",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "14px",
+    outline: "none",
+    zIndex: 10,
   },
 };
 
