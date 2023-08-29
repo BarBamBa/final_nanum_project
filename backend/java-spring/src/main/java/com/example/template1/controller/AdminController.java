@@ -1,9 +1,6 @@
 package com.example.template1.controller;
 
-import com.example.template1.model.Board;
-import com.example.template1.model.QnA;
-import com.example.template1.model.Reply;
-import com.example.template1.model.Users;
+import com.example.template1.model.*;
 import com.example.template1.model.dto.*;
 import com.example.template1.service.AdminService;
 import com.example.template1.service.BoardService;
@@ -135,7 +132,7 @@ public class AdminController {
                 .body(revertList);
     }
 
-    @PutMapping("/users/addAdmin") //유저 복구
+    @PutMapping("/users/addAdmin") //관리자 권한 부여
     public ResponseEntity<List<Users>> addAdmin(@RequestBody List<UsersRequest> request) {
         List<Users> adminList = adminService.addAdmins(request);
 
@@ -143,7 +140,7 @@ public class AdminController {
                 .body(adminList);
     }
 
-    @PutMapping("/users/removeAdmin") //유저 복구
+    @PutMapping("/users/removeAdmin") //관리자 권한 없애기
     public ResponseEntity<List<Users>> removeAdmin(@RequestBody List<UsersRequest> request) {
         List<Users> adminList = adminService.removeAdmins(request);
 
@@ -188,6 +185,52 @@ public class AdminController {
 
         return ResponseEntity.ok()
                 .body(revertList);
+    }
+
+    @GetMapping("/volunteer") //봉사활동 신청 리스트 조회
+    public ResponseEntity<List<ApplicantsAdminResponse>> getAllApplicants() {
+        List<ApplicantsAdminResponse> applicants = adminService.getAllApplicant()
+                .stream()
+                .map(ApplicantsAdminResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(applicants);
+    }
+
+    @PutMapping("/volunteer/permit") //봉사활동 신청 승인
+    public ResponseEntity<List<Applicants>> permitApplicants(@RequestBody List<ApplicantsRequest> request) {
+        List<Applicants> permitList = adminService.permitApplicant(request);
+
+        return ResponseEntity.ok()
+                .body(permitList);
+    }
+
+    @PutMapping("/volunteer/deny") //봉사활동 신청 거부
+    public ResponseEntity<List<Applicants>> denyApplicants(@RequestBody List<ApplicantsRequest> request) {
+        List<Applicants> denyList = adminService.denyApplicant(request);
+
+        return ResponseEntity.ok()
+                .body(denyList);
+    }
+
+    @PutMapping("/volunteer/wait") //봉사활동 승인대기중 상태로 돌리기
+    public ResponseEntity<List<Applicants>> waitApplicants(@RequestBody List<ApplicantsRequest> request) {
+        List<Applicants> waitList = adminService.waitApplicant(request);
+
+        return ResponseEntity.ok()
+                .body(waitList);
+    }
+
+    @PostMapping("/volunteer/category") //봉사신청 승인상태로 조회
+    public ResponseEntity<List<ApplicantsResponse>> getBoardsByCategory(@RequestBody ApplicantsRequest request) {
+        List<ApplicantsResponse> applicantsList = adminService.getApplicantsByCategory(request.getStatus())
+                .stream()
+                .map(ApplicantsResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(applicantsList);
     }
 
 

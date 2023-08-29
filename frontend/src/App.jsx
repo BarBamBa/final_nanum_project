@@ -27,7 +27,6 @@ import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
-import MypageModify from './pages/myPage/MypageModify';
 
 function App() {
 

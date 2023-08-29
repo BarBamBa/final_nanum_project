@@ -1,10 +1,7 @@
 package com.example.template1.service;
 
 import com.example.template1.model.*;
-import com.example.template1.model.dto.BoardRequest;
-import com.example.template1.model.dto.QnaRequest;
-import com.example.template1.model.dto.ReplyRequest;
-import com.example.template1.model.dto.UsersRequest;
+import com.example.template1.model.dto.*;
 import com.example.template1.model.enums.Authority;
 import com.example.template1.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +19,7 @@ public class AdminService {
     private final ReplyRepository replyRepository;
     private final UsersRepository usersRepository;
     private final QnARepository qnARepository;
+    private final ApplicantsRepository applicantsRepository;
 
     public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
@@ -260,6 +258,70 @@ public class AdminService {
         return revertBoards;
     }
 
+    public List<Applicants> getAllApplicant() { //게시판 조회
+        List<Applicants> applicants = applicantsRepository.findAllByOrderByCreateAtDesc();
+        return applicants;
+    }
 
+    public List<Applicants> permitApplicant(List<ApplicantsRequest> request) { // 봉사활동 신청 승인
+        List<Applicants> permitApplicants = new ArrayList<>();
+
+        for (ApplicantsRequest applicantsRequest : request) {
+            Long id = applicantsRequest.getId();
+            Optional<Applicants> boardItem = applicantsRepository.findById(id);
+
+            if (boardItem.isPresent()) {
+                Applicants applicants = boardItem.get();
+                applicants.setStatus('Y');
+                permitApplicants.add(applicantsRepository.save(applicants));
+            }
+        }
+
+        return permitApplicants;
+    }
+
+    public List<Applicants> denyApplicant(List<ApplicantsRequest> request) { // 봉사활동 신청 거부
+        List<Applicants> denyApplicants = new ArrayList<>();
+
+        for (ApplicantsRequest applicantsRequest : request) {
+            Long id = applicantsRequest.getId();
+            Optional<Applicants> boardItem = applicantsRepository.findById(id);
+
+            if (boardItem.isPresent()) {
+                Applicants applicants = boardItem.get();
+                applicants.setStatus('N');
+                denyApplicants.add(applicantsRepository.save(applicants));
+            }
+        }
+
+        return denyApplicants;
+    }
+
+    public List<Applicants> waitApplicant(List<ApplicantsRequest> request) { //봉사활동 승인대기중 상태로 돌리기
+        List<Applicants> denyApplicants = new ArrayList<>();
+
+        for (ApplicantsRequest applicantsRequest : request) {
+            Long id = applicantsRequest.getId();
+            Optional<Applicants> boardItem = applicantsRepository.findById(id);
+
+            if (boardItem.isPresent()) {
+                Applicants applicants = boardItem.get();
+                applicants.setStatus('R');
+                denyApplicants.add(applicantsRepository.save(applicants));
+            }
+        }
+
+        return denyApplicants;
+    }
+
+    public List<Applicants> getApplicantsByCategory(char status) { //봉사신청 승인상태로 조회
+        if(status == 'A') {
+            List<Applicants> applicantsList = applicantsRepository.findAllByOrderByCreateAtDesc();
+            return applicantsList;
+        }
+        List<Applicants> applicantsList = applicantsRepository.findByStatusOrderByCreateAtDesc(status);
+
+        return applicantsList;
+    }
 
 }

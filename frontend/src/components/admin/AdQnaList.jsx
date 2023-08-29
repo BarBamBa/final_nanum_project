@@ -126,7 +126,7 @@ function AdQnaList({ qnaData, page, handlePageChange, fetchQna, selectCategory }
             <tr>
               <td>문의글 선택</td>
               <td>
-                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false), handlePageChange(1) }} >
+                <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false), handlePageChange(1);setCheckItems([]); }} >
                   <option value="0">전체보기</option>
                   <option value="1">FAQ</option>
                   <option value="2">QnA</option>
@@ -170,7 +170,7 @@ function AdQnaList({ qnaData, page, handlePageChange, fetchQna, selectCategory }
 
             return (
               <tr key={qna.id}>
-                <td className="ad-board-checkbox">
+                <td className="ad-qna-checkbox">
                   <input
                     type='checkbox'
                     onChange={(e) => handleSingleCheck(e.target.checked, qna.id)}
@@ -178,22 +178,25 @@ function AdQnaList({ qnaData, page, handlePageChange, fetchQna, selectCategory }
                     checked={checkItems.includes(qna.id) ? true : false}
                   />
                 </td>
-                <td className="ad-board-item ad-board-id">{qna.id}</td>
-                <td className="ad-board-item ad-board-title"><span onClick={() => { navigate(`/qna/detail/${qna.id}`) }}>{qna.title}</span></td>
-                <td className="ad-board-item ad-board-userId">{qna.userId}</td>
-                <td className="ad-board-item ad-board-nickname">{qna.nickname}</td>
-                <td className="ad-board-item ad-board-flg">{qna.flg == "1" ? "FAQ" : "QnA"}</td>
-                <td className="ad-board-item ad-board-status">{qna.status == "Y" ? "게시" : "삭제"}</td>
-                <td className="ad-board-item ad-board-date">{qna.createAt2}</td>
-                <td className="ad-board-item ad-board-replyYn">{qna.answers.length == 0 ? "N" : "Y"}</td>
+                <td className="ad-board-item ad-qna-id">{qna.id}</td>
+                <td className="ad-board-item ad-qna-title"><span onClick={() => { navigate(`/qna/detail/${qna.id}`) }}>{qna.title}</span></td>
+                <td className="ad-board-item ad-qna-userId">{qna.userId}</td>
+                <td className="ad-board-item ad-qna-nickname">{qna.nickname}</td>
+                <td className="ad-board-item ad-qna-flg">{qna.flg == "1" ? "FAQ" : "QnA"}</td>
+                <td className="ad-board-item ad-qna-status">{qna.status == "Y" ? "게시" : "삭제"}</td>
+                <td className="ad-board-item ad-qna-date">{qna.createAt2}</td>
+                <td className="ad-board-item ad-qna-replyYn">{qna.answers.length == 0 ? "N" : "Y"}</td>
               </tr>
             );
           })}
 
         </tbody>
       </table>
-      <button onClick={deleteQna}>선택삭제</button>
-      <button onClick={revertQna}>선택복구</button>
+      <div className='ad-board-btn-box'>
+        <button onClick={deleteQna}>선택삭제</button>
+        <button onClick={revertQna}>선택복구</button>
+      </div>
+
       <Pagination
         activePage={page} // 현재 페이지
         itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수

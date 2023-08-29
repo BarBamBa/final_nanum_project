@@ -138,7 +138,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
   async function removeAdmin() {
     const jsonList = checkItems.map(id => ({ id })); //List 형태를 Json 형태로 변경
     console.log(jsonList);
-    if (!confirm("관리자로 등록 하시겠습니까?")) {
+    if (!confirm("관리자권한을 해제 하시겠습니까?")) {
       return;
     }
     await fetch("/api/admin/users/removeAdmin", {
@@ -193,7 +193,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
                 <input type="text" onChange={(e) => { setSearchKeyword(e.target.value) }}></input>
                 <button onClick={searchHandle}>검색</button>
               </td>
-              <td><button onClick={fetchUsers} >전체보기</button></td>
+              <td><button onClick={() => { fetchUsers(); setSearchKind("all") }} >전체보기</button></td>
               {/* <td>블랙유저만 보기</td>
               <td><input type="checkbox" onChange={(e) => { setBlackedOnly(!blackedOnly); searchHandle(); console.log(blackedOnly) }}></input></td> */}
             </tr>
@@ -223,7 +223,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
             <th className="ad-board-head">Email</th>
             <th className="ad-board-head">H.P</th>
             <th className='ad-board-head'>Nick</th>
-            <th className='ad-board-head'>회원상태</th>
+            <th className='ad-board-head'>상태</th>
             <th className='ad-board-head'>회원등급</th>
             <th className="ad-board-head">가입일</th>
           </tr>
@@ -233,7 +233,7 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
 
             return (
               <tr key={user.id}>
-                <td className="ad-board-checkbox">
+                <td className="ad-user-checkbox">
                   <input
                     type='checkbox'
                     onChange={(e) => handleSingleCheck(e.target.checked, user.id)}
@@ -241,25 +241,28 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
                     checked={checkItems.includes(user.id) ? true : false}
                   />
                 </td>
-                <td className="ad-board-item ad-board-id">{user.id}</td>
-                <td className="ad-board-item ad-board-name"><span>{user.name}</span></td>
-                <td className="ad-board-item ad-board-age"><span>{user.age}</span></td>
-                <td className="ad-board-item ad-board-mail">{user.email}</td>
-                <td className="ad-board-item ad-board-phone">{user.phone}</td>
-                <td className="ad-board-item ad-board-nick">{user.nickname}</td>
-                <td className="ad-board-item ad-board-status">{user.status == "Y" ? "활동" : "블랙"}</td>
-                <td className="ad-board-item ad-board-date">{user.authority == "ROLE_USER" ? "유저" : "관리자"}</td>
-                <td className="ad-board-item ad-board-date">{user.createAt2}</td>
+                <td className="ad-board-item ad-user-id">{user.id}</td>
+                <td className="ad-board-item ad-user-name"><span>{user.name}</span></td>
+                <td className="ad-board-item ad-user-age"><span>{user.age}</span></td>
+                <td className="ad-board-item ad-user-mail">{user.email}</td>
+                <td className="ad-board-item ad-user-phone">{user.phone}</td>
+                <td className="ad-board-item ad-user-nick">{user.nickname}</td>
+                <td className="ad-board-item ad-user-status">{user.status == "Y" ? "활동" : "블랙"}</td>
+                <td className="ad-board-item ad-user-auth">{user.authority == "ROLE_USER" ? "유저" : "관리자"}</td>
+                <td className="ad-board-item ad-user-date">{user.createAt2}</td>
               </tr>
             );
           })}
 
         </tbody>
       </table>
-      <button onClick={blackUsers}>선택차단</button>
-      <button onClick={revertUsers}>선택복구</button>
-      <button onClick={addAdmin}>관리자등록</button>
-      <button onClick={removeAdmin}>관리자해제</button>
+      <div className='ad-board-btn-box'>
+        <button onClick={blackUsers}>선택차단</button>
+        <button onClick={revertUsers}>선택복구</button>
+        <button onClick={addAdmin}>관리자등록</button>
+        <button onClick={removeAdmin}>관리자해제</button>
+      </div>
+
       <Pagination
         activePage={page} // 현재 페이지
         itemsCountPerPage={10} // 한 페이지랑 보여줄 아이템 갯수
