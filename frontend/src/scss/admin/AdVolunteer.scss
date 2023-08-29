@@ -17,6 +17,12 @@
 
     .ad-vol-title {
         width: 40%;
+        text-align: left !important;
+        span {
+            text-decoration: underline;
+            text-underline-position: under;
+            cursor: pointer;
+        }
     }
 
     .ad-vol-userId {

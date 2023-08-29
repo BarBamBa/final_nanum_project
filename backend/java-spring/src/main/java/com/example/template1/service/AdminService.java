@@ -7,6 +7,7 @@ import com.example.template1.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -322,6 +323,11 @@ public class AdminService {
         List<Applicants> applicantsList = applicantsRepository.findByStatusOrderByCreateAtDesc(status);
 
         return applicantsList;
+    }
+
+    public List<Board> getBoardsByDates(LocalDateTime startDate, LocalDateTime endDate) {
+
+        return boardRepository.findByCreateAtBetween(startDate, endDate);
     }
 
 }

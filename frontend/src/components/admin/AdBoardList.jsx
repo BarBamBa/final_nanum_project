@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Modal from "react-modal";
+import '/src/scss/admin/ModalTable.scss'
 
-function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoards, selectCategory, reportedBoard, reportViewHandle }) {
+function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoards, selectCategory, reportedBoard, reportViewHandle, searchByDate }) {
 
     const navigate = useNavigate();
 
@@ -221,14 +222,20 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
         return dateStr.slice(0, 10); // "LocalDateTime" 으로 온 날짜를 "YYYY-MM-DD" 형태로 포맷팅
     }
 
+    //날짜검색
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+
+
+
     return (
         <div className='ad-board'>
             <div className='ad-board-manage-bar'>
                 <table className='ad-board-manage-table'>
                     <tbody>
                         <tr>
-                            <td>게시판 선택</td>
                             <td>
+                                <span>게시판 선택</span>
                                 <select onChange={(e) => { setBoardCategory(e.target.value), selectCategory(e.target.value, false), setReportOnly(false), handlePageChange(1), setCheckItems([]); }} value={boardCategory}>
                                     <option value="0">전체보기</option>
                                     <option value="1">공지사항</option>
@@ -237,9 +244,27 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                     <option value="4">봉사후기</option>
                                 </select>
                             </td>
-                            {/* <td><button onClick={() => {reportViewHandle();}}>신고된 글만 보기</button></td> */}
                             <td>신고된 게시글만 보기</td>
-                            <td><input type='checkbox' onChange={(e) => { handlePageChange(1); setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked) }} checked={reportOnly ? true : false}></input></td>
+                            <td className='ad-board-manage-checkBox'><input type='checkbox' onChange={(e) => { handlePageChange(1); setReportOnly(!reportOnly); selectCategory(boardCategory, e.target.checked) }} checked={reportOnly ? true : false}></input></td>
+                            <td>기간별로보기</td>
+                            <td>
+                                <input
+                                    type='date'
+                                    id='startDate'
+                                    value={startDate || ''}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                                ~
+                                <input
+                                    type='date'
+                                    id='endDate'
+                                    value={endDate || ''}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                            </td>
+                            <td>
+                                <button onClick={() => searchByDate(startDate, endDate)}>날짜 검색</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -286,7 +311,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                     />
                                 </td>
                                 <td className="ad-board-item ad-board-id">{board.id}</td>
-                                <td className="ad-board-item ad-board-title" onClick={() => { navigate(`/board/detail/${board.id}`) }}><span>{board.title}</span></td>
+                                <td className="ad-board-item ad-board-title"><span onClick={() => { navigate(`/board/detail/${board.id}`) }}>{board.title}</span></td>
                                 <td className="ad-board-item ad-board-userId">{board.userId}</td>
                                 <td className="ad-board-item ad-board-nick">{board.nick}</td>
                                 <td className="ad-board-item ad-board-category">
@@ -333,9 +358,9 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 isOpen={isOpenReport}
                 onRequestClose={() => { setIsOpenReport(false) }}
             >
-                {reportData.length == 0 ? <span>신고내역이없습니다.</span> :
-                    <div>
-                        <table>
+                {reportData.length == 0 ? <span className='modal-null-alert'>신고내역이없습니다.</span> :
+                    <div className='modal-container modal-report-container'>
+                        <table className='modal-report-table'>
                             <thead>
                                 <tr>
                                     <th>번호</th>
@@ -351,8 +376,8 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                     return (
 
                                         <tr key={data.id}>
-                                            <td>{data.id}</td>
-                                            <td>{data.reason == 1
+                                            <td className='modal-report-id'>{data.id}</td>
+                                            <td className='modal-report-reason'>{data.reason == 1
                                                 ? "폭력"
                                                 : data.reason == 2
                                                     ? "광고"
@@ -361,10 +386,10 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                                         : data.reason == 4
                                                             ? "게시판성격과 무관"
                                                             : ""}</td>
-                                            <td>{data.boardId}</td>
-                                            <td>{data.reportedId}</td>
-                                            <td>{data.reporterId}</td>
-                                            <td>{data.createAt2}</td>
+                                            <td className='modal-report-boardId'>{data.boardId}</td>
+                                            <td className='modal-report-reportedId'>{data.reportedId}</td>
+                                            <td className='modal-report-reporterId'>{data.reporterId}</td>
+                                            <td className='modal-report-date'>{data.createAt2}</td>
                                         </tr>
                                     )
                                 })
@@ -383,8 +408,8 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                 onRequestClose={() => { setIsOpenReply(false), setCheckReplyItems([]) }}
             >
                 {replyData.length == 0 ? <span>댓글이 없습니다</span> :
-                    <div>
-                        <table>
+                    <div className='modal-container modal-reply-container'>
+                        <table className='modal-reply-table'>
                             <thead>
                                 <tr>
                                     <th>
@@ -413,7 +438,7 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                 {replyData.map((reply, i) => {
                                     return (
                                         <tr key={reply.id}>
-                                            <td>
+                                            <td className='modal-reply-checkbox'>
                                                 <input
                                                     type='checkbox'
                                                     onChange={(e) => handleSingleCheckReply(e.target.checked, reply.id)}
@@ -421,23 +446,26 @@ function AdBoardList({ boardData, reportData, page, handlePageChange, fetchBoard
                                                     checked={checkReplyItems.includes(reply.id) ? true : false}
                                                 />
                                             </td>
-                                            <td>{reply.id}</td>
-                                            <td>{reply.content}</td>
-                                            <td>{reply.users.id}</td>
-                                            <td>{reply.status == "Y"
+                                            <td className='modal-reply-id'>{reply.id}</td>
+                                            <td className='modal-reply-content'>{reply.content}</td>
+                                            <td className='modal-reply-userId'>{reply.users.id}</td>
+                                            <td className='modal-reply-status'>{reply.status == "Y"
                                                 ? "게시"
                                                 : reply.status == "N"
                                                     ? "삭제"
                                                     : ""}</td>
-                                            <td>{reply.reply == null ? "댓글" : `대댓글(${reply.reply.id})`}</td>
-                                            <td>{formatDate(reply.createAt)}</td>
+                                            <td className='modal-reply-kind'>{reply.reply == null ? "댓글" : `대댓글(${reply.reply.id})`}</td>
+                                            <td className='modal-reply-date'>{formatDate(reply.createAt)}</td>
                                         </tr>
                                     )
                                 })}
                             </tbody>
                         </table>
-                        <button onClick={deleteReply} >선택삭제</button>
-                        <button onClick={revertReply} >선택복구</button>
+                        <div className='modal-reply-btnBox'>
+                            <button onClick={deleteReply} >선택삭제</button>
+                            <button onClick={revertReply} >선택복구</button>
+                        </div>
+
                     </div>
                 }
             </Modal>
