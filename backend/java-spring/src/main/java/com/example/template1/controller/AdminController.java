@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -231,6 +232,19 @@ public class AdminController {
 
         return ResponseEntity.ok()
                 .body(applicantsList);
+    }
+
+    @PostMapping("/boards/date")
+    public ResponseEntity<List<BoardResponse>> getBoardsByDate(@RequestBody DateRequest request) {
+        LocalDateTime startDate = request.getStartDate();
+        LocalDateTime endDate = request.getEndDate();
+        List<BoardResponse> boardList = adminService.getBoardsByDates(startDate, endDate)
+                .stream()
+                .map(BoardResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(boardList);
     }
 
 

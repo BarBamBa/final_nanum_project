@@ -150,9 +150,9 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
                         <th className="ad-board-head">신청번호</th>
                         <th className="ad-board-head">봉사번호</th>
                         <th className="ad-board-head">봉사활동</th>
-                        <th className="ad-board-head">신청자ID</th>
-                        <th className='ad-board-head'>신청자이름</th>
-                        <th className='ad-board-head'>봉사선택날짜</th>
+                        <th className="ad-board-head">ID</th>
+                        <th className='ad-board-head'>이름</th>
+                        <th className='ad-board-head'>봉사날짜</th>
                         <th className="ad-board-head">신청등록일</th>
                         <th className="ad-board-head">신청상태</th>
                     </tr>

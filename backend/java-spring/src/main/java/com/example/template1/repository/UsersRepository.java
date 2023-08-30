@@ -31,4 +31,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     List<Users> findAllByNicknameContainingOrderByCreateAtDesc(String nickname);
 
+
+
 }

@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter >
     <ScrollToTop />
     <Routes>
-      <Route path='/*' element={<App />} />
+      <Route path='/*' element={<App />} />      
       <Route path="/admin/*" element={<Admin />} />
     </Routes>
   </BrowserRouter>
