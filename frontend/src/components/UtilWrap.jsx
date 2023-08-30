@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
 import { TokenCheck } from './TokenCheck';
+import { BsPersonGear } from 'react-icons/bs'
 
 function UtilWrap() {
   const userInfo = useContext(TokenCheck);
@@ -22,6 +23,7 @@ function UtilWrap() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("nickname");
+    localStorage.removeItem("user_email");
     setIsLogin(false);
   }
 
@@ -32,7 +34,7 @@ function UtilWrap() {
         <>
           <div className="loginName">
             {
-              userInfo.auth == "ROLE_ADMIN" && <Link to='/admin'>관리자</Link>
+              userInfo.auth == "ROLE_ADMIN" && <Link to='/admin' className='toAdminPage-btn'><BsPersonGear className='adminBtn'/></Link>
             }
             <Link to={`/MyPage`} className='welcomeBox'>
               <img src="/images/mainProfile.png" className='loginImg' />
