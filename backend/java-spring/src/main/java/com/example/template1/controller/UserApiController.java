@@ -33,6 +33,7 @@ public class UserApiController {
     private final UserService userService;
     private UsersRepository usersRepository;
 
+    private UsersRequsetDto usersRequsetDto;
 
 
     @PostMapping("/signup")
@@ -103,9 +104,21 @@ public class UserApiController {
         }
     }
 
+    //======= 유저 비밀번호 업데이트 ========================================
+    @PutMapping("/user/passwordUpdate")
+    public ResponseEntity<String> changePassword(@RequestBody UsersRequsetDto usersRequsetDto) {
+        try {
+            userService.changePassword(usersRequsetDto.getEmail(), usersRequsetDto.getPassword());
+            return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("비밀번호 변경에 실패했습니다.");
+        }
+    }
+
 
     // 아이디찾기
-    @PostMapping("/find-email")
+    @PostMapping("/id")
     public ResponseEntity<Map<String, String>> findEmail(@RequestBody UsersDto usersDto) {
         String foundEmail = userService.findEmailByNameAndPhone(usersDto.getName(), usersDto.getPhone());
 
@@ -119,5 +132,6 @@ public class UserApiController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+
 
 }
