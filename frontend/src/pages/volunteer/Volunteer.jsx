@@ -31,6 +31,7 @@ function Volunteer() {
 
   // 모집상태 체크박스 선택시 true/false
   function handleCheck(newOnCheck) {
+    
     if(newOnCheck === onCheck) {
       setOnCheck('');
     } else {
@@ -40,6 +41,7 @@ function Volunteer() {
 
   // useIntersectionObserver을 통해 fetchData 함수 동작 시
   const fetchData = async() => {
+    
     await fetch('/api/list', {
       method: 'POST',
       headers: {

@@ -10,6 +10,13 @@ function MyPage() {
 
   //===== 유저 정보 호출==============================================
 	async function fetchProfile() {
+
+		if (!localStorage.getItem("accessToken")) {
+      alert('로그인을 해주세요.'); 
+      navigate('/login');
+      return;
+    }
+
 		fetch("/api/user/me", {
 			method: "GET",
 			headers: {
@@ -68,10 +75,13 @@ function MyPage() {
 			<VolunteerHeaders />
 
 			<form className="mypage-form">
+
 				<div className="myPage-Container">
+
 					{/* ==이름========== */}
 					<div className="myPage-category">이름</div>
 					<div className="myPage-textBox">{userInfo.name}</div>
+
 					{/* ==이메일========== */}
 					<div className="myPage-category">이메일</div>
 					<div className="myPage-textBox">
@@ -80,14 +90,17 @@ function MyPage() {
 							이메일 인증
 						</button>
 					</div>
+
 					{/* ==닉네임 전화번호========== */}
 					<div className="myPage-category">닉네임</div>
 					<div className="myPage-textBox">{userInfo.nickname}</div>
 					<div className="myPage-category">전화번호</div>
 					<div className="myPage-textBox">{userInfo.phone}</div>
+
 					{/* ==주소========== */}
 					<div className="myPage-category">주소</div>
 					<div className="myPage-textBox">{userInfo.address}</div>
+
 					{/* ==나의 자원봉사 및 정보수정 버튼========== */}
 
 					<div className="buttonBox">
