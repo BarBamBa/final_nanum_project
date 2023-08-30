@@ -159,8 +159,8 @@ function AdQnaList({ qnaData, page, handlePageChange, fetchQna, selectCategory }
             <th className="ad-board-head">제목</th>
             <th className="ad-board-head">작성자ID</th>
             <th className="ad-board-head">Nick</th>
-            <th className='ad-board-head'>문의글 종류</th>
-            <th className='ad-board-head'>문의글 상태</th>
+            <th className='ad-board-head'>종류</th>
+            <th className='ad-board-head'>상태</th>
             <th className="ad-board-head">등록일</th>
             <th className="ad-board-head">답변여부</th>
           </tr>

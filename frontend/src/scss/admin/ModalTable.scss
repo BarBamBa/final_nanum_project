@@ -1,0 +1,99 @@
+.modal-null-alert {
+    margin-top: 70px;
+    font-size: 20px;
+}
+.modal-reply-container {
+    width: 100%;
+
+    .modal-reply-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 10px;
+
+        th {
+            background-color: #f5f4f4;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .modal-reply-checkbox {
+            width: 5%;
+        }
+
+        .modal-reply-id {
+            width: 5%;
+        }
+
+        .modal-reply-title {
+            width: 45%;
+        }
+
+        .modal-reply-userId {
+            width: 10%;
+        }
+
+        .modal-reply-status {
+            width: 10%;
+        }
+
+        .modal-reply-kind {
+            width: 10%;
+        }
+
+        .modal-reply-date {
+            width: 15%;
+        }
+
+
+    }
+
+    .modal-reply-btnBox {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.modal-report-container {
+    width: 100%;
+
+    .modal-report-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 10px;
+
+        th {
+            background-color: #f5f4f4;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .modal-report-id {
+            width: 5%;
+        }
+        .modal-report-reason {
+            width: 10%;
+        }
+        .modal-report-boardId {
+            width: 5%;
+        }
+        .modal-report-reportedId {
+            width: 5%;
+        }
+        .modal-report-reporterId {
+            width: 5%;
+        }
+        .modal-report-date {
+            width: 10%;
+        }
+    }
+}
