@@ -1,13 +1,11 @@
 package com.example.template1.model.dto;
 
 import com.example.template1.model.Applicants;
-import com.example.template1.model.Users;
-import com.example.template1.model.Volunteer;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 @Getter
-public class ApplicantsResponse {
+public class ApplicantsAdminResponse {
 
     private final Long id;
 
@@ -27,7 +25,9 @@ public class ApplicantsResponse {
 
     private final String userName;
 
-    public ApplicantsResponse(Applicants applicants) {
+    private final int volunteerCode;
+
+    public ApplicantsAdminResponse(Applicants applicants) {
         this.id = applicants.getId();
         this.userId = applicants.getUsers().getId();
         this.volunteerId = applicants.getVolunteer().getId();
@@ -37,5 +37,6 @@ public class ApplicantsResponse {
         this.createAt = applicants.getCreateAt();
         this.updateAt = applicants.getUpdateAt();
         this.userName = applicants.getUsers().getName();
+        this.volunteerCode = applicants.getVolunteer().getNumber();
     }
 }

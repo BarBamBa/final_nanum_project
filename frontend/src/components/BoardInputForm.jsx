@@ -167,7 +167,9 @@ function BoardInputForm() {
           if (uploadResponse.status === 200) {
             console.log("파일 업로드 성공:", uploadResponse);
             alert("등록완료");
-            navigate("/board");
+            navigate("/board", {
+              state: { boardKind: boardKind }
+            });
           } else {
             console.error("파일 업로드 에러:", uploadResponse.statusText);
           }

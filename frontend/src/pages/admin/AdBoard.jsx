@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
-import AdBoardList from '../../components/AdBoardList';
+import AdBoardList from '../../components/admin/AdBoardList';
 import '../../scss/admin/AdBoard.scss'
 
 function AdBoard() {
@@ -22,6 +22,7 @@ function AdBoard() {
     await fetch("/api/admin/boards")
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setBoardData(data);
         })
         .catch((error) => {
@@ -49,6 +50,7 @@ function AdBoard() {
             return;
           }
           setBoardData(data);
+          console.log(data);
         })
         .catch((error) => {
           console.log(error);

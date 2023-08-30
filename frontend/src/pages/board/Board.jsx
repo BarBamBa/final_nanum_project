@@ -105,13 +105,12 @@ function Board() {
             <button onClick={() => { setBoardKind("4"); }}
               style={boardKind === "4" ? { color: "#546d01" } : null} >봉사후기</button>
           </div>
+
+          <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
+
         </div>
 
-        <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
-
       </div>
-
-
     </div>
   );
 }
