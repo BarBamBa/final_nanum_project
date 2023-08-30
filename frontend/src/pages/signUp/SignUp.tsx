@@ -220,35 +220,42 @@ const SignUp = () => {
 
 	//========= 생년월일 유효성 ========
 	const onChangeAge = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		const inputBirthdate = e.target.value;
-		setBirthdate(inputBirthdate);
+    const inputBirthdate = e.target.value;
+    setBirthdate(inputBirthdate);
 
-		const currentYear = new Date().getFullYear();
-		const minimumYear = 1930;
+    const currentYear = new Date().getFullYear();
+    const minimumYear = 1930;
 
-		if (inputBirthdate.length !== 8 || !/^\d+$/.test(inputBirthdate)) {
-			setAgeMessage("올바른 형식으로 입력해주세요.");
-			setIsAge(false);
-		} else if (Number(inputBirthdate.substring(0, 4)) < minimumYear) {
-			setAgeMessage("1930년 이후의 생년월일을 입력해주세요.");
-			setIsAge(false);
-		} else if (e.target.value.replace(blank_pattern, "") == "") {
-			setAgeMessage("공백만 입력되었습니다.");
-			setIsAge(false);
-		} else if (blank_pattern2.test(e.target.value) == true) {
-			setAgeMessage("공백이 입력되었습니다.");
-			setIsAge(false);
-		} else if (special_pattern.test(e.target.value) == true) {
-			setAgeMessage("특수문자가 입력되었습니다.");
-			setIsAge(false);
-		} else if (inputBirthdate.trim() === "") {
-			setAgeMessage("생년월일을 입력해주세요.");
-			setIsAge(false);
-		} else {
-			setAgeMessage("올바른 생년월일 형식입니다.");
-			setIsAge(true);
-		}
-	}, []);
+    if (inputBirthdate.length !== 8 || !/^\d+$/.test(inputBirthdate)) {
+        setAgeMessage("올바른 형식으로 입력해주세요.");
+        setIsAge(false);
+    } else if (Number(inputBirthdate.substring(0, 4)) < minimumYear) {
+        setAgeMessage("1930년 이후의 생년월일을 입력해주세요.");
+        setIsAge(false);
+    } else if (e.target.value.replace(blank_pattern, "") == "") {
+        setAgeMessage("공백만 입력되었습니다.");
+        setIsAge(false);
+    } else if (blank_pattern2.test(e.target.value) == true) {
+        setAgeMessage("공백이 입력되었습니다.");
+        setIsAge(false);
+    } else if (special_pattern.test(e.target.value) == true) {
+        setAgeMessage("특수문자가 입력되었습니다.");
+        setIsAge(false);
+    } else if (inputBirthdate.trim() === "") {
+        setAgeMessage("생년월일을 입력해주세요.");
+        setIsAge(false);
+    } else if (
+        !/^(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/.test(
+            inputBirthdate.substring(4)
+        )
+    ) {
+        setAgeMessage("올바른 생년월일 형식으로 입력해주세요.");
+        setIsAge(false);
+    } else {
+        setAgeMessage("올바른 생년월일 형식입니다.");
+        setIsAge(true);
+    }
+}, []);
 
 	//========= 전화번호 유효성 =========
 	const onChangePhon = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -385,34 +392,34 @@ const SignUp = () => {
 			e.preventDefault();
 
 			if (!isNameValid) {
-				setNameMessage("이름을 입력해주세요.");
+				setNameMessage("이름을 확인해주세요.");
 				return;
 			}
 			if (!isAge) {
-				setAgeMessage("생년월일을 입력해주세요.");
+				setAgeMessage("생년월일을 확인해주세요.");
 				return;
 			}
 			if (!isPhone) {
-				setPhoneMessage("전화번호를 입력해주세요.");
+				setPhoneMessage("전화번호를 확인해주세요.");
 				return;
 			}
 			if (!detailAddress) {
-				setDetailAddressMessage("주소를 입력해주세요.");
+				setDetailAddressMessage("주소를 확인해주세요.");
 				return;
 			}
 			if (!isEmailAvailable) {
-				setEmailMessage("이메일을 입력해주세요.");
+				setEmailMessage("이메일을 확인해주세요.");
 				return;
 			}
 			if (!isPassword) {
-				setPasswordMessage("비밀번호를 입력해주세요.");
+				setPasswordMessage("비밀번호를 확인해주세요.");
 				return;
 			}
 			if (!passwordConfirm) {
-				setPasswordConfirmMessage("비밀번호를 확인을 해주세요.");
+				setPasswordConfirmMessage("비밀번호 일치확인을 해주세요.");
 			}
 			if (!isNicknameAvailable) {
-				setNickNameMessage("닉네임을 입력해주세요.");
+				setNickNameMessage("닉네임을 확인해주세요.");
 				return;
 			}
 
@@ -748,12 +755,7 @@ const SignUp = () => {
 									></input>
 									<div
 										className={`message ${
-											!isPasswordConfirm
-												? "error"
-												: passwordConfirm.length > 0
-												? "success"
-												: ""
-										}`}
+											!isPasswordConfirm? "error": passwordConfirm.length > 0	? "success"	: ""}`}
 									>
 										{passwordConfirmMessage}
 									</div>
