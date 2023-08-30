@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../scss/qna/qna.scss'
+import '/src/scss/qna/qna.scss'
 import QnaTab from './QnaTab';
 import FaqTab from './FaqTab';
 import { useState, useEffect, useContext } from "react";

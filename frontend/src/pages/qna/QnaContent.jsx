@@ -108,7 +108,7 @@ function QnaContent({ qnaData, fetchQna }) {
             <div className='qna-detail-box'>
                 <div className='qna-detail-header'>
                     <div className='qna-title'>
-                        <h3>글제목 : {qnaData.title}</h3>
+                        <h3>{qnaData.title}</h3>
                     </div>
                     <div className="qna-writter-info">
                         <p>글쓴이 : {qnaData.nickname}</p>
@@ -186,8 +186,10 @@ function QnaContent({ qnaData, fetchQna }) {
                                 locale: 'ko',
                             }}
                         />
-                        <button onClick={handleResponse} >저장</button>
-                        <button onClick={() => { setAnswerFlg(false) }} >취소</button>
+                        <div className="response-btn-box">
+                            <button onClick={handleResponse} >저장</button>
+                            <button onClick={() => { setAnswerFlg(false) }} >취소</button>
+                        </div>
                     </div>
                 )
             }

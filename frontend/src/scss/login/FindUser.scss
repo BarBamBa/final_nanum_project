@@ -1,152 +1,111 @@
-.head-font {
-  font-size: 35px;
-  font-weight: bold;
-  margin-top: 50px;
-  margin-left: 20px;
-  color: #202020;
-}
-
-.head-font-bottom {
-  width: 100%;
-  border-bottom: 3px solid #e2e2e2;
-}
-
-/* ========== 로고 css================================== */
-
-.findUser-logo{
-  width: 450px;
-  height: 250px;
-  margin-top: 100px;
-  margin-left: 175px;
-  margin-bottom: -20px;
-}
-
-
-.logo-div{
-  width: 850px;
-}
-
-
-/* ========== 상단탭 css================================== */
-
-.main input[type=radio] {
-	display: none;
-}
-
-#tab-1:checked ~ .tab label:nth-child(1),
-#tab-2:checked ~ .tab label:nth-child(2) {
-  width: 150px;
-	background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: none;
-  border-bottom: 4px solid #A4CC22;
-  color: #A4CC22;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.content > div {
-	display: none;
-}
-
-#tab-1:checked ~ .content div:nth-child(1),
-#tab-2:checked ~ .content div:nth-child(2)  {
-	display: block;
-  background-color: #fff;
-}
-
-.main div:not(.head-font-bottom, .find-Email) {
+.main {
+  width: 1440px;
+  height: 100vh;
   margin: 0 auto;
-  width: 850px;
-  position: relative;
-  left: 82px;
-}
-
-.tab {
-  overflow: hidden;
-  margin-left: 355px;
-}
-
-.tab label {
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    float: left;
-    width: 150px;
-    text-align: center;
-    padding: 10px 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    user-select: none;
-    -webkit-user-select: none;
-    position: relative;
-    left: 260px;
-    color: #cacaca;
-}
-
-.content > div{
-   padding: 30px;
-   line-height: 1.5;
-   font-size: 17px;
-}
 
 
+  .content {
+    width: 400px;
+    height: 300px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
+    margin: 0 auto;
 
-/* ==========아이디찾기 css================================== */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.findUser-textbox {
-  width: 380px;
-  height: 40px;
-  border-radius: 10px;
-  border: solid 1px black;
-  margin-bottom: 15px;
-}
+    input[type="text"], input[type="tel"] {
+      border: 1px solid #546D01;
+      border-radius: 5px;
+      color: #343434;
+      height: 30px;
+      margin: 10px auto;
+  
+      &:focus {
+        border-color: #A4CC22;
+        outline: none;
+        box-shadow: 0 0 2px rgba(#A4CC22, 1);
+      }
+    }
 
+    .find-error {
+      color: red;
+    }
+  
+    .find-email {
+      color: #546D01;
+    }
 
+    /* ==========찾기버튼 css================================== */
+    .findUser-button{
+      background-color: #A4CC22;
+      text-align: center;
+      color: #FFF;
+      border: solid 1px #546D01;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 65%;
+      height: 35px;
+      margin: 10px auto;
+      }
 
-.find-success{
-  margin-left: 160px;
-  font-size: 20px;
-  color: rgb(56, 206, 26);
-}
-
-.find-Email{
-  /* background-color: rgba(162, 238, 166, 0.2); */
-  /* border: 3px solid #A4CC22; */
-  color: #A4CC22;
-  border-radius: 10px;
-  text-align: center;
-  width: 380px;
-  padding: 5px;
-  font-size: 23px;
-  position: relative;
-  bottom: 60px;
-  left: 7px;
-}
-
-
-/* ==========찾기버튼 css================================== */
-.findUser-button{
-  background-color: #A4CC22;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  border: solid 2px #546D01;
-  cursor: pointer;
-  display: inline-block;
-  height: 50px;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-  width: 400px;
-  border-radius: 10px;
-  outline: rgb(255, 255, 255) none 0px;
-  margin-bottom: 100px;
-  margin-top: 10px;
+    .findUser-button:hover{
+      background-color: #FFF;
+      color: #A4CC22;
+    }
   }
-
-.findUser-button:hover{
-  background-color: #FFF;
-  color: #A4CC22;
+  /* ========== 상단탭 css================================== */
+  .content > div {
+    display: none;
+  }
+  
+  input[type=radio] {
+    display: none;
+  }
+  
+  #tab-1:checked ~ .tab label:nth-child(1),
+  #tab-2:checked ~ .tab label:nth-child(2) {
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    // border-bottom: 2px solid #A4CC22;
+    color: #A4CC22;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  
+  #tab-1:checked ~ .content div:nth-child(1),
+  #tab-2:checked ~ .content div:nth-child(2)  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+  
+  .tab {
+    overflow: hidden;
+    border-bottom: 3px solid #A4CC22;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    label {
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 150px;
+        text-align: center;
+        padding: 10px 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        user-select: none;
+        -webkit-user-select: none;
+        color: #cacaca;
+    }
+  }
 }

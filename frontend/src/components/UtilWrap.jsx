@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
 import { useToken } from './TokenCheck';
+import { PiPlantDuotone } from 'react-icons/pi'
 
 function UtilWrap() {
 
@@ -32,7 +33,7 @@ function UtilWrap() {
         <>
           <div className="loginName">
             <Link to={`/MyPage`} className='welcomeBox'>
-              <img src="/images/mainProfile.png" className='loginImg' />
+              <PiPlantDuotone className='loginImg' />
               {localStorage.getItem("nickname")} 
              님, 안녕하세요!
             </Link>

@@ -1,173 +1,120 @@
-body {
-  background: #ffffff;
-  padding: 0;
-  margin: 0;
-}
+.login-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 
+  input[type="email"], input[type="password"] {
+    border: 1px solid #546D01;
+    border-radius: 5px;
+    color: #343434;
+    height: 30px;
+    width: 60%;
+    margin: 10px 0;
 
-/* ======로고 css========================================== */
+    &:focus {
+      border-color: #A4CC22;
+      outline: none;
+      box-shadow: 0 0 2px rgba(#A4CC22, 1);
+    }
+  }
 
-.logo-size{
-  width: 430px;
-  height: 230px;
-  margin-bottom: 20px;
+  .login-box {
+    width: 400px;
+    height: 500px;
+    margin:  auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+      /* ======로고 css========================================== */
+      
+      .logo-size{
+        width: 150px;
+        height: 120px;
+        margin-bottom: 20px;
+      
+      }
+      /* ======로그인 css========================================== */
+      
+      h2 {
+        margin: 20px 0 20px;
+        padding: 0;
+        text-transform: uppercase;
+        color: #4688F1;
+      }
+      /* ====== 오류메시지 css========================================== */
+      
+      .login-error-message {
+        font-size: 18px;
+        font-weight: bold;
+        color: red;
+        margin-top: -3px;
+      }
+      
+      
+      /* ======회원가입, 아이디, 비번찾기 css========================================== */
+      .page-change-box {
+        margin: 10px 0;
 
-}
+        .page-change{
+          text-decoration: none;
+          color: #343434;
+          margin-top: 20px;
+          &:hover{
+            color: #546D01;
+          }
+        }
+      }
+      
+      /* ======로그인버튼 css========================================== */
 
+      .login-button{
+        background-color: #A4CC22;
+        text-align: center;
+        color: #FFF;
+        border: solid 1px #546D01;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: 190px;
+        height: 40px;
+        margin: 10px 0;
+        border-radius: 5px;
+        outline: rgb(255, 255, 255) none 0px;
+        transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+      
+      }
+      
+      .login-button:hover{
+        background-color: #FFF;
+        color: #A4CC22;
+      }
+      
+      
+      
+      /* ======구글 로그인 버튼 css==========================================*/
+      
+      .social-button {
+        width: 190px;
+        height: 45px;
+        background-image: url(/public/images/btn_google_signin_light_normal_web.png);
 
-/* ======로그인 css========================================== */
+        &:hover {
+          background-image: url(/public/images/btn_google_signin_light_focus_web.png);
+        }
 
-.login-textbox {
-  width: 390px;
-  height: 50px;
-  border-radius: 10px;
-  border: solid 1px black;
-  margin-bottom: 15px;
-  font-size: 20px;
-  padding-left: 10px;
-}
-
-.login-box {
-  padding: 20px;
-  max-width: 480px;
-  margin: 0px auto;
-  margin-top: 120px;
-  margin-bottom: 200px;
-  text-align: center;
-  letter-spacing: 1px;
-  position: relative;
-}
-
-.login-box h2 {
-  margin: 20px 0 20px;
-  padding: 0;
-  text-transform: uppercase;
-  color: #4688F1;
-}
-
-
-/* ====== 오류메시지 css========================================== */
-
-.login-error-message {
-  font-size: 18px;
-  font-weight: bold;
-  color: red;
-  margin-top: -3px;
-}
-
-
-/* ======회원가입, 아이디, 비번찾기 css========================================== */
-
-.page-change{
-  text-decoration: none;
-  color: black;
-}
-
-.page-change:hover{
-  color: #4c0cb3;
-}
-
-
-/* ======로그인버튼 css========================================== */
-
-
-.login-button{
-  background-color: #A4CC22;
-  font-size: 27px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  border: solid 2px #546D01;
-  cursor: pointer;
-  display: inline-block;
-  height: 50px;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-  width: 410px;
-  border-radius: 10px;
-  outline: rgb(255, 255, 255) none 0px;
-  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-
-}
-
-.login-button:hover{
-  background-color: #FFF;
-  color: #A4CC22;
-}
-
-
-
-/* ======구글 로그인 버튼 css==========================================*/
-
-.social-button {
-  background-position: 25px 0px;
-  box-sizing: border-box;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  display: inline-block;
-  height: 50px;
-  line-height: 50px;
-  text-align: left;
-  text-decoration: none;
-  text-transform: uppercase;
-  vertical-align: middle;
-  width: 410px;
-  border-radius: 10px;
-  margin: 10px auto;
-  outline: rgb(255, 255, 255) none 0px;
-  padding-left: 18%;
-  transition: all 0.2s cubic-bezier(0.72, 0.01, 0.56, 1) 0s;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-
-#google-connect {
-  background: rgb(255, 255, 255) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/google-plus.png') no-repeat scroll 5px 0px / 50px 50px padding-box border-box;
-  border: 1px solid rgb(220, 74, 61);
-}
-
-#google-connect:hover {
-  border-color: rgb(220, 74, 61);
-  background: rgb(220, 74, 61) url('https://raw.githubusercontent.com/eswarasai/social-login/master/img/google-plus-white.png') no-repeat scroll 5px 0px / 50px 50px padding-box border-box;
-  -webkit-transition: all .8s ease-out;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease-out;
-}
-
-#google-connect span {
-  box-sizing: border-box;
-  color: rgb(220, 74, 61);
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  border: 0px none rgb(220, 74, 61);
-  outline: rgb(255, 255, 255) none 0px;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
-}
-
-#google-connect:hover span {
-  color: #FFF;
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  -ms-transition: all .3s ease;
-  -o-transition: all .3s ease;
-  transition: all .3s ease;
+        &:active {
+          background-image: url(/public/images/btn_google_signin_light_pressed_web.png);
+        }
+      }
+ 
+  } 
 }

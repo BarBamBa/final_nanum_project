@@ -233,21 +233,18 @@ const checkNicknameAvailability = async () => {
   return (
 
     <>
-      <form className='mypage-form'>
+      <div className="pageTitle"><span>회원정보 수정</span></div>
 
-        <div className="myPage-head-font">회원정보 수정</div>
+      <form className='modify-form'>
 
-        <div className="myPage-head-bottom"></div>
+        <div className="modify-head-bottom"></div>
 
-        <div className="myPage-Container">
-
-
-          <div className="myPage-Item">
+        <div className="modify-Container">
 
            {/* ==이름========== */}
-            <div className="myPage-category">이름</div>
+            <div className="modify-category">이름</div>
             
-            <div className="myPage-textBox">{userInfo.name}</div>
+            <div className="modify-textBox">{userInfo.name}</div>
 
 
            {/* ==이메일========== */}
@@ -262,10 +259,10 @@ const checkNicknameAvailability = async () => {
                 className={`modify-check ${!isEmailValid && 'invalid-input'}`}
               >      
               </input>
-              <button type='button' className="ModifyCheck-btn" onClick={checkEmailAvailability}>중복확인</button>
-            </div>
             <div className={`message ${isEmailAvailable ?  'modifySuccess' : 'modifyError'}`}>
                   {emailMessage}</div>
+            </div>
+            <button type='button' className="modifyCheck-btn" onClick={checkEmailAvailability}>중복확인</button>
 
 
            {/* ==닉네임 ========== */}
@@ -281,10 +278,10 @@ const checkNicknameAvailability = async () => {
                 onChange={UserInfoChange}
               >              
               </input>
-              <button type='button' className="ModifyCheck-btn" onClick={checkNicknameAvailability}>중복확인</button>
-            </div>
             <div className={`message ${isNicknameAvailable ? 'modifySuccess' : 'modifyError'}`}>
                          {nicknameAvailabilityMessage}</div> 
+            </div>
+              <button type='button' className="modifyCheck-btn" onClick={checkNicknameAvailability}>중복확인</button>
 
 
             {/* ==전화번호 ========== */}
@@ -301,11 +298,11 @@ const checkNicknameAvailability = async () => {
                 onChange={UserInfoChange}
               >
               </input>
+            {phoneTouched && userInfo.phone !== '' && !isValidPhoneNumber && (
+              <div className="invalid-message">유효한 전화번호 형식이 아닙니다</div>
+            )}
             </div>
 
-            {phoneTouched && userInfo.phone !== '' && !isValidPhoneNumber && (
-              <div className="invalid-message">유효한 전화번호 형식이 아닙니다.</div>
-            )}
 
 
            {/* ==주소========== */}
@@ -320,9 +317,6 @@ const checkNicknameAvailability = async () => {
                 name="address"
                 onChange={UserInfoChange}
               />
-              <button type="button" className="ModifyCheck-btn" onClick={modalOpen}>
-                검색
-              </button>
 
               <div className="address-detail">
                 <input
@@ -334,13 +328,16 @@ const checkNicknameAvailability = async () => {
                   className="modify-check"
                   placeholder="상세주소를 입력해 주세요"
                 />
-            </div>
+              </div>
 
               <Modal isOpen={isOpen} ariaHideApp={false} className="address-modal">
                 <DaumPostcode onComplete={completeHandler}  />
                 <button className='modal-close' onClick={modalClose}>닫기</button>
               </Modal>   
            </div>
+              <button type="button" className="modifyCheck-btn" onClick={modalOpen}>
+                검색
+              </button>
              
 
            {/* ==정보수정 버튼========== */}
@@ -353,8 +350,6 @@ const checkNicknameAvailability = async () => {
             </div>
 
           </div>       
-      
-        </div>
            
     </form>
 

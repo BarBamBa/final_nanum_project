@@ -32,6 +32,7 @@ public class ApplicantService {
                 .users(users)
                 .volunteer(volunteer)
                 .selectedDay(selectedDay)
+                .status('R')
                 .build();
 
         applicantsRepository.save(applicants);
@@ -61,24 +62,24 @@ public class ApplicantService {
     }
 
     // 봉사활동 취소
-    public void cancelApp(Long userId, Long id) {
+    public void cancelApp(Long id) {
 
         // 사용자 ID 확인
-        if (!usersRepository.existsById(userId)) {
-            System.out.println("#### There's no User matches with request data ####");
-            return;
-        }
+//        if (!usersRepository.existsById(userId)) {
+//            System.out.println("#### There's no User matches with request data ####");
+//            return;
+//        }
 
-        Users user = usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("not found" + userId));
+//        Users user = usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("not found" + userId));
 
-        // 봉사활동 ID 확인
-        if (!applicantsRepository.existsById(id)) {
-            System.out.println("#### There's no Applicant matches with request data ####");
-            return;
-        }
+//        // 봉사활동 ID 확인
+//        if (!applicantsRepository.existsById(id)) {
+//            System.out.println("#### There's no Applicant matches with request data ####");
+//            return;
+//        }
 
-        Applicants app = applicantsRepository.findByIdAndUsers(id, user);
-        app.setStatus('N');
+        Applicants app = applicantsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found" + id));
+        app.setStatus('C');
         applicantsRepository.save(app);
         System.out.println("#### The Application has been cancelled ####");
     }

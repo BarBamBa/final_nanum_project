@@ -110,8 +110,6 @@ function FindUser() {
    
     <>
       <form>
-        <div className="head-font">{tabText}</div>
-    
         <div className="main">
           <input type="radio" id="tab-1" name="show" checked={tabText === '아이디 찾기'}
             onChange={handleTabChange}/>
@@ -123,19 +121,13 @@ function FindUser() {
             <label htmlFor="tab-2">비밀번호 찾기</label>
           </div>
 
-          <div className="head-font-bottom"></div>
-
-          <div className="logo-div">
-          <img src="/images/logo.png" className="findUser-logo" alt="로고이미지"></img>
-          </div>
-
           <div className="content">
             
             {/* ==================== 아이디 찾기 ===================================================== */}
          
             <div className="content-div">
 
-            <div>
+
               <input 
                 type='text' 
                 className="findUser-textbox"
@@ -145,9 +137,7 @@ function FindUser() {
                 value={name}
                 onChange={onChangeName}
               />
-            </div>
 
-            <div>
               <input 
                 type='tel' 
                 className="findUser-textbox" 
@@ -157,37 +147,28 @@ function FindUser() {
                 value={phone}
                 onChange={onChangePhon}
               />
-            </div>
             
               <div className={`message ${!isPhone ? 'find-error' : phone.length > 0 ? 'find-success' : ''}`}>
                 {phoneMessage}
               </div>
-              <div>
+
                 <button onClick={handleFindEmail} className="findUser-button">아이디 찾기</button>
                 <div className='find-Email'>{foundEmail}</div>
-              </div>
             </div>
 
 
             {/* ==================== 비밀번호 찾기 ===================================================== */}
             <div className="content-div">
               
-              <div><input type='text' className="findUser-textbox" placeholder='이름을 입력해 주세요'></input></div>
-              <div><input type='text' className="findUser-textbox" placeholder='아이디를 입력해 주세요'></input></div>
-              <div><input type='text' className="findUser-textbox" placeholder='이메일을 입력해 주세요'></input></div>
+              <input type='text' className="findUser-textbox" placeholder='이름을 입력해 주세요'></input>
+              <input type='text' className="findUser-textbox" placeholder='아이디를 입력해 주세요'></input>
+              <input type='text' className="findUser-textbox" placeholder='이메일을 입력해 주세요'></input>
               
-              <div>
               <button className="findUser-button">비밀번호 찾기</button>
               
-              </div>
             </div>
-
-
           </div>
-        </div>
-
-
-        
+        </div>      
       </form>
 
       

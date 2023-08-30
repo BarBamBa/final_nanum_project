@@ -27,7 +27,7 @@ import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
-import MypageModify from './pages/myPage/MypageModify';
+
 
 function App() {
 
@@ -42,19 +42,19 @@ function App() {
             <Route path="/vdetail/*" element={<Vdetail/>} />
             <Route path="/reserve/*" element={<Reserve/>} />
             <Route path="/board/*" element={<Board/>} />
-            <Route path="/MyVolunteer/*" element={<MyVolunteer/>} />
-            <Route path="/VolunteerSpec/*" element={<VolunteerSpec/>} />
-            <Route path="/VolunteerReview/*" element={<VolunteerReview/>} />
-            <Route path="/VolunteerHeaders/*" element={<VolunteerHeaders/>} />
+            <Route path="/myVolunteer/*" element={<MyVolunteer/>} />
+            <Route path="/volunteerSpec/*" element={<VolunteerSpec/>} />
+            <Route path="/volunteerReview/*" element={<VolunteerReview/>} />
+            <Route path="/volunteerHeaders/*" element={<VolunteerHeaders/>} />
             <Route path='/board/detail/:id' element={<BoardDetail/>} />
             <Route path='/board/input' element={<BoardInputForm/>} />
             <Route path="/mypage/*" element={<MyPage/>} />
-            <Route path="/MypageModify/*" element={<MypageModify/>} />
-            <Route path="/WishList/*" element={<WishList/>} />
+            <Route path="/mypageModify/*" element={<MypageModify/>} />
+            <Route path="/wishList/*" element={<WishList/>} />
             <Route path="/qna/*" element={<Qna/>} />
             <Route path="/login/*" element={<Login/>} />
-            <Route path="/FindUser/*" element={<FindUser/>} />
-            <Route path='/PasswordConfirm/*' element={<PasswordConfirm/>} />
+            <Route path="/findUser/*" element={<FindUser/>} />
+            <Route path='/passwordConfirm/*' element={<PasswordConfirm/>} />
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
             <Route path="/qna/input" element={<QnaInputForm />} />

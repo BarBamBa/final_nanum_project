@@ -39,13 +39,17 @@ function Reserve() {
     .then(res => res.json)
     .then(res => {
       console.log(res);
+
+      alert("신청되었습니다!");
+      nav("/myVolunteer", { state: { userId: userInfo.userId } });
     })
     .catch(err => {
+      alert("로그인을 해주세요!");
+      nav("/login");
       throw err;
     })
 
-    alert("신청되었습니다!");
-    nav("/");
+  
   }
 
   const handleDeny = () => {

@@ -15,7 +15,15 @@ public class ApplicantsResponse {
 
     private final Long volunteerId;
 
+    private final int volunteerNumber;
+
+    private final int selectedStartTime;
+
+    private final int selectedEndTime;
+
     private final String volunteerTitle;
+
+    private final String category;
 
     private final LocalDateTime selectedDay;
 
@@ -28,8 +36,12 @@ public class ApplicantsResponse {
     public ApplicantsResponse(Applicants applicants) {
         this.id = applicants.getId();
         this.userId = applicants.getUsers().getId();
+        this.volunteerNumber = applicants.getVolunteer().getNumber();
+        this.selectedStartTime = applicants.getVolunteer().getStartTime();
+        this.selectedEndTime = applicants.getVolunteer().getEndTime();
         this.volunteerId = applicants.getVolunteer().getId();
         this.volunteerTitle = applicants.getVolunteer().getTitle();
+        this.category = applicants.getVolunteer().getCategory();
         this.selectedDay = applicants.getSelectedDay();
         this.status = applicants.getStatus();
         this.createAt = applicants.getCreateAt();
