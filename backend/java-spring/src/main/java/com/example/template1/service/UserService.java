@@ -48,6 +48,7 @@ public class UserService {
                 .phone(dto.getPhone())
                 .gender(dto.getGender())
                 .authority(dto.getAuthority())
+                .status('Y')
                 .emailVerify('N')
                 .build();
         System.out.println(users.getId());

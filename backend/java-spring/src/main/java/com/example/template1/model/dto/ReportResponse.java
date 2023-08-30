@@ -30,7 +30,7 @@ public class ReportResponse {
     public ReportResponse(Report report) {
         this.id = report.getId();
         this.reportedId = report.getUsers().getId();
-        this.reporterId = report.getUsers().getId();
+        this.reporterId = report.getReporter().getId();
         this.boardId = report.getBoard().getId();
         this.reason = report.getReason();
         this.createAt = report.getCreateAt();

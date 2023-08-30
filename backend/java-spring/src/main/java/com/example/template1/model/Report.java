@@ -19,6 +19,7 @@ public class Report extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name="USER_ID") //신고 할 사람
+    @JsonBackReference
     private Users users;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 function ReviewInfo({ boardData }) {
     const volId = boardData.volunteerId;
     console.log(volId);

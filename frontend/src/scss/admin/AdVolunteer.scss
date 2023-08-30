@@ -1,0 +1,41 @@
+.ad-board-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+
+    .ad-vol-checkbox {
+        width: 5%;
+    }
+
+    .ad-vol-id {
+        width: 7%;
+    }
+
+    .ad-vol-volId {
+        width: 7%;
+    }
+
+    .ad-vol-title {
+        width: 40%;
+    }
+
+    .ad-vol-userId {
+        width: 5%;
+    }
+
+    .ad-vol-name {
+        width: 7%;
+    }
+
+    .ad-vol-selectDate {
+        width: 10%;
+    }
+
+    .ad-vol-date {
+        width: 10%;
+    }
+
+    .ad-vol-status {
+        width: 10%;
+    }
+}

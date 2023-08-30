@@ -1,6 +1,7 @@
 package com.example.template1.model;
 
 import com.example.template1.model.enums.Authority;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.pl.REGON;
@@ -39,12 +40,14 @@ public class Users extends BaseEntity implements UserDetails {
 
 //    @OneToMany(mappedBy = "users")
 //    List<Applicants> applicants = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "users")
+//    @JsonManagedReference
+//    List<Reply> replies = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "users")
-//    List<Review> reviews = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "users")
-//    List<BoardImg> boardImgs = new ArrayList<>();
+//    @JsonManagedReference
+//    List<Report> reports = new ArrayList<>();
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
