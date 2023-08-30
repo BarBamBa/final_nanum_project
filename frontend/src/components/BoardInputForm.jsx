@@ -19,8 +19,11 @@ function BoardInputForm() {
     return;
   }
 
+  // const boardData = location.state.boardData;
   const boardKind = location.state.boardKind;
+  const [boardData, setBoardData] = useState(location.state.boardData);
 
+  console.log("ddd", boardData);
 
 
   // 유저정보
@@ -35,6 +38,8 @@ function BoardInputForm() {
   // const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
   const [volunteerValue, setVolunteerValue] = useState(location.state.formKind === "modify" ? location.state.boardData.volunteerId : "");
   console.log("volvalue", volunteerValue);
+  // 등록된 이미지 데이터
+  const [ImagData, setImgData] = useState();
   // 에디터 컨텐츠 담을 state (초기값 empty로)
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -54,8 +59,8 @@ function BoardInputForm() {
       const contentHtml = location.state.boardData.content;
       const blocksFromHtml = convertFromHTML(contentHtml);
       const contentState = ContentState.createFromBlockArray(
-          blocksFromHtml.contentBlocks,
-          blocksFromHtml.entityMap
+        blocksFromHtml.contentBlocks,
+        blocksFromHtml.entityMap
       );
       setEditorState(EditorState.createWithContent(contentState));
     }
@@ -120,15 +125,15 @@ function BoardInputForm() {
         },
         body: JSON.stringify(data),
       })
-          .then(res => res.json())
-          .then(res => {
-            console.log("res", res);
-            boardId = res.id;
-            // navigate("/board/news");
-            console.log("boardId", boardId);
-            // handleFileUpload(e);
-            // alert("게시글 등록성공");
-          });
+        .then(res => res.json())
+        .then(res => {
+          console.log("res", res);
+          boardId = res.id;
+          // navigate("/board/news");
+          console.log("boardId", boardId);
+          // handleFileUpload(e);
+          // alert("게시글 등록성공");
+        });
 
     } catch (error) {
       console.error("등록 실패 에러", error);
@@ -156,20 +161,21 @@ function BoardInputForm() {
 
         try {
           const uploadResponse = await axios.post("/api/board/file/upload",
-              formData2,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
+            formData2,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
           );
 
           if (uploadResponse.status === 200) {
             console.log("파일 업로드 성공:", uploadResponse);
-            alert("등록완료");
+
             navigate("/board", {
               state: { boardKind: boardKind }
             });
+            alert("등록완료");
           } else {
             console.error("파일 업로드 에러:", uploadResponse.statusText);
           }
@@ -181,58 +187,120 @@ function BoardInputForm() {
     }
   };
 
+  async function fetchBoards() {
+    fetch("/api/boards/" + boardData.id)
+      .then((response) => response.json())
+      .then((data) => {
+        setBoardData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const removeImg = async (imgId) => {
+    fetch(`/api/img/remove`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: imgId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        alert("삭제성공");
+        fetchBoards();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
 
 
   return (
-      <div className="inputContainer">
-        <div className="board-input-nav">
-          <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
-        </div>
+    <div className="inputContainer">
+      <div className="board-input-nav">
+        <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
+      </div>
 
-        <div className="board-input-form">
-          <form onSubmit={handleSubmit}>
-            <table>
-              <tbody>
+      <div className="board-input-form">
+        <form onSubmit={handleSubmit}>
+          <table>
+            <tbody>
               <tr>
                 <td className="board-input-content-name"><span>제목</span></td>
                 <td>
                   <div className="board-input titleBox">
                     <input
-                        type="text"
-                        className="form-control"
-                        name="title"
-                        value={titleValue}
-                        onChange={(e) => setTitleValue(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      value={titleValue}
+                      onChange={(e) => setTitleValue(e.target.value)}
                     />
                   </div>
                 </td>
               </tr>
               {
-                  boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
+                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
               }
               <tr>
                 <td className="board-input-content-name"><span>내용</span></td>
                 <td>
                   <div className="board-input contentBox">
                     <Editor
-                        editorState={editorState}
-                        onEditorStateChange={onEditorStateChange}
-                        localization={{
-                          locale: 'ko',
-                        }}
+                      editorState={editorState}
+                      onEditorStateChange={onEditorStateChange}
+                      localization={{
+                        locale: 'ko',
+                      }}
                     />
                   </div>
                 </td>
               </tr>
+              {location.state.formKind === "modify" &&
+                <tr>
+                  <td className="board-input-content-name">첨부파일</td>
+                  <td>
+                    <div className="board-input board-imgList">
+                      <table className="board-img-table">
+                        <thead>
+                          <th>번호</th>
+                          <th>이미지</th>
+                        </thead>
+                        {boardData.boardImgs.map((img, i) => {
+                          return (
+                            img.status == "Y" && (
+                              <tr id={img.id}>
+                                <td className="board-img-id">{img.id}</td>
+                                <td>{img.name}</td>
+                                <td>
+                                  <span onClick={() => removeImg(img.id)}>삭제</span>
+                                </td>
+                              </tr>)
+
+                          )
+                        })}
+                      </table>
+
+                    </div>
+                  </td>
+                </tr>
+              }
+
               <tr>
                 <td className="board-input-content-name"><span>파일첨부</span></td>
                 <td>
                   <div className="board-input uploadBox">
                     <input
-                        type="file"
-                        multiple="multiple"
-                        className="form-control"
-                        name="upload"
+                      type="file"
+                      multiple="multiple"
+                      className="form-control"
+                      name="upload"
                     />
                   </div>
                 </td>
@@ -247,13 +315,13 @@ function BoardInputForm() {
                   </div>
                 </td>
               </tr>
-              </tbody>
-            </table>
+            </tbody>
+          </table>
 
 
-          </form>
-        </div>
+        </form>
       </div>
+    </div>
   );
 }
 

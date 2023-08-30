@@ -51,6 +51,22 @@
 
     .uploadBox input {
       margin-left: 10px;
+
+    }
+    .board-imgList {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      .board-img-table {
+        border: 1px solid #ccc;
+        th, td {
+          border: 1px solid #ccc;
+          padding : 16px;
+        }
+        .board-img-id {
+          width: 40px;
+        }
+      }
     }
   }
 }
