@@ -25,44 +25,42 @@ import QnaDetail from './pages/qna/QnaDetail';
 import QnaInputForm from './components/QnaInputForm';
 import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
-import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
 import ChangePassword from './pages/myPage/ChangePassword';
 
 function App() {
 
   return (
-    <>  
-      <TokenCheckProvider>
-        <Header />
-        <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path="/about" element={<About/>} /> 
-            <Route path="/volunteer/*" element={<Volunteer/>} />
-            <Route path="/vdetail/*" element={<Vdetail/>} />
-            <Route path="/reserve/*" element={<Reserve/>} />
-            <Route path="/board/*" element={<Board/>} />
-            <Route path="/MyVolunteer/*" element={<MyVolunteer/>} />
-            <Route path="/VolunteerSpec/*" element={<VolunteerSpec/>} />
-            <Route path="/VolunteerReview/*" element={<VolunteerReview/>} />
-            <Route path="/VolunteerHeaders/*" element={<VolunteerHeaders/>} />
-            <Route path='/board/detail/:id' element={<BoardDetail/>} />
-            <Route path='/board/input' element={<BoardInputForm/>} />
-            <Route path="/mypage/*" element={<MyPage/>} />
-            <Route path="/MypageModify/*" element={<MypageModify/>} />
-            <Route path="/WishList/*" element={<WishList/>} />
-            <Route path="/qna/*" element={<Qna/>} />
-            <Route path="/login/*" element={<Login/>} />
-            <Route path="/FindUser/*" element={<FindUser/>} />
-            <Route path='/PasswordConfirm/*' element={<PasswordConfirm/>} />
-            <Route path='/ChangePassword/*' element={<ChangePassword/>} />
-            <Route path="/signup/*" element={<SignUp />} />
-            <Route path="/qna/detail/:id" element={<QnaDetail />} />
-            <Route path="/qna/input" element={<QnaInputForm />} />
-        </Routes>
-        <ScrollTopButton />
-        <Footer />
-      </TokenCheckProvider>
+    <>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/volunteer/*" element={<Volunteer />} />
+        <Route path="/vdetail/*" element={<Vdetail />} />
+        <Route path="/reserve/*" element={<Reserve />} />
+        <Route path="/board/*" element={<Board />} />
+        <Route path="/MyVolunteer/*" element={<MyVolunteer />} />
+        <Route path="/VolunteerSpec/*" element={<VolunteerSpec />} />
+        <Route path="/VolunteerReview/*" element={<VolunteerReview />} />
+        <Route path="/VolunteerHeaders/*" element={<VolunteerHeaders />} />
+        <Route path='/board/detail/:id' element={<BoardDetail />} />
+        <Route path='/board/input' element={<BoardInputForm />} />
+        <Route path="/mypage/*" element={<MyPage />} />
+        <Route path="/MypageModify/*" element={<MypageModify />} />
+        <Route path="/WishList/*" element={<WishList />} />
+        <Route path="/qna/*" element={<Qna />} />
+        <Route path="/login/*" element={<Login />} />
+        <Route path="/FindUser/*" element={<FindUser />} />
+        <Route path='/PasswordConfirm/*' element={<PasswordConfirm />} />
+        <Route path='/ChangePassword/*' element={<ChangePassword />} />
+        <Route path="/signup/*" element={<SignUp />} />
+        <Route path="/qna/detail/:id" element={<QnaDetail />} />
+        <Route path="/qna/input" element={<QnaInputForm />} />
+      </Routes>
+      <ScrollTopButton />
+      <Footer />
+
     </>
   )
 }
