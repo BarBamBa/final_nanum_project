@@ -51,22 +51,22 @@ function FaqTab({ qnaData, searchQna }) {
             </div>
             <table className="qna-table">
                 <thead>
-                    <tr>
-                        <th className="qna-head">번호</th>
-                        <th className="qna-head">제목</th>
-                        <th className="qna-head">등록일</th>
-                    </tr>
+                <tr>
+                    <th className="qna-head">번호</th>
+                    <th className="qna-head">제목</th>
+                    <th className="qna-head">등록일</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {paginatedBoardData.map((qna, i) => {
-                        return (
-                            <tr key={qna.id}>
-                                <td className="table-no">{i + 1}</td>
-                                <td className="table-title"><span onClick={() => toDetail(qna.id)} >{qna.title}</span></td>
-                                <td className="table-date">{qna.createAt2}</td>
-                            </tr>
-                        );
-                    })}
+                {paginatedBoardData.map((qna, i) => {
+                    return (
+                        <tr key={qna.id}>
+                            <td className="table-no">{i + 1}</td>
+                            <td className="table-title"><span onClick={() => toDetail(qna.id)} >{qna.title}</span></td>
+                            <td className="table-date">{qna.createAt2}</td>
+                        </tr>
+                    );
+                })}
                 </tbody>
             </table>
             <Pagination

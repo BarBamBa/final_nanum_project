@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import './FindUser.css';
+
+import '/src/scss/login/FindUser.scss';
 
 
 function FindUser() {
 
   const [tabText, setTabText] = useState('아이디 찾기');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [phoneMessage, setPhoneMessage] = useState('');
+  const [isPhone, setIsPhone] = useState(false);
+  const [foundEmail, setFoundEmail] = useState('');
 
   const handleTabChange = (event) => {
     setTabText((prevTabText) =>
@@ -102,50 +110,74 @@ function FindUser() {
    
     <>
       <form>
-        <div class="head-font">{tabText}</div>
+        <div className="head-font">{tabText}</div>
     
-        <div class="main">
+        <div className="main">
           <input type="radio" id="tab-1" name="show" checked={tabText === '아이디 찾기'}
             onChange={handleTabChange}/>
           <input type="radio" id="tab-2" name="show" checked={tabText === '비밀번호 찾기'}
             onChange={handleTabChange} />
           
-          <div class="tab">
-            <label for="tab-1">아이디 찾기</label>
-            <label for="tab-2">비밀번호 찾기</label>
+          <div className="tab">
+            <label htmlFor="tab-1">아이디 찾기</label>
+            <label htmlFor="tab-2">비밀번호 찾기</label>
           </div>
 
-          <div class="head-font-bottom"></div>
+          <div className="head-font-bottom"></div>
 
           <div className="logo-div">
           <img src="/images/logo.png" className="findUser-logo" alt="로고이미지"></img>
           </div>
 
-          <div class="content">
+          <div className="content">
             
             {/* ==================== 아이디 찾기 ===================================================== */}
          
-            <div class="content-dis">
+            <div className="content-div">
 
-              <div><input type='text' class="findUser-textbox" placeholder='이름을 입력해 주세요'></input></div>
-              <div><input type='text' class="findUser-textbox" placeholder='이메일을 입력해 주세요'></input></div>
-              
-              <div>
-              <button class="findUser-button">아이디 찾기</button>
+            <div>
+              <input 
+                type='text' 
+                className="findUser-textbox"
+                placeholder='이름을 입력해 주세요'
+                name='name'
+                title='name'
+                value={name}
+                onChange={onChangeName}
+              />
+            </div>
+
+            <div>
+              <input 
+                type='tel' 
+                className="findUser-textbox" 
+                placeholder='전화번호를 입력해 주세요'
+                name="phone"
+                title="phone"
+                value={phone}
+                onChange={onChangePhon}
+              />
+            </div>
+            
+              <div className={`message ${!isPhone ? 'find-error' : phone.length > 0 ? 'find-success' : ''}`}>
+                {phoneMessage}
               </div>
-
+              <div>
+                <button onClick={handleFindEmail} className="findUser-button">아이디 찾기</button>
+                <div className='find-Email'>{foundEmail}</div>
+              </div>
             </div>
 
 
             {/* ==================== 비밀번호 찾기 ===================================================== */}
-            <div class="content-dis">
+            <div className="content-div">
               
-              <div><input type='text' class="findUser-textbox" placeholder='이름을 입력해 주세요'></input></div>
-              <div><input type='text' class="findUser-textbox" placeholder='아이디를 입력해 주세요'></input></div>
-              <div><input type='text' class="findUser-textbox" placeholder='이메일을 입력해 주세요'></input></div>
+              <div><input type='text' className="findUser-textbox" placeholder='이름을 입력해 주세요'></input></div>
+              <div><input type='text' className="findUser-textbox" placeholder='아이디를 입력해 주세요'></input></div>
+              <div><input type='text' className="findUser-textbox" placeholder='이메일을 입력해 주세요'></input></div>
               
               <div>
-              <button class="findUser-button">비밀번호 찾기</button>
+              <button className="findUser-button">비밀번호 찾기</button>
               
               </div>
             </div>
@@ -153,6 +185,9 @@ function FindUser() {
 
           </div>
         </div>
+
+
+        
       </form>
 
       

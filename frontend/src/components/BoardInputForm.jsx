@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { TokenCheck } from "./TokenCheck";
 import "/src/scss/board/BoardInputForm.scss";
 import axios from "axios";
-import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js";
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-js'
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -54,8 +54,8 @@ function BoardInputForm() {
       const contentHtml = location.state.boardData.content;
       const blocksFromHtml = convertFromHTML(contentHtml);
       const contentState = ContentState.createFromBlockArray(
-        blocksFromHtml.contentBlocks,
-        blocksFromHtml.entityMap
+          blocksFromHtml.contentBlocks,
+          blocksFromHtml.entityMap
       );
       setEditorState(EditorState.createWithContent(contentState));
     }
@@ -68,7 +68,7 @@ function BoardInputForm() {
       alert("제목을 입력해주세요");
       return;
     }
-    
+
     if (volunteerValue === "" && location.state.boardKind === "4") {
       alert("후기를 작성할 봉사활동을 선태해주세요");
       return;
@@ -120,15 +120,15 @@ function BoardInputForm() {
         },
         body: JSON.stringify(data),
       })
-        .then(res => res.json())
-        .then(res => {
-          console.log("res", res);
-          boardId = res.id;
-          // navigate("/board/news");
-          console.log("boardId", boardId);
-          // handleFileUpload(e);
-          // alert("게시글 등록성공");
-        });
+          .then(res => res.json())
+          .then(res => {
+            console.log("res", res);
+            boardId = res.id;
+            // navigate("/board/news");
+            console.log("boardId", boardId);
+            // handleFileUpload(e);
+            // alert("게시글 등록성공");
+          });
 
     } catch (error) {
       console.error("등록 실패 에러", error);
@@ -140,7 +140,9 @@ function BoardInputForm() {
 
     if (fileInput.files.length == 0) {//첨부파일없으면 바로 등록완료처리
       alert("등록완료");
-      navigate("/board");
+      navigate("/board", {
+        state: { boardKind: boardKind }
+      });
     }
 
     if (fileInput) {
@@ -154,12 +156,12 @@ function BoardInputForm() {
 
         try {
           const uploadResponse = await axios.post("/api/board/file/upload",
-            formData2,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
+              formData2,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
           );
 
           if (uploadResponse.status === 200) {
@@ -180,42 +182,42 @@ function BoardInputForm() {
 
 
   return (
-    <div className="inputContainer">
-      <div className="board-input-nav">
-        <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
-      </div>
+      <div className="inputContainer">
+        <div className="board-input-nav">
+          <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
+        </div>
 
-      <div className="board-input-form">
-        <form onSubmit={handleSubmit}>
-          <table>
-            <tbody>
+        <div className="board-input-form">
+          <form onSubmit={handleSubmit}>
+            <table>
+              <tbody>
               <tr>
                 <td className="board-input-content-name"><span>제목</span></td>
                 <td>
                   <div className="board-input titleBox">
                     <input
-                      type="text"
-                      className="form-control"
-                      name="title"
-                      value={titleValue}
-                      onChange={(e) => setTitleValue(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        name="title"
+                        value={titleValue}
+                        onChange={(e) => setTitleValue(e.target.value)}
                     />
                   </div>
                 </td>
               </tr>
               {
-                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
+                  boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
               }
               <tr>
                 <td className="board-input-content-name"><span>내용</span></td>
                 <td>
                   <div className="board-input contentBox">
                     <Editor
-                      editorState={editorState}
-                      onEditorStateChange={onEditorStateChange}
-                      localization={{
-                        locale: 'ko',
-                      }}
+                        editorState={editorState}
+                        onEditorStateChange={onEditorStateChange}
+                        localization={{
+                          locale: 'ko',
+                        }}
                     />
                   </div>
                 </td>
@@ -225,10 +227,10 @@ function BoardInputForm() {
                 <td>
                   <div className="board-input uploadBox">
                     <input
-                      type="file"
-                      multiple="multiple"
-                      className="form-control"
-                      name="upload"
+                        type="file"
+                        multiple="multiple"
+                        className="form-control"
+                        name="upload"
                     />
                   </div>
                 </td>
@@ -243,13 +245,13 @@ function BoardInputForm() {
                   </div>
                 </td>
               </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
 
 
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
   );
 }
 

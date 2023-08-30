@@ -13,12 +13,13 @@ import BoardDetail from "./BoardDetail";
 
 
 
-function Notice(props) {
+function BoardTab(props) {
   const userInfo = useContext(TokenCheck);
   console.log(userInfo.userId);
   console.log(userInfo.auth);
 
   const boardData = props.boardData;
+  const boardKind = props.boardKind;
   console.log(props);
 
   const navigate = useNavigate();
@@ -46,12 +47,12 @@ function Notice(props) {
 
   const handleWrite = () => {
     console.log(props.userInfo.userId);
-    if (props.userInfo.userId == null) {
+    if (userInfo.userId == null) {
       alert("로그인 이후 이용 가능한 기능입니다.");
       return;
     }
     navigate('/board/input', {
-      state: { boardName: "공지사항", boardKind: "1", formKind: "write" }
+      state: { boardKind: boardKind, formKind: "write" }
     })
   }
 
@@ -95,15 +96,15 @@ function Notice(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      {
-        userInfo.auth == "ROLE_ADMIN" && (
-          <div className="board-write-btn">
-            <button onClick={handleWrite}>글쓰기</button>
-          </div>
-        )
+      {((userInfo.auth === "ROLE_ADMIN" && (boardKind === "1" || boardKind === "2")) ||
+        (userInfo.auth === "ROLE_USER" && (boardKind === "3" || boardKind === "4"))) ? (
+        <div className="board-write-btn">
+          <button onClick={handleWrite}>글쓰기</button>
+        </div>
+      ) : null
       }
 
     </div>
   );
 }
-export default Notice;
+export default BoardTab;

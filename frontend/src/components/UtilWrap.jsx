@@ -9,9 +9,6 @@ function UtilWrap() {
   const [userId, setUserId] = useState(false);
   const [nickname, setNickname] = useState(null);
 
-  useEffect(() => {
-    
-  }, [nickname])
   
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
@@ -35,18 +32,16 @@ function UtilWrap() {
      {isLogin ? (
         <>
           <div className="loginName">
-            <Link to={`/MyPage`} >
+            <Link to={`/MyPage`} className='welcomeBox'>
               <img src="/images/mainProfile.png" className='loginImg' />
               {nickname} 
              님! 안녕하세요!
             </Link>
-            
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
               로그아웃 <img src='/images/logoutIcon.png' />
             </Link>
           </div>
 
- 
         </>
       ) : (
         <>
