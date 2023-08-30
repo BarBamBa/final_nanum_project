@@ -58,7 +58,6 @@ function App() {
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
             <Route path="/qna/input" element={<QnaInputForm />} />
-            <Route path="/admin/*" element={<Admin />} />
         </Routes>
         <ScrollTopButton />
         <Footer />
