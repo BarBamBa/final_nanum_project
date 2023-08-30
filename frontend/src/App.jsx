@@ -27,6 +27,7 @@ import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
+import Admin from './Admin';
 
 function App() {
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/signup/*" element={<SignUp />} />
             <Route path="/qna/detail/:id" element={<QnaDetail />} />
             <Route path="/qna/input" element={<QnaInputForm />} />
+            <Route path="/admin/*" element={<Admin />} />
         </Routes>
         <ScrollTopButton />
         <Footer />
