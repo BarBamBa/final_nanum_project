@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import '/src/scss/myPage/MyVolunteer.scss'
 import VolunteerHeaders from './VolunteerHeaders'
+import { useNavigate } from 'react-router-dom'
 import { LuFlower } from 'react-icons/lu'
 
 function MyVolunteer() {
@@ -10,7 +11,17 @@ function MyVolunteer() {
   //자원봉사활동 총 개수 카운트
   const [count, setCount] = useState();
 
+  const navigate = useNavigate('');
+
   useEffect(() => {
+
+    
+    if (!localStorage.getItem("accessToken")) {
+      alert('로그인이 필요합니다.'); 
+      navigate('/login');
+      return;
+    } 
+
     const fetchData = async () => {
       const res = await fetch('/api/myVolunteer', {
         method: 'GET',
