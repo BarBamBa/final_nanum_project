@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import '/src/scss/myPage/MyPage.scss'
 import '/src/scss/myPage/MypageModify.scss'
 import DaumPostcode from 'react-daum-postcode';
 import Modal from 'react-modal';
@@ -233,11 +232,11 @@ const checkNicknameAvailability = async () => {
   return (
 
     <>
-      <form className='mypage-form'>
+      <form className='mypageModify-form'>
 
-        <div className="myPage-head-font">회원정보 수정</div>
+        <div className="modify-head-font">회원정보 수정</div>
 
-        <div className="myPage-head-bottom"></div>
+        <div className="modify-head-bottom"></div>
 
         <div className="myPage-Container">
 
@@ -245,9 +244,9 @@ const checkNicknameAvailability = async () => {
           <div className="myPage-Item">
 
            {/* ==이름========== */}
-            <div className="myPage-category">이름</div>
+            <div className="modify-category-name">이름</div>
             
-            <div className="myPage-textBox">{userInfo.name}</div>
+            <div className="modify-textCheck-name"><span className='modify-check-name'>{userInfo.name}</span></div>
 
 
            {/* ==이메일========== */}
