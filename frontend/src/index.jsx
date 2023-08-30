@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Admin from './Admin.jsx'
-import AdLogin from './components/admin/AdLogin.jsx'
 import Modal from "react-modal";
 import TokenCheckProvider from './components/TokenCheck.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
