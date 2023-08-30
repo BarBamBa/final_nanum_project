@@ -77,7 +77,7 @@ function AdLogin({setAuth, setIsLogin}) {
                                     localStorage.removeItem("accessToken");
                                     localStorage.removeItem("refreshToken");
                                     localStorage.removeItem("nickname");
-                                    localStorage.removeItem("user_email");
+                                    localStorage.removeItem("email");
                                 }
                                 if (data.authority == "ROLE_ADMIN") {
                                     alert("관리자인증성공");
