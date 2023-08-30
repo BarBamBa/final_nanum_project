@@ -98,3 +98,21 @@
     }
   }
 }
+
+// 이메일 인증 버튼
+.emailAuth{
+  padding: 5px;
+  position: relative;
+  left: 40px;
+  font-size: 15px;
+  background-color: #A4CC22;
+  border: 3px solid #A4CC22;
+  border-radius: 5px;
+  color: white;
+}
+
+.emailAuth:hover{
+  background-color: #FFF;
+  color: #A4CC22;
+  border: 3px solid #A4CC22;
+}

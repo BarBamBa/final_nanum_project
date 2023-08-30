@@ -76,8 +76,8 @@ function Dropbox() {
         {menuState.navItem4 && (
           <ul className='dropBox'>
             <li className='dropItem'><Link to='/mypage'>회원정보</Link></li>
-            <li className='dropItem'><Link to='/mypage/volunteerList'>나의자원봉사</Link></li>
-            <li className='dropItem'><Link to='/mypage/wishList'>관심목록</Link></li>
+            <li className='dropItem'><Link to='/MyVolunteer'>나의자원봉사</Link></li>
+            <li className='dropItem'><Link to='/wishList'>관심목록</Link></li>
           </ul>
         )}
       </ul>
