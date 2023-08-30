@@ -53,7 +53,7 @@ function AdLogin({setAuth, setIsLogin}) {
                         console.log("로그인 성공");
                         console.log(localStorage)
                         // 토큰 정보 추출
-                        localStorage.setItem("user_email", email);
+                        localStorage.setItem("email", email);
                         localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
                         localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
                         localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
