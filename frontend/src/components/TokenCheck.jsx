@@ -42,6 +42,7 @@ export const TokenCheckProvider = ({ children }) => {
         .then((data) => {
           if (data) {
             setUserId(data.id);
+            localStorage.setItem("nickname", data.nickname);
           }
         })
         .catch((error) => {

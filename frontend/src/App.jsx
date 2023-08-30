@@ -25,6 +25,7 @@ import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import { TokenCheckProvider } from './components/TokenCheck';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
+import Oauth2Callback from './pages/login/Oauth2Callback';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/WishList/*" element={<WishList/>} />
             <Route path="/qna/*" element={<Qna/>} />
             <Route path="/login/*" element={<Login/>} />
+            <Route path="/oauth2login/callback" element={<Oauth2Callback/>} />
             <Route path="/FindUser/*" element={<FindUser/>} />
             <Route path='/PasswordConfirm/*' element={<PasswordConfirm/>} />
             <Route path="/signup/*" element={<SignUp />} />

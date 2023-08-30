@@ -1,26 +1,20 @@
 package com.example.template1.service;
 
-import com.example.template1.config.JwtTokenProvider;
-import com.example.template1.model.Board;
+import com.example.template1.config.jwt.JwtTokenProvider;
 import com.example.template1.model.Users;
-import com.example.template1.model.dto.TokenInfo;
+import com.example.template1.config.jwt.JwtTokenDto;
 import com.example.template1.model.dto.UsersDto;
-import com.example.template1.model.dto.UsersRequsetDto;
 import com.example.template1.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -72,7 +66,7 @@ public class UserService {
     // 비밀번호 암호화 로그인 및 토큰 반환
 
     @Transactional
-    public TokenInfo login(String email, String password) {
+    public JwtTokenDto login(String email, String password) {
 
         Users user = usersRepository.findByEmail(email);
 
@@ -93,13 +87,13 @@ public class UserService {
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
             // 3. 인증 정보를 기반으로 JWT 토큰 생성
-            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+            JwtTokenDto jwtTokenDto = jwtTokenProvider.generateTokenDto(authentication);
 
-            log.info("Generated token: {}", tokenInfo.getAccessToken());
+            log.info("Generated token: {}", jwtTokenDto.getAccessToken());
 
-            tokenInfo.setNickname(user.getNickname());
+            jwtTokenDto.setNickname(user.getNickname());
 
-            return tokenInfo;
+            return jwtTokenDto;
 
         } else {
             return null;

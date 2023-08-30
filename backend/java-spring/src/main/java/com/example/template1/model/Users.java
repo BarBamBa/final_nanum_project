@@ -75,6 +75,12 @@ public class Users extends BaseEntity implements UserDetails {
     @Column(columnDefinition = "CHAR(1) DEFAULT 'N'")
     private char emailVerify;
 
+    private String accessToken;
+
+    private Long accessTokenExpireIn;
+
+    private String refreshToken;
+
 //    @Transient
 //    private List<String> roles = new ArrayList<>();
 
@@ -87,9 +93,7 @@ public class Users extends BaseEntity implements UserDetails {
 //    }
 
     @Override
-    public String getUsername() {
-        return String.valueOf(id);
-    }
+    public String getUsername() { return String.valueOf(id); }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

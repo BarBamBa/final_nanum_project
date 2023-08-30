@@ -1,23 +1,21 @@
 package com.example.template1.config;
 
-import com.example.template1.service.CustomOAuth2UserService;
+import com.example.template1.config.jwt.*;
+import com.example.template1.config.oauth.CustomOAuth2SuccessHandler;
+import com.example.template1.config.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 //@Configuration
 @Component
@@ -37,9 +35,9 @@ public class WebSecurityConfig {
         return source;
     }
 
-
     private final JwtTokenProvider jwtTokenProvider;
-    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
@@ -50,24 +48,29 @@ public class WebSecurityConfig {
             .formLogin().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .accessDeniedHandler(jwtAccessDeniedHandler)
+            .and()
             .authorizeHttpRequests()
             .requestMatchers("/oauth2/**", "/auth/**").permitAll()
             .requestMatchers("/api/login", "/api/**").permitAll()
             .requestMatchers("/api/main").hasRole("USER")
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
             .oauth2Login()
-            .successHandler(customOAuth2SuccessHandler())
+            .successHandler(customAuth2SuccessHandler())
             .userInfoEndpoint() // OAuth 2.0 Provider로부터 사용자 정보를 가져오는 엔드포인트를 지정하는 메서드
             .userService(customOAuth2UserService)   // OAuth 2.0 인증이 처리되는데 사용될 사용자 서비스를 지정하는 메서드
         ;
+        http.apply(new JwtSecurityConfig(jwtTokenProvider));
 
         return http.build();
     }
 
-    private AuthenticationSuccessHandler customOAuth2SuccessHandler() {
-        return new CustomOAuth2SuccessHandler(customOAuth2UserService, jwtTokenProvider);
+    @Bean
+    public CustomOAuth2SuccessHandler customAuth2SuccessHandler() {
+        return new CustomOAuth2SuccessHandler(customOAuth2UserService);
     }
 
     @Bean

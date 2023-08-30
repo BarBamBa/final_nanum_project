@@ -7,14 +7,17 @@ function UtilWrap() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState(false);
+  const [nickname, setNickname] = useState(null);
+
+  useEffect(() => {
+    
+  }, [nickname])
   
   useEffect(() => {
-    if (localStorage.getItem("nickname")) {
+    if (localStorage.getItem("accessToken")) {
       setIsLogin(true);
-      console.log("isLogin ?? :: ", isLogin);
+      setNickname(localStorage.getItem("nickname"));
     }
-    console.log(isLogin);
-    console.log(localStorage)
   }, [isLogin])
 
   
@@ -23,6 +26,7 @@ function UtilWrap() {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("nickname");
     setIsLogin(false);
+    document.location.href = "/";
   }
   
   
@@ -33,7 +37,7 @@ function UtilWrap() {
           <div className="loginName">
             <Link to={`/MyPage`} >
               <img src="/images/mainProfile.png" className='loginImg' />
-              {localStorage.getItem("nickname")} 
+              {nickname} 
              님! 안녕하세요!
             </Link>
             
