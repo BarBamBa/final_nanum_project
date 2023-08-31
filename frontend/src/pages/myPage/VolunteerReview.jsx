@@ -1,20 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react'
 import VolunteerHeaders from './VolunteerHeaders'
+import '/src/scss/myPage/MyVolunteer.scss'
 import { LuFlower } from 'react-icons/lu'
-import { BiEditAlt } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
 import { TokenCheck } from '../../components/TokenCheck'
+import { format } from 'date-fns'
+import { FiCircle } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 function VolunteerReview() {
 
-  const [ myBoardList, setMyBoardList ] = useState();
+  const [ myBoardList, setMyBoardList ] = useState([]);
 
   const userInfo = useContext(TokenCheck);
 
-  //봉사내역조회
+  //내가 쓴 글 조회
   async function fetchMyBoardList() {
+
+    if (userInfo.userId) {
+      // let userId = userInfo.userId;
+
     await fetch(`/api/boards/myBoard/${userInfo.userId}`, {
-      method: 'GET',  // POST 요청으로 변경
+      method: 'POST',  // POST 요청으로 변경
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -28,11 +34,16 @@ function VolunteerReview() {
       .catch((error) => {
         console.error(error);
       });
+    } else {
+      console.log("아이디없음");
+    }
   }
 
   useEffect(() => {
     fetchMyBoardList();
+    console.log(myBoardList);
   }, [userInfo.userId]);
+
   return (
     <>
       <form>
@@ -43,13 +54,15 @@ function VolunteerReview() {
             {/* <div className="volunteer-request">작성한글 [전체 3건]</div> */}
             <div className="category-top"></div>
             <div className="volunteer-request-table">
-              <div className="request-CLCode"><LuFlower className='flowerIcon'/>{item.flg}</div> 
+              <div className="request-CLCode"><LuFlower className='flowerIcon'/>{item.flg === '3' ? "자유게시판" : item.flg === '4' ? "봉사후기" : ""}</div> 
               <div className="request-program-title">
-                <div>{item.title}</div>
+                <div>
+                  <Link to={`/board/detail/${item.id}`} state={{id: item.id}}>{item.title}</Link>
+                </div>
               </div>
               <div className="request-detail">
-                <span>작성날짜: {item.createAt}</span>
-                <span>수정날짜: {item.updateAt}</span> 
+                <span><FiCircle className='circleIcon'/>작성날짜: {format(new Date(item.createAt), 'yyyy-MM-dd')}</span>
+                <span><FiCircle className='circleIcon'/>수정날짜: {format(new Date(item.updateAt), 'yyyy-MM-dd')}</span> 
               </div>
               <div className='buttonBox'>
                 {/* <Link to='/board/review'>수정하러가기<BiEditAlt/></Link> */}

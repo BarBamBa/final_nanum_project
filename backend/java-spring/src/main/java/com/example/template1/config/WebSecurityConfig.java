@@ -55,7 +55,7 @@ public class WebSecurityConfig {
 //                .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtTokenAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login()
                 .successHandler(customOAuth2SuccessHandler())
                 .userInfoEndpoint() // OAuth 2.0 Provider로부터 사용자 정보를 가져오는 엔드포인트를 지정하는 메서드
@@ -66,8 +66,8 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CustomOAuth2SuccessHandler customAuth2SuccessHandler() {
+
+    public CustomOAuth2SuccessHandler customOAuth2SuccessHandler() {
         return new CustomOAuth2SuccessHandler(customOAuth2UserService);
     }
 
