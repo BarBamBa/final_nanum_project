@@ -64,6 +64,7 @@ function AdUser() {
           alert("검색결과가없습니다.");
           return
         }
+        console.log("data : ",data);
         setUserData(data);
       })
       .catch((error) => {

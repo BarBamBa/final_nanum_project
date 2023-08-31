@@ -58,6 +58,7 @@ function App() {
         <Route path="/signup/*" element={<SignUp />} />
         <Route path="/qna/detail/:id" element={<QnaDetail />} />
         <Route path="/qna/input" element={<QnaInputForm />} />
+        <Route path="/oauth2login/callback" element={<Oauth2Callback />} />
       </Routes>
       <ScrollTopButton />
       <Footer />

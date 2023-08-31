@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  
+
   .board-input-nav {
     border-bottom: 4px solid #546d01;
     position: relative;
@@ -12,13 +12,14 @@
 
   .board-input-form {
 
-    td  {
+    td {
       min-width: 120px;
     }
 
     .board-input-content-name {
       text-align: center;
     }
+
     .ContentBox {
       .form-control {
         width: 1000px;
@@ -31,6 +32,7 @@
       width: 1000px;
       height: 700px;
     }
+
     .board-input-titleBox {
       width: 100%;
       margin: 10px 0;
@@ -38,15 +40,14 @@
       .form-control {
         width: 980px;
 
-        .file {
-
-        }
+        .file {}
       }
     }
+
     .volunteer-box {
       padding: 16px;
-    
-      
+
+
     }
 
     .board-input-submitBox {
@@ -67,8 +68,32 @@
         &:active {
           background-color: darken(#546D01, 5%);
         }
+
       }
-    }  
+
+    }
+
+    .board-imgList {
+      margin-left: 10px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+
+      .board-img-table {
+        border: 1px solid #ccc;
+
+        th,
+        td {
+          border: 1px solid #ccc;
+          padding: 16px;
+        }
+
+        .board-img-id {
+          width: 40px;
+        }
+      }
+    }
+
     .uploadBox {
 
       .form-control {

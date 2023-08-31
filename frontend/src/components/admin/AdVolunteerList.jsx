@@ -15,7 +15,7 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
     console.log("paginatedVolData", paginatedVolData);
     //-----------페이징-------------
 
-    const [boardCategory, setBoardCategory] = useState("0"); // 게시판 카테고리
+    const [boardCategory, setBoardCategory] = useState("A"); // 게시판 카테고리
     const [reportOnly, setReportOnly] = useState(false);
 
     //-----------체크박스-------------
@@ -96,7 +96,9 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+                console.log("tata",boardCategory);
                 selectCategory(boardCategory);
+                // fetchVolunteer();
                 setCheckItems([]);
             })
             .catch((error) => {
@@ -111,6 +113,7 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
     }
 
     return (
+        paginatedVolData &&
         <div className='ad-board'>
             <div className='ad-board-manage-bar'>
                 <table className='ad-board-manage-table'>
