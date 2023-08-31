@@ -63,7 +63,8 @@ function Login() {
           localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
           localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
           alert("로그인 성공");
-          nav("/", true);
+          // nav("/", true);
+          document.location.href = "/";
       })
       .catch((error) => {
         console.error("로그인 중 에러 발생.", error);
