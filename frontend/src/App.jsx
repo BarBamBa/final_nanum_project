@@ -28,9 +28,9 @@ import ScrollTopButton from './components/ScrollTopButton';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
 import Oauth2Callback from './pages/login/Oauth2Callback';
 import ChangePassword from './pages/myPage/ChangePassword';
+import axios from 'axios';
 
 function App() {
-
   return (
     <>
       <Header />
