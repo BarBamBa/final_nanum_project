@@ -355,7 +355,7 @@
           box-shadow: 0 0 2px rgba(#A4CC22, 1);
         }
       }
-        
+
       .child-reply-content {
         padding: 10px;
       }
@@ -417,13 +417,9 @@
 }
 
 .board-detail-review-info-list {
-  border: 2px solid #546d01;
+  border-top: 1px solid #D6D6D6;
   border-bottom: none;
 }
-
-// .board-detail-review-info-list ul {
-//   height: 100%;
-// }
 
 .board-detail-review-dataname {
   margin: 0 20px;

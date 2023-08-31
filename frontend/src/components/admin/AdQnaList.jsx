@@ -169,6 +169,7 @@ function AdQnaList({ qnaData, page, handlePageChange, fetchQna, selectCategory }
           {paginatedQnaData.map((qna, i) => {
 
             return (
+              qna.title != null &&
               <tr key={qna.id}>
                 <td className="ad-qna-checkbox">
                   <input

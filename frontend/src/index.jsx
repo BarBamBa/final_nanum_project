@@ -12,7 +12,8 @@ import ScrollToTop from './components/ScrollTop.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   // <React.StrictMode>
-  <TokenCheckProvider basename={process.env.VITE_PUBLIC_URL}>
+  // <TokenCheckProvider basename={process.env.VITE_PUBLIC_URL}>
+  <TokenCheckProvider>
     <BrowserRouter >
       <ScrollToTop />
       <Routes>

@@ -31,6 +31,7 @@ import ChangePassword from './pages/myPage/ChangePassword';
 import axios from 'axios';
 
 function App() {
+// axios.defaults.baseURL = VITE_API_GATEWAY_HOST;
   return (
     <>
       <Header />

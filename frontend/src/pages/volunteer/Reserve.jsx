@@ -8,6 +8,7 @@ import { FiCircle } from 'react-icons/fi'
 function Reserve() {
   const [receivedData, setReceivedData] = useState(null);
   const userInfo = useContext(TokenCheck);
+  console.log(userInfo.emailVerify);
 
   const handleReceiveData = (sendData) => {
     setReceivedData(sendData);
@@ -25,7 +26,7 @@ function Reserve() {
 
   const fetchApplication = async () => {
 
-    if(userInfo.emailVerify === "N") {
+    if(userInfo.emailVerify == "N") {
       alert("이메일 인증이 필요합니다.")
       nav("/mypage");
       return;

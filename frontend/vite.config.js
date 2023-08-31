@@ -8,12 +8,13 @@ export default defineConfig({
   VitePluginHtmlEnv(),
   VitePluginHtmlEnv({compiler: true})],
   
-  base: '/final_project/',
+  // base: '/final_project/',
+  base: '/',
   server: {
     proxy: {
       "/api": {
-        // target: "http://localhost:9090/api",
-        target: `${process.env.VITE_API_GATEWAY_HOST}`,
+        target: "http://localhost:9090/api",
+        // target: `${process.env.VITE_API_GATEWAY_HOST}/api`,
         changeOrigin: true,
         secure: false,
         // ws: false,
