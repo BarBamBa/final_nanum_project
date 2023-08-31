@@ -7,9 +7,11 @@ import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Modal from "react-modal";
 import ReviewSelectForm from "./ReviewSelectForm";
 
 function BoardInputForm() {
+  const host = import.meta.env.VITE_API_GATEWAY_HOST;
   const location = useLocation();
   const navigate = useNavigate();
   // console.log("input kind : ", location.state.boardKind);
@@ -19,8 +21,11 @@ function BoardInputForm() {
     return;
   }
 
+  // const boardData = location.state.boardData;
   const boardKind = location.state.boardKind;
+  const [boardData, setBoardData] = useState(location.state.boardData);
 
+  console.log("boardData", boardData);
 
 
   // 유저정보
@@ -29,12 +34,16 @@ function BoardInputForm() {
   console.log(userInfo.auth);
   // 유저정보
 
+  const [imgPath, setImgPath] = useState();
+  const [isOpenModal, setIsOpenModal] = useState(false);
   // 제목 내용 관리 state 수정이면 boardData에서 title값 가져와 초기값 설정
   const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
   // 글 내용 관리 state => 에디터 적용이후 일단 비활성
   // const [contentValue, setContentValue] = useState(location.state.formKind === "modify" ? location.state.boardData.content : "");
   const [volunteerValue, setVolunteerValue] = useState(location.state.formKind === "modify" ? location.state.boardData.volunteerId : "");
   console.log("volvalue", volunteerValue);
+  // 등록된 이미지 데이터
+  const [ImagData, setImgData] = useState();
   // 에디터 컨텐츠 담을 state (초기값 empty로)
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -54,8 +63,8 @@ function BoardInputForm() {
       const contentHtml = location.state.boardData.content;
       const blocksFromHtml = convertFromHTML(contentHtml);
       const contentState = ContentState.createFromBlockArray(
-          blocksFromHtml.contentBlocks,
-          blocksFromHtml.entityMap
+        blocksFromHtml.contentBlocks,
+        blocksFromHtml.entityMap
       );
       setEditorState(EditorState.createWithContent(contentState));
     }
@@ -120,15 +129,15 @@ function BoardInputForm() {
         },
         body: JSON.stringify(data),
       })
-          .then(res => res.json())
-          .then(res => {
-            console.log("res", res);
-            boardId = res.id;
-            // navigate("/board/news");
-            console.log("boardId", boardId);
-            // handleFileUpload(e);
-            // alert("게시글 등록성공");
-          });
+        .then(res => res.json())
+        .then(res => {
+          console.log("res", res);
+          boardId = res.id;
+          // navigate("/board/news");
+          console.log("boardId", boardId);
+          // handleFileUpload(e);
+          // alert("게시글 등록성공");
+        });
 
     } catch (error) {
       console.error("등록 실패 에러", error);
@@ -156,18 +165,21 @@ function BoardInputForm() {
 
         try {
           const uploadResponse = await axios.post("/api/board/file/upload",
-              formData2,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
+            formData2,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
           );
 
           if (uploadResponse.status === 200) {
             console.log("파일 업로드 성공:", uploadResponse);
+
+            navigate("/board", {
+              state: { boardKind: boardKind }
+            });
             alert("등록완료");
-            navigate("/board");
           } else {
             console.error("파일 업로드 에러:", uploadResponse.statusText);
           }
@@ -179,58 +191,121 @@ function BoardInputForm() {
     }
   };
 
+  async function fetchBoards() {
+    fetch("/api/boards/" + boardData.id)
+      .then((response) => response.json())
+      .then((data) => {
+        setBoardData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const removeImg = async (imgId) => {
+    fetch(`/api/img/remove`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: imgId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        alert("삭제성공");
+        fetchBoards();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
 
 
   return (
-      <div className="inputContainer">
-        <div className="board-input-nav">
-          <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
-        </div>
+    <div className="inputContainer">
+      <div className="board-input-nav">
+        <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
+      </div>
 
-        <div className="board-input-form">
-          <form onSubmit={handleSubmit}>
-            <table>
-              <tbody>
+      <div className="board-input-form">
+        <form onSubmit={handleSubmit}>
+          <table>
+            <tbody>
               <tr>
                 <td className="board-input-content-name"><span>제목</span></td>
                 <td>
                   <div className="board-input-titleBox">
                     <input
-                        type="text"
-                        className="form-control"
-                        name="title"
-                        value={titleValue}
-                        onChange={(e) => setTitleValue(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      value={titleValue}
+                      onChange={(e) => setTitleValue(e.target.value)}
                     />
                   </div>
                 </td>
               </tr>
               {
-                  boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
+                boardKind == "4" && <ReviewSelectForm setVolunteerValue={setVolunteerValue} volunteerValue={volunteerValue} />
               }
               <tr>
                 <td className="board-input-content-name"><span>내용</span></td>
                 <td>
                   <div className="board-input contentBox">
                     <Editor
-                        editorState={editorState}
-                        onEditorStateChange={onEditorStateChange}
-                        localization={{
-                          locale: 'ko',
-                        }}
+                      editorState={editorState}
+                      onEditorStateChange={onEditorStateChange}
+                      localization={{
+                        locale: 'ko',
+                      }}
                     />
                   </div>
                 </td>
               </tr>
+              {location.state.formKind === "modify" &&
+                <tr>
+                  <td className="board-input-content-name">첨부파일</td>
+                  <td>
+                    <div className="board-input board-imgList">
+                      <table className="board-img-table">
+                        <thead>
+                          <th>번호</th>
+                          <th>이미지</th>
+                        </thead>
+                        {boardData.boardImgs.map((img, i) => {
+                          return (
+                            img.status == "Y" && (
+                              <tr id={img.id}>
+                                <td className="board-img-id">{img.id}</td>
+                                {/* <td onClick={() => { document.location.href = `${host}/api/image/${img.name}` }}>{img.name}</td> */}
+                                <td onClick={() => { setImgPath(`${host}/api/image/${img.name}`); setIsOpenModal(true); }}>{img.name}</td>
+                                <td>
+                                  <span onClick={() => removeImg(img.id)}>삭제</span>
+                                </td>
+                              </tr>)
+
+                          )
+                        })}
+                      </table>
+
+                    </div>
+                  </td>
+                </tr>
+              }
+
               <tr>
                 <td className="board-input-content-name"><span>파일첨부</span></td>
                 <td>
                   <div className="board-input uploadBox">
                     <input
-                        type="file"
-                        multiple="multiple"
-                        className="form-control"
-                        name="upload"
+                      type="file"
+                      multiple="multiple"
+                      className="form-control"
+                      name="upload"
                     />
                   </div>
                 </td>
@@ -245,14 +320,47 @@ function BoardInputForm() {
                   </div>
                 </td>
               </tr>
-              </tbody>
-            </table>
+            </tbody>
+          </table>
 
 
-          </form>
-        </div>
+        </form>
       </div>
+      <Modal
+        style={modalStyle}
+        isOpen={isOpenModal}
+        onRequestClose={() => { setIsOpenModal(false) }}
+      >
+        <img src={imgPath} ></img>
+      </Modal>
+    </div>
+
   );
 }
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10,
+  },
+  content: {
+    width: "600px",
+    height: "300px",
+    display: "flex",
+    justifyContent: "center",
+    overflow: "auto",
+    top: "20vh",
+    left: "30vw",
+    right: "38vw",
+    bottom: "42vh",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "14px",
+    outline: "none",
+    zIndex: 10,
+  },
+};
 
 export default BoardInputForm;

@@ -73,7 +73,10 @@ public class BoardService {
 
         board.setTitle(request.getTitle());
         board.setContent(request.getContent());
-        board.setVolunteer(request.getVolunteer());
+        if (request.getFlg() == '4') {
+            board.setVolunteer(request.getVolunteer());
+        }
+
 
         return board;
     }

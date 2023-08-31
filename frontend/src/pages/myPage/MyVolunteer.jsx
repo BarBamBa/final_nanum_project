@@ -1,6 +1,7 @@
 import React,{useContext, useEffect, useState} from 'react'
 import '/src/scss/myPage/MyVolunteer.scss'
 import VolunteerHeaders from './VolunteerHeaders'
+import { useNavigate } from 'react-router-dom'
 import { LuFlower } from 'react-icons/lu'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TokenCheck } from '../../components/TokenCheck'; 
@@ -13,19 +14,29 @@ function MyVolunteer() {
   const [volunteerList, setVolunteerList] = useState([]);
   
   
-    const userInfo = useContext(TokenCheck);
-    // console.log("유저아이디: " + userInfo.userId);
-    // console.log("오스: " + userInfo.auth);
+  const userInfo = useContext(TokenCheck);
+  // console.log("유저아이디: " + userInfo.userId);
+  // console.log("오스: " + userInfo.auth);
 
   //봉사내역조회
-    async function myVolunteerList() {
+    
+  const navigate = useNavigate('');
+
+    
+    if (!localStorage.getItem("accessToken")) {
+      alert('로그인이 필요합니다.'); 
+      navigate('/login');
+      return;
+    } 
+
+    const myVolunteerList = async () => {
       await fetch(`/api/myVolunteer?userId=${userInfo.userId}`, {
-        method: 'POST',  // POST 요청으로 변경
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+          method: 'POST',  // POST 요청으로 변경
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

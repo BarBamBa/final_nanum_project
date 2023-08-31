@@ -10,6 +10,7 @@ import { MdSubdirectoryArrowRight } from 'react-icons/md'
 import { BsPersonCircle } from 'react-icons/bs'
 
 function BoardDetail() {
+  const host = import.meta.env.VITE_API_GATEWAY_HOST;
   const userInfo = useContext(TokenCheck);
   console.log(userInfo.userId);
   console.log(userInfo.auth);
@@ -332,16 +333,18 @@ function BoardDetail() {
           </div>
           {
             boardData.volunteerId && (
-              <ReviewInfo boardData={boardData}/>
+              <ReviewInfo boardData={boardData} />
             )
           }
 
           <div className="board-detail-content">
             {boardData.boardImgs && boardData.boardImgs.map((img, k) => {
               return (
-                <>
-                  <img src={`http://localhost:9090/api/image/${img.name}`}></img>
-                </>
+                <div key={img.id} className="board-detail-image">
+                  {img.status == "Y" && <img src={`${host}/api/image/${img.name}`}></img>}
+
+                </div>
+
               )
             })}
             {/* <p>글내용 : {boardData.content}</p> */}

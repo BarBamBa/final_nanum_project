@@ -17,4 +17,5 @@ public interface ApplicantsRepository extends JpaRepository<Applicants, Long> {
     List<Applicants> findAllByOrderByCreateAtDesc();
     List<Applicants> findAllByUsersOrderByCreateAtDesc(Users users);
     List<Applicants> findByUsers(Users users);
+    List<Applicants> findByStatusOrderByCreateAtDesc(char status);
 }

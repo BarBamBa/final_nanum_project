@@ -1,0 +1,48 @@
+.ad-board-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+
+    .ad-qna-checkbox {
+        width: 5%;
+    }
+
+    .ad-qna-id {
+        width: 5%;
+    }
+
+    .ad-qna-title {
+        width: 40%;
+        text-align: left !important;
+        span {
+            text-decoration: underline;
+            text-underline-position: under;
+            cursor: pointer;
+        }
+
+    }
+
+    .ad-qna-userId {
+        width: 5%;
+    }
+
+    .ad-qna-nickname {
+        width: 10%;
+    }
+
+    .ad-qna-flg {
+        width: 5%;
+    }
+
+    .ad-qna-status {
+        width: 5%;
+    }
+
+    .ad-qna-date {
+        width: 15%;
+    }
+
+    .ad-qna-replyYn {
+        width: 10%;
+    }
+}

@@ -47,9 +47,13 @@ public class VolunteerService {
     }
 
     public Volunteer getVolunteer(long id) {
-        Volunteer volunteer = volunteerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
-        return volunteer;
+        return volunteerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+    }
+
+    public Users findEmailValidation(long id) {
+
+        return usersRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : " + id));
     }
 
 

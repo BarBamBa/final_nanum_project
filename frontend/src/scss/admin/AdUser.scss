@@ -1,0 +1,45 @@
+.ad-board-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+
+    .ad-user-checkbox {
+        width: 5%;
+    }
+
+    .ad-user-id {
+        width: 5%;
+    }
+
+    .ad-user-name {
+        width: 10%;
+    }
+
+    .ad-user-age {
+        width: 5%;
+    }
+
+    .ad-user-mail {
+        width: 20%;
+    }
+
+    .ad-user-phone {
+        width: 15%;
+    }
+
+    .ad-user-nick {
+        width: 15%;
+    }
+
+    .ad-user-status {
+        width: 5%;
+    }
+
+    .ad-user-auth {
+        width: 8%;
+    }
+
+    .ad-user-date {
+        width: 12%;
+    }
+}

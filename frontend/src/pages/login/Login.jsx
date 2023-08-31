@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '/src/scss/login/Login.scss'
 import axios from 'axios';
 import { GoogleLogin } from "@react-oauth/google";
@@ -7,15 +7,6 @@ import {Link, useNavigate} from 'react-router-dom'
 
 function Login() {
 
-//   /*
-
-//   구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
-
-//   구글 clientPw : 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
-
-//   */
-
-  const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -44,45 +35,46 @@ function Login() {
     console.log("Email : ", email);
     console.log("Password : ", password);
 
-    axios
-      .post("api/login", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res)
-        console.log("res.data.email ::", res.data.email);
-        console.log("res.data.msg ::", res.data.msg);
-        console.log("res.data.nickname ::", res.data.nickname);
-        console.log('토큰 정보:', res.data.refreshToken);
 
-        if (email === '') {
-          setErrorMessage('이메일을 입력해주세요.');
-          return;
-        } else if (password === '') {
-          setErrorMessage('비밀번호를 입력해주세요.');
-          return;
-        } else if (res.data === '로그인 실패') {
-          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
-        } else {
-          console.log("로그인 성공");
-          localStorage.setItem("user_email", email);
-          localStorage.setItem("nickname", res.data);
-          console.log(localStorage)
+    if (email === '') {
+      setErrorMessage('이메일을 입력해주세요.');
+      return;
+    } else if (password === '') {
+      setErrorMessage('비밀번호를 입력해주세요.');
+      return;
+    } else {
+      axios
+        .post("api/login", {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          console.log(res)
+          console.log("res.data.email ::", res.data.email);
+          console.log("res.data.msg ::", res.data.msg);
+          console.log("res.data.nickname ::", res.data.nickname);
+          console.log('토큰 정보:', res.data.refreshToken);
+
+            console.log("로그인 성공");
+            console.log(localStorage)
             // 토큰 정보 추출
-            localStorage.setItem("user_email", email);
+            localStorage.setItem("email", email);
             localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
             localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
             localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
 
-            alert("로그인 성공");
-          document.location.href = "/";
-        }
-     
+              alert("로그인 성공");
+            document.location.href = "/";
 
       })
-      .catch();
-
+      .catch((error) => {
+        console.error("로그인 중 에러 발생.", error);
+        console.error(error.response.data);
+        if(error.response.data == "로그인 실패") {
+          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
+        }
+      });
+    }
   }
 
 

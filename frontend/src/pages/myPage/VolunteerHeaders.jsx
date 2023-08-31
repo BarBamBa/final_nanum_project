@@ -37,7 +37,7 @@ function VolunteerHeaders() {
     
     <>
         <div className="volunteer-header-container">
-          <ul className="volunteer-tab">
+          <ul className="volunteer-tab" >
             <li>
               <Link to='/mypage' 
                 className={activeTab === 0 ? 'selected' : ''}

@@ -10,6 +10,7 @@ import com.example.template1.service.UserService;
 import com.example.template1.service.VolunteerService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,6 +29,7 @@ import java.util.Locale;
 public class VolunteerController {
 
     private final VolunteerService volunteerService;
+    private final UsersRepository usersRepository;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd", Locale.KOREA);
 
     @PostMapping("/reserve")  // 봉사활동 예약
@@ -35,6 +38,11 @@ public class VolunteerController {
         VolunteerRequestDto dto = new VolunteerRequestDto(new JSONObject(data).getJSONObject("data"));
         LocalDateTime date = LocalDate.parse(new JSONObject(data).getString("date"), formatter).atStartOfDay();
         Long uid = new JSONObject(data).getLong("id");
+
+        Users users = volunteerService.findEmailValidation(uid);
+        if ( users.getEmailVerify() == 'N') {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is not verified");
+        }
 
         volunteerService.volunteerValidation(dto, uid, date);
 

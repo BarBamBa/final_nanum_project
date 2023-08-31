@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
-import { useToken } from './TokenCheck';
 import { PiPlantDuotone } from 'react-icons/pi'
+import { TokenCheck } from './TokenCheck';
+import { BsPersonGear } from 'react-icons/bs'
 
 function UtilWrap() {
-
+  const userInfo = useContext(TokenCheck);
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState(false);
-  
+
   useEffect(() => {
     if (localStorage.getItem("nickname")) {
       setIsLogin(true);
@@ -16,22 +17,28 @@ function UtilWrap() {
     }
     console.log(isLogin);
     console.log(localStorage)
-  }, [isLogin])
+  }, [])
 
-  
+
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("nickname");
+    localStorage.removeItem("email");
+    localStorage.removeItem(undefined);
+
     setIsLogin(false);
   }
-  
-  
+
+
   return (
     <>
-     {isLogin ? (
+      {isLogin ? (
         <>
           <div className="loginName">
+            {
+              userInfo.auth == "ROLE_ADMIN" && <Link to='/admin' className='toAdminPage-btn'><BsPersonGear className='adminBtn'/></Link>
+            }
             <Link to={`/MyPage`} className='welcomeBox'>
               <PiPlantDuotone className='loginImg' />
               {localStorage.getItem("nickname")} 
@@ -55,7 +62,7 @@ function UtilWrap() {
           </ul>
         </>
       )}
-      
+
     </>
   )
 }

@@ -1,4 +1,3 @@
-select now();
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(100, "생활편의지원", 101, "활동보조");
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(100, "생활편의지원", 102, "이동지원");
 -- insert into volunteer_code(`large_code`, `large`, `small_code`, `small`) values(100, "생활편의지원", 103, "청결지도");
@@ -315,3 +314,4 @@ select now();
 -- INSERT INTO `users` (`user_id`, `create_at`, `update_at`, `address`, `age`, `email`, `gender`, `name`, `nickname`, `password`, `phone`, `status`) VALUES (10002, '2023-08-14 10:52:06.179235', '2023-08-14 10:52:06.179235', '경기 성남시 분당구 대왕판교로 4770', 0, 'test2@abc.com', 'M', '테스트유저2', 'testuser2_nickname', '$2a$10$MB7HTED.35/L2Owf54aqteMCbhRDVpCS73b8nyaWOHaSJmMhTr2Yq', '12345678913', ' ');
 -- INSERT INTO `users` (`user_id`, `create_at`, `update_at`, `address`, `age`, `email`, `gender`, `name`, `nickname`, `password`, `phone`, `status`) VALUES (10003, '2023-08-14 10:52:06.179235', '2023-08-14 10:52:06.179235', '경기 성남시 분당구 대왕판교로 4770', 0, 'test3@abc.com', 'M', '테스트유저3', 'testuser3_nickname', '1234', '12345678913', ' ');
 -- INSERT INTO `users` (`user_id`, `create_at`, `update_at`, `address`, `age`, `email`, `gender`, `name`, `nickname`, `password`, `phone`, `status`) VALUES (10004, '2023-08-14 10:52:06.179235', '2023-08-14 10:52:06.179235', '경기 성남시 분당구 대왕판교로 4770', 0, 'test4@abc.com', 'M', '테스트유저4', 'testuser4_nickname', '1234', '12345678913', ' ');
+select now();

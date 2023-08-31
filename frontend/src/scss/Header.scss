@@ -116,6 +116,15 @@ nav{
   justify-content: space-between;
   font-size: 14px;
 
+  .toAdminPage-btn {
+    position: relative;
+    right:20px;
+  }
+  .adminBtn {
+    width: 20px;
+    height: 20px;
+  }
+
   .welcomeBox {
     display: flex;
     align-items: center;
