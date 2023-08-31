@@ -1,14 +1,5 @@
 
 /* =======회원가입 css=============================================== */
-
-.signup-form{
-  margin-bottom: 80px;
-}
-
-.signup-form td{
-  padding: 10px;
-}
-
 .signup-text{
     margin-top: 100px;
     text-align: center;
@@ -16,88 +7,78 @@
     font-weight: bold;
 }
 
-.signup-table {
-    margin: 10px auto;
-    height: 750px;
-    width: 590px;
-    border: 3px solid #6d8d00c7;
-    border-radius: 20px;
-}
+.signup-form{
+  margin-bottom: 80px;
+  
+  td{
+    padding: 10px;
+  }
+  
+  td:not(.signup-td){
+    border-bottom: 1px solid rgb(0 0 0 / 17%);
+  }
 
-.signup-table td:not(.signup-td){
-  border-bottom: 2.5px solid rgb(0 0 0 / 17%);
-}
-
-.signup-td {
-  border-bottom: none;
-}
-
-.category-name{
-  text-align: center;
-  border-right: 2px solid #546D01;
-  font-family: 'Montserrat', 'Pretendard', sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 110px;
-}
-
-.category-box{
-  margin-left: 5px;
-  width: 250px;
-  height: 30px; 
-  border: 2.5px solid #bebebe; 
-  border-radius: 3px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  padding-left: 5px;
-  font-size: 15px;
-}
-
-
-.check-btn {
-    width: 80px;
-    height: 30px;
-    font-size: 13px;
-    font-weight: bold;
-    border: 2.5px solid #82a804 ;
-    background-color: #9DCB09;
-    color: #fff;
-    border-radius: 5px;
-    margin-left: 5px;
-    position: relative;
-    bottom: 2px;
-}
-
-.check-btn:hover {
+  .signup-table {
+      margin: 10px auto;
+      height: 750px;
+      width: 590px;
+      border: 1px solid #D6D6D6;
+  }
+  .signup-td {
+    border-bottom: none;
+  }
+  .category-name{
+    text-align: center;
+    border-right: 1px solid #D6D6D6;
+    padding: 10px;
     background-color: #FFF;
-    color: #9DCB09;
-}
-
-button{
-  cursor: pointer;
-}
-
-/* ======= 유효성 검사 문구 css ===============================================*/
-
-  .error{
-    margin-left: 10px;
-    font-size: 14px;
-    color: red;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 110px;
+  }
+  
+  .category-box{
+    margin-left: 5px;
+    width: 260px;
+    height: 30px; 
+    border: 1px solid #D6D6D6; 
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    font-size: 15px;
   }
 
-  .success{
-    margin-left: 10px;
-    font-size: 14px;
-    color: rgb(56, 206, 26);
+  button {
+      padding: 10px 15px;
+      border: none ;
+      background-color: #546D01;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-left: 5px;
+      position: relative;
+      bottom: 2px;
+      cursor: pointer;
+      
+      &:hover {
+          background-color: darken(#546D01, 5%);
+      }
   }
 
+  button[type="submit"] {
+    width: 200px;
+    height: 40px;
+    margin: 20px auto;
+    background-color: #A4CC22;
+    font-size: 16px;
 
-
-/* =======성별 css=============================================== */
-
+    &:hover {
+      background-color: darken(#A4CC22, 5%);
+  }
+  }
+  
+  /* ======= 성별 css ===============================================*/
   .gender-group [type="radio"] {
     display: none;
     
@@ -109,212 +90,135 @@ button{
 
   .gender-button {
     display: inline-block;
-    padding: 10px 40px 10px 40px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #bebebe;
-    border: 2.5px solid #d6d6d6;
+    padding: 10px 30px;
+    margin-left: 5px;
+    margin-right: 10px;
+    border: 1px solid #343434;
     border-radius: 5px;
-    margin: 5px 0px 5px 5px;
     
     cursor: pointer;
   }
 
   .gender-button.selected {
-    background-color: #9DCB09;
-    border: 2.5px solid #82a804;
-    color: white;
+    background-color: #546D01;
+    border: none;
+    color: #FFF;
   }
 
-
-/* =======전화번호 css=============================================== */
-  .number-select {
-    margin-left: 5px;
-    width: 70px;
-    height: 30px;
-    text-align: center;
-    font-size: 13px;
-    border: 2.5px solid #bebebe; 
-    border-radius: 3px;
-    margin-bottom: 10px;
-  }
-
-  .number-input{
-    width: 250px;
-    height: 30px;
-    padding-left: 5px;
-    font-size: 14px;
-    border: 2.5px solid #bebebe; 
-    border-radius: 3px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-  }
-
-  .hyphen {
-    margin-left: 3px;
-    margin-right: 3px;
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-
-/* =======생년월일 css=============================================== */
-
-  .age-box{
-    width: 250px;
-    height: 30px;
-    margin: 5px 10px 5px 5px;
-    padding-left: 5px;
-    font-size: 13px;
-    border: 2.5px solid #bebebe; 
-    border-radius: 3px;
-  }
-
-
-/* =======주소 css=============================================== */
-
-
-  .search-btn {
-      width: 60px;
-      height: 30px;
-      font-size: 13px;
-      font-weight: bold;
-      border: 2.5px solid #82a804 ;
-      background-color: #9DCB09;
-      color: #fff;
-      border-radius: 5px;
-      margin-left: 5px;
-      position: relative;
-      bottom: 2px;
-  }
-
-  .search-btn:hover {
-      background-color: #FFF;
-      color: #9DCB09;
-  }
-
-  .category-address{
+  .category-address {
     margin-left: 5px;
     width: 200px;
     height: 23px;
-    font-size: 13px;
-    border: 2.5px solid #bebebe;
-    border-radius: 3px; 
+    border: 1px solid #D6D6D6;
+    border-radius: 5px; 
     margin-bottom: 3px;
+    font-size: 14px;
   }
 
-  .category-address2{
+  .category-address2 {
     margin-top: 5px;
     margin-left: 5px;
     width: 380px;
     height: 23px;
-    font-size: 13px;
-    border: 2.5px solid #bebebe; 
-    border-radius: 3px;
+    border: 1px solid #D6D6D6; 
+    border-radius: 5px;
     padding-left: 5px;
     margin-bottom: 4px;
+    font-size: 14px;
   }
-
-/* ==주소Api ======== */
-
-  .address-modal{
-    background-color: rgba(0,0,0,0.5);
-    margin: 0 auto;
-    width: 700px;
-    height: 600px;
-    padding: 150px 700px 700px 600px;
-    overflow: hidden;
-  }
-
-  .modal-close{
-    margin: 10px auto;
-    position: relative;
-    left: 330px;
-    width: 70px;
-    height: 40px;
-    font-weight: bold;
-    border: 1px solid #383838;
+  /* ======= 생년월일 css ===============================================*/
+  .age-box {
+    width: 260px;
+    height: 30px;
+    margin: 5px 10px 5px 5px;
+    padding-left: 5px;
+    border: 1px solid #D6D6D6; 
     border-radius: 5px;
-    background-color: #ffffff;
+    font-size: 14px;
+  }
+  /* ======= 핸드폰번호 css ===============================================*/
+  .number-input{
+    width: 260px;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 14px;
+    border: 1px solid #D6D6D6; 
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
   }
 
-  .modal-close:hover{
-    cursor : pointer;
-  }
 
-
-/* =======이메일 css=============================================== */
-  .domain-box {
-      width: 100px;
-      height: 30px;
-      box-sizing: border-box;
-      margin-left: 5px;
-      padding: 0px 0 0px 10px;
-      border-radius: 4px;
-      border: 2px solid #d9d6d6;
-      color: #383838;
-      background-color: #ffffff;
-      font-family: 'Montserrat', 'Pretendard', sans-serif;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
+  /* ======= 이메일 css ===============================================*/
   .email-box{
     margin-left: 5px;
     margin-bottom: 5px;
     padding-left: 5px;
-    width: 250px;
+    width: 260px;
     height: 30px;
-    border: 2.5px solid #bebebe; 
-    border-radius: 3px;
+    border: 1px solid #D6D6D6; 
+    border-radius: 5px;
+    font-size: 14px;
   }
 
-  .email-box2{
-    width: 100px;
-    height: 23px;
-    border: 2px solid #bebebe; 
-    border-radius: 3px;
-  }
-
-/* ======= 비밀번호 보기 버튼 css ====================================================== */
-.PwShowBtn{
-  border: 1px solid #383838;
-  margin-left: 10px;
-  padding: 7px;
-  background-color: #9DCB09;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.PwShowBtn{
-  cursor : pointer;
-}
-
-/* =======회원가입 버튼 css=============================================== */
-  .signup-btn{
-    width: 200px;
-    height: 40px;
-    margin: 20px auto;
-  }
-
-  .signup-btn button{
-    border: 2.5px solid #82a804 ;
-    background-color: #9DCB09;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
+  // /* ======= 비밀번호 보기 버튼 css ====================================================== */
+  .PwShowBtn{
+    padding: 10px 15px;
+    border: none ;
+    background-color: #546D01;
     color: #fff;
-    width: 200px;
-    height: 45px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+    position: relative;
+    bottom: 2px;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: darken(#546D01, 5%);
+    }
   }
 
-  .signup-btn button:hover{
-    background-color: #FFF;
-    color: #9DCB09;
+  /* ======= 유효성 검사 문구 css ===============================================*/
+  .error{
+    margin-left: 10px;
+    font-size: 14px;
+    color: red;
   }
-
-
   
+  .success{
+    margin-left: 10px;
+    font-size: 14px;
+    color: rgb(56, 206, 26);
+  }
+
+  .signup-btn {
+    display: flex;
+    justify-content: center;
+  }
+}
+  /* ======= 모달창 ===============================================*/
+.address-modal{
+  background-color: rgba(0,0,0,0.5);
+  margin: 0 auto;
+  width: 700px;
+  height: 700px;
+  padding: 150px 700px 700px 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .modal-close{
+    margin: 10px auto;
+    border: 1px solid #343434;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    
+    &:hover{
+      cursor : pointer;
+    }
+  }
+}

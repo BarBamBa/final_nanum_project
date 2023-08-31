@@ -1,5 +1,89 @@
-.rdw-editor-wrapper {
-    width: 80%;
-    height: 600px;
+.inputContainer {
+    width: 1440px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-}
+    
+    .board-input-nav {
+      border-bottom: 4px solid #546d01;
+      position: relative;
+    }
+  
+    .board-input-form {
+  
+      td  {
+        min-width: 120px;
+      }
+  
+      .board-input-content-name {
+        text-align: center;
+      }
+
+      .ContentBox {
+        .form-control {
+          width: 1000px;
+          height: 450px;
+        }
+      }
+  
+      .contentBox {
+        margin: 0 auto;
+        width: 1000px;
+        height: 700px;
+      }
+
+      .board-input-titleBox {
+        width: 100%;
+        margin: 10px 0;
+  
+        .form-control {
+          width: 980px;
+        }
+      }
+  
+      .board-input-submitBox {
+        display: flex;
+        justify-content: flex-end;
+  
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #546D01;
+          border-radius: 5px;
+          background-color: #546D01;
+          color: white;
+          height: 40px;
+          width: 130px;
+  
+          &:active {
+            background-color: darken(#546D01, 5%);
+          }
+        }
+      }  
+      .uploadBox {
+  
+        .form-control {
+          margin-left: 10px;
+        }
+      }
+    }
+  
+    .rdw-editor-wrapper {
+      width: 100%;
+      height: 700px;
+    }
+  
+    .rdw-editor-main {
+      height: 90% !important;
+    }
+  
+    .DraftEditor-root {
+      border: 1px solid #d6d6d6;
+  
+      &:focus {
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }

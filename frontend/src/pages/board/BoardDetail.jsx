@@ -427,7 +427,7 @@ function BoardDetail() {
                       {/* 댓글 수정 삭제 버튼 */}
                       {
                         data.userId == userInfo.userId && (
-                          <>
+                          !editReplyFlg && <>
                             <button
                               onClick={() => {
                                 setEditReplyFlg(true);
@@ -491,7 +491,7 @@ function BoardDetail() {
                           {/*  대댓글 수정버튼 */}
                           {
                             childData.userId == userInfo.userId && (
-                              <>
+                              !editChildReplyFlg && <>
                                 <button
                                   onClick={() => {
                                     setEditChildReplyFlg(true);

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TokenCheck } from "./TokenCheck";
-import "/src/scss/board/BoardInputForm.scss";
+import "/src/scss/qna/QnaInputForm.scss";
 import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
@@ -168,7 +168,7 @@ function QnaInputForm() {
     return (
         <div className="inputContainer">
             <div className="board-input-nav">
-                <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
+                <h1>{location.state.formKind === "modify" ? "QnA 글 수정" : "QnA 글쓰기"}</h1>
             </div>
 
             <div className="board-input-form">
@@ -180,7 +180,7 @@ function QnaInputForm() {
                         <tr>
                             <td className="board-input-content-name">제목</td>
                             <td>
-                                <div className="board-input titleBox">
+                                <div className="board-input-titleBox">
                                     <input
                                         type="text"
                                         className="form-control"
@@ -221,7 +221,7 @@ function QnaInputForm() {
                         <tr>
                             <td className="board-input-content-name"></td>
                             <td>
-                                <div className="board-input submitBox">
+                                <div className="board-input-submitBox">
                                     <button type="submit">
                                         {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
                                     </button>

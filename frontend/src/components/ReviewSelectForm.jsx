@@ -29,7 +29,7 @@ function ReviewSelectForm({ setVolunteerValue, volunteerValue }) {
     return (
         volList &&
         <tr>
-            <td>봉사활동</td>
+            <td className="board-input-content-name"><span>봉사활동</span></td>
             <td>
                 <div className="board-input volunteer-box">
                     <select onChange={(e) => setVolunteerValue(e.target.value)} value={volunteerValue}>

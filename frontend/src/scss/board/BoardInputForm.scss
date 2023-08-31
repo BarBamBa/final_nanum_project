@@ -6,11 +6,17 @@
   margin: 0 auto;
 
   .board-input-nav {
-    border-bottom: 4px solid #546d01;
+    border-bottom: 3px solid #546d01;
     position: relative;
+
+    h1 {
+      padding-left: 30px;
+    }
   }
 
   .board-input-form {
+    display: flex;
+    justify-content: center;
 
     td {
       min-width: 120px;
@@ -39,15 +45,7 @@
 
       .form-control {
         width: 980px;
-
-        .file {}
       }
-    }
-
-    .volunteer-box {
-      padding: 16px;
-
-
     }
 
     .board-input-submitBox {

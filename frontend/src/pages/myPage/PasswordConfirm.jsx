@@ -115,7 +115,8 @@ function PasswordConfirm() {
 
           <div className='PW-Container'>
           <img className="PW-logo-size" src="/images/logo.png" alt="로고이미지" />
-              <div className='PW-Confirm'>비밀번호 입력 : 
+              <div className='PW-Confirm'>
+                비밀번호 입력 : 
                   <input 
                       type={pwType.type}
                       onChange={onPasswordHandler}
@@ -133,8 +134,9 @@ function PasswordConfirm() {
                   </span>
                   
               </div>
-
-              <button type='button' className='PW-Confrim-Btn' onClick={onClickPassword}>비밀번호 확인</button>
+              <div className='buttonBox'>
+                <button type='button' className='PW-Confrim-Btn' onClick={onClickPassword}>비밀번호 확인</button>
+              </div>
           </div>
         </form>
     </>

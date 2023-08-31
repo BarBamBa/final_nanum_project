@@ -221,8 +221,9 @@ function ChangePassword() {
                             {passwordConfirmMessage}</div>
 
                     </div>
-
-                    <button type='button' className='PW-Confrim-Btn2' onClick={passwordUpdate}>비밀번호 수정</button>
+                    <div className='buttonBox'>
+                        <button type='button' className='PW-Confrim-Btn' onClick={passwordUpdate}>비밀번호 수정</button>
+                    </div>
                 </div>
             </form>
         </>

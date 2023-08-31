@@ -340,6 +340,22 @@
         }
       }
 
+      textarea {
+        width: 80%;
+        min-height: 20px;
+        border: 1px solid #546D01;
+        border-radius: 5px;
+        color: #343434;
+        margin: 10px;
+        white-space: pre-wrap;
+    
+        &:focus {
+          border-color: #A4CC22;
+          outline: none;
+          box-shadow: 0 0 2px rgba(#A4CC22, 1);
+        }
+      }
+        
       .child-reply-content {
         padding: 10px;
       }
