@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
-import { GrClose } from 'react-icons/gr';
+import { TfiClose } from 'react-icons/Tfi';
 import '../scss/Map.scss';
 
 function MapBox({ data }) {
@@ -79,7 +79,7 @@ function MapBox({ data }) {
                 <div className="close"
                   onClick={() => handleCheck(index)}
                   title="닫기">
-                      <GrClose className='TfiClose'/>
+                      <TfiClose className='TfiClose'/>
                     </div>
                 <div className="title">{position.title}</div>
                 <div className="body">
