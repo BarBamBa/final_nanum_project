@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/Header.scss'
+import { PiPlantDuotone } from 'react-icons/pi'
 import { TokenCheck } from './TokenCheck';
 import { BsPersonGear } from 'react-icons/bs'
 
@@ -39,9 +40,9 @@ function UtilWrap() {
               userInfo.auth == "ROLE_ADMIN" && <Link to='/admin' className='toAdminPage-btn'><BsPersonGear className='adminBtn'/></Link>
             }
             <Link to={`/MyPage`} className='welcomeBox'>
-              <img src="/images/mainProfile.png" className='loginImg' />
-              {localStorage.getItem("nickname")}
-              님, 안녕하세요!
+              <PiPlantDuotone className='loginImg' />
+              {localStorage.getItem("nickname")} 
+             님, 안녕하세요!
             </Link>
             <Link to={'/'} onClick={handleLogout} className='logoutBtn'>
               로그아웃 <img src='/images/logoutIcon.png' />

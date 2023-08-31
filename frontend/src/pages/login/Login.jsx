@@ -3,7 +3,7 @@ import '/src/scss/login/Login.scss'
 import axios from 'axios';
 import { GoogleLogin } from "@react-oauth/google";
 import {GoogleOAuthProvider} from "@react-oauth/google";
-import {useNavigate} from 'react-router-dom' 
+import {Link, useNavigate} from 'react-router-dom' 
 
 function Login() {
 
@@ -90,39 +90,32 @@ function Login() {
 
   return (
     <>
-      <form >
+      <form className='login-form'>
         <div className="login-box">
               
-        <img className="logo-size" src="/images/logo.png" alt="로고이미지" />
+          <img className="logo-size" src="/images/logo.png" alt="로고이미지" />
       
-        <div>
-          <input type='email' value={email} onChange={onEmailHandler} 
-                  name='email' className="login-textbox" placeholder='이메일을 입력해 주세요'>
-          </input>
-        </div>
+            <input type='email' value={email} onChange={onEmailHandler} 
+                    name='email' className="login-textbox" placeholder='이메일을 입력해 주세요'>
+            </input>
 
-        <div>
-          <input type='password' value={password} onChange={onPasswordHandler} onKeyPress={OnkeyPress}
-                  name='password' className="login-textbox" placeholder='비밀번호를 입력해 주세요'>
-          </input>
-        </div>
-          
-         {errorMessage && <p className="login-error-message">{errorMessage}</p>}
+            <input type='password' value={password} onChange={onPasswordHandler} onKeyPress={OnkeyPress}
+                    name='password' className="login-textbox" placeholder='비밀번호를 입력해 주세요'>
+            </input>
+           
+          {errorMessage && <p className="login-error-message">{errorMessage}</p>}
 
-          <div>
             <button className="login-button" type='button' onClick={onClickLogin}>로그인</button>
-          </div>
-      
-
-          <a href="http://localhost:9090/oauth2/authorization/google" className="social-button" id="google-connect" >
-            <span>Connect with Google</span>
-          </a>
-          
-          <div>
-            <span><a href='http://localhost:5173/signup' className="page-change">회원가입</a> | </span>
-            <span><a href='http://localhost:5173/finduser' className="page-change">아이디 찾기</a> | </span>
-            <span><a href='http://localhost:5173/finduser' className="page-change">비밀번호 찾기</a></span>
-          </div>
+        
+            <a href="http://localhost:9090/oauth2/authorization/google" className="social-button" id="google-connect" >
+              <div className="social-button"></div>
+            </a>
+            
+            <div className='page-change-box'>
+              <span><Link to='/signup' className="page-change">회원가입</Link> | </span>
+              <span><Link to='/finduser' className="page-change">아이디 찾기</Link> | </span>
+              <span><Link to='/finduser' className="page-change">비밀번호 찾기</Link></span>
+            </div>
         </div>
     
       </form>  

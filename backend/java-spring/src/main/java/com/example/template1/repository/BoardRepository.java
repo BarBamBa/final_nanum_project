@@ -10,6 +10,7 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findAllByOrderByCreateAtDesc();
+    List<Board> findAllById(Long userId);
     List<Board> findByTitleContainingAndFlg(String title, char flg);
     List<Board> findByFlgOrderByCreateAtDesc(char flg);
     List<Board> findByCreateAtBetween(LocalDateTime startDate, LocalDateTime endDate);

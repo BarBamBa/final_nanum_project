@@ -67,7 +67,7 @@ function BoardTab(props) {
       <table className="board-table">
         <thead>
           <tr>
-            <th className="table-head">번호</th>
+            <th className="table-head">게시글번호</th>
             <th className="table-head">제목</th>
             <th className="table-head">등록일</th>
           </tr>
@@ -77,7 +77,7 @@ function BoardTab(props) {
             return (
               <tr key={board.id}>
                 <td className="table-no">{board.id}</td>
-                <td className="table-title" onClick={() => { navigate(`/board/detail/${board.id}`) }}>{board.title}</td>
+                <td className="table-title" onClick={() => { navigate(`/board/detail/${board.id}`) }} >{board.title}</td>
                 <td className="table-date">{board.createAt2}</td>
               </tr>
             );

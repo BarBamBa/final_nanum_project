@@ -1,13 +1,15 @@
-form:not(.mypageModify-form) {
+.volunteer-request-container {
   width: 1440px;
   min-height: 100vh;
   margin: 0 auto;
+  padding-bottom: 50px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   
-  .volunteer-request-container{
+  .volunteer-request-list{
     width: 1000px;
-    height: 750px;
-    margin: 10px auto;
+    min-height: 750px;
+    margin: 0 auto;
+
 
     .volunteer-request{
       margin: 10px;
@@ -54,13 +56,32 @@ form:not(.mypageModify-form) {
         align-items: center;
         font-size: 20px;
         grid-area: title;
-        
+        cursor: pointer;
+        padding-left: 20px;
+
+        a {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .request-detail {
         grid-area: detail;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        width: 50%;
+
+        span {
+          display: flex;
+          align-items: center;
+        }
+        .circleIcon {
+          height: 12px;
+          width: 12px;
+          margin-right: 3px;
+        }
       }
 
       .buttonBox {
@@ -74,7 +95,7 @@ form:not(.mypageModify-form) {
           margin-bottom: 10px;
         }
         //라벨로 꾸미기
-        .cancleBtn {
+        .cancelBtn {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -89,9 +110,13 @@ form:not(.mypageModify-form) {
           &:active {
             background-color: darken(#A4CC22, 10%);
           }
+
+          &.block {
+            display: none;
+          }
         }
         //버튼숨기기
-        #cancleBtn {
+        #cancelBtn {
           display: none;
         }
 
