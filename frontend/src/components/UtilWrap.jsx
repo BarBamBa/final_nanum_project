@@ -13,7 +13,6 @@ function UtilWrap() {
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       setIsLogin(true);
-      setNickname(localStorage.getItem("nickname"));
     }
     console.log(isLogin);
     console.log(localStorage)
