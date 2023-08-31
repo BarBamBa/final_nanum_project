@@ -36,20 +36,20 @@ function Reserve() {
         id: userInfo.userId,
       })
     })
-    .then(res => res.json)
+    .then(res => res.json())
     .then(res => {
       console.log(res);
-
-      alert("신청되었습니다!");
-      nav("/myVolunteer", { state: { userId: userInfo.userId } });
     })
     .catch(err => {
-      alert("로그인을 해주세요!");
-      nav("/login");
+      if(err.message = "Email is not verified") {
+        alert("이메일 인증을 해주세요");
+        nav("/mypage");
+      }
       throw err;
     })
 
-  
+    alert("신청되었습니다!");
+    nav("/");
   }
 
   const handleDeny = () => {
