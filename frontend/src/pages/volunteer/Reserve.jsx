@@ -36,11 +36,15 @@ function Reserve() {
         id: userInfo.userId,
       })
     })
-    .then(res => res.json)
+    .then(res => res.json())
     .then(res => {
       console.log(res);
     })
     .catch(err => {
+      if(err.message = "Email is not verified") {
+        alert("이메일 인증을 해주세요");
+        nav("/mypage");
+      }
       throw err;
     })
 

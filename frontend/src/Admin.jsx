@@ -23,7 +23,7 @@ function Admin() {
 
 
     return (
-        (isLogin == true && auth == "ROLE_ADMIN") || userInfo.auth == "ROLE_ADMIN" ? (
+        (isLogin == true && auth == "ROLE_ADMIN") || userInfo.auth == "ROLE_ADMIN" && userInfo.isLogin == true ? (
             <div>
                 <AdHeader setIsLogin={setIsLogin}/>
                 <Routes>
