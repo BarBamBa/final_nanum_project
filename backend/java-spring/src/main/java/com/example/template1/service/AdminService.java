@@ -315,6 +315,23 @@ public class AdminService {
         return denyApplicants;
     }
 
+    public List<Applicants> finishApplicant(List<ApplicantsRequest> request) { //봉사활동 승인대기중 상태로 돌리기
+        List<Applicants> denyApplicants = new ArrayList<>();
+
+        for (ApplicantsRequest applicantsRequest : request) {
+            Long id = applicantsRequest.getId();
+            Optional<Applicants> boardItem = applicantsRepository.findById(id);
+
+            if (boardItem.isPresent()) {
+                Applicants applicants = boardItem.get();
+                applicants.setStatus('F');
+                denyApplicants.add(applicantsRepository.save(applicants));
+            }
+        }
+
+        return denyApplicants;
+    }
+
     public List<Applicants> getApplicantsByCategory(char status) { //봉사신청 승인상태로 조회
         if(status == 'A') {
             List<Applicants> applicantsList = applicantsRepository.findAllByOrderByCreateAtDesc();

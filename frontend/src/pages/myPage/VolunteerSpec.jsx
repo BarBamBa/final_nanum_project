@@ -52,7 +52,7 @@ function VolunteerSpec() {
             <div className="category-top"></div>
             {volunteerList.length > 0 && volunteerList.map((item, i) => (
               // status가 'c'인 경우 해당 아이템을 건너뛰고 null을 반환
-              item.status !== 'Y' ? null :
+              item.status !== 'F' ? null :
 
               <div className="volunteer-request-table" key={item.id}>
                 <div className="request-CLCode"><LuFlower className='flowerIcon'/>{item.category}</div>

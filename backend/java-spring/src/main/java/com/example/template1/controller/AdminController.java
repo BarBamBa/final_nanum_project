@@ -223,6 +223,14 @@ public class AdminController {
                 .body(waitList);
     }
 
+    @PutMapping("/volunteer/finish") //봉사활동 승인대기중 상태로 돌리기
+    public ResponseEntity<List<Applicants>> finishApplicants(@RequestBody List<ApplicantsRequest> request) {
+        List<Applicants> waitList = adminService.finishApplicant(request);
+
+        return ResponseEntity.ok()
+                .body(waitList);
+    }
+
     @PostMapping("/volunteer/category") //봉사신청 승인상태로 조회
     public ResponseEntity<List<ApplicantsResponse>> getBoardsByCategory(@RequestBody ApplicantsRequest request) {
         List<ApplicantsResponse> applicantsList = adminService.getApplicantsByCategory(request.getStatus())

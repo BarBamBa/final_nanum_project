@@ -86,6 +86,12 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
             }
             endpoint = "wait";
         }
+        if (kind == "F") {
+            if (!confirm("봉사를 완료시겠습니까?")) {
+                return;
+            }
+            endpoint = "finish";
+        }
         await fetch(`/api/admin/volunteer/${endpoint}`, {
             method: "PUT",
             headers: {
@@ -180,7 +186,7 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
                                 <td className="ad-board-item ad-vol-name">{vol.userName}</td>
                                 <td className="ad-board-item ad-vol-selectDate">{formatDate(vol.selectedDay)}</td>
                                 <td className="ad-board-item ad-vol-date">{formatDate(vol.createAt)}</td>
-                                <td className="ad-board-item ad-vol-status">{vol.status == "Y" ? "승인" : vol.status == "N" ? "거부" : "승인대기"}</td>
+                                <td className="ad-board-item ad-vol-status">{vol.status == "Y" ? "승인" : vol.status == "N" ? "거부" : vol.status == "R" ?"승인대기": vol.status == "F" ? "완료":null}</td>
                             </tr>
                         );
                     })}
@@ -191,6 +197,7 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
                 <button onClick={() => { permitApplicants("Y") }}>선택승인</button>
                 <button onClick={() => { permitApplicants("N") }}>선택거부</button>
                 <button onClick={() => { permitApplicants("R") }}>선택승인대기</button>
+                <button onClick={() => { permitApplicants("F") }}>봉사완료</button>
             </div>
 
             <Pagination

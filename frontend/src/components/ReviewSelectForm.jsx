@@ -35,6 +35,7 @@ function ReviewSelectForm({ setVolunteerValue, volunteerValue }) {
                     <select onChange={(e) => setVolunteerValue(e.target.value)} value={volunteerValue}>
                         <option value="">봉사활동선택</option>
                         {volList.map((volunteer, i) => (
+                            volunteer.status == "F" &&
                             <option key={volunteer.volunteerId} value={volunteer.volunteerId}>
                                 {volunteer.volunteerTitle}
                             </option>
