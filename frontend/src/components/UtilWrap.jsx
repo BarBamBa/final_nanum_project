@@ -11,14 +11,13 @@ function UtilWrap() {
   const [userId, setUserId] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("nickname")) {
+    if (localStorage.getItem("accessToken")) {
       setIsLogin(true);
-      console.log("isLogin ?? :: ", isLogin);
+      setNickname(localStorage.getItem("nickname"));
     }
     console.log(isLogin);
     console.log(localStorage)
   }, [])
-
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -28,6 +27,7 @@ function UtilWrap() {
     localStorage.removeItem(undefined);
 
     setIsLogin(false);
+    document.location.href = "/";
   }
 
 
