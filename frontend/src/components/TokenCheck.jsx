@@ -11,6 +11,7 @@ export const TokenCheckProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState(null);
   const [auth, setAuth] = useState(null);
+  const [emailVerify, setEmailVerify] = useState(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -44,6 +45,7 @@ export const TokenCheckProvider = ({ children }) => {
             setUserId(data.id);
             localStorage.setItem("nickname", data.nickname);
             setAuth(data.authority);
+            setEmailVerify(data.emailVerify);
           }
         })
         .catch((error) => {
@@ -57,6 +59,7 @@ export const TokenCheckProvider = ({ children }) => {
     isLogin,
     userId,
     auth,
+    emailVerify
   };
 
 

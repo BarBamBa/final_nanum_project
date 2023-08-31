@@ -115,6 +115,7 @@ function BoardDetail() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        navigate("/board",{state : {boardKind: boardData.flg}})
       })
       .catch((error) => {
         console.error(error);

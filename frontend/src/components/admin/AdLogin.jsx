@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { TokenCheck } from '../TokenCheck';
+import '/src/scss/login/Login.scss'
 import axios from 'axios';
 
 function AdLogin({setAuth, setIsLogin}) {
@@ -77,7 +78,7 @@ function AdLogin({setAuth, setIsLogin}) {
                                     localStorage.removeItem("accessToken");
                                     localStorage.removeItem("refreshToken");
                                     localStorage.removeItem("nickname");
-                                    localStorage.removeItem("email");
+                                    localStorage.removeItem("`email");
                                 }
                                 if (data.authority == "ROLE_ADMIN") {
                                     alert("관리자인증성공");
@@ -105,16 +106,16 @@ function AdLogin({setAuth, setIsLogin}) {
 
     return (
 
-        <form >
+        <form className='login-form' >
             <div className="login-box">
                 <h1>관리자 로그인</h1>
-                <div>
+                <div className='ad-email'>
                     <input type='email' value={email} onChange={onEmailHandler}
                         name='email' className="login-textbox" placeholder='이메일을 입력해 주세요'>
                     </input>
                 </div>
 
-                <div>
+                <div className='ad-password'>
                     <input type='password' value={password} onChange={onPasswordHandler} onKeyPress={OnkeyPress}
                         name='password' className="login-textbox" placeholder='비밀번호를 입력해 주세요'>
                     </input>

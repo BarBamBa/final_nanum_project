@@ -37,12 +37,12 @@ public class VolunteerController {
 
         VolunteerRequestDto dto = new VolunteerRequestDto(new JSONObject(data).getJSONObject("data"));
         LocalDateTime date = LocalDate.parse(new JSONObject(data).getString("date"), formatter).atStartOfDay();
-        Long uid = new JSONObject(data).getLong("id");
+        long uid = new JSONObject(data).getLong("id");
 
-        Users users = volunteerService.findEmailValidation(uid);
-        if ( users.getEmailVerify() == 'N') {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is not verified");
-        }
+//        Users users = volunteerService.findEmailValidation(uid);
+//        if ( users.getEmailVerify() == 'N') {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("인증필요");
+//        }
 
         volunteerService.volunteerValidation(dto, uid, date);
 
