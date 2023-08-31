@@ -186,7 +186,7 @@ function AdVolunteerList({ volData, page, handlePageChange, fetchVolunteer, sele
                                 <td className="ad-board-item ad-vol-name">{vol.userName}</td>
                                 <td className="ad-board-item ad-vol-selectDate">{formatDate(vol.selectedDay)}</td>
                                 <td className="ad-board-item ad-vol-date">{formatDate(vol.createAt)}</td>
-                                <td className="ad-board-item ad-vol-status">{vol.status == "Y" ? "승인" : vol.status == "N" ? "거부" : vol.status == "R" ?"승인대기": vol.status == "F" ? "완료":null}</td>
+                                <td className="ad-board-item ad-vol-status">{vol.status == "Y" ? "승인" : vol.status == "N" ? "거부" : vol.status == "R" ?"승인대기": vol.status == "F" ? "완료": "신청취소"}</td>
                             </tr>
                         );
                     })}
