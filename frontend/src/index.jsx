@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   // <TokenCheckProvider basename={process.env.VITE_PUBLIC_URL}>
   <TokenCheckProvider>
-    <BrowserRouter  basename='https://barbamba.github.io/final_project'>
+    <BrowserRouter>
       <ScrollToTop />
       <Routes>
         <Route path='/*' element={<App />} />
