@@ -91,6 +91,7 @@ function PasswordConfirm() {
         })
         .catch(error => {
           console.error(error);
+          alert("비밀번호가 일치하지 않습니다.")
         });
     }
   }

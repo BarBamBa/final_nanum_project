@@ -31,6 +31,8 @@ public class UsersDto {
 
     private Authority authority;
 
+    private char emailVerify;
+
     public UsersDto(Users users) {
         this.id = users.getId();
         this.name = users.getName();
@@ -42,6 +44,7 @@ public class UsersDto {
         this.phone = users.getPhone();
         this.gender = users.getGender();
         this.authority = users.getAuthority();
+        this.emailVerify = users.getEmailVerify();
     }
 
 

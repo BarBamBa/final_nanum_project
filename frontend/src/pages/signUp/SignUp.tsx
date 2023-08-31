@@ -391,15 +391,15 @@ const SignUp = () => {
 		async (e: React.FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
 
-			if (!isNameValid) {
+			if (isNameValid === false) {
 				setNameMessage("이름을 확인해주세요.");
 				return;
 			}
-			if (!isAge) {
+			if (isAge === false) {
 				setAgeMessage("생년월일을 확인해주세요.");
 				return;
 			}
-			if (!isPhone) {
+			if (isPhone === false) {
 				setPhoneMessage("전화번호를 확인해주세요.");
 				return;
 			}
@@ -407,18 +407,18 @@ const SignUp = () => {
 				setDetailAddressMessage("주소를 확인해주세요.");
 				return;
 			}
-			if (!isEmailAvailable) {
+			if (isEmailAvailable  === false) {
 				setEmailMessage("이메일을 확인해주세요.");
 				return;
 			}
-			if (!isPassword) {
+			if (isPassword === false) {
 				setPasswordMessage("비밀번호를 확인해주세요.");
 				return;
 			}
 			if (!passwordConfirm) {
 				setPasswordConfirmMessage("비밀번호 일치확인을 해주세요.");
 			}
-			if (!isNicknameAvailable) {
+			if (isNicknameAvailable === false) {
 				setNickNameMessage("닉네임을 확인해주세요.");
 				return;
 			}
@@ -703,7 +703,7 @@ const SignUp = () => {
 
 									<div
 										className={`message ${
-											isEmailAvailable ? "success" : "error"
+											!isEmailAvailable ? "error" : "success"
 										}`}
 									>
 										{emailMessage}
