@@ -1,14 +1,15 @@
-package com.example.template1.config;
+package com.example.template1.config.jwt;
 
 import com.example.template1.model.Users;
-import com.example.template1.model.dto.TokenInfo;
 import com.example.template1.model.enums.Authority;
+import com.example.template1.repository.UsersRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,62 +17,69 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 @Slf4j
 @Component
+//@RequiredArgsConstructor
 public class JwtTokenProvider {
 
+    @Autowired
+    private UsersRepository usersRepository;
     private final Key key;
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;    // 30분의 유효기간
-    private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;    // 24시간의 유효기간
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60;    // 60분의 유효기간
+    private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;    // 7일의 유효기간
 
     public JwtTokenProvider(@Value("${spring.jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // 유저 정보를 가지고 AccessToken, RefreshToken 을 생성하는 메서드
-    public TokenInfo generateToken(Authentication authentication) {
-
+    private Date getTokenExpirationTime(long tokenExpireTime) {
         long now = (new Date()).getTime();
+        return new Date(now + tokenExpireTime);
+    }
 
-        // Access Token 생성
-        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+    // 유저 정보를 가지고 AccessToken, RefreshToken 을 생성하는 메서드
+    public JwtTokenDto generateTokenDto(Authentication authentication) {
+
+        Date accessTokenExpireIn = getTokenExpirationTime(ACCESS_TOKEN_EXPIRE_TIME);
+        Date refreshTokenExpireIn = getTokenExpirationTime(REFRESH_TOKEN_EXPIRE_TIME);
 
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("auth", authentication.getAuthorities())
-                .setExpiration(accessTokenExpiresIn)
+                .setExpiration(accessTokenExpireIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
 
         // Refresh Token 생성
         String refreshToken = Jwts.builder()
-                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+                .setSubject(authentication.getName())
+                .claim("auth", authentication.getAuthorities())
+                .setExpiration(refreshTokenExpireIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
 
-        return TokenInfo.builder()
+        return JwtTokenDto.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .accessTokenExpiresIn(accessTokenExpireIn.getTime())
                 .build();
     }
 
     // OAuth2 사용자의 로그인 정보를 통해 토큰을 생성하는 메서드
-    public TokenInfo generateToken(Users user) {
+    public JwtTokenDto generateTokenDto(String id) {
 
         long now = (new Date()).getTime();
 
@@ -79,8 +87,8 @@ public class JwtTokenProvider {
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
 
         String accessToken = Jwts.builder()
-                .setSubject(user.getId().toString())
-                .claim("auth", user.getAuthority())
+                .setSubject(id)
+                .claim("auth", Authority.ROLE_USER.name())
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
@@ -88,15 +96,18 @@ public class JwtTokenProvider {
 
         // Refresh Token 생성
         String refreshToken = Jwts.builder()
+                .setSubject(id)
+                .claim("auth", Authority.ROLE_USER.name())
                 .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
 
-        return TokenInfo.builder()
+        return JwtTokenDto.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
                 .build();
     }
 

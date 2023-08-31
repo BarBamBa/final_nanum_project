@@ -7,7 +7,7 @@ import {Link, useNavigate} from 'react-router-dom'
 
 function Login() {
 
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +35,6 @@ function Login() {
     console.log("Email : ", email);
     console.log("Password : ", password);
 
-
     if (email === '') {
       setErrorMessage('이메일을 입력해주세요.');
       return;
@@ -55,17 +54,16 @@ function Login() {
           console.log("res.data.nickname ::", res.data.nickname);
           console.log('토큰 정보:', res.data.refreshToken);
 
-            console.log("로그인 성공");
-            console.log(localStorage)
-            // 토큰 정보 추출
-            localStorage.setItem("email", email);
-            localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
-            localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
-            localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
-
-              alert("로그인 성공");
-            document.location.href = "/";
-
+          console.log("로그인 성공");
+          console.log(localStorage)
+          // 토큰 정보 추출
+          localStorage.setItem("email", email);
+          localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
+          localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
+          localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
+          localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
+          alert("로그인 성공");
+          nav("/", true);
       })
       .catch((error) => {
         console.error("로그인 중 에러 발생.", error);

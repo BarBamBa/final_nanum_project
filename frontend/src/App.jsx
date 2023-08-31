@@ -26,6 +26,7 @@ import QnaInputForm from './components/QnaInputForm';
 import './scss/App.scss'
 import ScrollTopButton from './components/ScrollTopButton';
 import PasswordConfirm from './pages/myPage/PasswordConfirm';
+import Oauth2Callback from './pages/login/Oauth2Callback';
 import ChangePassword from './pages/myPage/ChangePassword';
 
 function App() {
@@ -60,7 +61,6 @@ function App() {
       </Routes>
       <ScrollTopButton />
       <Footer />
-
     </>
   )
 }
