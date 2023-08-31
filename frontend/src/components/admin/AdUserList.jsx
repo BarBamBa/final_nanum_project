@@ -76,7 +76,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
       .then((res) => res.json())
       .then((data) => {
         setCheckItems([]);
-        searchHandle(searchKind, searchKeyword);
+        // searchHandle(searchKind, searchKeyword);
+        fetchUsers();
       })
       .catch((error) => {
         console.log(error);
@@ -101,7 +102,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
       .then((res) => res.json())
       .then((data) => {
         setCheckItems([]);
-        searchHandle(searchKind, searchKeyword);
+        // searchHandle(searchKind, searchKeyword);
+        fetchUsers();
       })
       .catch((error) => {
         console.log(error);
@@ -126,7 +128,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
       .then((res) => res.json())
       .then((data) => {
         setCheckItems([]);
-        searchHandle(searchKind, searchKeyword);
+        // searchHandle(searchKind, searchKeyword);
+        fetchUsers();
       })
       .catch((error) => {
         console.log(error);
@@ -151,7 +154,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
       .then((res) => res.json())
       .then((data) => {
         setCheckItems([]);
-        searchHandle(searchKind, searchKeyword);
+        // searchHandle(searchKind, searchKeyword);
+        fetchUsers();
       })
       .catch((error) => {
         console.log(error);
@@ -166,8 +170,8 @@ function AdUserList({ userData, page, handlePageChange, fetchUsers, getBoardList
   //-----------체크박스-------------
 
   async function searchHandle() {
-
     searchUser(searchKind, searchKeyword);
+    // fetchVolunteer();
     handlePageChange(1);
     console.log("검색기준 : ", searchKind);
     console.log("검색어 : ", searchKeyword);

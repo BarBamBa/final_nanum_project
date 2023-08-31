@@ -48,7 +48,7 @@ function Login() {
           password: password,
         })
         .then((res) => {
-          console.log(res)
+          console.log(res);
           console.log("res.data.email ::", res.data.email);
           console.log("res.data.msg ::", res.data.msg);
           console.log("res.data.nickname ::", res.data.nickname);
@@ -70,6 +70,9 @@ function Login() {
         console.error(error.response.data);
         if(error.response.data == "로그인 실패") {
           alert('입력하신 이메일과 비밀번호를 확인해주세요.');
+        }
+        if(error.response.data == "차단계정") {
+          alert('차단된 계정입니다.');
         }
       });
     }
