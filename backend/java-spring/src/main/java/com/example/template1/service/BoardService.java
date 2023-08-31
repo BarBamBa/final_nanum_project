@@ -5,6 +5,7 @@ import com.example.template1.model.Users;
 import com.example.template1.model.Volunteer;
 import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.repository.BoardRepository;
+import com.example.template1.repository.UsersRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UsersRepository usersRepository;
 
     public List<Board> getAllBoard() { //게시판 조회
         List<Board> boardList = boardRepository.findAllByOrderByCreateAtDesc();
@@ -28,8 +30,8 @@ public class BoardService {
     }
 
     public List<Board> getMyBoard(Long userId) { //내가 작성한 게시글 조회
-        List<Board> myboardList = boardRepository.findAllById(userId);
-        return myboardList;
+        Users user = usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("not found" + userId));
+        return boardRepository.findAllByUsers(user);
     }
 
     public List<Board> searchBoard(String title, char flg) { //게시판 검색 (검색어와 게시판종류로)

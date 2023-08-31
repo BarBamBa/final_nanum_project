@@ -105,14 +105,14 @@
       .social-button {
         width: 190px;
         height: 45px;
-        background-image: url(/public/images/btn_google_signin_light_normal_web.png);
+        background-image: url(/images/btn_google_signin_light_normal_web.png);
 
         &:hover {
-          background-image: url(/public/images/btn_google_signin_light_focus_web.png);
+          background-image: url(/images/btn_google_signin_light_focus_web.png);
         }
 
         &:active {
-          background-image: url(/public/images/btn_google_signin_light_pressed_web.png);
+          background-image: url(/images/btn_google_signin_light_pressed_web.png);
         }
       }
  
