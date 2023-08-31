@@ -1,8 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { TokenCheck } from "../../components/TokenCheck";
 import Modal from "react-modal";
 import ReviewInfo from "../../components/ReviewInfo";
+import { BiX } from "react-icons/bi";
+import { PiSiren } from 'react-icons/pi'
+import { LuFlower } from 'react-icons/lu'
+import { MdSubdirectoryArrowRight } from 'react-icons/md'
+import { BsPersonCircle } from 'react-icons/bs'
 
 function BoardDetail() {
   const host = import.meta.env.VITE_API_GATEWAY_HOST;
@@ -295,28 +300,35 @@ function BoardDetail() {
         <div className="board-detail-kind">
           <h1>{BoardFlg(boardData.flg)}</h1>
         </div>
-
+        <div className="backBtnBox">
+          <Link to=
+            {"/board"} onClick={() => {navigate(-1, {boardKind: boardData.flg})}}>
+            목록으로
+          </Link>
+        </div>
         <div className="board-detail-box">
           <div className="board-detail-header">
             <div className="board-title">
-              <h3>글제목 : {boardData.title}</h3>
-              {
-                boardData.flg == "3" || boardData.flg == "4" ? (
-                  <button
-                    className="board-reportBtn"
-                    onClick={() => { setIsOpen(true) }}>게시글신고
-                  </button>
-                ) : null
-              }
-
+              <h2>{boardData.title}</h2>
             </div>
-            <div className="board-writter-info">
+            
+            <div className="board-detail-info">
+              <div className="board-writter-date">
+                {
+                  boardData.flg == "3" || boardData.flg == "4" ? (
+                    <p><BsPersonCircle className="profileIcon"/> {boardData.name}</p>
+                  ) : null
+                }
+                <p>등록일 : {boardData.createAt2}</p>
+              </div>
               {
                 boardData.flg == "3" || boardData.flg == "4" ? (
-                  <p>글쓴이 : {boardData.name}</p>
+                  <span
+                    className="board-reportBtn"
+                    onClick={() => { setIsOpen(true) }}><PiSiren className="sirenIcon"/>게시글신고
+                  </span>
                 ) : null
               }
-              <p>등록일 : {boardData.createAt2}</p>
             </div>
           </div>
           {
@@ -338,6 +350,7 @@ function BoardDetail() {
             {/* <p>글내용 : {boardData.content}</p> */}
             <div dangerouslySetInnerHTML={{ __html: boardData.content }} />
           </div>
+        </div>
           {
             boardData.userId == userInfo.userId || userInfo.auth == "ROLE_ADMIN" ? (
               <div className="board-detail-btn">
@@ -346,10 +359,6 @@ function BoardDetail() {
               </div>
             ) : null
           }
-
-
-
-        </div>
 
 
         {/* 댓글영역 */}
@@ -364,8 +373,7 @@ function BoardDetail() {
 
               {postReplyFlg ?
                 <div className="board-reply-input">
-                  <input
-                    type="text"
+                  <textarea
                     onChange={(e) => {
                       console.log(e.target.value);
                       setNewReplyData(e.target.value);
@@ -378,14 +386,13 @@ function BoardDetail() {
                 <div key={i} className="board-reply-content">
                   {/* 댓글작성자 */}
                   <div className="reply-writter">
-                    <p>글쓴이 : {data.name}</p>
+                    <p className="reply-writter-nick"><LuFlower className="flowerIcon"/>{data.name}</p>
                   </div>
 
                   {/* 댓글 수정버튼 누르면 나오는 입력 영역 */}
                   {editReplyFlg && replyIdx === i ? (
-                    <div>
-                      <input
-                        type="text"
+                    <div className="board-reply-modify">
+                      <textarea
                         value={editReplyContent || data.content} //editReplyContent를 입력 전까지는 data.content를 표시해줌
                         onChange={(e) => {
                           // e.preventDefault;
@@ -409,7 +416,7 @@ function BoardDetail() {
 
                     <div className="reply-childBtn-area">
                       {/* 대댓글보기버튼 */}
-                      <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>대댓글보기</p>
+                      <p onClick={() => { setViewChildReplyFlg(!viewChildReplyFlg), fetchChildReplies(data.id), setReplyIdx(i); }}>{viewChildReplyFlg ? "대댓글닫기" : "대댓글보기"}</p>
 
                       {/* 대댓글달기버튼 */}
                       <p onClick={() => { setChildReplyFlg(true); setViewChildReplyFlg(true); setReplyIdx(i); }}>댓글달기</p>
@@ -429,7 +436,7 @@ function BoardDetail() {
                               }}>수정</button>
 
                             <button onClick={() => { removeReplyHandle(data.id) }}>삭제</button>
-                          </>
+                          </>                         
                         )
                       }
 
@@ -442,8 +449,7 @@ function BoardDetail() {
                   {/* 대댓글달기 input 영역 */}
                   {postChildReplyFlg && replyIdx === i ? (
                     <div className="child-reply-input">
-                      <input
-                        type="text"
+                      <textarea
                         name={data.id}
                         onChange={(e) => {
                           console.log(e.target.name);
@@ -458,17 +464,16 @@ function BoardDetail() {
 
                   {viewChildReplyFlg && replyIdx === i ? ( // viewChildReplyFlg True/ index맞으면 대댓글창보이게
                     <div className="board-child-reply-container">
-
                       {childReplyData.map((childData, j) => (
+                        <>
+                        <MdSubdirectoryArrowRight />
                         <div key={j} className="board-child-reply-content">
-
-                          <div className="child-reply-writter">대댓글작성자 : {childData.name}</div>
+                          <div className="child-reply-writter"><LuFlower className="flowerIcon"/>{childData.name}</div>
 
                           {/* 대댓글 내용 / 수정창 전환영역 */}
                           {editChildReplyFlg && childReplyIdx === j ? (
                             <div>
-                              <input
-                                type="text"
+                              <textarea
                                 value={editReplyContent || childData.content}
                                 onChange={(e) => {
                                   setEditReplyContent(e.target.value);
@@ -477,7 +482,6 @@ function BoardDetail() {
                               <button onClick={() => { modifyReplyHandle(childData.id) }}>저장</button>
                               <button onClick={() => { setEditChildReplyFlg(false); }}>취소</button>
                             </div>
-
                           ) : (
                             <div className="child-reply-content">{childData.content}</div>
                           )}
@@ -501,6 +505,7 @@ function BoardDetail() {
 
 
                         </div>
+                        </>
                       ))}
 
                     </div>
@@ -519,7 +524,8 @@ function BoardDetail() {
           onRequestClose={() => { setIsOpen(false) }}
         >
           <div>
-            <h3 className="report-head">신고 사유를 선택해 주세요.</h3>
+            <BiX className="XBtn" onClick={() => { setIsOpen(false) }}/>
+            <h3 className="report-head" style={{marginTop: '0'}}>신고 사유를 선택해 주세요.</h3>
             <label htmlFor="selectbar">신고사유</label>
             <select id="selectbar" onChange={(e) => { setReportReason(e.target.value) }} value={reportReason}>
               <option value={1}>폭력/욕설</option>
@@ -527,14 +533,13 @@ function BoardDetail() {
               <option value={3}>선정적인 게시물</option>
               <option value={4}>게시판 성격과 무관한 게시물</option>
             </select>
-            <button onClick={reportBoard}>신고</button>
+            <button onClick={reportBoard} className="reportBtn">신고</button>
             <li className="report-alert">허위 신고 시 본인도 불이익을 받을 수 있습니다.</li>
           </div>
         </Modal>
       </div >
 
     )
-
   )
 
 
@@ -554,6 +559,7 @@ const modalStyle = {
     height: "180px",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     overflow: "auto",
     top: "42vh",
     left: "38vw",

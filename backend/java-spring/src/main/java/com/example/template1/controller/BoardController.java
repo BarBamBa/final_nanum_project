@@ -93,4 +93,17 @@ public class BoardController {
         return ResponseEntity.ok()
                 .body(applicants);
     }
+
+    @GetMapping("/boards/myBoard/{userId}") //사용자 개별 작성한 글 조회
+    public ResponseEntity<List<BoardResponse>> getMyBoard(@PathVariable String userId) {
+        Long id = Long.parseLong(userId);
+        List<BoardResponse> boards = boardService.getMyBoard(id)
+                .stream()
+                .filter(board -> board.getStatus() == 'Y') //게시글 상태 N은 삭제상태로 설정
+                .map(BoardResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(boards);
+    }
 }

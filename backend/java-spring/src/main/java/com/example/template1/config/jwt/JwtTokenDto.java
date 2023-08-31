@@ -1,6 +1,5 @@
-package com.example.template1.model.dto;
+package com.example.template1.config.jwt;
 
-import com.example.template1.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,11 +7,11 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
-public class TokenInfo {
+public class JwtTokenDto {
 
     private String grantType;
     private String accessToken;
+    private Long accessTokenExpiresIn;
     private String refreshToken;
     private String nickname;
-
 }

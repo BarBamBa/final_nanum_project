@@ -14,8 +14,8 @@
 /* ScrollAnimation.css */
 .scrollAnimate {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .scrollAnimate.visible {
@@ -24,7 +24,7 @@
 }
 //FadeIn
 .animationClass {
-  animation: fadeInUp 2s ease;
+  animation: fadeInUp 1s ease;
   /* 기타 애니메이션 속성들 */
 }
 
@@ -57,7 +57,7 @@
   }
 
   div {
-    width: 470px;
+    width: 33%;
     height: 100%;
     text-align: center;
 
@@ -66,7 +66,10 @@
       font-size: 30px;
     }
   }
-  
+  .iconList1, .iconList2, .iconList3 {
+    margin: 0 auto;
+  }
+
   .iconList2 {
     border-left: 1px dashed #D6D6D6;
     border-right: 1px dashed #D6D6D6;

@@ -92,7 +92,7 @@ function QnaTab({ qnaData, searchQna, qnaKind }) {
                 nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
                 onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
             />
-            <div>
+            <div className="qna-write-btn">
                 <button onClick={handleWrite} >글쓰기</button>
             </div>
         </>

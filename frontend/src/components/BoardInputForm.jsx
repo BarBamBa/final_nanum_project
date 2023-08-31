@@ -238,7 +238,7 @@ function BoardInputForm() {
               <tr>
                 <td className="board-input-content-name"><span>제목</span></td>
                 <td>
-                  <div className="board-input titleBox">
+                  <div className="board-input-titleBox">
                     <input
                       type="text"
                       className="form-control"
@@ -313,7 +313,7 @@ function BoardInputForm() {
               <tr>
                 <td className="board-input-content-name"></td>
                 <td>
-                  <div className="board-input submitBox">
+                  <div className="board-input-submitBox">
                     <button type="submit">
                       {location.state.formKind === "modify" ? "수정하기" : "작성하기"}
                     </button>

@@ -1,193 +1,119 @@
-/*  */
-.invalid-message{
-  margin-left: 5px;
-  font-weight: bold;
-  color: red;
-}
+.modify-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.mypageModify-form{
-  width: 1440px;
-  min-height: 100vh;
-  margin: 0px auto;
-  margin-top: 30px;
-  margin-bottom: 150px;
-}
+  .modify-Container {
+    width: 700px;
+    height: 650px;
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: repeat(6, 100px);
+    align-items: center;
+    justify-items: center;
+    align-content: center;
 
-.myPage-Item{
-  width: 750px;
-  margin-top: 100px;
-  margin-left: 495px;
-}
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
 
-//====== 상단 글 및 밑줄 css ==========================================
-.modify-head-font{
-  font-size: 35px;
-  font-weight: bold;
-}
+    button {
+      grid-column-start: 3;
+    }
 
-.modify-head-bottom{
-  margin-top: 10px;
-  border-bottom: 3px solid #ccccccc4;
-}
+    .modify-category {
+      text-align: center;
+      grid-column-start: 1;
+    }
 
+    input[type="text"] {
+      grid-area: textInput;
+      border: 1px solid #D6D6D6;
+      border-radius: 5px;
+      height: 30px;
+      width: 380px;
+      text-align: center;
+    }
 
-//====== 수정 할 텍스트 박스 ==========================================
-  // 이름 css 
-.modify-category-name{
-  margin-left: 3px;
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
+    .modify-textBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #D6D6D6;
+      border-radius: 5px;
+      height: 40px;
+      width: 400px;
+      white-space: pre-wrap;
+      overflow: hidden;
+    }
 
-.modify-check-name{
-  margin-left: 5px ;
-}
+    
+    .modify-textCheck {
 
-.modify-textCheck-name{
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 600px;
-  height: 35px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding-top: 10px;
-  border-bottom: 4px solid rgb(191, 212, 111, 0.5);
-}
+    }
 
-// 수정 가능한 text css
-.modify-category{
-  margin-left: 3px;
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
+    .message {
+      grid-column-start: 2;
 
+      /* 에러 메시지 */
+      &.modifySuccess{
+        display: flex;
+        justify-content: center;
+        color: #546d01;
+      }
+  
+      &.modifyError{
+        display: flex;
+        justify-content: center;
+        color: red;
+      }
+    }
 
-.modify-textBox{
-  font-size: 17px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 600px;
-  height: 35px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding-top: 10px;
-  border-bottom: 4px solid rgb(191, 212, 111, 0.5);
-  background-color: #cccccc59;
-}
+    .invalid-message {
+      display: flex;
+      justify-content: center;
+      color: red;
+    }
 
-.modify-textCheck{
-  font-size: 17px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 600px;
-  height: 35px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  border-bottom: 4px solid rgb(191, 212, 111, 0.5);
-  background-color: #cccccc59;
-}
+    .modifyCheck-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #546d01;
+      border: 1px solid #546d01;
+      border-radius: 5px;
+      color: white;
+      padding: 10px 20px;
+      text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      margin-left: 5px;
 
-.modify-check{
-  width: 460px;
-  background-color: transparent;
-  margin-left: -1px;
-  border: transparent;
-}
+      &:hover {
+        background-color: darken(#546d01, 5%);
+      }
+    }
 
+    .modifyBtns{
+      grid-column-start: 1;
+      grid-column-end: 4;
+      grid-row-start: 6;
 
-//===== 상세주소 css ==========================================
-.address-detail{
-  font-size: 17px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  width: 600px;
-  height: 32px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  border-bottom: 4px solid rgb(191, 212, 111, 0.5);
-  background-color: #cccccc59;
-}
-
-
-
-//===== 이메일, 닉네임 중복확인 버튼 ==========================================
-
-.ModifyCheck-btn {
-  width: 90px;
-  height: 35px;
-  font-size: 15px;
-  font-weight: bold;
-  border: 2.5px solid #82a804 ;
-  background-color: #9DCB09;
-  color: #fff;
-  border-radius: 5px;
-  margin-top: 2px;
-  margin-left: 5px;
-  position: relative;
-  bottom: 5px;
-}
-
-.ModifyCheck-btn:hover {
-  background-color: #FFF;
-  color: #9DCB09;
-}
-
-
-
-//===== 취소 및 수정하기 버튼 ==========================================
-
-.modifyBtns{
-  margin-top: 80px;
-  width: 750px;
-}
-
-.modify-btn{
-  width: 200px;
-  height: 40px;
-  margin: 20px auto;
-  margin-top: 25px;
-  margin-right: 10px;
-  border: 2.5px solid #82a804 ;
-  background-color: #9DCB09;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-  width: 200px;
-  height: 40px;
-  position: relative;
-  left: 90px;
-}
-
-.modify-btn:hover{
-  background-color: #FFF;
-  color: #9DCB09;
-}
-
-//===== 에러 메시지 ==========================================
-.modifySuccess{
-  font-weight: bold;
-  margin-left: 3px;
-  margin-top: 10px;
-  font-size: 17px;
-  color: #81db0a;
-}
-
-.modifyError{
-  font-weight: bold;
-  margin-left: 3px;
-  margin-top: 10px;
-  font-size: 17px;
-  color: red;
+      .modify-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #A4CC22;
+        border: 1px solid #A4CC22;
+        border-radius: 5px;
+        color: white;
+        padding: 10px 20px;
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        margin-left: 5px;
+  
+        &:hover {
+          background-color: darken(#A4CC22, 5%);
+        }
+      }
+    }  
+  }
 }

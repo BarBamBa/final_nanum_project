@@ -1,24 +1,36 @@
 import React, {useState, useEffect} from 'react'
 import '/src/scss/myPage/VolunteerHeaders.scss'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
 function VolunteerHeaders() {
 
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
-    localStorage.setItem('activeTab', tabIndex); // 클릭한 탭의 인덱스를 로컬 스토리지에 저장
+    localStorage.setItem('activeTab', tabIndex);
   };
 
   useEffect(() => {
     const storedActiveTab = localStorage.getItem('activeTab');
     if (storedActiveTab !== null) {
-      setActiveTab(Number(storedActiveTab)); // 로컬 스토리지에서 값을 읽어와 탭 상태 설정
+      setActiveTab(Number(storedActiveTab));
     }
-  }, []);
+
+    // URL의 경로에 따라 활성 탭 설정
+    if (location.pathname === '/mypage') {
+      setActiveTab(0);
+    } else if (location.pathname === '/myVolunteer') {
+      setActiveTab(1);
+    } else if (location.pathname === '/volunteerSpec') {
+      setActiveTab(2);
+    } else if (location.pathname === '/volunteerReview') {
+      setActiveTab(3);
+    }
+  }, [location.pathname]);
 
 
   return (
@@ -34,21 +46,21 @@ function VolunteerHeaders() {
               </Link>  
             </li>
             <li>
-              <Link to='/MyVolunteer' 
+              <Link to='/myVolunteer' 
                 className={activeTab === 1 ? 'selected' : ''}
                 onClick={() => handleTabClick(1)}>
                   봉사신청내역
               </Link>  
             </li>
             <li>           
-              <Link to='/VolunteerSpec' 
+              <Link to='/volunteerSpec' 
                 className={activeTab === 2 ? 'selected' : ''}
                 onClick={() => handleTabClick(2)}>
                   봉사완료내역
               </Link>
             </li>
             <li>
-              <Link to='/VolunteerReview' 
+              <Link to='/volunteerReview' 
                 className={activeTab === 3 ? 'selected' : ''}
                 onClick={() => handleTabClick(3)}>
                   내가작성한글
