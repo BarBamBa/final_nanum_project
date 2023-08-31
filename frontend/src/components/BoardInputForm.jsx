@@ -7,9 +7,11 @@ import { EditorState, ContentState, convertToRaw, convertFromHTML } from 'draft-
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Modal from "react-modal";
 import ReviewSelectForm from "./ReviewSelectForm";
 
 function BoardInputForm() {
+  const host = import.meta.env.VITE_API_GATEWAY_HOST;
   const location = useLocation();
   const navigate = useNavigate();
   // console.log("input kind : ", location.state.boardKind);
@@ -23,7 +25,7 @@ function BoardInputForm() {
   const boardKind = location.state.boardKind;
   const [boardData, setBoardData] = useState(location.state.boardData);
 
-  console.log("ddd", boardData);
+  console.log("boardData", boardData);
 
 
   // 유저정보
@@ -32,6 +34,8 @@ function BoardInputForm() {
   console.log(userInfo.auth);
   // 유저정보
 
+  const [imgPath, setImgPath] = useState();
+  const [isOpenModal, setIsOpenModal] = useState(false);
   // 제목 내용 관리 state 수정이면 boardData에서 title값 가져와 초기값 설정
   const [titleValue, setTitleValue] = useState(location.state.formKind === "modify" ? location.state.boardData.title : "");
   // 글 내용 관리 state => 에디터 적용이후 일단 비활성
@@ -277,7 +281,8 @@ function BoardInputForm() {
                             img.status == "Y" && (
                               <tr id={img.id}>
                                 <td className="board-img-id">{img.id}</td>
-                                <td>{img.name}</td>
+                                {/* <td onClick={() => { document.location.href = `${host}/api/image/${img.name}` }}>{img.name}</td> */}
+                                <td onClick={() => { setImgPath(`${host}/api/image/${img.name}`); setIsOpenModal(true); }}>{img.name}</td>
                                 <td>
                                   <span onClick={() => removeImg(img.id)}>삭제</span>
                                 </td>
@@ -321,8 +326,41 @@ function BoardInputForm() {
 
         </form>
       </div>
+      <Modal
+        style={modalStyle}
+        isOpen={isOpenModal}
+        onRequestClose={() => { setIsOpenModal(false) }}
+      >
+        <img src={imgPath} ></img>
+      </Modal>
     </div>
+
   );
 }
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10,
+  },
+  content: {
+    width: "600px",
+    height: "300px",
+    display: "flex",
+    justifyContent: "center",
+    overflow: "auto",
+    top: "20vh",
+    left: "30vw",
+    right: "38vw",
+    bottom: "42vh",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "14px",
+    outline: "none",
+    zIndex: 10,
+  },
+};
 
 export default BoardInputForm;
