@@ -328,7 +328,7 @@ function BoardDetail() {
           <div className="board-detail-content">
             {boardData.boardImgs && boardData.boardImgs.map((img, k) => {
               return (
-                <div key={img.id}>
+                <div key={img.id} className="board-detail-image">
                   {img.status == "Y" && <img src={`${host}/api/image/${img.name}`}></img>}
 
                 </div>
