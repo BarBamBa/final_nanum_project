@@ -28,7 +28,7 @@ function Board() {
         const data = await response.json();
         console.log(data);
         const filteredData = data
-            .filter(item => item.flg === boardKind)
+          .filter(item => item.flg === boardKind)
         // .sort((a, b) => a.id - b.id);
         setBoardData(filteredData);
       } catch (error) {
@@ -64,14 +64,14 @@ function Board() {
       body: JSON.stringify(data),
 
     })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setBoardData(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setBoardData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   useEffect(() => {
@@ -106,13 +106,13 @@ function Board() {
               style={boardKind === "4" ? { color: "#546d01" } : null} >봉사후기</button>
           </div>
 
-        <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
+          <BoardTab boardData={boardData} searchBoards={searchBoards} userInfo={userInfo} boardKind={boardKind} />
+
+        </div>
 
       </div>
-
-
-      </div>
+    </div>
   );
 }
 
-export default Board;
+export default Board

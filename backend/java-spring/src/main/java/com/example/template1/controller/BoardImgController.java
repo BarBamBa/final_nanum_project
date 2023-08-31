@@ -4,6 +4,8 @@ package com.example.template1.controller;
 import com.example.template1.model.Board;
 import com.example.template1.model.BoardImg;
 import com.example.template1.model.Users;
+import com.example.template1.model.dto.BoardImgRequest;
+import com.example.template1.model.dto.BoardRequest;
 import com.example.template1.service.BoardImgService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -65,6 +67,7 @@ public class BoardImgController {
                     .name(saveFileName)
                     .board(board)
                     .users(users)
+                    .status('Y')
                     .build();
 
             // 이미지 정보를 DB에 저장하는 dao 실행
@@ -107,5 +110,14 @@ public class BoardImgController {
         return ResponseEntity.ok()
                 .contentType(mediaType)
                 .body(imageBytes);
+    }
+
+    @PostMapping("/img/remove") // 게시판 삭제
+    public ResponseEntity<BoardImg> removeImg(@RequestBody BoardImgRequest request) {
+
+        BoardImg img = boardImgService.deleteImg(request.getId());
+
+        return ResponseEntity.ok()
+                .body(img);
     }
 }

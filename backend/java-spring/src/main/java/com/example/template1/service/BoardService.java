@@ -27,6 +27,11 @@ public class BoardService {
         return board;
     }
 
+    public List<Board> getMyBoard(Long userId) { //내가 작성한 게시글 조회
+        List<Board> myboardList = boardRepository.findAllById(userId);
+        return myboardList;
+    }
+
     public List<Board> searchBoard(String title, char flg) { //게시판 검색 (검색어와 게시판종류로)
         List<Board> boardList;
         if (title == null) { // 검색어가 비어있는 경우 모든 게시글 반환
@@ -68,7 +73,10 @@ public class BoardService {
 
         board.setTitle(request.getTitle());
         board.setContent(request.getContent());
-        board.setVolunteer(request.getVolunteer());
+        if (request.getFlg() == '4') {
+            board.setVolunteer(request.getVolunteer());
+        }
+
 
         return board;
     }

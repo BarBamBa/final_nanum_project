@@ -67,7 +67,7 @@ function BoardTab(props) {
       <table className="board-table">
         <thead>
           <tr>
-            <th className="table-head">번호</th>
+            <th className="table-head">게시글번호</th>
             <th className="table-head">제목</th>
             <th className="table-head">등록일</th>
           </tr>
@@ -77,7 +77,7 @@ function BoardTab(props) {
             return (
               <tr key={board.id}>
                 <td className="table-no">{board.id}</td>
-                <td className="table-title" onClick={() => { navigate(`/board/detail/${board.id}`) }}>{board.title}</td>
+                <td className="table-title" onClick={() => { navigate(`/board/detail/${board.id}`) }} >{board.title}</td>
                 <td className="table-date">{board.createAt2}</td>
               </tr>
             );
@@ -96,7 +96,7 @@ function BoardTab(props) {
         nextPageText={<AiOutlineRight />} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
-      {((userInfo.auth === "ROLE_ADMIN" && (boardKind === "1" || boardKind === "2")) ||
+      {((userInfo.auth === "ROLE_ADMIN" ) ||
         (userInfo.auth === "ROLE_USER" && (boardKind === "3" || boardKind === "4"))) ? (
         <div className="board-write-btn">
           <button onClick={handleWrite}>글쓰기</button>

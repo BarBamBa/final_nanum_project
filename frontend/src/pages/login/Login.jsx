@@ -1,21 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '/src/scss/login/Login.scss'
 import axios from 'axios';
 import { GoogleLogin } from "@react-oauth/google";
 import {GoogleOAuthProvider} from "@react-oauth/google";
-import {useNavigate} from 'react-router-dom' 
+import {Link, useNavigate} from 'react-router-dom' 
 
 function Login() {
 
-//   /*
-
-//   구글 clientId: 410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com
-
-//   구글 clientPw : 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
-
-//   */
-
-  const clientId = '410023866431-k9tfd6ko1m0km898b2k2qe4f34u0s3is.apps.googleusercontent.com'
   const nav = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -44,40 +35,44 @@ function Login() {
     console.log("Email : ", email);
     console.log("Password : ", password);
 
-    axios
-      .post("api/login", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res)
-        console.log("res.data.email ::", res.data.email);
-        console.log("res.data.msg ::", res.data.msg);
-        console.log("res.data.nickname ::", res.data.nickname);
-        console.log('토큰 정보:', res.data.refreshToken);
+    if (email === '') {
+      setErrorMessage('이메일을 입력해주세요.');
+      return;
+    } else if (password === '') {
+      setErrorMessage('비밀번호를 입력해주세요.');
+      return;
+    } else {
+      axios
+        .post("api/login", {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          console.log(res)
+          console.log("res.data.email ::", res.data.email);
+          console.log("res.data.msg ::", res.data.msg);
+          console.log("res.data.nickname ::", res.data.nickname);
+          console.log('토큰 정보:', res.data.refreshToken);
 
-        if (email === '') {
-          setErrorMessage('이메일을 입력해주세요.');
-          return;
-        } else if (password === '') {
-          setErrorMessage('비밀번호를 입력해주세요.');
-          return;
-        } else if (res.data === '로그인 실패') {
-          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
-        } else {
           console.log("로그인 성공");
-          localStorage.setItem("user_email", email);
+          console.log(localStorage)
+          // 토큰 정보 추출
+          localStorage.setItem("email", email);
+          localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
           localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
           localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
           localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
           alert("로그인 성공");
-          nav("/", true)
-        }
-     
-
+          nav("/", true);
       })
-      .catch();
-
+      .catch((error) => {
+        console.error("로그인 중 에러 발생.", error);
+        console.error(error.response.data);
+        if(error.response.data == "로그인 실패") {
+          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
+        }
+      });
+    }
   }
 
 
@@ -93,39 +88,32 @@ function Login() {
 
   return (
     <>
-      <form >
+      <form className='login-form'>
         <div className="login-box">
               
-        <img className="logo-size" src="/images/logo.png" alt="로고이미지" />
+          <img className="logo-size" src="/images/logo.png" alt="로고이미지" />
       
-        <div>
-          <input type='email' value={email} onChange={onEmailHandler} 
-                  name='email' className="login-textbox" placeholder='이메일을 입력해 주세요'>
-          </input>
-        </div>
+            <input type='email' value={email} onChange={onEmailHandler} 
+                    name='email' className="login-textbox" placeholder='이메일을 입력해 주세요'>
+            </input>
 
-        <div>
-          <input type='password' value={password} onChange={onPasswordHandler} onKeyPress={OnkeyPress}
-                  name='password' className="login-textbox" placeholder='비밀번호를 입력해 주세요'>
-          </input>
-        </div>
-          
-         {errorMessage && <p className="login-error-message">{errorMessage}</p>}
+            <input type='password' value={password} onChange={onPasswordHandler} onKeyPress={OnkeyPress}
+                    name='password' className="login-textbox" placeholder='비밀번호를 입력해 주세요'>
+            </input>
+           
+          {errorMessage && <p className="login-error-message">{errorMessage}</p>}
 
-          <div>
             <button className="login-button" type='button' onClick={onClickLogin}>로그인</button>
-          </div>
-      
-
-          <a href="http://localhost:9090/oauth2/authorization/google" className="social-button" id="google-connect" >
-            <span>Connect with Google</span>
-          </a>
-          
-          <div>
-            <span><a href='http://localhost:5173/signup' className="page-change">회원가입</a> | </span>
-            <span><a href='http://localhost:5173/finduser' className="page-change">아이디 찾기</a> | </span>
-            <span><a href='http://localhost:5173/finduser' className="page-change">비밀번호 찾기</a></span>
-          </div>
+        
+            <a href="http://localhost:9090/oauth2/authorization/google" className="social-button" id="google-connect" >
+              <div className="social-button"></div>
+            </a>
+            
+            <div className='page-change-box'>
+              <span><Link to='/signup' className="page-change">회원가입</Link> | </span>
+              <span><Link to='/finduser' className="page-change">아이디 찾기</Link> | </span>
+              <span><Link to='/finduser' className="page-change">비밀번호 찾기</Link></span>
+            </div>
         </div>
     
       </form>  

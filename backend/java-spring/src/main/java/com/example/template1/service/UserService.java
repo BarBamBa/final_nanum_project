@@ -42,6 +42,8 @@ public class UserService {
                 .phone(dto.getPhone())
                 .gender(dto.getGender())
                 .authority(dto.getAuthority())
+                .status('Y')
+                .emailVerify('N')
                 .build();
         System.out.println(users.getId());
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
@@ -130,10 +132,24 @@ public class UserService {
         user.setPhone(dto.getPhone());
         user.setAddress(dto.getAddress());
 
-
         usersRepository.save(user);
     }
 
+
+    // 유저 비밀번호 업데이트
+    @Transactional
+    public void changePassword(String email, String newPassword) {
+        Users user = usersRepository.findByEmail(email);
+
+        if (email != null) {
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            user.setPassword(encodedPassword);
+            usersRepository.save(user);
+        }
+    }
+
+
+    // 이메일 찾기
     public String findEmailByNameAndPhone(String name, String phone) {
         Users user = usersRepository.findByNameAndPhone(name, phone);
 
@@ -143,4 +159,16 @@ public class UserService {
             return null;
         }
     }
+
+    // 비밀번호 찾기
+    public String findPasswordByEmailByNameAndPhone(String name, String phone, String email) {
+        Users user = usersRepository.findByNameAndPhoneAndEmail(name, phone, email);
+
+        if(user != null) {
+            return user.getPassword();
+        } else {
+            return null;
+        }
+    }
+
 }

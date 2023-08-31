@@ -4,56 +4,110 @@
     margin: auto;
     padding: 10px;
     width: 70%;
+
+    .ad-board-manage-table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+
+
+
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+    }
+
+
+    .ad-board-table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        width: 100%;
+
+        .ad-board-head {
+            border: 1px solid #ccc;
+            background-color: #f5f4f4;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        td {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        .ad-board-checkbox {
+            width: 5%;
+        }
+
+        .ad-board-id {
+            width: 5%;
+        }
+
+        .ad-board-title {
+            width: 42%;
+            text-align: left;
+
+            span {
+                text-decoration: underline;
+                text-underline-position: under;
+                cursor: pointer;
+            }
+        }
+
+        .ad-board-userId {
+            width: 5%;
+        }
+
+        .ad-board-nick {
+            width: 10%;
+        }
+
+        .ad-board-category {
+            width: 8%;
+        }
+
+        .ad-board-replyCount {
+            width: 5%;
+
+            span {
+                text-decoration: underline;
+                text-underline-position: under;
+                cursor: pointer;
+            }
+        }
+
+        .ad-board-status {
+            width: 5%;
+        }
+
+        .ad-board-date {
+            width: 10%;
+        }
+
+        .ad-board-reportYn {
+            width: 5%;
+
+            span {
+                text-decoration: underline;
+                text-underline-position: under;
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .ad-board-btn-box {
+        display: flex;
+        justify-content: end;
+        margin-top: 20px;
+    }
+
 }
 
-.ad-board {}
-
-.ad-board-manage-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-}
-
-.ad-board-manage-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-.ad-board-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.ad-board-head {
-    border: 1px solid #ccc;
-    background-color: #f5f4f4;
-    text-align: center;
-    padding: 0 10px;
-}
-.ad-board-head-checkbox {
-    width: 80px;
-    
-}
-
-.ad-board-table td{
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 0 10px;
-}
-.ad-board-title span {
-    text-decoration: underline;
-    text-underline-position: under;
-    cursor: pointer;
-}
-
-.ad-board-replyCount span{
-    text-decoration: underline;
-    text-underline-position: under;
-    cursor: pointer;
-}
-
-.ad-board-reportYn span{
-    text-decoration: underline;
-    text-underline-position: under;
-    cursor: pointer;
+.ad-qna-title span{
+    text-align: left;
 }

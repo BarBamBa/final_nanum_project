@@ -11,4 +11,6 @@ public class EmailPostDto {
     @NotNull
     @Email
     private String email;
+    private String phone;
+    private String name;
 }

@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import '/src/scss/myPage/WishList.scss'
 
 
 
 function WishList() {
+
+  const navigate = useNavigate('');
+
+  // if (!localStorage.getItem("accessToken")) {
+  //   alert('로그인이 필요합니다.'); 
+  //   navigate('/login');
+  //   return;
+  // } 
+
 
   return (
     <>

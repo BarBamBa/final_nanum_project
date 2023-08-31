@@ -60,10 +60,6 @@
         background-color: #546d01;
         color: white;
         height: 40px;
-        width: 400px;
-        margin-top: 60px;
-        margin-bottom: 20px;
-        margin-left: 120px;
 
         &:hover {
           background-color: darken(#546d01, 5%);
@@ -97,4 +93,33 @@
       }
     }
   }
+}
+
+// 이메일 인증 버튼
+.emailAuth{
+  padding: 5px;
+  position: relative;
+  left: 40px;
+  font-size: 15px;
+  background-color: #A4CC22;
+  border: 3px solid #A4CC22;
+  border-radius: 5px;
+  color: white;
+}
+
+.emailAuth2{
+  padding: 5px;
+  position: relative;
+  left: 40px;
+  font-size: 15px;
+  background-color: #afd436;
+  border: 3px solid #A4CC22;
+  border-radius: 5px;
+  color: white;
+}
+
+.emailAuth:hover{
+  background-color: #FFF;
+  color: #A4CC22;
+  border: 3px solid #A4CC22;
 }

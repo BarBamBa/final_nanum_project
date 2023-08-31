@@ -1,6 +1,7 @@
 package com.example.template1.controller;
 
 import com.example.template1.model.Applicants;
+import com.example.template1.model.dto.ApplicantsRequest;
 import com.example.template1.model.dto.ApplicantsResponse;
 import com.example.template1.service.ApplicantService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -16,9 +18,10 @@ public class ApplicantController {
     private final ApplicantService applicantService;
 
     // 봉사활동 예약 취소
-    @GetMapping("/app/cancel")
-    public ResponseEntity cancelApplicant(@RequestBody Long userId, Long id) {
-        applicantService.cancelApp(userId, id);
+    @PostMapping("/app/cancel")
+    public ResponseEntity cancelApplicant(@RequestBody ApplicantsRequest request) {
+
+        applicantService.cancelApp(request.getId());
 
         return ResponseEntity.ok().build();
     }
@@ -43,8 +46,8 @@ public class ApplicantController {
                 .body(myVolunteers);
     }
 
-    @GetMapping("/myVolunteer")  // 사용자의 봉사활동 예약 리스트 조회
-    public ResponseEntity<List<ApplicantsResponse>> getAllVolunteersByUserId(@RequestBody Long userId) {
+    @PostMapping("/myVolunteer")  // 사용자의 봉사활동 예약 리스트 조회
+    public ResponseEntity<List<ApplicantsResponse>> getAllVolunteersByUserId(@RequestParam Long userId) {
         List<ApplicantsResponse> myVolunteers = applicantService.getAllVolunteerByUserId(userId)
                 .stream()
                 .map(ApplicantsResponse::new)

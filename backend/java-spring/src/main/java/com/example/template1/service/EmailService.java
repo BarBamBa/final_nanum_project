@@ -2,6 +2,7 @@ package com.example.template1.service;
 
 import com.example.template1.model.EmailAuth;
 import com.example.template1.model.Users;
+import com.example.template1.model.dto.EmailPostDto;
 import com.example.template1.repository.EmailAuthRepository;
 import com.example.template1.repository.UsersRepository;
 import jakarta.mail.MessagingException;
@@ -103,9 +104,9 @@ public class EmailService {
     }
 
     @Async
-    public void sendTemporalPasswordMail(String email) throws MessagingException {
+    public void sendTemporalPasswordMail(EmailPostDto dto) throws MessagingException {
         // 사용자 임시 비밀번호 적용
-        Users user = usersRepository.findByEmail(email);
+        Users user = usersRepository.findByNameAndPhoneAndEmail(dto.getName(), dto.getPhone(), dto.getEmail());
         String code = codeBuilder();
         user.setPassword(passwordEncoder.encode(code));
         usersRepository.save(user);
@@ -113,9 +114,9 @@ public class EmailService {
         // 임시 비밀번호 이메일 발송
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-        helper.setTo(email);
+        helper.setTo(dto.getEmail());
         helper.setSubject("[나눔] 비밀번호 재설정 메일입니다.");
-        helper.setText(setContext(email, code, "TemporalPasswordMail"), true);
+        helper.setText(setContext(dto.getEmail(), code, "TemporalPasswordMail"), true);
 
         javaMailSender.send(message);
         System.out.println("#### The Temporal Password Mail has been sent ####");
