@@ -16,14 +16,16 @@ function UtilWrap() {
     }
     console.log(isLogin);
     console.log(localStorage)
-  }, [isLogin])
+  }, [])
 
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("nickname");
-    localStorage.removeItem("user_email");
+    localStorage.removeItem("email");
+    localStorage.removeItem(undefined);
+
     setIsLogin(false);
   }
 

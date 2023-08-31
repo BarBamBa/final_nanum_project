@@ -55,23 +55,24 @@ function Login() {
           console.log("res.data.nickname ::", res.data.nickname);
           console.log('토큰 정보:', res.data.refreshToken);
 
-          if (res.data === '로그인 실패') {
-            alert('입력하신 이메일과 비밀번호를 확인해주세요.');
-          } else {
             console.log("로그인 성공");
             console.log(localStorage)
             // 토큰 정보 추출
-            localStorage.setItem("user_email", email);
+            localStorage.setItem("email", email);
             localStorage.setItem("nickname", res.data.nickname); // 사용자 이름 저장
             localStorage.setItem("accessToken", res.data.accessToken); // Access Token 저장
             localStorage.setItem("refreshToken", res.data.refreshToken); // Refresh Token 저장
 
               alert("로그인 성공");
             document.location.href = "/";
-          }
+
       })
       .catch((error) => {
-        console.error("Error during login request:", error);
+        console.error("로그인 중 에러 발생.", error);
+        console.error(error.response.data);
+        if(error.response.data == "로그인 실패") {
+          alert('입력하신 이메일과 비밀번호를 확인해주세요.');
+        }
       });
     }
   }
