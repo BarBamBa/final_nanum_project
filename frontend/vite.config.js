@@ -9,7 +9,7 @@ export default defineConfig({
   VitePluginHtmlEnv({compiler: true})],
   
   // base: import.meta.env.VITE_PUBLIC_URL,
-  base: '/final_project/',
+  base: '/template1-project/',
   server: {
     proxy: {
       "/api": {
