@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import DatePicker, { registerLocale } from'react-datepicker';
 import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
-import '../scss/DatePicker.scss';
+import '../scss/Datepicker.scss';
 
 registerLocale('ko', ko);
 
