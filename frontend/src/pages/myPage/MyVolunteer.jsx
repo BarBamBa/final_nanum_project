@@ -107,12 +107,13 @@ function MyVolunteer() {
                   {
                     item.status === 'R' ? "승인대기" : 
                       item.status === 'Y' ? "승인완료" :
+                      item.status === 'F' ? "봉사완료" :
                       item.status === 'N' ? "승인거부" :  
                       "승인대기"
                   }
                 </div>
                 <label 
-                  className={ `cancelBtn ${item.status === 'Y' ? 'block' : item.status === 'D' ? 'block': ''}`} 
+                  className={ `cancelBtn ${item.status === 'Y' ? 'block' : item.status === 'F' ? 'block' : item.status === 'D' ? 'block': ''}`} 
                   htmlFor='cancelBtn' 
                   onClick={() => {cancel(item.id)}}>
 
