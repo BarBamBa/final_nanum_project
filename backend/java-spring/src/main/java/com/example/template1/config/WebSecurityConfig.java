@@ -39,35 +39,36 @@ public class WebSecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
-
+    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic().disable()
-                .csrf().disable()
-                .formLogin().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/oauth2/**", "/auth/**").permitAll()
-                .requestMatchers("/api/login", "/api/**").permitAll()
-                .requestMatchers("/api/main").hasRole("USER")
-//                .requestMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new JwtTokenAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login()
-                .successHandler(customOAuth2SuccessHandler())
-                .userInfoEndpoint() // OAuth 2.0 Provider로부터 사용자 정보를 가져오는 엔드포인트를 지정하는 메서드
-                .userService(customOAuth2UserService)   // OAuth 2.0 인증이 처리되는데 사용될 사용자 서비스를 지정하는 메서드
+            .httpBasic().disable()
+            .csrf().disable()
+            .formLogin().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .accessDeniedHandler(jwtAccessDeniedHandler)
+            .and()
+            .authorizeHttpRequests()
+            .requestMatchers("/oauth2/**", "/auth/**").permitAll()
+            .requestMatchers("/api/login", "/api/**").permitAll()
+            .requestMatchers("/api/main").hasRole("USER")
+            .anyRequest().authenticated()
+            .and()
+            .oauth2Login()
+            .successHandler(customAuth2SuccessHandler())
+            .userInfoEndpoint() // OAuth 2.0 Provider로부터 사용자 정보를 가져오는 엔드포인트를 지정하는 메서드
+            .userService(customOAuth2UserService)   // OAuth 2.0 인증이 처리되는데 사용될 사용자 서비스를 지정하는 메서드
         ;
         http.apply(new JwtSecurityConfig(jwtTokenProvider));
 
         return http.build();
     }
 
-
-    public CustomOAuth2SuccessHandler customOAuth2SuccessHandler() {
+    public CustomOAuth2SuccessHandler customAuth2SuccessHandler() {
         return new CustomOAuth2SuccessHandler(customOAuth2UserService);
     }
 

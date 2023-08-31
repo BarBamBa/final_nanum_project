@@ -2,6 +2,7 @@ package com.example.template1.controller;
 
 
 import com.example.template1.config.jwt.JwtTokenDto;
+import com.example.template1.model.Users;
 import com.example.template1.model.dto.*;
 import com.example.template1.model.enums.Authority;
 import com.example.template1.repository.UsersRepository;
@@ -23,7 +24,7 @@ import java.util.Map;
 public class UserApiController {
 
     private final UserService userService;
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     private UsersRequsetDto usersRequsetDto;
 
@@ -62,13 +63,22 @@ public class UserApiController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UsersRequsetDto usersRequsetDto) {
+
+        Users users = usersRepository.findByEmail(usersRequsetDto.getEmail());
+        if(users.getStatus() == 'N') {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("차단계정");
+        }
+
         JwtTokenDto jwtTokenDto = userService.login(usersRequsetDto.getEmail(), usersRequsetDto.getPassword());
+
+
 
         if (jwtTokenDto == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
         } else {
             return ResponseEntity.ok(jwtTokenDto); // 토큰 정보 반환
         }
+
     }
 
     @PostMapping("/logout")
