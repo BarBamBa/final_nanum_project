@@ -107,7 +107,7 @@ function MyVolunteer() {
                   {
                     item.status === 'R' ? "승인대기" : 
                       item.status === 'Y' ? "승인완료" :
-                      item.status === 'D' ? "승인거부" :  
+                      item.status === 'N' ? "승인거부" :  
                       "승인대기"
                   }
                 </div>
