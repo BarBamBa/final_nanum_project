@@ -1,7 +1,6 @@
 import React,{useContext, useEffect, useState} from 'react'
 import '/src/scss/myPage/MyVolunteer.scss'
 import VolunteerHeaders from './VolunteerHeaders'
-import { useNavigate } from 'react-router-dom'
 import { LuFlower } from 'react-icons/lu'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TokenCheck } from '../../components/TokenCheck'; 
