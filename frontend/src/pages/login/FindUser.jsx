@@ -188,7 +188,9 @@ const handleFindPassword = () => {
             {/* ==================== 아이디 찾기 ===================================================== */}
          
             <div className="content-div">
-
+              <div>
+                <img src='/images/logo.png' className='findLogoImage'/>
+              </div>
 
               <input 
                 type='text' 
@@ -222,6 +224,10 @@ const handleFindPassword = () => {
             {/* ==================== 비밀번호 찾기 ===================================================== */}
             <div className="content-div">
               
+              <div>
+                <img src='/images/logo.png' className='findLogoImage'/>
+              </div>
+
               <div>
                 <input 
                   type='text' 

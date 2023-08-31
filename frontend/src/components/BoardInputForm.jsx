@@ -228,7 +228,7 @@ function BoardInputForm() {
   return (
     <div className="inputContainer">
       <div className="board-input-nav">
-        <h1>{location.state.formKind === "modify" ? "글 수정" : "글쓰기"}</h1>
+        <h1>{location.state.formKind === "modify" ? "게시판 글 수정" : "게시판 글쓰기"}</h1>
       </div>
 
       <div className="board-input-form">
