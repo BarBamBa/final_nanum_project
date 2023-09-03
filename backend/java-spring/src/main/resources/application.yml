@@ -43,16 +43,10 @@ spring:
       enabled: true
 
   datasource:
-    #    url: jdbc:mariadb://ec2-3-34-177-39.ap-northeast-2.compute.amazonaws.com/mydb         # mariadb
-#    url: jdbc:mariadb://localhost:3306/mydb         # mariadb
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    username: root
-#    password: 1234
-    # mariadb
-    url: jdbc:mariadb://118.67.130.95:3306/voldb
+    url: jdbc:mariadb://localhost:3306/mydb
     driver-class-name: org.mariadb.jdbc.Driver
-    username: volroot
-    password: nanum1234!@
+    username: root
+    password: 1234
 
   devtools:
     livereload:
