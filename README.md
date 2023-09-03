@@ -10,7 +10,7 @@
 - 홍진우 https://github.com/JWH12
 
 # 개발 환경
-- 개발언어
+<ul> 개발언어 <ul/>
 - <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
 - 개발환경관리
 - <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=Spring Boot&logoColor=white" />
