@@ -26,7 +26,7 @@
 	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
 	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
 	<img src="https://img.shields.io/badge/sass-CC6699?style=flat&logo=sass&logoColor=white" />
-	 <img src="https://img.shields.io/badge/sass-CB3837?style=flat&logo=npm&logoColor=white" />
+	 <img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white" />
 <h3> 백엔드 </h3>
 	<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=flat&logo=springsecurityt&logoColor=white" />
 	<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat&logo=jsonwebTokenst&logoColor=white" />
