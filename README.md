@@ -18,7 +18,15 @@
 	<img src="https://img.shields.io/badge/intellij-000000?style=flat&logo=intellijidea&logoColor=white" />
  	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" /> 
 <h3> DB관리 </h3>  
-<img src="https://img.shields.io/badge/mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
-<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" />
+	<img src="https://img.shields.io/badge/mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
+	<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" />
+<h3> 프론트엔드 </h3>
+	<img src="https://img.shields.io/badge/react-003545?style=flat&logo=mariadb&logoColor=white" />
+	<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
+	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
+	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
+	<img src="https://img.shields.io/badge/sass-CC6699?style=flat&logo=sassb&logoColor=white" />
+
+	
 
 
