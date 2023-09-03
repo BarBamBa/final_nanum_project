@@ -32,8 +32,8 @@
 	<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat&logo=jsonwebTokenst&logoColor=white" />
 	<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" />
 <h3> 협업관리 </h3>
-<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" />
-<img src="https://img.shields.io/badge/GitHub-F05032?style=flat&logo=github&logoColor=white" />
+<img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" />
+<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
 <img src="https://img.shields.io/badge/Figma-F05032?style=flat&logo=figma&logoColor=white" />
 	
 	
