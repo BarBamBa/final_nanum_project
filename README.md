@@ -4,7 +4,7 @@
 봉사에대한 흥미와 참여를 이끌어내고자하는 홈페이지
 
 # Project Member
-강현국 https://github.com/BarBamBa
-박호연
-정인태
-홍진우
+-강현국 https://github.com/BarBamBa
+-박호연
+-정인태
+-홍진우
