@@ -17,4 +17,8 @@
 <h3> 개발관리 </h3>   
 	<img src="https://img.shields.io/badge/intellij-000000?style=flat&logo=intellijidea&logoColor=white" />
  	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" /> 
+<h3> DB관리 </h3>  
+<img src="https://img.shields.io/badge/mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
+<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" />
+
 
