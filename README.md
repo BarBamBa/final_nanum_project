@@ -5,12 +5,12 @@
 
 # Project Member
 - 강현국 https://github.com/BarBamBa
-- 박호연
-- 정인태
-- 홍진우
+- 박호연 https://github.com/TerRanda
+- 정인태 https://github.com/GitLoonda
+- 홍진우 https://github.com/JWH12
 
 # 개발 환경
-  <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
+- 개발언어 <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
 	<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
 	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
 	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
