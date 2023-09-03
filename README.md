@@ -27,7 +27,7 @@
 	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
 	<img src="https://img.shields.io/badge/sass-CC6699?style=flat&logo=sass&logoColor=white" />
 <h3> 백엔드 </h3>
-<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=flat&logo=SpringSecurityt&logoColor=white" />
+<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=flat&logo=springsecurityt&logoColor=white" />
 
 	
 
