@@ -15,7 +15,7 @@
 <h3> 프레임워크 </h3> 
  	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white" />
 <h3> 개발관리 </h3>   
-	<img src="https://img.shields.io/badge/IntelliJ-#000000?style=flat&logo=IntelliJ&logoColor=white" />
+	<img src="https://img.shields.io/badge/IntelliJ-#000000?style=flat&logo=intellijidea&logoColor=white" />
 	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
 	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
 	<img src="https://img.shields.io/badge/jQuery-0769AD?style=flat&logo=jQuery&logoColor=white" />
