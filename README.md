@@ -13,8 +13,7 @@
 <ul>
 	<h3> 개발언어 </h3> 
 	<li><img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" /></li>
-<ul/>	
-<ul>
+
 	<h3> 프레임워크 </h3> 
 	<li>><img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=Spring Boot&logoColor=white" /></li>
 <ul/>	
