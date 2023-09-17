@@ -25,7 +25,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); // 모든 도메인 허용 (실제 환경에서는 보안을 고려하여 수정)
+        configuration.addAllowedOrigin("http://ec2-34-207-134-139.compute-1.amazonaws.com"); // 모든 도메인 허용 (실제 환경에서는 보안을 고려하여 수정)
         configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
         configuration.addAllowedHeader("*"); // 모든 헤더 허용
         configuration.setAllowCredentials(true); // 인증 정보 허용
