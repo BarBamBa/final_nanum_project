@@ -12,30 +12,33 @@
 
 # 개발 환경
 <h3> 개발언어 </h3> 
-	<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" />
+	<img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" height="30px" />
+	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" height="30px"/>	
+  	<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/Sass-CC6699?style=flat&logo=sass&logoColor=white" height="30px"/>
+ 
 <h3> 프레임워크 </h3> 
- 	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white" />
+ 	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white" height="30px"/>
+  	<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=flat&logo=springsecurityt&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat&logo=jsonwebTokenst&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" height="30px"/>
+ 
 <h3> 개발관리 </h3>   
-	<img src="https://img.shields.io/badge/intellij-000000?style=flat&logo=intellijidea&logoColor=white" />
- 	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" /> 
+	<img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=flat&logo=intellijidea&logoColor=white" height="30px"/>
+ 	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" height="30px"/> 
+  	<img src="https://img.shields.io/badge/NPM-CB3837?style=flat&logo=npm&logoColor=white" height="30px"/>
+   
 <h3> DB관리 </h3>  
-	<img src="https://img.shields.io/badge/mariadb-003545?style=flat&logo=mariadb&logoColor=white" />
+	<img src="https://img.shields.io/badge/MariaDB-003545?style=flat&logo=mariadb&logoColor=white" height="30px"/>
 	
-<h3> 프론트엔드 Tools Modules Libraries </h3>
-	<img src="https://img.shields.io/badge/react-003545?style=flat&logo=react&logoColor=white" />
-	<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" />
-	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
-	<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" />
-	<img src="https://img.shields.io/badge/sass-CC6699?style=flat&logo=sass&logoColor=white" />
-	 <img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white" />
-<h3> 백엔드 Tools Modules Libraries </h3>
-	<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=flat&logo=springsecurityt&logoColor=white" />
-	<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat&logo=jsonwebTokenst&logoColor=white" />
-	<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" />
+<h3> 라이브러리 </h3>
+	<img src="https://img.shields.io/badge/React-003545?style=flat&logo=react&logoColor=white" height="30px"/>
+	
 <h3> 협업관리 </h3>
-<img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" />
-<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" />
-<img src="https://img.shields.io/badge/Figma-F05032?style=flat&logo=figma&logoColor=white" />
+	<img src="https://img.shields.io/badge/Git-000000?style=flat&logo=git&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/GitHub-000000?style=flat&logo=github&logoColor=white" height="30px"/>
+	<img src="https://img.shields.io/badge/Figma-F05032?style=flat&logo=figma&logoColor=white" height="30px"/>
 
 # 나눔 주요 기능
 <h3> 봉사활동검색 </h3> 
