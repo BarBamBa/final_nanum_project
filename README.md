@@ -24,6 +24,8 @@
 	<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat&logo=jsonwebTokenst&logoColor=white" height="30px"/>
 	<img src="https://img.shields.io/badge/JPA Hibernate-59666C?style=flat&logo=hibernate&logoColor=white" height="30px"/>
  
+<h3> 빌드도구 </h3>   
+	<img src="https://img.shields.io/badge/Gradle-02303A?style=flat&logo=gradle&logoColor=white" height="30px"/>
 <h3> 개발관리 </h3>   
 	<img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=flat&logo=intellijidea&logoColor=white" height="30px"/>
  	<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" height="30px"/> 
